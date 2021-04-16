@@ -1,0 +1,39 @@
+{
+  "name": "acom",
+  "version": "1.0.6",
+  "description": "A component-based JavaScript framework for building user interfaces. It is highly flexible and compatible with other frameworks and libraries. You can easily integrate it in existing projects or use it to create a web app from scratch. The framework provides a number of ways to manage resources in terms of reusability, loading and more. It provides built in support for plugins, allowing you to extend its functionality easily. Acom provides both declarative and procedural ways of building user interfaces.",
+  "main": "./dist/main.js",
+  "files": [
+    "dist"
+  ],
+  "browserslist": "> 0.25%, not dead",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riu-web/acom.git"
+  },
+  "keywords": [
+    "acom",
+    "javascript-framework",
+    "javascript-library",
+    "framework",
+    "library"
+  ],
+  "author": "Mishieck Mwale <mishieckmwale@gmail.com> (https://mishieck.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riu-web/acom/issues"
+  },
+  "homepage": "https://github.com/riu-web/acom#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {}
+}

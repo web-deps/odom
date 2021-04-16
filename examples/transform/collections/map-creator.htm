@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map - Using createNode</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <main id="map"></main>
+
+  <script type="module">
+    import { $create } from "/src/main.js";
+
+
+    (async () => {
+      const markup = /* html */`
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <!-- <tbody acom-map="@methods.mapper"></tbody> -->
+          <tbody acom-map='{ "getData": "@methods.getData", "createNode": "@methods.createNode", "range": [1, 2] }'></tbody>
+          <!-- <tbody acom-map='{ "mapper": "@methods.mapper", "range": [1, 2], "cache": { "id": 1, "storage": "app" } }'></tbody -->
+          <!-- <tbody acom-map='{ "mapper": "@methods.mapper", "range": [1, 2], "refresh": true }'></tbody -->
+            <!-- <tbody acom-map='{ "mapper": "@methods.mapper" }'></tbody> -->
+          </table>
+      `;
+
+      const styles = /* css */`
+        :scope {
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          width: 100%;
+          height: 100vh;
+        }
+      `;
+
+      const users = [
+        {
+          id: 1,
+          name: "name 1"
+        },
+        {
+          id: 2,
+          name: "name 2"
+        },
+        {
+          id: 3,
+          name: "name 3"
+        }
+      ];
+
+      const createNode = async datum => {
+        return `
+          <tr>
+            <td><b>${datum.id}</b></td>
+            <td>${datum.name}</td>
+          </tr>
+        `;
+      };
+
+      const getData = async () => users;
+
+      const methods = { getData, createNode };
+      const data = { users };
+      const utils = { methods };
+      const options = { markup, styles, utils };
+      const $map = await $create(options);
+      $map.render("#map");
+
+      const tbody = await $map.select("tbody", false);
+      setTimeout(async () => await tbody.acom.updateMap({
+        // range: [1, 2],
+        // newData: [
+        //   {
+        //     id: 4,
+        //     name: "name 4"
+        //   }
+        // ],
+          extension: 1,
+          prepend: true
+        }), 3000);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insert</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <main id="insert" acom-src="/examples/transform/insert/app.js"></main>
+
+  <script type="module">
+    import { render, importComponent } from "/src/main.js";
+
+    (async () => {
+      await render();
+      console.info(document.head);
+      console.info(document.body);
+    })();
+  </script>
+</body>
+</html>

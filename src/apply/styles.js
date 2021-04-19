@@ -28,12 +28,19 @@ const cacheID = id => {
 };
 
 const observeScopeRemoval = (id, selector) => {
+  const removeStyles = () => {
+    if (styleElement) {
+      styleElement.remove();
+      window.$app.styles = window.$app.styles.filter(styleID => styleID !== id);
+    };
+  };
+
 	const observer = observeMutations(
 		document.body,
 		mutations => {
 			if (document.body.querySelector(selector)) return;
       const styleElement = document.head.querySelector(`.${id}`);
-      styleElement && styleElement.remove();
+      removeStyles();
 			observer.disconnect();
 		},
 		{ childList: true, subtree: true }

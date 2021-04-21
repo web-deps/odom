@@ -6,7 +6,7 @@ import { createFragment } from "./create-fragment.js";
 
 export  const map = async ({ element, props, data, methods }) => {
   const value = element.getAttribute("acom-map");
-  let limits, cache, getMapData, createNode, mapDataSelector, mapData, refresh, reactive;
+  let limits, cache, getMapData, createNode, mapDataSelector, mapData, reactive;
 
   if (value.startsWith("@")) mapDataSelector = value;
   else if (value.startsWith("{")) {
@@ -16,12 +16,12 @@ export  const map = async ({ element, props, data, methods }) => {
     cache = options.cache;
     getMapData = options.getData;
     createNode = options.createNode;
-    refresh = options.refresh;
     reactive = options.reactive;
     if (reactive === undefined) reactive = true;
   };
 
   if (mapDataSelector) mapData = await getData({ selector: mapDataSelector, props, data, methods });
+  if (typeof mapData === "function") mapData = mapData();
 
   if (getMapData) {
     getMapData = await getData({ selector: getMapData, methods });
@@ -31,7 +31,7 @@ export  const map = async ({ element, props, data, methods }) => {
   if (createNode) createNode = await getData({ selector: createNode, methods });
   const template = element.firstElementChild;
   await addFragment({ element, template, data: mapData, limits, createNode });
-  if (reactive) await setReactivity({ element, template, data: mapData, cache, getMapData, refresh, createNode });
+  if (reactive) await setReactivity({ element, template, data: mapData, cache, getMapData, createNode });
 };
 
 const addFragment = async ({ element, template, data, limits, createNode, append, prepend }) => {
@@ -53,10 +53,16 @@ const addFragment = async ({ element, template, data, limits, createNode, append
   };
 };
 
-const setReactivity = async ({ element, template, data, cache, refresh, getMapData, createNode }) => {
+const setReactivity = async ({ element, template, data, cache, getMapData, createNode }) => {
   if (cache) await setCache(cache.id, cache.storage, data);
 
-  const updateMap = async ({ range, extension, newData, prepend, append } = {}) => {
+  const updateMap = async ({ refresh, range, extension, newData, prepend, append } = {}) => {
+    if (refresh) {
+      data = await getMapData();
+    } else if (cache) {
+      data = await getCache(cache.id, cache.storage);
+    };
+
     if (!range) {
       const options = JSON.parse(element.getAttribute("acom-map"));
       range = options.range;
@@ -66,13 +72,6 @@ const setReactivity = async ({ element, template, data, cache, refresh, getMapDa
       const len = element.children.length;
       range = [len + 1, len + extension];
     };
-
-    if (refresh) {
-      data = await getMapData();
-    } else if (cache) {
-      data = await getCache(cache.id, cache.storage);
-    };
-
 
     if (newData) data = newData;
     await addFragment({ element, template, data, limits: range, createNode, append, prepend });

@@ -1,15 +1,33 @@
 export const applyInlineStyles = async function (styleEntries) {
   await this.apply.custorm(styleEntries, (element, styles) => {
+    let style = element.style;
+
     for (const property in styles) {
-      let value = styles[property],
-        propertyPriority = "";
-      
-      if (value.includes("!important")) {
-        propertyPriority = "important";
-        value = value.replace(/\s*important/, "");
+      const value = styles[property];
+
+      if (!(property in element.style)) {
+        [property, value] = addVendorPrefixes(property, value)[0];
       };
-      
-      element.style.setProperty(property, value, propertyPriority);
+
+      style += `${property}:${value};`;
     };
+
+    element.setAttribute("style", style);
   });
+};
+
+const addVendorPrefixes = (property, value) => {
+  let prefixedProperty = "";
+  const vendorPrefixes = ["-webkit-", "-moz-", "-o-", "-ms-"];
+
+  for (const prefix of vendorPrefixes) {
+    prefixedProperty = `${prefix}${property}`;
+
+    if (prefixedProperty in element.style) {
+      property = prefixedProperty;
+      break;
+    };
+  };
+
+  return [property, value];
 };

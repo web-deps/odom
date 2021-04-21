@@ -1,7 +1,10 @@
 const path = require('path');
 
+const mode = process.env.NODE_ENV;
+const sourceMap = mode === "development" ? "eval-source-map" : "source-map";
+
 module.exports = {
-  mode: "production",
+  mode,
   entry: path.resolve(__dirname, './src/index.js'),
   module: {
     rules: [
@@ -21,5 +24,11 @@ module.exports = {
     library: 'acom',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-  }
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'src'),
+    compress: true,
+    port: 9000,
+  },
+  devtool: sourceMap
 };

@@ -3,7 +3,7 @@ import { insertSlot } from "./insert/slot.js";
 import { getSlots } from "./get-slots.js";
 import { getProps } from "../dom/get-props.js";
 import { conditionals } from "../conditionals/conditionals.js";
-import { multiply } from "./multiply/multiply.js";
+import { collections } from "./collections/collections.js";
 import { render } from "../dom/render.js";
 
 
@@ -24,7 +24,7 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
 
   const multiplyElements = async type => {
     if (`acom-${type}` in attributes) {
-      await multiply({ element, type, props, data, methods });
+      await collections({ element, type, props, data, methods });
       proceed = false;
     };
   };

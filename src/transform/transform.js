@@ -3,7 +3,7 @@ import { run } from "./run.js";
 import { insertData } from "./insert/data.js";
 import { insertSlot } from "./insert/slot.js";
 import { conditionals } from "../conditionals/conditionals.js";
-import { multiply } from "./multiply/multiply.js";
+import { collections } from "./collections/collections.js";
 import { getProps } from "../dom/get-props.js";
 import { render } from "../dom/render.js";
 
@@ -100,7 +100,7 @@ export const transform = function () {
     multiple: async ({ data, methods, props }) => {
       await apply(
         this.scope,
-        async element => multiply({ element, type: "multiple", props, data, methods }),
+        async element => collections({ element, type: "multiple", props, data, methods }),
         "acom-markupltiple"
       );
     },
@@ -108,7 +108,7 @@ export const transform = function () {
     map: async (methods) => {
       await apply(
         this.scope,
-        async element => multiply({ element, type: "map", props, data, methods }),
+        async element => collections({ element, type: "map", props, data, methods }),
         "acom-map"
       );
     },

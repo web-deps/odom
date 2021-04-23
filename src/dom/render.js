@@ -57,7 +57,7 @@ const insert = async ({
 
 const getTargets = () => {
   let targets = [];
-  const assetTypes = ["component", "element", "markup", "text"];
+  const assetTypes = ["component", "node", "markup", "text"];
 
   for (const assetType of assetTypes) {
     const attributeName = assetTypeToAttributeMap[assetType];
@@ -76,14 +76,14 @@ const getTargets = () => {
 
 const assetTypeToAttributeMap = {
   component: "acom-src",
-  element: "acom-node",
+  node: "acom-node",
   markup: "acom-markup",
   text: "acom-text"
 };
 
 const assetTypeToCreateElementMap = {
   component: async $component => $component.scope,
-  element: element => element,
+  node: node => node,
   markup: async markup => parseMarkup({ markup }),
   text: text => document.createTextNode(text)
 };

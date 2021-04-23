@@ -46,6 +46,7 @@ Specifies the type of response expected when the asset gets fetched. It can have
 * `"json"`: JSON text
 * `"blob"`: a blob
 * `"arrayBuffer"`: an array buffer
+* `"formData"`: form data
 
 ### Return Value
 

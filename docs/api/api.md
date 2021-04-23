@@ -131,7 +131,7 @@ Used to replace a DOM node with another node.
 ### Syntax
 
 ```js
-replaceNode(target, node, replacer)
+replaceNode(target, node[, replacer])
 ```
 
 ### Parameters
@@ -143,7 +143,7 @@ replaceNode(target, node, replacer)
 
 * `node`:
   * Type: `Node`
-  * Required: No
+  * Required: Yes
   * Usage: replaces another node
 
 * `replacer`:

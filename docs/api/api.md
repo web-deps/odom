@@ -38,7 +38,7 @@ __Table of Contents__
 
 ## Introduction
 
-Acom has several exports. This documentation, we will look at these exports.
+Acom provides a number of utilities for creating and manipulating components. We are going to look at how each one of these utilities works.
 
 ## Structure
 
@@ -47,9 +47,9 @@ Acom has several exports. This documentation, we will look at these exports.
   createComponent: Function,
   $create: Function,
   Component: Object,
+  $A: class,
   render: Function,
   replaceNode: Function,
-  limitAwait: Function,
   assetManager: Object
 }
 ```
@@ -71,11 +71,11 @@ createComponent(options);
 * `options`
   * Type: `Object`
   * Required: Yes
-  * Usage: contains utilies for creating and transforming a component
+  * Usage: contains utilities for manipulating a component
   * Reference: [`options`](./options.md)
 
 
-> __Note:__ If you create a component using [`Component`](./component/component.md), you have to add transformations to a component on your own using the [`API`](./component/component.md#api).
+> __Note:__ If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
 
 
 ### Return Value
@@ -88,7 +88,7 @@ An alias for [`crateComponent`](#createcomponent).
 
 ## `Component`
 
-The component class. Checkout [Component](./component/component.md) for more.
+The component class. Refer to [Component](./component/component.md) for more.
 
 ## `$A`
 
@@ -98,7 +98,7 @@ An alias for [Component](#component);
 
 ### Description
 
-Used for inserting components into the DOM or `Element`.
+Used for inserting components into the DOM or component.
 
 ### Syntax
 
@@ -126,7 +126,7 @@ A promise that resolves to `undefined`.
 
 ### Description
 
-A function used to replace a DOM node with another node.
+Used to replace a DOM node with another node.
 
 ### Syntax
 
@@ -173,6 +173,7 @@ Contains utilities used to manage assets. It handles importation, fetching and p
 {
   fetchAsset: Function,
   importModule: Function,
+  prefetch: Function,
   limitAwait: Function
 }
 ```

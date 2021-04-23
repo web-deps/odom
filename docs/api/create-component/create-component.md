@@ -1,37 +1,70 @@
-# options
+# `createComponent`
 
 __Table of Contents__
 
-- [options](#options)
+- [`createComponent`](#createcomponent)
   - [Introduction](#introduction)
-  - [Structure](#structure)
-  - [`src`](#src)
-  - [`id`](#id)
-  - [`uri`](#uri)
-  - [`markup`](#markup)
-  - [`styles`](#styles)
-  - [`eventListeners`](#eventlisteners)
-  - [`data`](#data)
-  - [`utils`](#utils)
-  - [`middleware`](#middleware)
-
+  - [Syntax](#syntax)
+  - [Parameters](#parameters)
+  - [Return Value](#return-value)
+  - [`options`](#options)
+    - [Description](#description)
+    - [Structure](#structure)
+    - [`src`](#src)
+    - [importType](#importtype)
+    - [`id`](#id)
+    - [`uri`](#uri)
+    - [`markup`](#markup)
+    - [`styles`](#styles)
+    - [`eventListeners`](#eventlisteners)
+    - [`data`](#data)
+    - [`utils`](#utils)
+    - [`middleware`](#middleware)
 
 ## Introduction
 
-One of the possible parameters of `acom` is a `options`. The options contains attributes that are used to create a component. 
+Used to create and transform a component. The function executes processes using values of [`options`](#options) to transform a component.
 
-## Structure
+## Syntax
 
-The `options` has the following structure:
+```js
+createComponent(options);
+```
+
+## Parameters
+
+* `options`
+  * Type: `Object`
+  * Required: Yes
+  * Usage: contains utilities for manipulating a component
+  * Reference: [`options`](#options)
+
+
+> __Note:__ If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
+
+## Return Value
+
+A promise that resolves to an instance of [`Component`](#component).
+
+## `options`
+
+### Description
+
+The options contains utilities that are used to create a component and manipulate a component.
+
+### Structure
 
 ```js
 {
-  src: String,
-  id: String,
-  uri: String,
+  src: string,
+  importType: string, 
+  id: string,
+  uri: string,
+  scope: Element,
   props: Object,
-  markup: String,
-  styles: String | HTMLStyleElement,
+  markup: string,
+  styles: string | HTMLStyleElement,
+  inlineStyles: Object,
   eventListeners: Array<Object>,
   data: Object,
   utils: Object,
@@ -39,19 +72,26 @@ The `options` has the following structure:
 }
 ```
 
-## `src`
+### `src`
 
-You can import a options via this attribute. You provide a URI of either an ES module or JSON file.
+You can import a options via this property. You provide a URI of either an ES module or JSON file.
 
-## `id`
+### importType
+
+The type of imported `options`. It have any of the following values:
+
+* `"module"`: a JavaScript (ESM) module
+* `"json"`: a JSON file or string. The JSON is fetched and the response is read to completion as JSON.
+
+### `id`
 
 The ID of the component. For HTML components, `id` is set via the meta tag. Set the id property of a meta tag to the ID of the component. For JS components, the id is set via the `options`. If not provided, it is generated. The `id` is used to provide a unique class for style elements of components and for caching. The id must be unique.
 
-## `uri`
+### `uri`
 
 The URI of a component. Used for caching.
 
-## `markup`
+### `markup`
 
 The markup used to construct the DOM of a component is specified in `markup`. The markup can be HTML, XML or any XML-compliant markup. For types of markup other than HTML, the markup have some details to indicate this. The root element of the markup must have the attribute `acom-ml="xml"`. The attribute is not required for HTML, but it is permitted, in which case you set it to `html`. For all non-HTML markup, all elements are converted to the `div` element of HTML by default. To specify which HTML element should be used in place of an element, you set the attribute `html` to the HTML element tag name. All other attributes on the element will be preserved.
 
@@ -85,11 +125,11 @@ HTML Equivalent
 </main>
 ```
 
-## `styles`
+### `styles`
 
 The styling for the content is specified via `styles`. This can be a `string` containing CSS or a style `Element`. The `style` element must be part of the document for it to work.
 
-## `eventListeners`
+### `eventListeners`
 
 eventListeners can be attached to the DOM via `eventListeners`. This has the following structure:
 
@@ -138,7 +178,7 @@ The event listener. It is a function that is called everytime an event to which 
 `mozSytemGroup`
 
 
-## `data`
+### `data`
 
 Used for HTML components. The creator gets `data` as a parameter and put it in the options. This can also be user defined, used to assign custom element and props to a component.
 
@@ -158,13 +198,10 @@ The attributes `id`, `uri`, `props`, `styles` work the same way as the attribute
 
 Used for HTML components and can also be user defined. This ends up being the `scope` of a component accessed via `Component.scope`.
 
-## `utils`
+### `utils`
 
 This is an object containing the utilities of a component. Refer to [Utils]() for more.
 
-## `middleware`
+### `middleware`
 
 middleware are used to manipulate [`markup`](#markup) and [`styles`](#styles), and add state to a component. Check out [middleware](middleware.md).
-
-
-

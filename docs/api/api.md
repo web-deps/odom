@@ -10,6 +10,7 @@ __Table of Contents__
     - [Syntax](#syntax)
     - [Parameters](#parameters)
     - [Return Value](#return-value)
+    - [Reference](#reference)
   - [`$create`](#create)
   - [`Component`](#component)
   - [`$A`](#a)
@@ -18,17 +19,17 @@ __Table of Contents__
     - [Syntax](#syntax-1)
     - [Parameters](#parameters-1)
     - [Return Value](#return-value-1)
-    - [Reference](#reference)
+    - [Reference](#reference-1)
   - [`replaceNode`](#replacenode)
     - [Description](#description-2)
     - [Syntax](#syntax-2)
     - [Parameters](#parameters-2)
     - [Return Value](#return-value-2)
-    - [Reference](#reference-1)
+    - [Reference](#reference-2)
   - [`assetManager`](#assetmanager)
     - [Description](#description-3)
     - [Structure](#structure-1)
-    - [Reference](#reference-2)
+    - [Reference](#reference-3)
   - [`importComponent`](#importcomponent)
     - [Description](#description-4)
     - [Syntax](#syntax-3)
@@ -81,6 +82,10 @@ createComponent(options);
 ### Return Value
 
 A promise that resolves to an instance of [`Component`](#component).
+
+### Reference
+
+[`createComponent`](./create-component.md).
 
 ## `$create`
 

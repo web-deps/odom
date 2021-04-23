@@ -26,10 +26,18 @@ export const createComponent = async options => {
   return $component;
 };
 
-const importOptions = async ({ src, extension }) => {
-  const res = await fetch(src);
-  const json = res.json();
-  return extension ? { ...json, ...extension } : json;
+const importOptions = async ({ src, importType = "module", extension }) => {
+  let imported;
+
+  if (importType === "module") {
+    imported = Object.values((await import(src)))[0];
+    if (typeof imported === "function") imported = imported();
+  } else {
+    const res = await fetch(src);
+    imported = res.json();
+  };
+
+  return extension ? { ...imported, ...extension } : json;
 };
 
 const transform = async (

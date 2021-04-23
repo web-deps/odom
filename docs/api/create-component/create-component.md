@@ -12,6 +12,7 @@ __Table of Contents__
     - [Structure](#structure)
     - [`src`](#src)
     - [importType](#importtype)
+    - [extension](#extension)
     - [`id`](#id)
     - [`uri`](#uri)
     - [`markup`](#markup)
@@ -57,7 +58,8 @@ The options contains utilities that are used to create a component and manipulat
 ```js
 {
   src: string,
-  importType: string, 
+  importType: string,
+  extension: Object,
   id: string,
   uri: string,
   scope: Element,
@@ -83,9 +85,16 @@ The type of imported `options`. It have any of the following values:
 * `"module"`: a JavaScript (ESM) module
 * `"json"`: a JSON file or string. The JSON is fetched and the response is read to completion as JSON.
 
+The default value is `"module"`. If the imported module is a function, the function is invoked and the return value will be used as the imported `options`.
+
+
+### extension
+
+This is used when the `options` are being imported. It is an extension of the imported `options`.
+
 ### `id`
 
-The ID of the component. For HTML components, `id` is set via the meta tag. Set the id property of a meta tag to the ID of the component. For JS components, the id is set via the `options`. If not provided, it is generated. The `id` is used to provide a unique class for style elements of components and for caching. The id must be unique.
+The ID of the component. For HTML components, `id` is set via the meta tag. Set the id property of a meta tag to the ID of the component. For JS components, the id is set via `options`. If not provided, it is generated. The `id` is used to provide a unique class for style elements of components and for caching. The id must be unique.
 
 ### `uri`
 
@@ -93,19 +102,19 @@ The URI of a component. Used for caching.
 
 ### `markup`
 
-The markup used to construct the DOM of a component is specified in `markup`. The markup can be HTML, XML or any XML-compliant markup. For types of markup other than HTML, the markup have some details to indicate this. The root element of the markup must have the attribute `acom-ml="xml"`. The attribute is not required for HTML, but it is permitted, in which case you set it to `html`. For all non-HTML markup, all elements are converted to the `div` element of HTML by default. To specify which HTML element should be used in place of an element, you set the attribute `html` to the HTML element tag name. All other attributes on the element will be preserved.
+The markup used to construct the DOM of a component. The markup can be HTML, XML or any XML-compliant markup. For types of markup other than HTML, the root element of the markup must have the attribute `acom-ml="xml"`. The attribute is not required for HTML, but it is permitted, in which case you set it to `html`.
 
-One or two more attributes will be added on the resulting HTML element. An attribute `xml` will be set to the XML tag name. If the elment does not have the `name` attribute, `name` will be set to the XML tag name. The attribute `html` will be removed.
+For all non-HTML markup, all elements are converted to the `div` element of HTML by default. To specify which HTML element should be used in place of an element, you set the attribute `html` to the HTML element tag name. All other attributes on the element will be preserved. An attribute `xml` is set to the XML tag name during conversion from XML to HTML.
 
 __Example__
 
-The following markup flavours will result in the same DOM elements, except for extra one or two attributes on the XML based one.
+The following markup flavours will result in the same DOM elements, except for extra attribute "xml" on the XML based one.
 
 HTML
 
 ```html
 <main acom-ml="html">
-  <button name="say-hello">Say Hello</button>
+  <a href="/example">visit</a>
 </main>
 ```
 
@@ -113,15 +122,15 @@ XML
 
 ```xml
 <container acom-ml="xml" html="main">
-  <btn html="button" name="say-hello">Say Hello</btn>
+  <link html="a" href="/example">Visit</link>
 </container>
 ```
 
 HTML Equivalent
 
 ```html
-<main acom-ml="xml" name="container" xml="container">
-  <button name="say-hello" xml="btn">Say Hello</button>
+<main acom-ml="xml" xml="container">
+  <a href="/example" xml="link">Visit</button>
 </main>
 ```
 

@@ -6,36 +6,28 @@ __Table of Contents__
   - [Introduction](#introduction)
   - [API](#api)
     - [Structure](#structure)
+    - [dynamicData](#dynamicdata)
     - [`id`](#id)
-    - [`uri`](#uri)
     - [`scope`](#scope)
     - [`apply`](#apply)
     - [`transform`](#transform)
     - [`select`](#select)
-    - [`parseMarkup`](#parsemarkup)
       - [Syntax](#syntax)
       - [Parameters](#parameters)
       - [Return Value](#return-value)
-    - [`run`](#run)
+    - [`parseMarkup`](#parsemarkup)
       - [Syntax](#syntax-1)
       - [Parameters](#parameters-1)
       - [Return Value](#return-value-1)
-    - [`replace`](#replace)
+    - [`render`](#render)
       - [Syntax](#syntax-2)
       - [Parameters](#parameters-2)
       - [Return Value](#return-value-2)
-    - [`createState`](#createstate)
-      - [Syntax](#syntax-3)
-      - [Parameters](#parameters-3)
-      - [Return Value](#return-value-3)
-    - [`render`](#render)
-      - [Parameters](#parameters-4)
-      - [Return Value](#return-value-4)
 
 
 ## Introduction
 
-Acom uses components to build user interfaces. The components are instances of a class called __Component__. The class is one of the named exports of the framework. You can use the class directly. The default export [`acom`](exports.md#acom) is only a wrapper for the class. It executes certain processes according to attributes of a options (if provided) and returns the class. Using __Component__ directly means you will have to do the work done by __acom__ on your own. You can do this via the [API](#api).
+Acom uses components to build user interfaces. The components are instances of a class called __Component__. The class one of the utilities in the [`API`](../api.md). The function [`createComponent`](../api.md#create-component) is only a wrapper for the class. It executes certain processes according to attributes of `options` and returns the class instance. Using __Component__ directly means you will have to do all the work done by `createComponent` on your own. You can do this via the [API](#api).
 
 ## API
 
@@ -43,8 +35,8 @@ Acom uses components to build user interfaces. The components are instances of a
 
 ```js
 {
-  id: String,
-  uri: String,
+  dynamicData: Object,
+  id: string,
   scope: Element | document,
   apply: Object,
   transform: Object,
@@ -54,23 +46,23 @@ Acom uses components to build user interfaces. The components are instances of a
 }
 ```
 
+### dynamicData
+
+The data that is linked to the DOM. This is the data specified in [`options.utils.data.dynamic`](../create-component/utils.md#dynamic-data). Changing the contents updates the data in the DOM.
+
 ### `id`
 
-This is the id of the component. In HTML components, it is set via the `id` attribute of the `<meta>` tag. In JS components, it is set on the options. If you have not set this property, it is automatically set. The attribute is used for uniquely identifying `scope` of a component for styling and eventListeners purposes. It is also used for caching a component and `styles`.
+The ID of the component. In HTML components, it is set via the `id` attribute of a `<meta>` tag. In JS components, it is set on `options`. If you have not set this property, it is automatically generated. The ID is used for uniquely identifying `scope` of a component for styling and eventListeners purposes. It is also used for caching a component and `styles`.
 
-> __Note__: If you have not set the `id` explicitly, it will not be used for caching purposes. Therefore, settiing `id` on a component guarantees caching. 
-
-### `uri`
-
-This property is set only on HTML components. It indicates the URI of the component (the HTML file). This is used for importing and caching components.
+> __Note__: If you have not set the `id` explicitly, it will not be used for caching purposes. Therefore, settiing `id` on a component guarantees caching.
 
 ### `scope`
 
-The `scope` of a component is the `Element` or `document` of that component. This is what is added to the DOM (if it is an `Element`). The `document` object of the `window` object is used as the scope of [`$createpp`](data.md#app), a global object (component) for sharing data within an app.
+The `scope` of a component is the `Element` inserted into the DOM.
 
 ### `apply`
 
-Styling and eventListeners are applied to a component using `apply`.
+Select nodes in the component and apply actions like styling, adding event listeners and the like. Refer to [`apply](./apply.md) for more information.
 
 ### `transform`
 
@@ -78,189 +70,67 @@ Transformations like inserting components into `scope` are done via `transform`.
 
 ### `select`
 
-This method selects elements of `scope`.
+This method selects elements of [`scope`](#scope) using a CSS selector.
 
-__Syntax__
+#### Syntax
 
 ```js
 select(selector, selectAll)
 ```
 
-__Parameters__
+#### Parameters
 
-`selector`
+- `selector`:
+  - Type: `string`
+  - Required: Yes
+  - Usage: selecting an element specified
 
-A CSS selector string.
+- `selectAll`:
+  - Type: `boolean`
+  - Required: Yes
+  - Usage: determines whether all matching elements or only the first matching element must be returned from the function. The default value is `true`.
 
-`selectAll`
+#### Return Value
 
-A `Boolean` which determines whether all matching elements or only the first matching element must be returned from the function. The default value is `true`.
-
-__Return Value__
-
-A promise that resolves to an element if `selectAll` is set to `false` and an array of elements if `selectAll` is set to `true`. This includes all descendants including components and their descendants.
+A promise that resolves to an element if `selectAll` is set to `false` and an array of elements if `selectAll` is set to `true`. This includes all descendants including those added by child components.
 
 ### `parseMarkup`
 
-This method parses markup and assigns the resulting DOM to `scope`.
+This method parses markup and assigns the resulting DOM to [`scope`](#scope).
 
 #### Syntax
 
 ```js
-parseMarkup(markup [, middleware])
+parseMarkup(options)
 ```
 
 #### Parameters
 
-`markup`
-
-A `String` containing markup. For more, check out [`markup`]().
-
-`middleware` (Optional)
-
-An object containing middleware to handle transformation of `markup`.
-
-Structure
-
-```js
-{
-  parser: Function,
-  converter: Function
-}
-```
-
-`parser` (Optional)
-
-Parses the markup.
-
-Syntax
-
-```js
-parser(markup)
-```
-
-Parameters
-
-`markup`
-
-A markup `String`.
-
-Return Value
-
-A promise that resolves to an `Element`.
-
-`converter` (Optional)
-
-Converts from XML-based DOM to HTML DOM.
-
-Syntax
-
-```js
-converter(element)
-```
-
-Parameters
-
-`element`
-
-An `Element` that is to be converted.
-
-Return Value
-
-A promise that resolves to an `HTMLElement` element.
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains markup and options for processing markup.
 
 #### Return Value
 
-A promise that resolves to an `Element`.
-
-### `run`
-
-This method all the aforementioned transformations.
-
-#### Syntax
-
-```js
-run(options)
-```
-
-#### Parameters
-
-`options`
-
-An `Object` containing data to use for transformations.
-
-Structure
-
-```js
-{
-  components: Object,
-  elements: Object,
-  markups: Object,
-  texts: Object,
-  slots: Object,
-  data: Object,
-  methods: Object
-}
-```
-
-#### Return Value
-
-A promise that resolves to an `Element` (`scope`).
-
-### `replace`
-
-This method inserts `scope` into the DOM or another `Element`.
-
-#### Syntax
-
-```js
-replace(element)
-```
-
-#### Parameters
-
-`element`
-
-A CSS selector string or an `Element` `scope` is supposed to is supposed to use as a target element. If it is a string, the element matching the selector is going to be used as the target element.
-
-#### Return Value
-
-A promise that resolves to `undefined`.
-
-### `createState`
-
-This method is used to create either a state or a state machine for a component. This method uses third-party middleware to achieve this.
-
-#### Syntax
-
-```js
-crateState(element)
-```
-
-#### Parameters
-
-`element`
-
-A CSS selector string or an `Element` `scope` is supposed to is supposed to use as a target element. If it is a string, the element matching the selector is going to be used as the target element.
-
-#### Return Value
-
-A promise that resolves to `undefined`.
-
+A promise that resolves to `HTMLElement`.
 
 ### `render`
 
-A function used for inserting a component into the DOM.
+This method inserts `scope` into the DOM or another component.
+
+#### Syntax
 
 ```js
-render(target)
+render(element)
 ```
 
 #### Parameters
 
-`target`
-
-A CSS selector for a target element or a target `Element`.
+- `element`
+  - Type: `string` | `Node`
+  - Required: Yes
+  - Usage: if it is a node, it is replaced by [`scope`](#scope). If it is a CSS selector, it is used to select a node in the DOM to be replaced by `scope`.
 
 #### Return Value
 

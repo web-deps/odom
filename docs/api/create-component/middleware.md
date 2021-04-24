@@ -13,6 +13,7 @@ __Table of Contents__
       - [Parameters](#parameters)
       - [Return Value](#return-value)
     - [`converter`](#converter)
+      - [Description](#description-1)
       - [Syntax](#syntax-1)
       - [Parameters](#parameters-1)
       - [Return Value](#return-value-1)
@@ -31,7 +32,7 @@ __Table of Contents__
 
 ## Introduction
 
-middleware are either user defined or third-party functions used to supplement or override the [Component API](component/component.md#API). The middleware are used for manipulating `markup` and `styles` of a component.
+middleware are either user defined or third-party utilities used to supplement or override the [Component API](component/component.md#api). The middleware are used for manipulating `markup` and `styles` of a component.
 
 ## Structure
 
@@ -60,7 +61,7 @@ Used to manipulate [`markup`](#markup).
 
 ### `parser`
 
-Used to parse [`markup`](#markup).
+Used to parse [`markup`](#markup). This will override the default markup parser for a component.
 
 #### Syntax
 
@@ -70,16 +71,20 @@ parser(markup)
 
 #### Parameters
 
-* `markup`
-  * Type: `String`
-  * Required: Yes
-  * Usage: contains markup to be parsed
+- `markup`
+  - Type: `string`
+  - Required: Yes
+  - Usage: contains markup to be parsed
 
 #### Return Value
 
-A promise that resolves to an `Element`.
+A promise that resolves to a `Node`.
 
 ### `converter`
+
+#### Description
+
+Used to convert an XML based document to HTML document. This is used when the markup used is not HTML. This overrides the default converter for a component.
 
 #### Syntax
 
@@ -89,10 +94,10 @@ converter(element)
 
 #### Parameters
 
-* `element`
-  * Type: `Element`
-  * Required: Yes
-  * Usage: converted to `HTMLElement`
+- `element`
+  - Type: `Element`
+  - Required: Yes
+  - Usage: converted to `HTMLElement`
 
 #### Return Value
 
@@ -100,7 +105,7 @@ A promise that resolves to an `HTMLElement`.
 
 ### `custom`
 
-Array of functions used to process [`markup`](). The result of one function is passed to the next function.
+Array of functions used to process [`markup`](./create-component.md#markup). The functions are involked in the order they are in the array. The result of one function is passed to the next function. After processing, the end result is assigned to [`Component.scope`](../component/compnent.md#scope). This overrides all the component utilities used to process markup.
 
 ## `styles`
 
@@ -118,7 +123,7 @@ Used to manipulate [`styles`](#styles).
 
 ### `preprocessor`
 
-Used to preprocess [`styles`](#styles).
+Used to preprocess [`styles`](#styles). This can be used for languages that can be converted to CSS.
 
 #### Syntax
 
@@ -128,10 +133,10 @@ preprocessor(styles)
 
 #### Parameters
 
-* `styles`
-  * Type: `String`
-  * Required: Yes
-  * Usage: converted to CSS
+- `styles`
+  - Type: `string`
+  - Required: Yes
+  - Usage: converted to CSS
 
 #### Return Value
 
@@ -139,7 +144,7 @@ A promise that resolves to a string containg CSS.
 
 ### `postprocessor`
 
-Used to post-process CSS.
+Used to post-process CSS. This can be used to add vendor prefixes and the like.
 
 #### Syntax
 
@@ -149,11 +154,10 @@ postprocessor(css)
 
 #### Parameters
 
-* `css`
-  * Type: `String`
-  * Required: Yes
-  * Usage: converted to post-precessed CSS
-
+- `css`
+  - Type: `String`
+  - Required: Yes
+  - Usage: converted to post-precessed CSS
 
 #### Return Value
 
@@ -161,4 +165,4 @@ A promise that resolves to a `string` containing post-processed CSS.
 
 ### `custom`
 
-Array of functions used to process [`styles`](). The result of one function is passed to the next function.
+Array of functions used to process [`styles`](./create-component.md#styles). The functions are involked in the order they are put in the array. The result of one function is passed to the next function. The end result is used to style the component. These utilities override all the default styling utilities of a component.

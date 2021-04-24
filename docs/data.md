@@ -14,18 +14,9 @@ __Table of Contents__
     - [__Slots__](#slots)
       - [__Description__](#description-1)
       - [__Example__](#example-1)
-  - [__Utils__](#utils)
-    - [__Introduction__](#introduction-2)
-    - [__Generic__](#generic)
-      - [__Description__](#description-2)
-      - [__Example__](#example-2)
-    - [__Specific__](#specific)
-      - [__Description__](#description-3)
-      - [__Usage__](#usage)
-      - [__Example__](#example-3)
   - [__App__](#app)
-    - [__Description__](#description-4)
-    - [__Example__](#example-4)
+    - [__Description__](#description-2)
+    - [__Example__](#example-2)
 
 
 ## __Introduction__
@@ -117,115 +108,7 @@ Acom inserts slots on all elements in the component that have the same value for
 
 The `<div>` with the attribute `acom-slot` will be replaced with `props.slots.text`. If text was an array, the `<div>` would have be replaced with all the slots.
 
-## __Utils__
 
-### __Introduction__
-
-A component can have a collection of local utilities called `utils`. The collection `utils` has the following structure:
-
-```javascript
-{
-  data: Object,
-  methods: Object,
-  components: Object,
-  elements: Object,
-  markups: Object,
-  texts: Object
-}
-```
-
-The utilities in the collection are divided into two categories, generic and specific.
-
-### __Generic__
-
-#### __Description__
-
-Generic utilities are used for general purposes. The following are the items in generic data:
-
-1. `data`: An object containing data of any type.
-2. `methods`: An object of function.
-
-Generic utilities are accessed using any attribute name using data selectors.
-
-#### __Example__
-
-Let us set the title of an element using `data`.
-
-HTML:
-
-```html
-<span title="@data.title"></span>
-```
-
-JS:
-
-```javascript
-const data = { title: "Hello" };
-const utils = { data };
-// ...
-const options = { ..., utils };
-// ...
-```
-
-The title attribute of `<span>` will be updated to `Hello`.
-
-> Note: <br />
-> All generic data is converted to `string` for all elements except target elements. If the target element has ordinary attributes, the attributes will be converted to props as they are in the utility collections.
-
-### __Specific__
-
-#### __Description__
-
-Specific utilities are used for inserting content into the DOM. The items in this category are:
-
-1. `components`: An object of components.
-2. `elements`: An object of DOM elements (HTMLElement, SVGElement etc).
-3. `markups`: An object of markup text (HTML, XML, etc).
-4. `texts`: An object of strings.
-
-#### __Usage__
-
-_Attribute Names_
-
-Specific utilities are used with specific attributes. All attribute names are prefixed with `acom-`. The table below shows specific utilities and corresponding attribute names.
-
-
-Utility       | Attribute Name 
---------------|----------------
-`components`  | `acom-src`     
-`elements`    | `acom-node`  
-`markups`     | `acom-markup`  
-`texts`       | `acom-text`   
-
-_Attribute Values_
-
-Attribute values are simple, just put the name of the item as the value. Acom will look up the item in the utility collection corresponding to the attribute value.
-
-#### __Example__
-
-Let us insert a component `footer` into the markup. For this, we are going to use the attribute `acom-src`. The value will be the name of our component.
-
-HTML:
-
-```html
-<div acom-src="footer">
-```
-
-JS:
-
-```javascript
-const footer = await importComponent("/src/components/footer.htm");
-const components = { footer };
-const utils = { components };
-
-// ...
-
-const options = { ..., utils };
-
-// ...
-```
-
-The component `footer` will be inserted into the DOM by replacing `<div>`. If `<div>` has extra attributes that are not special, they will be considered as props and will be used to instantiate the component.
 
 ## __App__
 

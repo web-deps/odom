@@ -6,23 +6,23 @@ __Table of Contents__
   - [Introduction](#introduction)
   - [API](#api)
     - [Structure](#structure)
+    - [`apply`](#apply)
     - [dynamicData](#dynamicdata)
     - [`id`](#id)
-    - [`scope`](#scope)
-    - [`apply`](#apply)
-    - [`transform`](#transform)
-    - [`select`](#select)
+    - [`parseMarkup`](#parsemarkup)
       - [Syntax](#syntax)
       - [Parameters](#parameters)
       - [Return Value](#return-value)
-    - [`parseMarkup`](#parsemarkup)
+    - [`render`](#render)
       - [Syntax](#syntax-1)
       - [Parameters](#parameters-1)
       - [Return Value](#return-value-1)
-    - [`render`](#render)
+    - [`scope`](#scope)
+    - [`select`](#select)
       - [Syntax](#syntax-2)
       - [Parameters](#parameters-2)
       - [Return Value](#return-value-2)
+    - [`transform`](#transform)
 
 
 ## Introduction
@@ -46,6 +46,10 @@ Acom uses components to build user interfaces. The components are instances of a
 }
 ```
 
+### `apply`
+
+Select nodes in the component and apply actions like styling, adding event listeners and the like. Refer to [`apply](./apply.md) for more information.
+
 ### dynamicData
 
 The data that is linked to the DOM. This is the data specified in [`options.utils.data.dynamic`](../create-component/utils.md#dynamic-data). Changing the contents updates the data in the DOM.
@@ -55,44 +59,6 @@ The data that is linked to the DOM. This is the data specified in [`options.util
 The ID of the component. In HTML components, it is set via the `id` attribute of a `<meta>` tag. In JS components, it is set on `options`. If you have not set this property, it is automatically generated. The ID is used for uniquely identifying `scope` of a component for styling and eventListeners purposes. It is also used for caching a component and `styles`.
 
 > __Note__: If you have not set the `id` explicitly, it will not be used for caching purposes. Therefore, settiing `id` on a component guarantees caching.
-
-### `scope`
-
-The `scope` of a component is the `Element` inserted into the DOM.
-
-### `apply`
-
-Select nodes in the component and apply actions like styling, adding event listeners and the like. Refer to [`apply](./apply.md) for more information.
-
-### `transform`
-
-Transformations like inserting components into `scope` are done via `transform`. Check out [Transform](transform.md) for more details.
-
-### `select`
-
-This method selects elements of [`scope`](#scope) using a CSS selector.
-
-#### Syntax
-
-```js
-select(selector, selectAll)
-```
-
-#### Parameters
-
-- `selector`:
-  - Type: `string`
-  - Required: Yes
-  - Usage: selecting an element specified
-
-- `selectAll`:
-  - Type: `boolean`
-  - Required: Yes
-  - Usage: determines whether all matching elements or only the first matching element must be returned from the function. The default value is `true`.
-
-#### Return Value
-
-A promise that resolves to an `Element` if `selectAll` is set to `false` and an array of elements if `selectAll` is set to `true`. This includes all descendants including those added by child components.
 
 ### `parseMarkup`
 
@@ -155,3 +121,37 @@ render(element)
 #### Return Value
 
 A promise that resolves to `undefined`.
+
+### `scope`
+
+The `scope` of a component is the `Element` inserted into the DOM.
+
+### `select`
+
+This method selects elements of [`scope`](#scope) using a CSS selector.
+
+#### Syntax
+
+```js
+select(selector, selectAll)
+```
+
+#### Parameters
+
+- `selector`:
+  - Type: `string`
+  - Required: Yes
+  - Usage: selecting an element specified
+
+- `selectAll`:
+  - Type: `boolean`
+  - Required: Yes
+  - Usage: determines whether all matching elements or only the first matching element must be returned from the function. The default value is `true`.
+
+#### Return Value
+
+A promise that resolves to an `Element` if `selectAll` is set to `false` and an array of elements if `selectAll` is set to `true`. This includes all descendants including those added by child components.
+
+### `transform`
+
+Transformations like inserting components into `scope` are done via `transform`. Check out [Transform](transform.md) for more details.

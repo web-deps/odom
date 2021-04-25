@@ -22,42 +22,41 @@ export const transform = function () {
       });
     },
 
-    insertComponents: async (components) => {
-      await apply(this.scope, async element => {
-        await insertComponent({ element, src, components, props });
-
-        await render({
-          assetType: "component",
-          fileType: "module",
-          target: element,
-          asset: src,
-          assets: components,
-          props
-        });
-      });
-    },
-
-    insertElements: async (elements) => {
+    insertComponents: async (components, data, methods, props) => {
       await apply(
         this.scope,
-        async (element) => {
-          const asset = element.getAttribute("acom-node");
-          const props = await getProps(element);
-          
+        async element => {
+          await render({
+            assetType: "component",
+            fileType: "module",
+            target: element,
+            asset: element.getAttribute("acom-src"),
+            assets: components,
+            props: await getProps({ element, skip: ["acom-src"], data, methods, props })
+          });
+        },
+        "acom-src"
+      );
+    },
+
+    insertElements: async (elements, data, methods, props) => {
+      await apply(
+        this.scope,
+        async element => {
           await render({
             assetType: "element",
             fileType: "module",
             target: element,
-            asset,
+            asset: element.getAttribute("acom-node"),
             assets: elements,
-            props
+            props: await getProps({ element, skip: ["acom-node"], data, methods, props})
           });
         },
         "acom-node"
       );
     },
 
-    insertMarkups: async (markups) => {
+    insertMarkup: async (markups) => {
       await apply(
         this.scope,
         async (element) => {

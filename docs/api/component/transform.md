@@ -6,6 +6,7 @@
   - [`insertData`](#insertdata)
     - [Syntax](#syntax)
     - [Parameters](#parameters)
+      - [`options`](#options)
     - [Return Value](#return-value)
   - [`insertComponents`](#insertcomponents)
     - [Syntax](#syntax-1)
@@ -42,38 +43,48 @@
 
 ## Introduction
 
-Transformations like inserting components into `scope` are done via `transform`, a property of [`Component`](component.md). Transformations are some of the functions performed by [`acom`](../exports.md#acom). Let us take a look at the structure and functionality of `transform`.
+Transformations like inserting components into [`scope`](./component.md#scope) are done via `transform`, a property of [`Component`](component.md). Transformations are some of the functions performed by [`createComponent`](../create-component/create-component.md). Let us take a look at the structure and functionality of `transform`. Every transformations are done on [`scope`](./component.md#scope).
 
 ## Structure
 
 ```js
 {
+  display: Function,
   insertData: Function,
   insertSlots: Function,
   insertComponents: Function,
   insertElements: Function,
   insertMarkup: Function,
   insertText: Function,
-  multiply: Function,
-  map: Function
+  loading: Function,
+  map: Function,
+  multiple: Function,
+  presence: Function,
+  run: Function
 }
 ```
 
 ## `insertData`
 
-Used for inserting data into [`scope`](#scope).
+Used for inserting and binding data.
 
 ### Syntax
 
 ```js
-insertData(param)
+insertData(options)
 ```
 
 ### Parameters
 
-`param`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: provides data utilities for inserting
+  - Reference: [`options`](#options)
 
-__Structure__
+#### `options`
+
+_Structure_
 
 ```js
 {
@@ -83,26 +94,19 @@ __Structure__
 }
 ```
 
-`props`
+_Properties_
 
-The props of a component provided in the options. For more information, check out [`props`](../data.md#props).
-
-`data`
-
-Generic data in a component. Check out [`data`](../data.md#data) for more details.
-
-`methods`
-
-Generic methods used in a component.  Check out [`methods`](../data.md#methods) for more details.
+- `props`: the props of a component provided in [`options`](../create-component/create-component.md). For more information, Refer to [`props`](../create-component/create-component.md#props).
+- `data`: generic data in a component. Refer to [`data`](../create-component/create-component.md#data) for more details
+- `methods`: generic methods used in a component. Refer to [`methods`](../create-component/create-component.md#methods) for more details.
 
 ### Return Value
 
 A promise that resolves to `undefined`.
 
-
 ## `insertComponents`
 
-This method inserts `components` into [`scope`](component.md#scope).
+This method inserts `components`.
 
 ### Syntax
 

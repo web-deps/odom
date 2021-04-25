@@ -22,7 +22,7 @@ export const transform = function () {
       });
     },
 
-    insertComponents: async (components, data, methods, props) => {
+    insertComponents: async ({ components, data, methods, props }) => {
       await apply(
         this.scope,
         async element => {
@@ -39,7 +39,7 @@ export const transform = function () {
       );
     },
 
-    insertElements: async (elements, data, methods, props) => {
+    insertElements: async ({ elements, data, methods, props }) => {
       await apply(
         this.scope,
         async element => {
@@ -56,40 +56,34 @@ export const transform = function () {
       );
     },
 
-    insertMarkup: async (markups) => {
+    insertMarkup: async ({ markups, data, methods, props }) => {
       await apply(
         this.scope,
         async (element) => {
-          const asset = element.getAttribute("acom-markup");
-          const props = await getProps(element);
-          
           await render({
             assetType: "markup",
             fileType: element.getAttribute("acom-filetype"),
             target: element,
-            asset,
+            asset: element.getAttribute("acom-markup"),
             assets: markups,
-            props
+            props: await getProps({ element, skip: ["acom-node"], data, methods, props})
           });
         },
         "acom-markup"
       );
     },
 
-    insertTexts: async (texts) => {
+    insertText: async ({ texts, data, methods, props }) => {
       await apply(
         this.scope,
         async (element) => {
-          const asset = element.getAttribute("acom-text");
-          const props = await getProps(element);
-          
           await render({
             assetType: "text",
             fileType: element.getAttribute("acom-filetype"),
             target: element,
-            asset,
+            asset: element.getAttribute("acom-text"),
             assets: texts,
-            props
+            props: await getProps({ element, skip: ["acom-node"], data, methods, props})
           });
         },
         "acom-text"
@@ -100,11 +94,11 @@ export const transform = function () {
       await apply(
         this.scope,
         async element => collections({ element, type: "multiple", props, data, methods }),
-        "acom-markupltiple"
+        "acom-multiple"
       );
     },
 
-    map: async (methods) => {
+    map: async ({ data, methods, props }) => {
       await apply(
         this.scope,
         async element => collections({ element, type: "map", props, data, methods }),

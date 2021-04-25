@@ -11,18 +11,22 @@
   - [`insertComponents`](#insertcomponents)
     - [Syntax](#syntax-1)
     - [Parameters](#parameters-1)
+      - [insertComponent Options](#insertcomponent-options)
     - [Return Value](#return-value-1)
-  - [`insertElements`](#insertelements)
+  - [`insertNodes`](#insertnodes)
     - [Syntax](#syntax-2)
     - [Parameters](#parameters-2)
+      - [insertNodes Options](#insertnodes-options)
     - [Return Value](#return-value-2)
   - [`insertMarkup`](#insertmarkup)
     - [Syntax](#syntax-3)
     - [Parameters](#parameters-3)
+      - [insertMarkup Options](#insertmarkup-options)
     - [Return Value](#return-value-3)
   - [`insertText`](#inserttext)
     - [Syntax](#syntax-4)
     - [Parameters](#parameters-4)
+      - [insertText Options](#inserttext-options)
     - [Return Value](#return-value-4)
   - [`insertSlots`](#insertslots)
     - [Syntax](#syntax-5)
@@ -111,34 +115,78 @@ This method inserts `components`.
 ### Syntax
 
 ```js
-insertComponents(components)
+insertComponents(options)
 ```
 
 ### Parameters
 
-`components`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilites for inserting components
+  - Reference: [`insertComponents Options`](#insertcomponents-options)
 
-An object containing components. For more details, check out [`components`](../data.md#components).
+#### insertComponent Options
+
+__Structure__:
+
+```js
+{
+  components: Object,
+  data: Object,
+  methods: Object,
+  props: Object
+}
+```
+
+__Properties__:
+
+- `components`: contains components with property names corresponding to values specified via "acom-src" attributes.
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
 
 ### Return Value
 
 A promise that resolves to `undefined`.
 
-## `insertElements`
+## `insertNodes`
 
-This method inserts `elements` into [`scope`](component.md#scope).
+This method inserts `nodes` into [`scope`](component.md#scope).
 
 ### Syntax
 
 ```js
-insertElements(elements)
+insertNodes(options)
 ```
 
 ### Parameters
 
-`elements`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilites for inserting elements
+  - Reference: [`insertElements Options`](#insertnodes-options)
 
-An object containing elements. For more details, check out [`elements`](../data.md#elements).
+#### insertNodes Options
+
+__Structure__:
+
+```js
+{
+  nodes: Object,
+  data: Object,
+  methods: Object,
+  props: Object
+}
+```
+
+__Properties__:
+
+- `nodes`: contains nodes with property names corresponding to values specified via "acom-node" attributes.
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -156,9 +204,31 @@ insertMarkup(markups)
 
 ### Parameters
 
-`markups`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilites for inserting markup
+  - Reference: [`insertMarkup Options`](#insertmarkup-options)
 
-An object containing markup. For more details, check out [`markups`](../data.md#markups).
+#### insertMarkup Options
+
+__Structure__:
+
+```js
+{
+  markups: Object,
+  data: Object,
+  methods: Object,
+  props: Object
+}
+```
+
+__Properties__:
+
+- `markups`: contains markup with property names corresponding to values specified via "acom-markup" attributes.
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -176,9 +246,31 @@ insertText(texts)
 
 ### Parameters
 
-`texts`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilites for inserting text
+  - Reference: [`insertText Options`](#inserttext-options)
 
-An object containing text. For more details, check out [`texts`](../data.md#texts).
+#### insertText Options
+
+__Structure__:
+
+```js
+{
+  texts: Object,
+  data: Object,
+  methods: Object,
+  props: Object
+}
+```
+
+__Properties__:
+
+- `texts`: contains text with property names corresponding to values specified via "acom-text" attributes.
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
 
 ### Return Value
 

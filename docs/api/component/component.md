@@ -92,11 +92,11 @@ select(selector, selectAll)
 
 #### Return Value
 
-A promise that resolves to an element if `selectAll` is set to `false` and an array of elements if `selectAll` is set to `true`. This includes all descendants including those added by child components.
+A promise that resolves to an `Element` if `selectAll` is set to `false` and an array of elements if `selectAll` is set to `true`. This includes all descendants including those added by child components.
 
 ### `parseMarkup`
 
-This method parses markup and assigns the resulting DOM to [`scope`](#scope).
+This method parses markup and assigns the resulting `Element` to [`scope`](#scope).
 
 #### Syntax
 
@@ -111,13 +111,33 @@ parseMarkup(options)
   - Required: Yes
   - Usage: contains markup and options for processing markup.
 
+`options`
+
+_Structure_:
+
+```js
+{
+  markup: string,
+  markupMiddleware: Object,
+  mltype: string,
+  convertMarkup: boolean
+}
+```
+
+_Properties_:
+
+- `markup`: the markup to be parsed
+- `mltype`: the markup type. Can be either `"html"` or `"xml"`. The default value is `"html"`.
+- `markupMiddleware`: utilities for processing markup. Refer to [`markup`](../create-component/middleware.md) for more information.
+- `convertMarkup`: indicates whether or not to convert the resulting `Element` (if not an HTMLElement) to an HTMLElement. The default value is true.
+
 #### Return Value
 
-A promise that resolves to `HTMLElement`.
+A promise that resolves to `Element` or `HTMLElement`.
 
 ### `render`
 
-This method inserts `scope` into the DOM or another component.
+This method inserts [`scope`](#scope) into the DOM or another component's `scope`.
 
 #### Syntax
 

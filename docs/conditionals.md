@@ -34,7 +34,7 @@ A conditions can be of any a data value or media query. Let us look at each one 
 
 ### Data
 
-Data can be any value in [`props`](data.md#props), [`schem.utils.data`](data.md#data), the return value of any function of [`options.utils.methods`](data.md#methods) or a global value specified in [`$createpp`](data.md#app). A data selector is used to select a particular data. The selector is prefixed with `@`. The rest of the selector uses dot notation. Check out [Data](data.md) for a detailed description of all of these types of data.
+Data can be any value in [`props`](data.md#props), [`schem.utils.data`](data.md#data), the return value of any function of [`options.utils.methods`](data.md#methods) or a global value specified in [`$createpp`](data.md#app). A data selector is used to select a particular data. The selector is prefixed with `@`. The rest of the selector uses dot notation. Refer to [Data](data.md) for a detailed description of all of these types of data.
 
 ### Media Query
 
@@ -120,7 +120,7 @@ Structure:
 }
 ```
 
-Check out [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) for a detailed explaination of how these values work.
+Refer to [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) for a detailed explaination of how these values work.
 
 `root`
 

@@ -154,4 +154,4 @@ A promise that resolves to an `Element` if `selectAll` is set to `false` and an 
 
 ### `transform`
 
-Transformations like inserting components into `scope` are done via `transform`. Check out [Transform](transform.md) for more details.
+Transformations like inserting components into `scope` are done via `transform`. Refer to [Transform](transform.md) for more details.

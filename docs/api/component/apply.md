@@ -50,7 +50,7 @@ A `String` or `HTMLStyleElement` containing the styles of `scope`.
 
 `middleware`
 
-Functions used to transform [`styles`](../options.md#styles). Check out [`styles`](../options.md#styles-1) for more information.
+Functions used to transform [`styles`](../options.md#styles). Refer to [`styles`](../options.md#styles-1) for more information.
 
 ### Return Value
 
@@ -70,7 +70,7 @@ eventListeners(param)
 
 `param`
 
-An object containing eventListeners. For more information check out [`eventListeners`](../options.md#eventListeners).
+An object containing eventListeners. For more information Refer to [`eventListeners`](../options.md#eventListeners).
 
 ### Return Value
 
@@ -106,11 +106,11 @@ CSS `String` or `HTMLStyleElement` that contains styles for a component.
 
 `eventListeners`
 
-eventListeners for a component. Check out [`eventListeners`](../options.md#eventListeners) for more information.
+eventListeners for a component. Refer to [`eventListeners`](../options.md#eventListeners) for more information.
 
 `stylesmiddleware`
 
-middleware used to transform [`styles`](../options.md#styles). Check out [`styles`](../options.md#styles-1) for more information.
+middleware used to transform [`styles`](../options.md#styles). Refer to [`styles`](../options.md#styles-1) for more information.
 
 ### Return Value
 

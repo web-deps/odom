@@ -199,7 +199,7 @@ HTML Equivalent
 
 ### `middleware`
 
-middleware are used to manipulate [`markup`](#markup) and [`styles`](#styles), and add state to a component. Check out [middleware](middleware.md).
+middleware are used to manipulate [`markup`](#markup) and [`styles`](#styles), and add state to a component. Refer to [middleware](middleware.md).
 
 ### `props`
 

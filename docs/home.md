@@ -23,7 +23,7 @@ Checkout the [Quick Start Guide](quick-start.md) for an introductory guide to th
 
 ## Topics
 
-Check out the following topics for further reading.
+Refer to the following topics for further reading.
 
 * [Exports](exports.md)
 * [options](options.md)

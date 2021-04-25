@@ -35,7 +35,7 @@ This is used in markup that is not HTML. It is used to specify which HTML elemen
 
 ## `acom-display`
 
-This is used to specify the conditional `display`. For more on how it works and the values it takes, check out [Conditionals](conditionals.md).
+This is used to specify the conditional `display`. For more on how it works and the values it takes, Refer to [Conditionals](conditionals.md).
 
 ## `acom-node`
 
@@ -43,7 +43,7 @@ This is used to specify the URI of an element. If the element is external, the U
 
 ## `acom-loading`
 
-This is used to specify the conditional `loading`. For more on how it works and the values it takes, check out [Conditionals](conditionals.md#loading).
+This is used to specify the conditional `loading`. For more on how it works and the values it takes, Refer to [Conditionals](conditionals.md#loading).
 
 ## `acom-ml`
 
@@ -59,7 +59,7 @@ Used on placeholder elements. [Placeholders](conditionals.md#placeholders) are u
 
 ## `acom-presence`
 
-This is used to specify the conditional [Presence](conditionals.md#presence). For more on how it works and the values it takes, check out [Conditionals](conditionals.md#presence).
+This is used to specify the conditional [Presence](conditionals.md#presence). For more on how it works and the values it takes, Refer to [Conditionals](conditionals.md#presence).
 
 ## `acom-scope`
 
@@ -67,7 +67,7 @@ This is the attribute set on the `scope` of a component. If not set by the user,
 
 ## `acom-slot`
 
-Target elements for slots require this attribute in order to be identified. In the imported component, each slot target is replaced with the matching slot in `props.slots`. The slots, in the importing component, do not require this attribute. All children of component target elements are considred to be slots. For more information on how slots in exporting components work, check out [Slots](data.md#props).
+Target elements for slots require this attribute in order to be identified. In the imported component, each slot target is replaced with the matching slot in `props.slots`. The slots, in the importing component, do not require this attribute. All children of component target elements are considred to be slots. For more information on how slots in exporting components work, Refer to [Slots](data.md#props).
 
 ## `acom-src`
 
@@ -79,7 +79,7 @@ Text is inserted via `acom-text`. If the text is external, its value is a URI. I
 
 ## `acom-visibility`
 
-This is used to specify the conditional `visibility`. For more on how it works and the values it takes, check out [Conditionals](conditionals.md).
+This is used to specify the conditional `visibility`. For more on how it works and the values it takes, Refer to [Conditionals](conditionals.md).
 
 ## `xml`
 

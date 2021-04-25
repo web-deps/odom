@@ -32,17 +32,20 @@
     - [Syntax](#syntax-5)
     - [Parameters](#parameters-5)
     - [Return Value](#return-value-5)
-  - [`multiply`](#multiply)
+  - [`multiple`](#multiple)
     - [Syntax](#syntax-6)
     - [Parameters](#parameters-6)
+      - [multiple Options](#multiple-options)
     - [Return Value](#return-value-6)
   - [`map`](#map)
     - [Syntax](#syntax-7)
     - [Parameters](#parameters-7)
+      - [map Options](#map-options)
     - [Return Value](#return-value-7)
   - [`run`](#run)
     - [Syntax](#syntax-8)
     - [Parameters](#parameters-8)
+      - [run Options](#run-options)
     - [Return Value](#return-value-8)
 
 ## Introduction
@@ -241,7 +244,7 @@ This method inserts text into [`scope`](component.md#scope).
 ### Syntax
 
 ```js
-insertText(texts)
+insertText(options)
 ```
 
 ### Parameters
@@ -278,7 +281,7 @@ A promise that resolves to `undefined`.
 
 ## `insertSlots`
 
-This method inserts `slots` into [`scope`](component.md#scope). For more details, check out [Slots](../data.md#slots).
+This method inserts `slots` into [`scope`](./component.md#scope). For more details, Refer to [Slots](../../data.md#slots).
 
 ### Syntax
 
@@ -288,49 +291,50 @@ insertSlots(slots)
 
 ### Parameters
 
-`slots`
-
-An object containing slots. For more details, check out [`slots`](../data.md#slots).
+- `slots`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains slots passed in from parent component
 
 ### Return Value
 
 A promise that resolves to `undefined`.
 
-## `multiply`
+## `multiple`
 
-This method inserts a collection of variants of an element into `scope`. Check out [`Multiple`](../collections.md#multiple) for more.
+This method inserts a collection of variants of an element into `scope` using a template. Refer to [`Multiple`](../../collections.md#multiple) for more.
 
 ### Syntax
 
 ```js
-multiply(param)
+multiple(options)
 ```
 
 ### Parameters
 
-`param`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilites for inserting multiple elements
+  - Reference: [`multiple Options`](#multiple-options)
 
-Sturcture:
+#### multiple Options
+
+__Structure__:
 
 ```js
 {
-  props: Object,
   data: Object,
-  methods: Object
+  methods: Object,
+  props: Object
 }
 ```
 
-`props`
+__Properties__:
 
-The props of a component provided in the options. For more information, check out [`props`](../data.md#props).
-
-`data`
-
-Generic data in a component. Check out [`data`](../data.md#data) for more details.
-
-`methods`
-
-Generic methods used in a component.  Check out [`methods`](../data.md#methods) for more details.
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -338,39 +342,39 @@ A promise that resolves to `undefined`.
 
 ## `map`
 
-This method inserts variants of the same element into `scope` by mapping an array of data to a collection of elements. Check out [`Map`](../collections.md#map) for more.
+This method inserts variants of the same element into `scope` by mapping an array of data to a collection of elements. Refer to [`Map`](../../collections.md#map) for more.
 
 ### Syntax
 
 ```js
-map(param)
+map(options)
 ```
 
 ### Parameters
 
-`param`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilites for inserting a map element
+  - Reference: [`map Options`](#map-options)
 
-Sturcture:
+#### map Options
+
+__Structure__:
 
 ```js
 {
-  props: Object,
   data: Object,
-  methods: Object
+  methods: Object,
+  props: Object
 }
 ```
 
-`props`
+__Properties__:
 
-The props of a component provided in the options. For more information, check out [`props`](../data.md#props).
-
-`data`
-
-Generic data in a component. Check out [`data`](../data.md#data) for more details.
-
-`methods`
-
-Generic methods used in a component.  Check out [`methods`](../data.md#methods) for more details.
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -383,55 +387,32 @@ This method perfom all the transformations.
 ### Syntax
 
 ```js
-run(param)
+run(options)
 ```
 
 ### Parameters
 
-`param`
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilies for transforming a component
+  - Reference: [`run Options`](#run-options)
 
-Sturcture:
+#### run Options
+
+__Sturcture__:
 
 ```js
 {
   props: Object,
-  data: Object,
-  methods: Object,
-  components: Object,
-  elements: Object,
-  markups: Object,
-  texts: Object,
-  slots: Object
+  utils: Object
 }
 ```
 
-`props`
+__Properties__:
 
-The props of a component provided in the options. For more information, check out [`props`](../data.md#props).
-
-`data`
-
-Generic data in a component. Check out [`data`](../data.md#data) for more details.
-
-`methods`
-
-Generic methods used in a component.  Check out [`methods`](../data.md#methods) for more details.
-
-`components`
-
-An object containing components. For more details, check out [`components`](../data.md#components).
-
-`elements`
-
-An object containing elements. For more details, check out [`elements`](../data.md#elements).
-
-`markups`
-
-An object containing markup. For more details, check out [`markups`](../data.md#markups).
-
-`slots`
-
-An object containing slots. For more details, check out [`slots`](../data.md#slots).
+- `props`: the props of a component. For more information, Refer to [`props`](../../data.md#props).
+- `utils`: contains the utilities used to perform transformations. Refer to [`utils`](../create-component/utils.md) for more details.
 
 ### Return Value
 

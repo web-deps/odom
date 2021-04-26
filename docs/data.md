@@ -52,13 +52,13 @@ The structure has three parts, these are:
 
 ### __Introduction__
 
-Data can be passed from a component to an asset or another component using `props`. Components, elements, markup and text can use `props` to provide variable instances of themselves before they are inserted into the DOM. Props are derived from attributes and slots.
+Data can be passed from a component to an asset or another component using `props`. Components, nodes, markup and text can use `props` to provide variable instances of themselves before they are inserted into the DOM. Props are derived from attributes and slots.
 
 ### __Attributes__
 
 #### __Description__
 
-One way of using props is by using attributes on target elements (elements that assets and utilites are supposed to replace when inserted into the DOM). All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `acom-`) are considered as props. Attributes are added to props as key-value pairs of attribute names and values. Props are used to instantiate assets and utilities.
+One way of using props is by using attributes on target nodes (nodes that assets and utilites are supposed to replace when inserted into the DOM). All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `acom-`) are considered as props. Attributes are added to props as key-value pairs of attribute names and values. Props are used to instantiate assets and utilities.
 
 #### __Example__
 
@@ -98,7 +98,7 @@ _Importing Module_
 
 _Exporting Module_
 
-Acom inserts slots on all elements in the component that have the same value for the attribute `acom-slot` as the name of the attribute `name` on a slot from the importing component.
+Acom inserts slots on all nodes in the component that have the same value for the attribute `acom-slot` as the name of the attribute `name` on a slot from the importing component.
 
 ```html
 <div>
@@ -114,7 +114,7 @@ The `<div>` with the attribute `acom-slot` will be replaced with `props.slots.te
 
 ### __Description__
 
-To share data within a web app as a whole, Acom uses the global object `$createpp`. You can explicitly add this object to the window object. If you have not added it, Acom will add it automatically when needed. Through `$createpp` you can share any kind of data globally within your app. You can make the object an instance of [`Component`](component/component.md). The window object `document` is used as `scope` for the component. This means that you can use some of the methods of the API such as [`select`](component/component.md#select) to select elements in the whole document (DOM). You create the component using [`createApp`](component/component.md#createapp).
+To share data within a web app as a whole, Acom uses the global object `$createpp`. You can explicitly add this object to the window object. If you have not added it, Acom will add it automatically when needed. Through `$createpp` you can share any kind of data globally within your app. You can make the object an instance of [`Component`](component/component.md). The window object `document` is used as `scope` for the component. This means that you can use some of the methods of the API such as [`select`](component/component.md#select) to select nodes in the whole document (DOM). You create the component using [`createApp`](component/component.md#createapp).
 
 ### __Example__
 

@@ -22,7 +22,7 @@ A property of [`options`](./create-component.md#options). It contains data and a
   data: Object,
   methods: Object,
   components: Object,
-  elements: Object,
+  nodes: Object,
   markups: Object,
   texts: Object
 }
@@ -66,7 +66,7 @@ const options = { ..., utils };
 The title attribute of `<span>` will be updated to `Hello`.
 
 > Note: <br />
-> All generic data is converted to `string` for all elements except target elements. If the target element has ordinary attributes, the attributes will be converted to props as they are in the utility collections.
+> All generic data is converted to `string` for all nodes except target nodes. If the target element has ordinary attributes, the attributes will be converted to props as they are in the utility collections.
 
 ## Specific Utilities
 
@@ -75,7 +75,7 @@ The title attribute of `<span>` will be updated to `Hello`.
 Specific utilities are used for inserting content into the DOM. The items in this category are:
 
 1. `components`: An object of components.
-2. `elements`: An object of DOM elements (HTMLElement, SVGElement etc).
+2. `nodes`: An object of DOM nodes.
 3. `markups`: An object of markup text (HTML, XML, etc).
 4. `texts`: An object of strings.
 
@@ -89,7 +89,7 @@ Specific utilities are used with specific attributes. All attribute names are pr
 Utility       | Attribute Name 
 --------------|----------------
 `components`  | `acom-src`     
-`elements`    | `acom-node`  
+`nodes`    | `acom-node`  
 `markups`     | `acom-markup`  
 `texts`       | `acom-text`   
 

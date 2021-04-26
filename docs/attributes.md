@@ -23,7 +23,7 @@ __Table of Contents__
 
 ## Introduction
 
-Markup elements in Acom may contain special attribute names and values which have special meaning. Most of these attribute names are prefixed with `acom-`. Let us look at what these attributes mean and their use cases.
+Markup nodes in Acom may contain special attribute names and values which have special meaning. Most of these attribute names are prefixed with `acom-`. Let us look at what these attributes mean and their use cases.
 
 ## `acom-display`
 
@@ -51,7 +51,7 @@ This is used to specify the URI of a node. If the node is external, the URI is t
 
 ## `acom-placeholder`
 
-Used on placeholder elements. [Placeholders](./conditionals.md#placeholders) are used for [Conditionals](./conditionals.md).
+Used on placeholder nodes. [Placeholders](./conditionals.md#placeholders) are used for [Conditionals](./conditionals.md).
 
 ## `acom-presence`
 
@@ -63,7 +63,7 @@ This is the attribute set on the [`scope`](api/create-component/utils.md#scope) 
 
 ## `acom-slot`
 
-Target elements for slots require this attribute in order to be identified. In the imported component, each slot target is replaced with the matching slot in [`props.slots`](./data.md#props). The slots, in the importing component, do not require this attribute. All children of component target elements are considered to be slots. For more information on how slots in exporting components work, Refer to [Slots](./data.md#slots).
+Target nodes for slots require this attribute in order to be identified. In the imported component, each slot target is replaced with the matching slot in [`props.slots`](./data.md#props). The slots, in the importing component, do not require this attribute. All children of component target nodes are considered to be slots. For more information on how slots in exporting components work, Refer to [Slots](./data.md#slots).
 
 ## `acom-src`
 

@@ -21,13 +21,13 @@ __Table of Contents__
 
 ## Introduction
 
-A component may depend on external assets such as other components and elements. We are going to look at these assets and how they can be used in a component. There are two ways in which external assets can find their way into a component. One way is by importing them into a JavaScript module and the other is by referencing them via markup.
+A component may depend on external assets such as other components and nodes. We are going to look at these assets and how they can be used in a component. There are two ways in which external assets can find their way into a component. One way is by importing them into a JavaScript module and the other is by referencing them via markup.
 
 ## Types of Assets
 
 ### Introduction
 
-In Acom, there are four types of assets, components, elements, markup and text. In the following sections, we will look at how you can use each one of these types of assets.
+In Acom, there are four types of assets, components, nodes, markup and text. In the following sections, we will look at how you can use each one of these types of assets.
 
 ### Components
 
@@ -39,7 +39,7 @@ DOM nodes can be created in various ways including Vanilla Javascript, libraries
 
 ### Markup
 
-Acom allows you to create markup and insert it in the DOM. The markup is parsed before inserted into the DOM. Markup can be created the same way [`elements`](#elements) are created. Either use it directly or create a function that returns markup. In Acom, markup can be HTML, XML or any XML based markup. Acom has built-in support for HTML and XML. If you use any markup that is not HTML or XML-compliant, you can use [`middleware`](./api/create-component/middleware.md) to precess the markup. External markup can be created in HTML files, XML files, ES6 modules or any text file. Refer to [Using Assets](#using-assets) to see how you can use markup as an asset.
+Acom allows you to create markup and insert it in the DOM. The markup is parsed before inserted into the DOM. Markup can be created the same way [`nodes`](#nodes) are created. Either use it directly or create a function that returns markup. In Acom, markup can be HTML, XML or any XML based markup. Acom has built-in support for HTML and XML. If you use any markup that is not HTML or XML-compliant, you can use [`middleware`](./api/create-component/middleware.md) to precess the markup. External markup can be created in HTML files, XML files, ES6 modules or any text file. Refer to [Using Assets](#using-assets) to see how you can use markup as an asset.
 
 ### Text
 
@@ -49,7 +49,7 @@ Just like markup, text can also be inserted dynamically into the DOM. External t
 
 ### Introduction
 
-Assets are inserted into the DOM using target elements. Target elements are elements that are replaced by data or external assets. Target elements use special attributes to indicate what kind of asset or data is supposed to replace them. All assets are converted to DOM nodes before they are inserted into the DOM.
+Assets are inserted into the DOM using target nodes. Target nodes are nodes that are replaced by data or external assets. Target nodes use special attributes to indicate what kind of asset or data is supposed to replace them. All assets are converted to DOM nodes before they are inserted into the DOM.
 
 ### Importing
 
@@ -117,7 +117,7 @@ node      | `acom-node`
 markup    | `acom-markup`
 text      | `acom-text`
 
-In the markup, you provide the URI of the asset as the value of the attribute. Some assets may require additional attributes on target elements.
+In the markup, you provide the URI of the asset as the value of the attribute. Some assets may require additional attributes on target nodes.
 
 __Example__:
 

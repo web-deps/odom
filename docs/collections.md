@@ -3,46 +3,45 @@
 __Table of Contents__
 
 - [Collections](#collections)
-  - [__Introduction__](#introduction)
-  - [__Multiple__](#multiple)
-    - [__Introduction__](#introduction-1)
+  - [Introduction](#introduction)
+  - [Multiple](#multiple)
+    - [Introduction](#introduction-1)
     - [Attribute Value](#attribute-value)
       - [`data`](#data)
       - [`range`](#range)
     - [Example](#example)
-      - [__Markup__](#markup)
+      - [Markup](#markup)
       - [JS](#js)
-  - [__Map__](#map)
-    - [__Introduction__](#introduction-2)
+  - [Map](#map)
+    - [Introduction](#introduction-2)
     - [Attribute Value](#attribute-value-1)
-      - [`mapper`](#mapper)
-      - [`range`](#range-1)
       - [`cache`](#cache)
-      - [`refresh`](#refresh)
-    - [Mapper](#mapper-1)
-      - [Parameters](#parameters)
-      - [Return Value](#return-value)
-    - [__Reactivity__](#reactivity)
+      - [`createNode`](#createnode)
+      - [`data`](#data-1)
+      - [`getData`](#getdata)
+      - [`range`](#range-1)
+    - [Reactivity](#reactivity)
+      - [`updateMap`](#updatemap)
     - [Example 1 - Using Template](#example-1---using-template)
-      - [__Markup__](#markup-1)
+      - [Markup](#markup-1)
       - [JS](#js-1)
-    - [Example 2 - Using creator](#example-2---using-creator)
-      - [__Markup__](#markup-2)
+    - [Example 2 - Using createNode](#example-2---using-createnode)
+      - [Markup](#markup-2)
       - [JS](#js-2)
 
-## __Introduction__
+## Introduction
 
-Collections are a way to reuse elements by using the same element to form a collection of variants of that element.
+Acom provides a way for you to create collections of DOM nodes based of collections of data. You can populate tables or lists using these collections. There are two types of collections in Acom, multiple and map. The following sections dive deep into the nature of these collectins.
 
-## __Multiple__
+## Multiple
 
-### __Introduction__
+### Introduction
 
-Multiple is a collection of elements which are variants of one element. The original elements acts as a template for all its variants. The original element references an array, and specifies how each item of the array will be used on each one of its variants. The original element uses the attribute `acom-markupltiple`. Each variant accesses the matching item of the array using `@datum` in its attribute values. If the item is an object its values can be accessed using dot notation.
+Multiple is a collection of elements which are variants of one element. The original element acts as a template for all its variants. The original element references an array, and specifies how each item of the array will be used on each one of its variants. The original element uses the attribute `"acom-multiple"`. Each variant accesses the matching item of the array using a data selector prefixed with `@datum` in its attribute values. If the item is an object its values can be accessed using the dot notation.
 
 ### Attribute Value
 
-The attribute value can either be a data selector or a JSON string. A data selector references an array in any of the properties of `utils` as described in [Data](data.md).
+The attribute value can either be a data selector or a JSON string. A data selector references an array in any of the properties of [`utils`](api/create-component/utils.md#generic-utilities).
 
 The JSON string has the following structure:
 
@@ -59,15 +58,15 @@ A string that specifies the array containing the data that will be used to gener
 
 #### `range`
 
-An array of numbers that indicates the range of the array over which the variants must be generated. It uses one-based indexing. The array has two values. The first value indicates the start of the range. The second value indicates the end of the range.
+An array of numbers that indicates the range of the array over which the variants must be generated. It uses one-based indexing. The array has two values. The first value indicates the start of the range. The second value indicates the end of the range. If not specified, the entire data array will be used.
 
 ### Example
 
-#### __Markup__
+#### Markup
 
 ```html
 <ul>
-  <li acom-markupltiple="@data.users" title="@datum">
+  <li acom-multiple="@data.users" title="@datum.username">
     <img src="@datum.avator" class="avator" />
     <span class="username">
       <span acom-text="@datum.username"></span>
@@ -80,6 +79,7 @@ An array of numbers that indicates the range of the array over which the variant
 
 ```js
 // ...
+
 const data = {
   users: [
     {
@@ -98,41 +98,39 @@ const data = {
 };
 
 const utils = { data };
+
 // ...
+
 const options = { ..., utils };
+const List = await createComponent(options);
+
 // ...
 ```
 
-## __Map__
+## Map
 
-### __Introduction__
+### Introduction
 
-Map is an element whose children are variants of one element. Map uses the attribute `acom-map`. Map can use the a template just like Multiple. The template must be the child element of the element.
+Map is an element whose children are variants of a template element or nodes created by a function based on a collection of data. Map uses the attribute `"acom-map"`. Map can use a template just like [Multiple](#multiple). The template must be the child element of the element.
 
 ### Attribute Value
 
-Just like [Multiple](#multiple), the value of `acom-map` can either be a data selector or a JSON string. The JSON string has the following structure:
+Just like [Multiple](#multiple), the value of `acom-map` can either be a data selector or a JSON string. A data selector is used when a template is used. The JSON string has the following structure:
 
 ```json
 {
-  "mapper": string,
-  "range": array,
   "cache": object,
-  "refresh": boolean
+  "createNode": function,
+  "data": string,
+  "getData": function,
+  "range": array,
+  "reactive": boolean
 }
 ```
 
-#### `mapper`
-
-A data selector used to select a [Mapper](#mapper).
-
-#### `range`
-
-A one-based array used to specify the range of the data over which variants must be generated.
-
 #### `cache`
 
-An object used to specify the options for caching. This is used for [Reactivity](#reactivity). The data is cached, and used everytime the [`range`](#range) is changed.
+An object used to specify the options for caching. This is used for [Reactivity](#reactivity). The data is cached, and used everytime the [`range`](#range) is changed via the element's attribute (`acom-map`) or when an update is done via [`updateMap`](#updatemap).
 
 Structure
 
@@ -152,60 +150,106 @@ Used to specify which storage facility will be used for the caching. It has the 
 * "app": means the cache is going to be stored in the global variable `$createpp`.
 * "session": means the cache will be stored in session storage.
 
-#### `refresh`
+#### `createNode`
 
-Used for [Reactivity](#reactivity). Everytime the range is changed, [Mapper](#mapper) is called and the data returned is used for the range instead of cached values.
+A data selector used to select a user defined function that creates a node based on an item in the data array. Let us look at the signature of this function.
 
-### Mapper
+__Syntax__:
 
-Map uses a function called `mapper` to create variants. The mapper is a function that either returns data or data and a variant.
+```js
+createNode(datum)
+```
 
-#### Parameters
+__Parameters__:
 
-The mapper takes no parameters.
+- `datum`
+  - Type: any
+  - Required: Yes
+  - Usage: contains the information required to create a node. It is a member of the data array.
 
-#### Return Value
+__Return Value__:
 
-A promise that resolves to an object containing and array or an array and a function that returns a variant. If a template has been used, the return value resolves to an object containing only data. Otherwise, the return value is an object containing data and a function called creator. The creator is used to create a single variant. The return value has the following structure:
+A promise that resolves to a `Node` or markup. If the promise resolves to markup, the markup will be converted to an `Element`.
+
+#### `data`
+
+A data selector for an array containing data that will be used to create nodes or variants of a template element.
+
+#### `getData`
+
+A data selector for a function that returns an array of data to be used to create nodes for Map nodes. Let us look at the signature of this function.
+
+__Syntax__:
+
+```js
+getData()
+```
+
+__Parameters__: 
+
+None.
+
+__Return Value__:
+
+A promise that resolves to an array.
+
+#### `range`
+
+An array used to specify the range of the data over which variants must be generated. It has two values. The first value specifies the begenning of the range, and the second one specifies the end of the range. You specify the range using one-based indexing (i.e. [1, 5] means from first item to the fifth item).
+
+### Reactivity
+
+Map is can be reactive. Every time the range is changed via the attribute `acom-map`, the nodes generated are updated according to the range. To change the range, update the range in the JSON object in the `acom-map` attribute. You can also use [`updateMap`](#updatemap) to update the nodes in Map.
+
+#### `updateMap`
+
+A function used to update the nodes for [Map](#map). It is accessed via the Map element (element with the attribute `acom-map`) as `element.acom.updateMap`.
+
+__Syntax__:
+
+```js
+updateMap(options)
+```
+
+__Parameters__:
+
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains the options for updating Map
+  - Reference: refer to the next section
+
+_updateMap Options_
+
+Structure:
 
 ```js
 {
-  data: Array<any>,
-  creator: Function
+  append: boolean,
+  extension: number,
+  newData: Array,
+  prepend: boolean,
+  range: Array,
+  refresh: boolean
 }
 ```
 
-`data`
+Properties:
 
-An array containing data that will be used to create variants.
+- `append`: indicates that the new nodes should be appended to the existing nodes.
+- `extension`: specifies the number of nodes to add to existing nodes when appending or prepending.
+- `newData`: the data that should be used to create new nodes.
+- prepend: indicates that the new nodes should be prepended to the existing nodes.
+- range: the new range of nodes.
+- refresh: indicates that the new nodes should be created from the new data gotten from [`getData`](#getdata).
 
-`creator`
+__Return Value__:
 
-A function that returns a variant.
-
-Syntax
-
-```js
-creator(datum)
-```
-
-Parameters
-
-`datum`
-
-A single item in the array `data`.
-
-Return Value
-
-A string containing markup for a variant, or an `HTMLElement`. If markup is returned, it is parsed them added to the DOM. If you use XML for the markup, do not forget to add the attribute `acom-ml="xml"` to the root tag of the markup.
-
-### __Reactivity__
-
-Map is reactive. Every time the range is changed, the variants generated are updated according to the range. To change the range, change the range in the JSON object in the `acom-map` attribute directly or use `updataRange`.
+A promise that resolves to `undefined`
 
 ### Example 1 - Using Template
 
-#### __Markup__
+#### Markup
 
 ```html
 <table>
@@ -215,7 +259,7 @@ Map is reactive. Every time the range is changed, the variants generated are upd
       <th></th>
     </tr>
   </thead>
-  <tbody acom-map='{"data": "@data.users", "mapper": "@methods.userMapper"}'>
+  <tbody acom-map="@data.users">
     <tr>
       <td>
         <img src="@datum.avator" />
@@ -231,6 +275,7 @@ Map is reactive. Every time the range is changed, the variants generated are upd
 
 ```js
 // ...
+
 const data = {
   users: [
     {
@@ -248,19 +293,19 @@ const data = {
   ]
 };
 
-const methods = {
-  userMapper: async () => { data };
-};
+const utils = { data };
 
-const utils = { methods };
 // ...
+
 const options = { ..., utils };
+const Table = await createComponent(options);
+
 // ...
 ```
 
-### Example 2 - Using creator
+### Example 2 - Using createNode
 
-#### __Markup__
+#### Markup
 
 ```html
 <table>
@@ -270,13 +315,14 @@ const options = { ..., utils };
       <th></th>
     </tr>
   </thead>
-  <tbody acom-map="@methods.userMapper"></tbody>
+  <tbody acom-map='{"data": "@data.users", "createNode": "@methods.createNode"}'></tbody>
 ```
 
 #### JS
 
 ```js
 // ...
+
 const data = {
   users: [
     {
@@ -294,46 +340,24 @@ const data = {
   ]
 };
 
-const userMapper = () => {
-  const createVariant = user => {
-    return `
-      <tr>
-        <td>
-          <img src="${user.avator}" />
-        </td>
-        <td>${user.username}</td>
-      </tr>
-    `;
-  };
-
-  return { data, creator: createVariant };
+const createNode = user => {
+  return `
+    <tr>
+      <td>
+        <img src="${user.avator}" />
+      </td>
+      <td>${user.username}</td>
+    </tr>
+  `;
 };
 
 const methods = { userMapper };
-const utils = { methods };
+const utils = { data, methods };
+
 // ...
+
 const options = { ..., utils };
+const Table = await createComponent(options);
+
 // ...
 ```
-
-`updateRange`
-
-A function used to update the of the data used for [Map](#map). It is accessed via the element as `element.acom.updateRange`.
-
-Syntax
-
-```js
-updateRange(newRange)
-```
-
-Parameters
-
-`newRange`
-
-An array indicating the new range.
-
-Return Value
-
-A promise that resolves to `undefined`
-
-

@@ -3,6 +3,8 @@
 - [Transform](#transform)
   - [Introduction](#introduction)
   - [Structure](#structure)
+  - [`display`](#display)
+    - [Description](#description)
   - [`insertComponents`](#insertcomponents)
     - [Syntax](#syntax)
     - [Parameters](#parameters)
@@ -32,6 +34,8 @@
     - [Parameters](#parameters-5)
       - [insertText Options](#inserttext-options)
     - [Return Value](#return-value-5)
+  - [`loading`](#loading)
+    - [Description](#description-1)
   - [`map`](#map)
     - [Syntax](#syntax-6)
     - [Parameters](#parameters-6)
@@ -42,11 +46,15 @@
     - [Parameters](#parameters-7)
       - [multiple Options](#multiple-options)
     - [Return Value](#return-value-7)
+  - [`presence`](#presence)
+    - [Description](#description-2)
   - [`run`](#run)
     - [Syntax](#syntax-8)
     - [Parameters](#parameters-8)
       - [run Options](#run-options)
     - [Return Value](#return-value-8)
+  - [`visibility`](#visibility)
+    - [Description](#description-3)
 
 ## Introduction
 
@@ -67,9 +75,16 @@ Transformations like inserting components into [`scope`](./component.md#scope) a
   map: Function,
   multiple: Function,
   presence: Function,
-  run: Function
+  run: Function,
+  visibility: Function
 }
 ```
+
+## `display`
+
+### Description
+
+Sets particular display values of elements based on specified conditions. For more information, refer to [`display`](../../conditionals.md#display).
 
 ## `insertComponents`
 
@@ -300,6 +315,12 @@ __Properties__:
 
 A promise that resolves to `undefined`.
 
+## `loading`
+
+### Description
+
+Loads elements in the DOM based on particular conditions. Refer to [`loading`](../../conditionals.md#loading) for more information.
+
 ## `map`
 
 This method inserts variants of the same element into `scope` by mapping an array of data to a collection of elements. Refer to [`Map`](../../collections.md#map) for more.
@@ -380,6 +401,12 @@ __Properties__:
 
 A promise that resolves to `undefined`.
 
+## `presence`
+
+### Description
+
+Adds or removes elements from the DOM based on specified conditons. Refer to [`presence`](../../conditionals.md#presence) for more details.
+
 ## `run`
 
 This method perfom all the transformations.
@@ -417,3 +444,9 @@ __Properties__:
 ### Return Value
 
 A promise that resolves to `undefined`.
+
+## `visibility`
+
+### Description
+
+Sets visibility values to elements according to specified conditions. For details, refer to [`visibility`](../../conditionals.md#visibility).

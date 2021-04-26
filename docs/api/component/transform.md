@@ -1,60 +1,69 @@
-# Transform
+# transform
 
-- [Transform](#transform)
+- [transform](#transform)
   - [Introduction](#introduction)
   - [Structure](#structure)
   - [`display`](#display)
     - [Description](#description)
   - [`insertComponents`](#insertcomponents)
+    - [Description](#description-1)
     - [Syntax](#syntax)
     - [Parameters](#parameters)
       - [insertComponent Options](#insertcomponent-options)
     - [Return Value](#return-value)
   - [`insertData`](#insertdata)
+    - [Description](#description-2)
     - [Syntax](#syntax-1)
     - [Parameters](#parameters-1)
       - [`options`](#options)
     - [Return Value](#return-value-1)
   - [`insertMarkup`](#insertmarkup)
+    - [Description](#description-3)
     - [Syntax](#syntax-2)
     - [Parameters](#parameters-2)
       - [insertMarkup Options](#insertmarkup-options)
     - [Return Value](#return-value-2)
   - [`insertNodes`](#insertnodes)
+    - [Description](#description-4)
     - [Syntax](#syntax-3)
     - [Parameters](#parameters-3)
       - [insertNodes Options](#insertnodes-options)
     - [Return Value](#return-value-3)
   - [`insertSlots`](#insertslots)
+    - [Description](#description-5)
     - [Syntax](#syntax-4)
     - [Parameters](#parameters-4)
     - [Return Value](#return-value-4)
   - [`insertText`](#inserttext)
+    - [Description](#description-6)
     - [Syntax](#syntax-5)
     - [Parameters](#parameters-5)
       - [insertText Options](#inserttext-options)
     - [Return Value](#return-value-5)
   - [`loading`](#loading)
-    - [Description](#description-1)
+    - [Description](#description-7)
   - [`map`](#map)
+    - [Description](#description-8)
     - [Syntax](#syntax-6)
     - [Parameters](#parameters-6)
       - [map Options](#map-options)
     - [Return Value](#return-value-6)
   - [`multiple`](#multiple)
+    - [Description](#description-9)
     - [Syntax](#syntax-7)
     - [Parameters](#parameters-7)
       - [multiple Options](#multiple-options)
     - [Return Value](#return-value-7)
   - [`presence`](#presence)
-    - [Description](#description-2)
+    - [Description](#description-10)
   - [`run`](#run)
+    - [Description](#description-11)
     - [Syntax](#syntax-8)
     - [Parameters](#parameters-8)
       - [run Options](#run-options)
     - [Return Value](#return-value-8)
   - [`visibility`](#visibility)
-    - [Description](#description-3)
+    - [Description](#description-12)
 
 ## Introduction
 
@@ -87,6 +96,8 @@ Transformations like inserting components into [`scope`](./component.md#scope) a
 Sets particular display values of elements based on specified conditions. For more information, refer to [`display`](../../conditionals.md#display).
 
 ## `insertComponents`
+
+### Description
 
 This method inserts `components`.
 
@@ -130,6 +141,8 @@ A promise that resolves to `undefined`.
 
 ## `insertData`
 
+### Description
+
 Used for inserting and binding data.
 
 ### Syntax
@@ -169,6 +182,8 @@ _Properties_
 A promise that resolves to `undefined`.
 
 ## `insertMarkup`
+
+### Description
 
 This method inserts markup into [`scope`](component.md#scope).
 
@@ -212,6 +227,8 @@ A promise that resolves to `undefined`.
 
 ## `insertNodes`
 
+### Description
+
 This method inserts `nodes` into [`scope`](component.md#scope).
 
 ### Syntax
@@ -254,6 +271,8 @@ A promise that resolves to `undefined`.
 
 ## `insertSlots`
 
+### Description
+
 This method inserts `slots` into [`scope`](./component.md#scope). For more details, Refer to [Slots](../../data.md#slots).
 
 ### Syntax
@@ -274,6 +293,8 @@ insertSlots(slots)
 A promise that resolves to `undefined`.
 
 ## `insertText`
+
+### Description
 
 This method inserts text into [`scope`](component.md#scope).
 
@@ -323,6 +344,8 @@ Loads elements in the DOM based on particular conditions. Refer to [`loading`](.
 
 ## `map`
 
+### Description
+
 This method inserts variants of the same element into `scope` by mapping an array of data to a collection of elements. Refer to [`Map`](../../collections.md#map) for more.
 
 ### Syntax
@@ -362,6 +385,8 @@ __Properties__:
 A promise that resolves to `undefined`.
 
 ## `multiple`
+
+### Description
 
 This method inserts a collection of variants of an element into `scope` using a template. Refer to [`Multiple`](../../collections.md#multiple) for more.
 
@@ -408,6 +433,8 @@ A promise that resolves to `undefined`.
 Adds or removes elements from the DOM based on specified conditons. Refer to [`presence`](../../conditionals.md#presence) for more details.
 
 ## `run`
+
+### Description
 
 This method perfom all the transformations.
 

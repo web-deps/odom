@@ -3,44 +3,44 @@
 - [Transform](#transform)
   - [Introduction](#introduction)
   - [Structure](#structure)
-  - [`insertData`](#insertdata)
+  - [`insertComponents`](#insertcomponents)
     - [Syntax](#syntax)
     - [Parameters](#parameters)
-      - [`options`](#options)
+      - [insertComponent Options](#insertcomponent-options)
     - [Return Value](#return-value)
-  - [`insertComponents`](#insertcomponents)
+  - [`insertData`](#insertdata)
     - [Syntax](#syntax-1)
     - [Parameters](#parameters-1)
-      - [insertComponent Options](#insertcomponent-options)
+      - [`options`](#options)
     - [Return Value](#return-value-1)
-  - [`insertNodes`](#insertnodes)
+  - [`insertMarkup`](#insertmarkup)
     - [Syntax](#syntax-2)
     - [Parameters](#parameters-2)
-      - [insertNodes Options](#insertnodes-options)
+      - [insertMarkup Options](#insertmarkup-options)
     - [Return Value](#return-value-2)
-  - [`insertMarkup`](#insertmarkup)
+  - [`insertNodes`](#insertnodes)
     - [Syntax](#syntax-3)
     - [Parameters](#parameters-3)
-      - [insertMarkup Options](#insertmarkup-options)
+      - [insertNodes Options](#insertnodes-options)
     - [Return Value](#return-value-3)
-  - [`insertText`](#inserttext)
+  - [`insertSlots`](#insertslots)
     - [Syntax](#syntax-4)
     - [Parameters](#parameters-4)
-      - [insertText Options](#inserttext-options)
     - [Return Value](#return-value-4)
-  - [`insertSlots`](#insertslots)
+  - [`insertText`](#inserttext)
     - [Syntax](#syntax-5)
     - [Parameters](#parameters-5)
+      - [insertText Options](#inserttext-options)
     - [Return Value](#return-value-5)
-  - [`multiple`](#multiple)
+  - [`map`](#map)
     - [Syntax](#syntax-6)
     - [Parameters](#parameters-6)
-      - [multiple Options](#multiple-options)
+      - [map Options](#map-options)
     - [Return Value](#return-value-6)
-  - [`map`](#map)
+  - [`multiple`](#multiple)
     - [Syntax](#syntax-7)
     - [Parameters](#parameters-7)
-      - [map Options](#map-options)
+      - [multiple Options](#multiple-options)
     - [Return Value](#return-value-7)
   - [`run`](#run)
     - [Syntax](#syntax-8)
@@ -70,6 +70,48 @@ Transformations like inserting components into [`scope`](./component.md#scope) a
   run: Function
 }
 ```
+
+## `insertComponents`
+
+This method inserts `components`.
+
+### Syntax
+
+```js
+insertComponents(options)
+```
+
+### Parameters
+
+- `options`
+  - Type: `Object`
+  - Required: Yes
+  - Usage: contains utilites for inserting components
+  - Reference: [`insertComponents Options`](#insertcomponents-options)
+
+#### insertComponent Options
+
+__Structure__:
+
+```js
+{
+  components: Object,
+  data: Object,
+  methods: Object,
+  props: Object
+}
+```
+
+__Properties__:
+
+- `components`: contains components with property names corresponding to values specified via "acom-src" attributes.
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
+
+### Return Value
+
+A promise that resolves to `undefined`.
 
 ## `insertData`
 
@@ -111,14 +153,14 @@ _Properties_
 
 A promise that resolves to `undefined`.
 
-## `insertComponents`
+## `insertMarkup`
 
-This method inserts `components`.
+This method inserts markup into [`scope`](component.md#scope).
 
 ### Syntax
 
 ```js
-insertComponents(options)
+insertMarkup(markups)
 ```
 
 ### Parameters
@@ -126,16 +168,16 @@ insertComponents(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting components
-  - Reference: [`insertComponents Options`](#insertcomponents-options)
+  - Usage: contains utilites for inserting markup
+  - Reference: [`insertMarkup Options`](#insertmarkup-options)
 
-#### insertComponent Options
+#### insertMarkup Options
 
 __Structure__:
 
 ```js
 {
-  components: Object,
+  markups: Object,
   data: Object,
   methods: Object,
   props: Object
@@ -144,7 +186,7 @@ __Structure__:
 
 __Properties__:
 
-- `components`: contains components with property names corresponding to values specified via "acom-src" attributes.
+- `markups`: contains markup with property names corresponding to values specified via "acom-markup" attributes.
 - `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
 - `methods`: the methods that can be accessed via data selectors
 - `props`: the props of the component that can be accessed via data selectors
@@ -195,43 +237,22 @@ __Properties__:
 
 A promise that resolves to `undefined`.
 
-## `insertMarkup`
+## `insertSlots`
 
-This method inserts markup into [`scope`](component.md#scope).
+This method inserts `slots` into [`scope`](./component.md#scope). For more details, Refer to [Slots](../../data.md#slots).
 
 ### Syntax
 
 ```js
-insertMarkup(markups)
+insertSlots(slots)
 ```
 
 ### Parameters
 
-- `options`
+- `slots`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting markup
-  - Reference: [`insertMarkup Options`](#insertmarkup-options)
-
-#### insertMarkup Options
-
-__Structure__:
-
-```js
-{
-  markups: Object,
-  data: Object,
-  methods: Object,
-  props: Object
-}
-```
-
-__Properties__:
-
-- `markups`: contains markup with property names corresponding to values specified via "acom-markup" attributes.
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
+  - Usage: contains slots passed in from parent component
 
 ### Return Value
 
@@ -279,22 +300,41 @@ __Properties__:
 
 A promise that resolves to `undefined`.
 
-## `insertSlots`
+## `map`
 
-This method inserts `slots` into [`scope`](./component.md#scope). For more details, Refer to [Slots](../../data.md#slots).
+This method inserts variants of the same element into `scope` by mapping an array of data to a collection of elements. Refer to [`Map`](../../collections.md#map) for more.
 
 ### Syntax
 
 ```js
-insertSlots(slots)
+map(options)
 ```
 
 ### Parameters
 
-- `slots`
+- `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains slots passed in from parent component
+  - Usage: contains utilites for inserting a map element
+  - Reference: [`map Options`](#map-options)
+
+#### map Options
+
+__Structure__:
+
+```js
+{
+  data: Object,
+  methods: Object,
+  props: Object
+}
+```
+
+__Properties__:
+
+- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: the methods that can be accessed via data selectors
+- `props`: the props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -319,46 +359,6 @@ multiple(options)
   - Reference: [`multiple Options`](#multiple-options)
 
 #### multiple Options
-
-__Structure__:
-
-```js
-{
-  data: Object,
-  methods: Object,
-  props: Object
-}
-```
-
-__Properties__:
-
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
-
-### Return Value
-
-A promise that resolves to `undefined`.
-
-## `map`
-
-This method inserts variants of the same element into `scope` by mapping an array of data to a collection of elements. Refer to [`Map`](../../collections.md#map) for more.
-
-### Syntax
-
-```js
-map(options)
-```
-
-### Parameters
-
-- `options`
-  - Type: `Object`
-  - Required: Yes
-  - Usage: contains utilites for inserting a map element
-  - Reference: [`map Options`](#map-options)
-
-#### map Options
 
 __Structure__:
 

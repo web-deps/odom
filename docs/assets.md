@@ -4,13 +4,16 @@ __Table of Contents__
 
 - [Assets](#assets)
   - [Introduction](#introduction)
-  - [Components](#components)
-  - [Elements](#elements)
-  - [Markup](#markup)
-  - [Text](#text)
+  - [Types of Assets](#types-of-assets)
+    - [Introduction](#introduction-1)
+    - [Components](#components)
+    - [Nodes](#nodes)
+    - [Markup](#markup)
+    - [Text](#text)
   - [Using Assets](#using-assets)
+    - [Introduction](#introduction-2)
     - [Importing](#importing)
-      - [Introduction](#introduction-1)
+      - [Introduction](#introduction-3)
       - [Static Imports](#static-imports)
       - [Dynamic Imports](#dynamic-imports)
       - [Using Imports](#using-imports)
@@ -18,26 +21,33 @@ __Table of Contents__
 
 ## Introduction
 
-A component may depend on external assets such as other components and elements. We are going to look at these assets and how they can be used in a component. There are two ways in which external assets can find their way into a component. One way is by importing them and the other is by referencing them via markup.
+A component may depend on external assets such as other components and elements. We are going to look at these assets and how they can be used in a component. There are two ways in which external assets can find their way into a component. One way is by importing them into a JavaScript module and the other is by referencing them via markup.
 
+## Types of Assets
 
-## Components
+### Introduction
 
-Components are the main assets in Acom. Components can be created in JS scripts, ES6 modules and HTML files. For more infomation on how to create and use component refer to [Components](components.md).
+In Acom, there are four types of assets, components, elements, markup and text. In the following sections, we will look at how you can use each one of these types of assets.
 
-## Elements
+### Components
 
-Elements can be created in various ways including Vanilla Javascript, libraries and frameworks. Howsoever you create an element, you might want to use or reuse the element in a component which is in the same file or another file. Acom provides a way to do so. You can create an element and use it as is, or you can create a function that takes props as arguments and returns an element.
+Components are the main assets in Acom. Components can be created in JS scripts, ES6 modules and HTML files. For more infomation on how to create and use component refer to [Components](./components.md).
 
-## Markup
+### Nodes
 
-Acom allows you to create markup and insert it in the DOM. The markup is parsed before inserted into the DOM. Markup can be created the same way elements. Either use it directly or create a function that returns markup. In Acom, markup can be HTML, XML or any XML based markup. Acom has built-in support for HTML and XML. Using other types of markup, require middleware. External markup can be created in HTML files, XML files, ES6 modules or any text file. Refer to [Using Assets](#60-using-assets) to see how you can use markup as an asset in a component.
+DOM nodes can be created in various ways including Vanilla Javascript, libraries and frameworks. Howsoever you create a node, you might want to use or reuse the node in a component which is in the same file or another file. Acom provides a way to do so. You can create a node and use it as is, or you can create a function that takes props as arguments and returns a node.
 
-## Text
+### Markup
 
-Just like markup, text can also be inserted dynamically into the DOM. External text can be in any text file.
+Acom allows you to create markup and insert it in the DOM. The markup is parsed before inserted into the DOM. Markup can be created the same way [`elements`](#elements) are created. Either use it directly or create a function that returns markup. In Acom, markup can be HTML, XML or any XML based markup. Acom has built-in support for HTML and XML. If you use any markup that is not HTML or XML-compliant, you can use [`middleware`](./api/create-component/middleware.md) to precess the markup. External markup can be created in HTML files, XML files, ES6 modules or any text file. Refer to [Using Assets](#using-assets) to see how you can use markup as an asset.
+
+### Text
+
+Just like markup, text can also be inserted dynamically into the DOM. External text can be in any text file. Text is converted to text nodes before being inserted into the DOM.
 
 ## Using Assets
+
+### Introduction
 
 Assets are inserted into the DOM using target elements. Target elements are elements that are replaced by data or external assets. Target elements use special attributes to indicate what kind of asset or data is supposed to replace them. All assets are converted to DOM nodes before they are inserted into the DOM.
 
@@ -63,15 +73,15 @@ __Description__
 
 ES6 dynamic imports work for all kinds of assets except HTML single file components. Single file components, whether HTML or JS, can be imported with `importComponent`. It is used the same way ES6 dynamic imports are used.
 
-Example
+__Example__
 
-`import`:
+_Using import_:
 
 ```javascript
 const home = await import("/src/components/pages/home.js");
 ```
 
-`importComponent`:
+_Using importComponent_:
 
 ```javascript
 const home = await importComponent("/src/components/pages/home.html");
@@ -79,39 +89,38 @@ const home = await importComponent("/src/components/pages/home.html");
 
 #### Using Imports
 
-All imports can be used via `options.utils`. The assets are put in `options.utils` and then referenced in the DOM via the special attributes. The table below shows assets and the corresponding value in `options.utils`.
+All imports can be used via [`utils`](./api/create-component/utils.md). The assets are put in `utils` and then referenced in the DOM via the special attributes. The table below shows assets and the corresponding collection in `utils`.
 
 Asset     | Value
 ----------|-----------
 component | `components`
-element   | `elements`
+node      | `nodes`
 markup    | `markups`
 text      | `texts`
 
-Example:
+__Example__:
 
-If you have imported a component and put in in `options.utils.components`, you can reference it as follows:
+If you have imported a component and put in in `utils.components` under the property name "home", you can reference it as follows:
 
 ```html
 <div acom-src="home">
 ```
 
-
 ### Using URIs
 
-Assets can be inserted into the DOM using special attributes. All of these attributes are prefixed with `acom-`. The table below shows attributes and the kind of assets they reference.
+Assets can be inserted into the DOM using special attributes. All of these attributes are prefixed with `acom`. The table below shows attributes and the kind of assets they reference.
 
 Asset     | Attribute
 ----------|-----------
 component | `acom-src`
-element   | `acom-node`
+node      | `acom-node`
 markup    | `acom-markup`
 text      | `acom-text`
 
 In the markup, you provide the URI of the asset as the value of the attribute. Some assets may require additional attributes on target elements.
 
-Example:
+__Example__:
 
 ```html
-<div acom-src="/src/components/pages/home.html">
+<div acom-node="/src/components/pages/home.js">
 ```

@@ -12,6 +12,8 @@ __Table of Contents__
     - [Text](#text)
   - [Using Assets](#using-assets)
     - [Introduction](#introduction-2)
+    - [Constructor](#constructor)
+    - [Target Elements](#target-elements)
     - [Importing](#importing)
       - [Introduction](#introduction-3)
       - [Static Imports](#static-imports)
@@ -50,6 +52,21 @@ Just like markup, text can also be inserted dynamically into the DOM. External t
 ### Introduction
 
 Assets are inserted into the DOM using target nodes. Target nodes are nodes that are replaced by data or external assets. Target nodes use special attributes to indicate what kind of asset or data is supposed to replace them. All assets are converted to DOM nodes before they are inserted into the DOM.
+
+### Constructor
+
+A constructor is any function that returns a promise that resolves to an asset. Constructors can be used in all of the aforementioned types of assets.
+
+### Target Elements
+
+Target elements are DOM elements that are mearnt to be replaced by assets. Any element with one of the following attributes is a target element:
+
+- acom-src
+- acom-node
+- acom-markup
+- acom-text
+
+Refer to [Using Imports](#using-imports) to find out which asset each one of these attributes correspond to.
 
 ### Importing
 

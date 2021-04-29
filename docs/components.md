@@ -23,7 +23,19 @@ __Table of Contents__
       - [Markup](#markup-1)
       - [Styles](#styles-1)
       - [module](#module)
+      - [Main HTML File](#main-html-file)
       - [HTML Component Constructor URIs](#html-component-constructor-uris)
+  - [Multiple File Components](#multiple-file-components)
+    - [File Structure](#file-structure)
+    - [Markup](#markup-2)
+    - [Styles](#styles-2)
+    - [Constructor](#constructor-1)
+    - [Main HTML File](#main-html-file-1)
+    - [Asset Import Options](#asset-import-options)
+      - [`fetchAsset`](#fetchasset)
+      - [`fetch`](#fetch)
+      - [Build Tools](#build-tools)
+      - [Conclusion](#conclusion)
 
 ## Introduction
 
@@ -64,7 +76,7 @@ The app has the following file system:
 The module, `hello-world.js` has the following general structure:
 
 ```js
-export const HelloWorld = (props) => {
+export const HelloWorld = async (props) => {
   const markup = // ...
   const styles = // ...
   const eventListeners = // ...
@@ -199,7 +211,7 @@ The first element of the `body` is `main` which has an attribute `acom-src`. The
 
 HTML single file components are created using standard HTML files. Each file contains markup used just as it would be used for a single page. In other words, each HTML component is also a page on its own. One strict rule is that the `style` element should be placed inside the `body` element.
 
-Let us rewrite the "Hello World" app we created using a JS component using an HTML single file component.
+Let us rewrite the [Hello World](#js-components) app we created earlier (using a JS component) using an HTML single file component.
 
 The app has the following file system:
 
@@ -247,7 +259,7 @@ The first element we will look at is the `meta` element in the `head` element. T
 
 #### Markup
 
-The markup of a component can be wrapped in any HTML element that can be displayed. The markup has to have only one root element. In our case, the element is an `HTMLMainElement`. The attribute "acom-ml" is used to indicate what type of markup is being used. The attribute has been set to "html" because we are using HTML. The default value for the attribute is "html", so, it is okay to leave it out in this case.
+The markup of a component can be wrapped in any HTML element that can be displayed. The markup has to have only one root element. In our case, the element is an `HTMLMainElement`. The attribute "acom-ml" is used to indicate what type of markup is used. The attribute has been set to "html" because we are using HTML. The default value for the attribute is "html", so, it is okay to leave it out in this case.
 
 ```html
 <main acom-ml="html">
@@ -266,7 +278,7 @@ The markup of a component can be wrapped in any HTML element that can be display
 
 #### Styles
 
-The CSS used to style our component is put inside the "style" tag. The selector `:scope` is used to select the root element, which in this case is the root element of the markup (`main`).
+The CSS used to style our component is put inside the `style` element. The selector `:scope` is used to select the root element, which in this case is the root element of the markup (`main`).
 
 ```html
 <style>
@@ -306,7 +318,7 @@ The CSS used to style our component is put inside the "style" tag. The selector 
 
 #### module
 
-The `script` tag contains a module that exports the [Constructor](#constructor). The constructor is what is used to create the component. The constructor takes one parameter `data`. The parameter is required as it contains the markup, styles, props and the ID. We are using `createComponent` to create our component, so, we have to pass the parameter `data` into `options`. You do not have to include the attribute `type` on the script element.
+The `script` tag contains a module that exports the [Constructor](#constructor). The constructor is what is used to create the component. The constructor takes one parameter `data`. The parameter is required as it contains the markup, styles and the ID. We are using `createComponent` to create our component, so, we have to pass the parameter `data` into `options`. You do not have to include the attribute `type` on the script element.
 
 ```html
 <script type="module">
@@ -325,9 +337,33 @@ The `script` tag contains a module that exports the [Constructor](#constructor).
       ]
     };
     
-    return createComponent({ data, eventListeners });
+    return Acom.createComponent({ data, eventListeners });
   };
 </script>
+```
+
+#### Main HTML File
+
+We are going to use our HTML component in `index.html`. The file contents are very similar to those of the file we used in the JS component. The only difference is the extension used for the URI of the component file specified in the attribute `acom-src` on the `main` element. Openning the file in the browser, you will see the component displayed on the page.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+  </head>
+  <body>
+    <main acom-src="./hello-world.html"></main>
+
+    <script src="/path-to-acom"></script>
+
+    <script>
+      Acom.render();
+    </script>
+  </body>
+<html>
 ```
 
 #### HTML Component Constructor URIs
@@ -343,3 +379,152 @@ To use relative URLs other than in the aforementioned cases, the URLs must start
 
 - `/`
 - `www.`
+
+## Multiple File Components
+
+A component that has its markup and/or styles (e.g CSS) in a seperate file (or files) is called a multiple file component. The assets (markup and styles) are imported in the file containing the [Constructor](#constructor). They are then used to build a component.
+
+Acom provides a way to dynamically import these assets via [`assetManager`](api/asset-manager.md). In this section we are going to rewrite the app we wrote using a [JS single file component](#js-components) and an [HTML single file component](#html-components).
+
+### File Structure
+
+All the files for the component are put in a single folder `component`.
+
+```txt
+|-- hellow-world-multiple-file-component
+    |-- component
+        |-- styles.css
+        |-- markup.html
+        |-- main.js
+    |-- index.html
+```
+
+### Markup
+
+The markup for the component is put in the file `markup.html`. The file has the following contents:
+
+```html
+<main acom-ml="html">
+  <h1>
+    Hello <span>World</span>
+  </h1>
+  <section>
+    <div class="input-group">
+      <label for="">To:</label>
+      <input type="text" placeholder="Enter Your Name" />
+    </div>
+    <button>Say Hello</button>
+  </section>
+</main>
+```
+
+### Styles
+
+The CSS for styling the component is put in `styles.css`. The file contains the following contents:
+
+```css
+:scope {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+h1 span {
+  color: #0cffff;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0cffff;
+  background-color: #7f3fff;
+  cursor: pointer;
+}
+```
+
+### Constructor
+
+The [Constructor](#constructor) of the component contaned in `main.js`. The file is a module that exports the constructor. In the constructor, we import the assets using [`assetManager.fetchAsset`](api/asset-manager.md#fetchasset). The method `fetchAsset` of `assetManager` returns a promise that resolves to a string containing the contents of the file specified in the URI passed in as the parameter. The module has the following contents:
+
+```js
+export const HelloWorld = async (props) => {
+  const markup = await Acom.assetManager.fetchAsset("./markup.html");
+  const styles = await Acom.assetManager.fetchAsset("./styles.css");
+
+  const eventListeners = {
+    "button": [
+      {
+        type: "click",
+        listener: async function (event, $helloWorld) {
+          const whom = await $helloWorld.select("h1 span", false);
+          const input = await $helloWorld.select(".input-group input", false);
+          const name = input.value;
+          whom.textContent = name;
+        }
+      }
+    ]
+  };
+
+  const id = "hello-world";
+  const options = { id, markup, styles, events };
+  return Acom.createComponent(options);
+};
+```
+
+### Main HTML File
+
+The main HTML file `index.html` contains content so similar to that used for single file components. The only difference is the URI for the main file (`main.js`) for the component. The HTML file has the following contents:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+  </head>
+  <body>
+    <main acom-src="./component/main.js"></main>
+
+    <script src="/path-to-acom"></script>
+
+    <script>
+      Acom.render();
+    </script>
+  </body>
+<html>
+```
+
+### Asset Import Options
+
+You can use a number of ways to import assets into the component modules. One way we have looked at already is using `assetManager.fetchAsset`. The other two ways is by using the fetch API of the window object and using file loaders of build tools. Let us look at each one of these methods in detail.
+
+#### `fetchAsset`
+
+The method `assetManager.fetchAsset` allows us to import assets dynamically into our component module. This method provides a simpler API than the fetch API (which we will look into shortly) as you do not have to convert the file contents to a string on your own. However, `fetchAsset` has the same disadvantage as the aforementioned alternative, dynamic importation. For assets required in a module, dynamic imports/fetches are usually not the best way to do things. Dynamic imports result into many requests being made to the server at runtime. This usually results in poor performance.
+
+#### `fetch`
+
+The API `fetch` of the `window` object can be used to import text content from files. Unlike `assetManager.fetchAsset`, you have to convert the file contents to a string on your own by reading the response to completion using the method `text` of the response object. This method has the disadvantage described in [`fetchAsset`](#fetchasset) section. The `fetch` API has other alternatives that offer similar functionality.
+
+#### Build Tools
+
+Build tools provide a way to statically import assets into a module at build time. This avoids importing assets at runtime, which usually results in performance gains. However, build tools are harder to work with than the aforementioned alternatives. Build tools have to be installed, may require a special syntax to import non-JavaScript files and may require configurations.
+
+#### Conclusion
+
+You can use whichever method best suits your use case. If you have decided not to use build tools, your best alternative would in most cases be [`fetchAsset`](#fetchasset) as you do less work than using [`fetch`](#fetch). If you use build tools, you use appropriate file loaders for each type of asset. If a compnent is so complex, you might want to import other assets other than markup and styles. For example, you might put all events in an `[`eventListeners`](api/create-component/create-component.md#eventListeners) object in a different JavaScript module.

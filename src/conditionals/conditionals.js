@@ -20,8 +20,7 @@ export const conditionals = async function ({
 }) {
   let value;
 
-  if (options.startsWith("@")) value = options;
-  else if (/^\s*{/.test(options)) value = JSON.parse(options);
+  if (/^\s*{/.test(options)) value = JSON.parse(options);
   else value = options;
   
 

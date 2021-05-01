@@ -5,10 +5,19 @@ __Table of Contents__
 - [Components](#components)
   - [Introduction](#introduction)
   - [Local Components](#local-components)
+    - [Creating an App using a Local Component](#creating-an-app-using-a-local-component)
+      - [Introduction](#introduction-1)
+      - [File Structure](#file-structure)
+      - [General Content Structure](#general-content-structure)
+      - [Creating the Component](#creating-the-component)
+      - [Adding Styles](#adding-styles)
+      - [Adding Event Listeners](#adding-event-listeners)
   - [Global Components](#global-components)
   - [Constructor](#constructor)
   - [Single File Components](#single-file-components)
+    - [Description](#description)
     - [JS Components](#js-components)
+      - [Creating an App using a JS Single File Component](#creating-an-app-using-a-js-single-file-component)
       - [JS Component File Contents](#js-component-file-contents)
       - [Markup](#markup)
       - [Styles](#styles)
@@ -26,14 +35,13 @@ __Table of Contents__
       - [Main HTML File](#main-html-file)
       - [HTML Component Constructor URIs](#html-component-constructor-uris)
   - [Multiple File Components](#multiple-file-components)
-    - [File Structure](#file-structure)
+    - [File Structure](#file-structure-1)
     - [Markup](#markup-2)
     - [Styles](#styles-2)
     - [Constructor](#constructor-1)
     - [Main HTML File](#main-html-file-1)
     - [Asset Import Options](#asset-import-options)
-      - [`fetchAsset`](#fetchasset)
-      - [`fetch`](#fetch)
+      - [`assetManager`](#assetmanager)
       - [Build Tools](#build-tools)
       - [Conclusion](#conclusion)
 
@@ -43,17 +51,172 @@ Acom is a component based framework. Components put content, presentation and be
 
 ## Local Components
 
-Internal components are created and used in the same file. This file can be a script or module. Internal components can be inserted directly into the DOM or they can be used by other components in the same file.
+Local components are created and used in the same file. This file can be a script or module. Local components can be inserted directly into the DOM or they can be used by other components in the same file.
+
+### Creating an App using a Local Component
+
+#### Introduction
+
+Let us create a "Hello World" app using a local component. The app has a heading which initially reads "Hello World". It also has a text input field into which the user can put their name. It also has a button which the user can click after puting their name in the input field. Upon clicking the button, the heading will be update to "Hello [name of user]", where [name of user] is the name of the user put into the input field.
+
+#### File Structure
+
+We are going to use a single HTML file for our app. Create the following file structure:
+
+```txt
+|-- local-component
+    |-- index.html
+```
+
+#### General Content Structure
+
+The index.html file has the following general structure:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+  </head>
+  <body>
+    <main id="hello-world"></main>
+
+    <script src="/path-to-acom"></script>
+
+    <script>
+      // ...
+    </script>
+  </body>
+<html>
+```
+
+The `body` of the html document has a `main` element with the ID `hello-world`. This is the element that is going to be replaced by our component. The following element is a `script` element having its `src` attribute set to the CDN for Acom. The last element of the `body` is a `script` element from which we are going to create the component and insert it into the DOM. So, in the following sections, we are goint to focus on the contents of this element.
+
+#### Creating the Component
+
+First we are going to create our component using `Acom.createComponent`. We are only going to build our component with markup we put into the argument of `createComponent`.
+
+Put the following code into the `script` element:
+
+```js
+(async () => {
+  const markup = `
+    <main acom-ml="html">
+      <h1>
+        Hello <span>World</span>
+      </h1>
+      <section>
+        <div class="input-group">
+          <label for="">To:</label>
+          <input type="text" placeholder="Enter Your Name" />
+        </div>
+        <button>Say Hello</button>
+      </section>
+    </main>
+  `;
+
+  const options = { markup };
+  const HelloWorld = await Acom.createComponent(options);
+  HelloWorld.render("#hello-world");
+})();
+```
+
+Open the HTML file in the browser. You should be able to see the heading reading "Hello World", an input field with the label "To:" and a button with the text "Say Hello". Let us look at each step we have taken to make this happen.
+
+1. __Create Markup__: First, we put the markup for our component in the variable `markup`. This is the markup used to build the element that replaces `main#hello-world`.
+2. __Create `options`__: Next, we created an `options` object and put our markup in it.
+3. __Create Component__: Next, we created our component using `Acom.createComponent`. We passed the object `options` as the only parameter of the method `createComponent`. The method is asynchronous, thus we had to use the `await` keyword when calling it. Also note that we wrapped our code in an asynchronous IIFE. The IIFE is asynchronous (indicated by the `async` keyword), this enabled us to use the keyword `await` in the code inside it.
+4. __Render the Component__: Finally, we rendered the component to the DOM using the our component's method `render`. In this case, we used a CSS selector as the only parameter of the method. The method looked for the element (`main`) that matched the selector in the DOM and replaced it with the component element.
+
+#### Adding Styles
+
+Right now, our component looks quite basic. Let us make it look better by adding some styles to it. Add the following code the the `script`:
+
+```js
+// ...
+
+const styles = `
+  :scope {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h1 span {
+    color: #0cffff;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  button {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0cffff;
+    background-color: #7f3fff;
+    cursor: pointer;
+  }
+`;
+
+const options = { ..., styles };
+
+// ...
+```
+
+Refresh the page. You should be able to see the content updated with the styles. We used the selector `:scope` to select the root element (`main` in `markup`) of our component. All selectors in `styles` are scoped. Which means that they apply only to the component. If any element outside the component matches any of the selectors, it will not be selected.
+
+#### Adding Event Listeners
+
+At this point, our component does not have the desired behaviour. Let us add behaviour to it using an event listener. We are going to add a `click` event listener on the `button` so that we can be able to update our page when the use clicks it. Add the following code to the `script`:
+
+```js
+// ...
+
+const eventListeners = {
+  "button": [
+    {
+      type: "click",
+      listener: async function (event, $helloWorld) {
+        const whom = await $helloWorld.select("h1 span", false);
+        const input = await $helloWorld.select(".input-group input", false);
+        const name = input.value;
+        whom.textContent = name;
+      }
+    }
+  ]
+};
+
+const options = { ..., eventListeners };
+
+// ...
+```
+
+Refresh the browser. Enter your name in the text field and click the `button`. You should the see the heading displaying a message saying hello to you. The object `eventListeners` takes CSS selectors as its properties. The CSS selectors are used to select elements inside the component that match the selectors. We used the selector `button` to select the button in our component. The value of `button` is and array containing only one item. The object the array contains options for our event. The property `type` is used to indicated what type of event we wanted to listen to. The property `listener` specified the listener we wanted to attach to the event. The listener update the heading when you clicked the button. The array specified by `button` can have as many event objects as we want.
 
 ## Global Components
 
-External components are created in one file and used in another file. A module can export one or more components. These components can then be imported and used by other modules.
+Global components are created in one file and used in another file. A module may export one or more components. These components can then be imported and used by other modules.
 
 ## Constructor
 
-A constructor is any function that returns a promise that resolves to a [`Component`](api/component/component.md). Constructors are used in all of the aforementioned types of a component.
+A constructor is any function that returns a promise that resolves to a [`Component`](api/component/component.md). Constructors can be used in all of the kinds components.
 
 ## Single File Components
+
+### Description
 
 Single file components are created using one file, which can be either an HTML file or an ES6 module. If created in an ES6 module, the module has only one export - the component. The [`constructor`](#constructor) of an HTML single file component always exports the component as the only export.
 
@@ -61,9 +224,15 @@ Single file components are created using one file, which can be either an HTML f
 
 JavaScript single file components are ES6 modules that have a [`constructor`](#constructor) as the only export.
 
-Let us create a "Hello World" app using a JS single file component. The app has a header that initially reads "Hello World". It also has a text input field into which the user can put their name. It also has a button which the user can click after puting their name in the input field. Upon clicking the button, the heading will be update to "Hello [name of user]", where [name of user] is the name of the user put into the input field.
+#### Creating an App using a JS Single File Component
 
-The app has the following file system:
+__Introduction__
+
+Let us rewrite the component we created in [Creating an App using a Local Component](#creating-an-app-using-a-local-component) section.
+
+__File Structure__
+
+Create the following file structure:
 
 ```txt
 |-- hellow-world-js-component
@@ -513,13 +682,9 @@ The main HTML file `index.html` contains content so similar to that used for sin
 
 You can use a number of ways to import assets into the component modules. One way we have looked at already is using `assetManager.fetchAsset`. The other two ways is by using the fetch API of the window object and using file loaders of build tools. Let us look at each one of these methods in detail.
 
-#### `fetchAsset`
+#### `assetManager`
 
-The method `assetManager.fetchAsset` allows us to import assets dynamically into our component module. This method provides a simpler API than the fetch API (which we will look into shortly) as you do not have to convert the file contents to a string on your own. However, `fetchAsset` has the same disadvantage as the aforementioned alternative, dynamic importation. For assets required in a module, dynamic imports/fetches are usually not the best way to do things. Dynamic imports result into many requests being made to the server at runtime. This usually results in poor performance.
-
-#### `fetch`
-
-The API `fetch` of the `window` object can be used to import text content from files. Unlike `assetManager.fetchAsset`, you have to convert the file contents to a string on your own by reading the response to completion using the method `text` of the response object. This method has the disadvantage described in [`fetchAsset`](#fetchasset) section. The `fetch` API has other alternatives that offer similar functionality.
+The method `assetManager.fetchAsset` allows us to import assets dynamically into our component module. The export `assetManager` has other methods used for importing modules. The method [`importModule`](./api/asset-manager.md#importmodule) is used to import ES modules and [`prefetch`](./api/asset-manager.md#prefetch) is used to prefetch all kinds of assets. The method `fetchAsset` provides a simpler API than the `window.fetch` API (which we will look into shortly) as you do not have to convert the file contents to a string on your own. Also, `importModule` also has a simpler interface than `window.import` because it gets the module contents on your behalf. However, `assetManager` has the same disadvantage as the aforementioned alternatives - dynamic importation. For assets required in a module, dynamic imports/fetches are usually not the best way to do things. Dynamic imports result into many requests being made to the server at runtime. This usually results in poor performance.
 
 #### Build Tools
 
@@ -527,4 +692,6 @@ Build tools provide a way to statically import assets into a module at build tim
 
 #### Conclusion
 
-You can use whichever method best suits your use case. If you have decided not to use build tools, your best alternative would in most cases be [`fetchAsset`](#fetchasset) as you do less work than using [`fetch`](#fetch). If you use build tools, you use appropriate file loaders for each type of asset. If a component is so complex, you might want to import other assets other than markup and styles. For example, you might put all events in an `[`eventListeners`](api/create-component/create-component.md#eventListeners) object in a different JavaScript module.
+You can use whichever method best suits your use case. If you have decided not to use build tools, your best alternative would in most cases be [`assetManager`](#assetmanager) as you do less work than using `window.fetch` or `window.import`. If you use build tools, you can use appropriate file loaders for each type of asset.
+
+If a component is so complex, you might want to import other assets other than markup and styles. For example, you might put all events in an `[`eventListeners`](api/create-component/create-component.md#eventListeners) object in a different JavaScript module.

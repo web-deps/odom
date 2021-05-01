@@ -15,8 +15,8 @@
     (async () => {
       const str = "hello";
       const helloWorld = await importComponent("./hello-world.htm");
-      const $HelloWorld = await helloWorld({name: "hello-world"});
-      $HelloWorld.replace("#hello-world");
+      const HelloWorld = await helloWorld({name: "hello-world"});
+      HelloWorld.replace("#hello-world");
     })();
   </script>
 </body>

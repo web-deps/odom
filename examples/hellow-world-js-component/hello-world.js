@@ -55,9 +55,9 @@ export const helloWorld = async props => {
     "button": [
       {
         type: "click",
-        listener: async function (event, $helloWorld) {
-          const whom = await $helloWorld.select("h1 span", false);
-          const input = await $helloWorld.select(".input-group input", false);
+        listener: async function (event, HelloWorld) {
+          const whom = await HelloWorld.select("h1 span", false);
+          const input = await HelloWorld.select(".input-group input", false);
           const name = input.value;
           whom.textContent = name;
         }
@@ -65,6 +65,6 @@ export const helloWorld = async props => {
     ]
   };
     
-  const $helloWorld = await $create({ markup, styles, eventListeners });
-  return $helloWorld;
+  const HelloWorld = await $create({ markup, styles, eventListeners });
+  return HelloWorld;
 };

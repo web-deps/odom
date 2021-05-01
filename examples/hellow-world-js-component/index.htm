@@ -15,9 +15,9 @@
     (async () => {
       const str = "hello";
       const helloWorld = await importComponent("./hello-world.js");
-      const $helloWorld = await helloWorld({name: "hello-world"});
+      const HelloWorld = await helloWorld({name: "hello-world"});
       const main = document.querySelector("main");
-      main.replaceWith($helloWorld.scope);
+      main.replaceWith(HelloWorld.scope);
     })();
   </script>
 </body>

@@ -56,12 +56,12 @@ Create a script tag and add the following code. Put the script tag in the body a
   `;
 
   const options = { markup };
-  const $HelloWorld = await $create(options);
-  $HelloWorld.replace("#hello-world");
+  const HelloWorld = await $create(options);
+  HelloWorld.replace("#hello-world");
 })();
 ```
 
-Open the HTML file in the browser. You should be able to see a button with the text "Say Hello" in the browser. What we have done is create a component using the markup in `markup`. We created the and added the markup for our component and assigned it to `markup`. Then we put the markup in an object called `options`. The options was then passed to the function `$create`. The function `$create` returned the component `$HelloWorld`. When we called the method `replace` of `$HelloWorld`, the element created from our markup was inserted into the DOM.
+Open the HTML file in the browser. You should be able to see a button with the text "Say Hello" in the browser. What we have done is create a component using the markup in `markup`. We created the and added the markup for our component and assigned it to `markup`. Then we put the markup in an object called `options`. The options was then passed to the function `$create`. The function `$create` returned the component `HelloWorld`. When we called the method `replace` of `HelloWorld`, the element created from our markup was inserted into the DOM.
 
 ## Adding Styles
 

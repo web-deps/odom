@@ -1,94 +1,97 @@
-# __Data__
+# Data
 
 __Table of Contents__
 
-- [__Data__](#data)
-  - [__Introduction__](#introduction)
+- [Data](#data)
+  - [Introduction](#introduction)
   - [Data Access](#data-access)
     - [Data Selectors](#data-selectors)
-  - [__Props__](#props)
-    - [__Introduction__](#introduction-1)
-    - [__Attributes__](#attributes)
-      - [__Description__](#description)
+  - [Props](#props)
+    - [Introduction](#introduction-1)
+    - [Attributes](#attributes)
+      - [Description](#description)
       - [__Example__](#example)
-    - [__Slots__](#slots)
-      - [__Description__](#description-1)
-      - [__Example__](#example-1)
-  - [__App__](#app)
-    - [__Description__](#description-2)
-    - [__Example__](#example-2)
+    - [Slots](#slots)
+      - [Description](#description-1)
+      - [Example](#example-1)
+  - [$App](#app)
+    - [Description](#description-2)
 
+## Introduction
 
-## __Introduction__
+Acom provides a number of ways in which data can be shared within a component, across components and within an applications as a whole. Data can be shared using the following methods:
 
-Acom provides a number of ways in which data can be shared within a component, across components and within an applications as a whole. Data can be shared using the following structures:
-
-* Props: data transfered from one asset to another
-* `utils`: an attribute of [`options`](options.md)
-* `$createpp` (a window object).
+- `props`: Data transfered from one component to another.
+- `utils`: An attribute of [`options`](./api/create-component/create-component.md#options).
+- `$App`: An object set on the `window` object.
 
 ## Data Access
 
-Data can be accessed via attributes in markup. For some special attributes, data can be accessed by simply providing the property name of the data provided that the data is stored in the appropriate structure. User defined attributes and some special attributes can access data via data selectors.
+In components, data can be accessed via attributes in markup. For some special attributes, data can be accessed by simply providing the property name of the data provided that the data is stored in the appropriate collection in [utils](./api/create-component/utils.md). User defined attributes and some special attributes can access data via [data selectors](#data-selectors).
 
 ### Data Selectors
 
-A data selector is an attribute value that is used to access data stored in the data structures mentioned in [Introduction](#introduction). A data selector has the following structure:
+A data selector is an attribute value (or part of an attribute value) that is used to access data stored in the data structures mentioned in [Introduction](#introduction). A data selector has the following structure:
 
-`@structure.property`
+`@collection.property`
 
-The structure has three parts, these are:
+The structure has the following three parts:
 
-* `@`: necessary to indicate that the attribute value is special
-* `sturcture`: the data structure which can be any of these values;
-  * [`props`](#props) - props of an component
-  * [`data`](#data) - attribute of [`options.utils`](options.md#utils)
-  * [`methods`](#methods) - attribute of [`options.utils`](options.md#utils)
-  * [`$createpp`](#app) - a global object
-  * `datum` - used in [Collections](collections.md)
-* `property`: a property of the data structure (it can use dot notation to select nested values).
+- `@`: necessary to indicate that the attribute value is a data selector.
+- `collection`: the data structure which can be any of these values;
+  - [`props`](#props) - props of a component.
+  - [`data`](#data) - property of [`utils`](./api/create-component/utils.md).
+  - [`methods`](#methods) - property of [`utils`](./api/create-component/utils.md)..
+  - [`$App`](#app) - a property set on the `window` object.
+  - `datum` - used in [Collections](collections.md).
+- `property`: a property of the data collection (you can use dot notation to select nested values).
 
-## __Props__
+## Props
 
-### __Introduction__
+### Introduction
 
-Data can be passed from a component to an asset or another component using `props`. Components, nodes, markup and text can use `props` to provide variable instances of themselves before they are inserted into the DOM. Props are derived from attributes and slots.
+Data can be passed from a component to an asset (component or not) using `props`. The constructors of components, nodes, markup and text can use `props` to instantiate the assets. Props are derived from attributes of all kinds of assets. Component props may include slots if the target elements have children.
 
-### __Attributes__
+### Attributes
 
-#### __Description__
+#### Description
 
-One way of using props is by using attributes on target nodes (nodes that assets and utilites are supposed to replace when inserted into the DOM). All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `acom-`) are considered as props. Attributes are added to props as key-value pairs of attribute names and values. Props are used to instantiate assets and utilities.
+One way of using props is by using attributes on target elements. All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `acom-`) are considered as props. Props are used to instantiate assets.
 
 #### __Example__
 
 In this example we will import a component and instantiate it using props.
 
 ```html
-<div acom-src="/src/components/header.htm" page="home"></div>
+<div acom-src="/src/components/header.html" page="home"></div>
 ```
 
-In this example, `page` will be considered as a prop of the component at `/src/components/header.htm`. The component will be imported and instantiated with an object (`props`) containing `page` as a prop. The object will be:
+In this example, `page` will be considered as a prop of the component at `/src/components/header.html`. The component will be imported and instantiated with an object (`props`) containing `page` as a prop. The object will have the following structure:
 
-```javascript
+```js
 {
   page: "home"
 }
 ```
 
-Inside the component being imported, the props can be accessed from the markup using data selectors. For example, the prop `page` can be accessed using `@props.page` in any of the attributes. For this to work, the props must be included in the options of the component (`home`).
+Inside the component being imported, the props can be accessed from the markup using data selectors. For example, the prop `page` can be accessed using `@props.page` in any of the attributes. For this to work, the props must be included in the [`options`](./api/create-component/create-component.md#options) of the component (`home`).
 
-### __Slots__
+### Slots
 
-#### __Description__
+#### Description
 
-Any child of the target element is considered to be a slot. All slots are added to props. If there is more than one child, all the children are collected in an array and put in `props.slots`. Slots are used only with components.
+Any child of the target element is considered to be a slot. All slots are added to props. If there is more than one child, one of the following things will happen
 
-#### __Example__
+- All elements with unique values for the `name` attribute are put in `props` under property names corresponding to the value of their `name` attributes.
+- All elements with the same value for `name` attribute collected into an array and put in `props` under the same property (equal to the value of the `name` attribute).
 
-In this example we will import a component and pass a slot into it throu props.
+ Slots are used only with components.
 
-_Importing Module_
+#### Example
+
+Let us import a component and pass a slot into it throug props.
+
+__Parent Component__
 
 ```html
 <div acom-src="/src/components/button.htm">
@@ -96,9 +99,9 @@ _Importing Module_
 </div>
 ```
 
-_Exporting Module_
+__Child Component__
 
-Acom inserts slots on all nodes in the component that have the same value for the attribute `acom-slot` as the name of the attribute `name` on a slot from the importing component.
+Acom inserts slots on all nodes in the component that have the same value for the attribute `acom-slot` as the name of the attribute `name` on a slot from the parent component. If the value of the slot in `props` is an array, the slot placeholder is replaced with all the elements in the array.
 
 ```html
 <div>
@@ -106,27 +109,10 @@ Acom inserts slots on all nodes in the component that have the same value for th
 </div>
 ```
 
-The `<div>` with the attribute `acom-slot` will be replaced with `props.slots.text`. If text was an array, the `<div>` would have be replaced with all the slots.
+The `div` with the attribute `acom-slot` will be replaced with `props.slots.text`.
 
+## $App
 
+### Description
 
-## __App__
-
-### __Description__
-
-To share data within a web app as a whole, Acom uses the global object `$createpp`. You can explicitly add this object to the window object. If you have not added it, Acom will add it automatically when needed. Through `$createpp` you can share any kind of data globally within your app. You can make the object an instance of [`Component`](component/component.md). The window object `document` is used as `scope` for the component. This means that you can use some of the methods of the API such as [`select`](component/component.md#select) to select nodes in the whole document (DOM). You create the component using [`createApp`](component/component.md#createapp).
-
-### __Example__
-
-In our app, we will create the component and store the approximate time at which our app was started in `$createpp`.
-
-```javascript
-// ...
-
-const props = { startTime: Date.now() };
-const $createpp = await createApp(props);
-```
-
-Any data that you want to share via `$createpp` has to be put in `props`. All `props` will be properties of `$createpp`. So, we can access `startTime` using `$createpp.startTime`.
-
-> __Note:__ If you have not explicitly created `$createpp` as a component, Acom will use an object literal instead.
+To share data within a web app as a whole, Acom uses the global object `$App`. You can explicitly add this object to the window object. If you have not added it, Acom will add it automatically when needed. Through `$App`, Acom caches and shares a lot of data between components.

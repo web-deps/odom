@@ -26,7 +26,7 @@ __Table of Contents__:
 
 ## Introduction
 
-Used to create and transform a component. The function executes processes using values of [`options`](#options) to transform a component.
+Components can be created using `createComponent`, a method of the [API](../api.md). The method creates and transforms a component using [`options`](#options). The method has an alias `$create` which available in the API.
 
 ## Syntax
 

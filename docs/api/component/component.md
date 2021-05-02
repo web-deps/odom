@@ -27,7 +27,7 @@ __Table of Contents__
 
 ## Introduction
 
-Acom uses components to build user interfaces. The components are instances of a class called __Component__. The class one of the utilities in the [`API`](../api.md). The function [`createComponent`](../api.md#create-component) is only a wrapper for the class. It executes certain processes according to attributes of `options` and returns the class instance. Using __Component__ directly means you will have to do all the work done by `createComponent` on your own. You can do this via the [API](#api).
+Acom uses components to build user interfaces. The components are instances of a class called `Component`. The class one of the utilities in the [`API`](../api.md). The API provides an alias `$A` for `Component`. The function [`createComponent`](../api.md#create-component) is only a wrapper for the class. It executes certain processes according to attributes of `options` and returns the class instance. Using `Component` directly means you will have to do all the work done by `createComponent` on your own. You can do this via the [API](#api).
 
 ## API
 

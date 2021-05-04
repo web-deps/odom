@@ -147,7 +147,7 @@ Used to specify the id of the cache. It must be unique globally (all components)
 
 Used to specify which storage facility will be used for the caching. It has the following values:
 
-* "app": means the cache is going to be stored in the global variable `$createpp`.
+* "app": means the cache is going to be stored in the global variable `$App`.
 * "session": means the cache will be stored in session storage.
 
 #### `createNode`

@@ -96,8 +96,8 @@ Let us create a component and insert it into the DOM. Replace the comment in the
 
 Open the HTML file in the browser. You should be able to see a button with the text "Say Hello" on the page. Let us look at each step we took to make this happen:
 
-1. Create markup: First, we created HTML markup and put in the variable `markup`.
-2. Create options: The second thing we did was create an object and added our markup in it. We then put the object in the variable `options`.
+1. Create markup: First, we created HTML markup and put in the variable `markup`. For more details about using markup in Acom, refer to [`markup`](./api/create-component/utils.md#markup).
+2. Create options: The second thing we did was create an object and added our markup in it. We then put the object in the variable `options`. For more information about `options`, refer to [`options`](./api/create-component/create-component.md#options).
 3. Create component: We created a component (`HelloWorld`) using `Acom.createComponent`. The `options` object we created earlier was used as the only parameter to `Acom.createComponent`. `Acom.createComponent` is asynchronous. That is why we used the keyword `await` when calling it. Also notice that our entire code is wrapped in an asynchronous IIFE (indicated by the `async` keyword). This was done to enable us to use the `await` keyword in the code inside it.
 4. Render component: Finally, we rendered our component to the DOM by calling `HelloWorld.render`. The parameter to `HelloWorld.render` was a CSS selector corresponding to the element (`main#hello-world`) we wished to replace with our component.
 
@@ -140,7 +140,7 @@ At this point, our app looks quite basic. Let us add some styling to make it loo
 })();
 ```
 
-Refresh the page. You should see the CSS in `styles` has been applied to the element. Notice the use of the selector `:scope`. The selector is used to select the root element of our component, which in this case is `main`. All selectors in `styles` are scoped. This means that they apply to only elements in the component. So, event if there was another element in the `document` which matched the selector `button`, it could not have been selected.
+Refresh the page. You should see the CSS in `styles` has been applied to the element. Notice the use of the selector `:scope`. The selector is used to select the root element of our component, which in this case is `main`. All selectors in `styles` are scoped. This means that they apply to only elements in the component. So, event if there was another element in the `document` which matched the selector `button`, it could not have been selected. For more details about styles, refer to [`styles`](./api/create-component/utils.md#styles).
 
 ### Adding Event Listeners
 
@@ -191,7 +191,7 @@ We have created our component and added styles, but our app can not say "Hello W
   HelloWorld.render("#hello-world");
 ```
 
-Refresh the page and click the button. Upon clicking the button, an alert must pop up with the message "Hellow World". The `eventListeners` object contains an array under the property `button`. The property `button` is a CSS selector for the element (`button`) we wanted to apply an event listener to. We can can put as many CSS selectors as we want in `eventListeners`. The array contains an object specifying the options for the event listener. The property `type` indicated what type of event we wished to listen to, which in our case was the click event. The property `listener` specified the listener we wanted to attach to the event. When the button was clicked, the listener show an alert message with the message "Hello World!". We can put as many event objects in the array for `button` as we wish to.
+Refresh the page and click the button. Upon clicking the button, an alert must pop up with the message "Hellow World". The `eventListeners` object contains an array under the property `button`. The property `button` is a CSS selector for the element (`button`) we wanted to apply an event listener to. We can can put as many CSS selectors as we want in `eventListeners`. The array contains an object specifying the options for the event listener. The property `type` indicated what type of event we wished to listen to, which in our case was the click event. The property `listener` specified the listener we wanted to attach to the event. When the button was clicked, the listener show an alert message with the message "Hello World!". We can put as many event objects in the array for `button` as we wish to. For more information about events, refer to [`eventListeners`](./api/create-component/utils.md#eventlisteners).
 
 ### Inserting Data
 

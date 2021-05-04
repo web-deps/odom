@@ -13,7 +13,21 @@ __Table of Contents__
     - [Adding Event Listeners](#adding-event-listeners)
     - [Inserting Data](#inserting-data)
   - [Conditionals](#conditionals)
+    - [HTML File Contents](#html-file-contents)
+    - [Markup](#markup)
+    - [Styles](#styles)
+    - [Testing](#testing)
+      - [Defer](#defer)
+      - [Visibility](#visibility)
+      - [Display](#display)
+      - [Presence](#presence)
+      - [Lazy](#lazy)
   - [Collections](#collections)
+    - [File Content Structure](#file-content-structure)
+    - [Markup](#markup-1)
+    - [Styles](#styles-1)
+    - [Users](#users)
+    - [Viewing the Collection](#viewing-the-collection)
   - [Documentation](#documentation)
 
 ## Installation
@@ -208,11 +222,214 @@ Refresh the page and hover over the button. You will see the tooltip "Say Hello"
 
 ## Conditionals
 
-Using Acom, you can add or remove elements to/from the DOM or change the visual status such as display and visibility of elements according to conditions you specify.
+Using Acom, you can add or remove elements to/from the DOM or change the visual status such as display and visibility of elements according to conditions you specify. Let us look at the different kinds of [conditionals](./conditionals.md) you can apply to DOM elements.
+
+### HTML File Contents
+
+We are going to use a single HTML file. THe file has the following general structure:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditionals</title>
+</head>
+<body>
+  <main id="conditionals"></main>
+
+  <script src="/path-to-acom"></script>
+
+  <script>
+    (async () => {
+      const markup = `<!-- markup -->`;
+      const styles = `/* styles */`;
+
+      const data = { show: true, hide: false };
+      const utils = { data };
+      const options = { markup, styles, utils };
+      const Conditionals = await Acom.createComponent(options);
+      Conditionals.render("#conditionals");
+    })();
+  </script>
+</body>
+</html>
+```
+
+We are going to focus on the contents of the last `script` element.
+
+### Markup
+
+Replace the comment in the value for `markup` with the following HTML code:
+
+```html
+<ul>
+  <li acom-loading='{"type": "defer", "time": 3000}'>Loading - Defer (3s)</li>
+  <li acom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'>Visibility</li>
+  <li acom-display='{"value": ["none", "grid"], "conditions": ["@data.hide"]}'>Display</li>
+  <li acom-presence='{"action": "add", "conditions": ["@data.show", {"query": "(min-width: 800px)"}]}'>Presence</li>
+  <li acom-loading="lazy">Loading - Lazy</li>
+</ul>
+```
+
+### Styles
+
+Replace the comment in the value of `styles` with the following CSS code:
+
+```css
+:scope {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+li {
+  display: grid;
+  place-items: center;
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+}
+```
+
+We are going to use the CSS to style our content so that the effects of the conditionals are observable.
+
+### Testing
+
+Open the HTML file in the browser and wait for about 3 seconds. After approximately 3 seconds, you should see another square being added to the page. While watching the scroll bar, scroll to the bottom of the page. Just before you reached the end of the page, you should have seen the scroll bar reduce in width a bit. This indicated that a new element was added to the page. If you have missed any of the steps, refresh the page and observe what happens. Let us look at each conditional we used in detail.
+
+#### Defer
+
+The conditional [Defer](./conditionals.md#defer) allows you to delay rendering of an element. The first element rendered approximately 3 seconds after the loading of the page. We made this happen via the attribute `acom-loading`. We used a JSON object to specify the options. The JSON object had a property `type` which was set to `defer`. This property enabled the delayed rendering of the element. The JSON object also had another property `time` which we set to `3000`. This property specified how much time (in miliseconds) should pass before the element is rendered.
+
+#### Visibility
+
+The visibility of an element can be set or changed via the conditional [Visibility](./conditionals.md#visibility). The second element's visibility was set via the attribute `acom-visibilty`. We used a JSON object. The property `value` was set to an array containing two values of visibility. The visibility is set to the first value if the conditional is true, and to the second if the conditional is false. The conditions checked were specified in the property `conditions`. The `conditions` were specified in an array which contained only one value. The value was a string with a data selector `@data.hide` which referred to `options.utils.data.hide`. The value referred to was set to `false`, which means the conditional failed. This resulted into the visibility of the element being set to `visible`. That is why you were able to see the element on the page.
+
+Let us see what happens if we change the result of the conditional. Set the value of `options.utils.data.hide` to `true` and refresh the page. After refreshing, you should not be able to see the element on the page. This is because the conditonal failed and thus the visibility of the element set to `hidden`. Fore more information about the Visibility conditional, refer to [Visibility](./conditionals.md#visibility).
+
+#### Display
+
+We set the display value of the third element using the conditional [Display](./conditionals.md#display). In the value for the attribute `acom-display` we set the desired options via a JSON object. The property `value` specified the desired display values for the success and failure of the conditional using the first and second values of the array respectively. The property `conditions` was used to specify the conditions to be checked. The array contained only a data selector for the value `options.utils.data.hide`. Since the value was set to `false` the conditional failed and thus the value of the display was set to `grid`.
+
+Let us see what happens if we change the conditions. Set the value of `options.utils.data.hide` (if you have not changed it already) to `true` and refresh the page. You should no longer see the element on the page. For more information about Display refer to [Display](./conditionals.md#display).
+
+#### Presence
+
+We can choose to add or remove and element from the DOM using the conditional [Presence](./conditionals.md#presence). The fourth element's presence in the DOM was set via the attribute `acom-presence`. The value for the attribute was a JSON object in which we specified the options for the conditional. The property `action` specified what was supposed to be done should the conditions be met, which in our case was to add the element to the DOM. The `conditions` were specified in an array with two values. The first value was a data selector of `options.utils.data.show`. The second value was a media query specifying the media conditions to be tested. All the values of the array must be true for the conditional to be successful. In our case, `options.utils.data.show` was set to `true`. The media query test depended on the width of the viewport. If your viewport width passed the test (was 800px or larger), you were able to see the element, and if not, you were not able to see it.
+
+Change the width of the viewport so that it results into the opposite effect. Refresh the page and observe what happens. Refer to [Presence conditional](./conditionals.md#presence) for more details.
+
+#### Lazy
+
+We can apply lazy loading to any element in the DOM via the [Lazy loading conditional](./conditionals.md#lazy). The last element was lazily loaded as you observed in [Testing](#testing). In the attribute `acom-loading`, we specified the type of loading as `lazy`. This enabled the element to be lazily loaded. For more information about lazy loading refer to [Lazy](./conditionals.md#lazy).
 
 ## Collections
 
 Using Acom, you can create collections of elements from collections of data. You can use these elements in lists, tables and the like.
+
+### File Content Structure
+
+We are going to use a single HTML file which has the following general structure:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections</title>
+</head>
+<body>
+  <main id="collections"></main>
+
+  <script src="/path-to-acom"></script>
+
+  <script>
+    (async () => {
+      const markup = `<!-- markup -->`;
+      const styles = `/* styles */`;
+
+      const users = // ...
+      const data = { users };
+      const utils = { data };
+      const options = { markup, styles, utils };
+      const Collections = await Acom.createComponent(options);
+      Collections.render("#collections");
+    })();
+  </script>
+</body>
+</html>
+```
+
+We are going to modify the contents of the `script` element.
+
+### Markup
+
+Replace the comment in `markup` with the following HTML code:
+
+```html
+<ul acom-multiple="@data.users">
+  <li title="@datum.username">
+    <span>
+      <span acom-text="@datum.id"></span>
+    </span>
+    <span>
+      <span acom-text="@datum.username"></span>
+    </span>
+  </li>
+</ul>
+```
+
+### Styles
+
+We are going to style the `li` elements of our list so that they display the contents horizontally with a small space between them. Replace the comment in `styles` with the following CSS:
+
+```css
+li {
+  display: flex;
+  gap: 0.5rem;
+}
+```
+
+### Users
+
+We are going to use an array of users as our collection. Set the value of `users` to the following array (replace comment):
+
+```js
+[
+  {
+    id: "1",
+    username: "@user-1"
+  },
+  {
+    id: "2",
+    username: "@user-2"
+  },
+  {
+    id: "3",
+    username: "@user-3"
+  }
+]
+```
+
+### Viewing the Collection
+
+Save the file and open it in the browser. You should be able to see a list displaying three items. Each item has a number and followed by some text prefixed with `@`.
+
+Let us look at how we made this possible. We put the attribute `acom-multiple` on the `li` element in our `markup`. This indicated that the element was a collection of type `multiple`. The value of the attribute was a data selector for the collection `options.utils.data.users`.
+
+The `ul` element contained only one `li` element. This is the template which was used to generate the list items you saw on the page. The `li` element had an attribute `title` which was set to `@datum.id`. Every item of the collection was referenced by `@datum`. The properties of the each item was accessed using the dot notation. So, `@datum.id` referred to the `id` of each user.
+
+The first element of the `li` element was a `span` element which contained another `span` element inside it. The inner `span` had an attribute `acom-text` which was set to `@datum.id`. The attribute `acom-text` indicated that the element was supposed to be used to insert a text asset. So, the `span` was replaced by the `id`. For more information about how to insert text into the DOM, refer to [texts](./api/create-component/utils.md#texts).
+
+The second child of `li` followed the same pattern. The inner `span` was used to insert the `username` of the user.
+
+For more information about collections, refer to [Collections](./collections.md).
 
 ## Documentation
 

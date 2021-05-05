@@ -32,7 +32,7 @@ Acom offers a lot of flexibility including the following:
 
 1. __Markup__: You can use HTML, XML or any XML-compliant markup language. You are also provided with some flexibility on how the markup you write in non-HTML languages gets converted to HTML. This makes it easier for you to ship and reuse code from already existing code bases in native platforms and the like.
 2. __Styles__: You can use inline, internal and external styles.
-3. __Components__: You can create components that are local to a file (script or module), single-file components (using ES modules or HTML files) or multiple-file components (using seperate files for markup, styles and JavaScript code).
+3. __Components__: You can create components that are local to a file (script or module), single-file components (using ES modules or HTML files) or multiple-file components (using seperate files for markup, styles and JavaScript code). You can also choose to create and manipulate components using either declarative or procedural means.
 4. __Middleware__: Acom allows you to use middleware for markup and styles processing. These middleware can either supplement or override the default processes used by Acom. This offers you a lot of room for you to use user-defined or third-party utilities.
 
 ## Quick Start

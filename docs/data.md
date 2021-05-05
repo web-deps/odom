@@ -6,14 +6,20 @@ __Table of Contents__
   - [Introduction](#introduction)
   - [Data Access](#data-access)
     - [Data Selectors](#data-selectors)
+    - [Data Binding](#data-binding)
+      - [Introduction](#introduction-1)
+      - [Add Dynamic Data](#add-dynamic-data)
+      - [Use Binding on Data Selectors](#use-binding-on-data-selectors)
+      - [Updating Data](#updating-data)
+      - [Example](#example)
   - [Props](#props)
-    - [Introduction](#introduction-1)
+    - [Introduction](#introduction-2)
     - [Attributes](#attributes)
       - [Description](#description)
-      - [__Example__](#example)
+      - [__Example__](#example-1)
     - [Slots](#slots)
       - [Description](#description-1)
-      - [Example](#example-1)
+      - [Example](#example-2)
   - [$App](#app)
     - [Description](#description-2)
 
@@ -45,6 +51,110 @@ The structure has the following three parts:
   - [`$App`](#app) - a property set on the `window` object.
   - `datum` - used in [Collections](collections.md).
 - `property`: a property of the data collection (you can use dot notation to select nested values).
+
+### Data Binding
+
+#### Introduction
+
+You can bind data to the DOM using dynamic data. When the data changes, the DOM is updated. You can also make the data be updated if the DOM changes. To be able to use data binding, you need to a two things - add dynamic data and add data binding syntax to data selectors. Let us look at how we can achive this.
+
+#### Add Dynamic Data
+
+To [`options.utils.data`](./api/create-component/utils.md#generic-data), add the property `dynamic`. Inside `dynamic`, you can either add values directly, or specify options that include a way of updating the data. The options have the following structure:
+   
+```js
+{
+  data: any,
+  update: Function
+}
+```
+
+__Properties__:
+
+- `data`: Data of any type.
+- `update`: The function that updates the data.
+ 
+The function has the follwing syntax:
+        
+```js
+update(newData)
+```
+
+_Parameters_:
+
+- newData
+  - Type: `any`.
+  - Required: Yes.
+  - Usage: Contains the update.
+
+_Return Value_:
+
+The update.
+
+#### Use Binding on Data Selectors
+
+prefix the data selector with `:` for a single bind and `::` for a double bind. A single bind will updates the DOM every time the data is changed. A double bind does what a single bind does, but also updates the data if the DOM updates.
+
+#### Updating Data
+
+The dynamic data will be set as `Component.dynamicData`. You can get and set data using the properties specified in `options.utils.data.dynamic`.
+
+#### Example
+
+Let us use data binding on an input field. First we are going to use a single bind to update the value of the input field. Then well update the data and display it when the user enters some data in the input field.
+
+__Markup__:
+
+```html
+<div>
+  <h1></h1>
+  <input type="text" value=":@data.username" />
+</div>
+```
+
+__JavaScript__:
+
+```js
+// ...
+
+const dynamic = { username: "" };
+const data = { dynamic };
+const utils = { data }
+const options = { utils };
+const ExampleComponent = await Acom.createComponent(options);
+const ExampleComponent.render("#example-component");
+
+setTimeout(() => {
+  ExampleComponent.dynamicData.username = "@username";
+}, 3000);
+```
+
+If you open the HTML file in the browser, you should see no text in the text field initailly. After about 3 seconds, you should see the text "@username" in the text field.
+
+Let us use double binding and an update function. Change the data selector on `input` to `::@data.username`
+
+```js
+// ...
+
+const dynamic = {
+  username: {
+    data: "",
+    update: (newData) => {
+      heading.textContent = newData;
+      setTimeout(() => console.log(ExampleComponent.dynamicData.username), 0);
+      return newData;
+    }
+  }
+};
+
+// ...
+
+const heading = ExampleComponent.select("h1");
+
+// ...
+```
+
+Refresh the page. You should see the same thing as before on the input field. However, the `h1` also updates with the same text as the `input`. Enter some text into the input field. The `h1` should be updated with the text you entered in the text field.
 
 ## Props
 

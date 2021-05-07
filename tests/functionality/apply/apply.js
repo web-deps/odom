@@ -1,9 +1,9 @@
 import attributes from "./attributes.js";
-import classes from "./classes";
-import custom from "./custom";
-import eventListeners from "./event-listeners";
-import inlineStyles from "./inline-styles";
-import styles from "./styles";
+import classes from "./classes.js";
+import custom from "./custom.js";
+import eventListeners from "./event-listeners.js";
+import inlineStyles from "./inline-styles.js";
+import styles from "./styles.js";
 
 
 apply = {

@@ -13,7 +13,7 @@ export class Component {
   };
 
   setProps = props => Object.assign(this, props);
-  select = async (selector, selectAll) => select.call(this.scope, selector, selectAll);
+  select = async (selector, selectAll) => select(this.scope, selector, selectAll);
   parseMarkup = async (markup, middleware) => parseMarkup.call(this, markup, middleware);
   render = async element => render.call(this, element);
 };

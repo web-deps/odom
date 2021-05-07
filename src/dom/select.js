@@ -1,30 +1,30 @@
-export const select = function (selector, selectAll = true) {
+export const select = function (scope, selector, selectAll = true) {
   selector = selector.trim();
 
-  const run = async () => {
-    return (
-      selector === ":scope" ? scopeElement(selectAll)
-      : selector.startsWith(":scope,") ? startsWithScope()
-      : selector.includes(",") ? multiple()
-      : selectAll ? Array.from(this.querySelectorAll(selector))
-      : this.querySelector(selector)
-    );
-  };
+  return (
+    selector === ":scope" ? scope
+    : selector.startsWith(":scope.") ? scopeClass(scope, selector, selectAll)
+    : selector.startsWith(":scope") ? startsWithScope(scope, selector)
+    : selector.includes(",") ? multiple()
+    : selectAll ? Array.from(this.querySelectorAll(selector))
+    : this.querySelector(selector)
+  );
+};
 
-  const scopeElement = () => {
-    return selectAll ? [this] : this;
-  };
-  
-  const multiple = async () => {
-    const selectors = selector.split(",");
-    const elements = await Promise.all(selectors.map(selector => select(selector)));
-    return elements.flat();
-  };
+const multiple = async (scope, selector) => {
+  const selectors = selector.split(",");
+  const elements = await Promise.all(selectors.map(selector => select(scope, selector)));
+  return elements.flat();
+};
 
-  const startsWithScope = async () => {
-    const rest = await select(selector.replace(/^:scope/, ""));
-    return [this, rest].flat();
-  };
+const scopeClass = (scope, selector, selectAll) => {
+  const [match, classSelector] = selector.match(/^:scope(\.[-\w]+)/);
+  const newSelector = selector.replace(match, ":scope");
+  if (!scope.matches(classSelector)) return null;
+  return select(scope, newSelector, selectAll);
+};
 
-  return run();
+const startsWithScope = async (scope, selector) => {
+  const rest = await select(selector.replace(/^:scope/, ""));
+  return [scope, rest].flat();
 };

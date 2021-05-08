@@ -4,11 +4,13 @@ import { run } from "./run.js";
 import { custom } from "./custom.js";
 import { applyClasses } from "./classes.js";
 import { applyAttributes } from "./attributes.js";
+import { applyInlineStyles } from "./inline-styles.js";
 
 
 export const apply = function () {
   return {
     styles: async param => styles.call(this, param),
+    inlineStyles: async (map) => this.apply.custom(map, applyInlineStyles),
     eventListeners: async param => eventListeners.call(this, param),
     run: async param => await run.call(this, param),
     custom: async (data, action, options) => await custom.call(this, data, action, options),

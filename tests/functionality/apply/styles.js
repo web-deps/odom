@@ -14,9 +14,7 @@ const styles = async () => {
 
   const options = { markup, styles: _styles };
   const Styles = await createComponent(options);
-  const scope = Styles.scope;
-  let passed = true;
-  if (scope.style.getPropertyValue("width") !== "100vw") passed = false;
+  let passed = document.head.querySelector("style").className === Styles.id;
 
   if (passed) console.info("Passed");
   else console.error("Failed");

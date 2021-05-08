@@ -4,9 +4,13 @@ import { createComponent } from "/src/main.js";
 const attributes = async () => {
   const markup = /* html */`<div></div>`;
 
-  const _attributes = {
+  const scopeAttributes = {
     id: "attributes",
     class: "attributes"
+  };
+
+  const _attributes = {
+    ":scope": scopeAttributes
   };
 
   const options = { markup, attributes: _attributes };
@@ -14,8 +18,8 @@ const attributes = async () => {
   const scope = Attributes.scope;
   let passed = true;
 
-  for (const attributeName in _attributes) {
-    if (_attributes[attributeName] !== scope.getAttribute(attributeName)) passed = false;
+  for (const attributeName in scopeAttributes) {
+    if (scopeAttributes[attributeName] !== scope.getAttribute(attributeName)) passed = false;
   };
 
   if (passed) console.info("Passed");

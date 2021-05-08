@@ -1,5 +1,3 @@
-export const applyClasses = async function (classEntries) {
-  await this.apply.custom(classEntries, (element, classes) => {
-    element.className += ` ${classes.join(" ")}`;
-  });
+export const applyClasses = async (element, classes) => {
+  element.className += ` ${classes.join(" ")}`;
 };

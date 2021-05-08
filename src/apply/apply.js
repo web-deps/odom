@@ -13,10 +13,10 @@ export const apply = function () {
     styles: async param => styles.call(this, param),
     inlineStyles: async (map) => this.apply.custom(map, applyInlineStyles),
     eventListeners: async param => eventListeners.call(this, param),
-    run: async param => await run.call(this, param),
+    run: async (param) => await run.call(this, param),
     custom: async (data, action, options) => await custom.call(this, data, action, options),
-    classes: async classEntries => await applyClasses.call(classEntries),
-    attributes: async attributeEntries => await applyAttributes.call(this, attributeEntries),
+    classes: async (map) => await this.apply.custom(map, applyClasses),
+    attributes: async (map) => await this.apply.custom(map, applyAttributes),
     mutations: async (map) => this.apply.custom(map, applyMutations)
   };
 };

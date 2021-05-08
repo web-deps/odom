@@ -25,6 +25,10 @@ __Table of Contents__:
       - [Example](#example-1)
     - [`markup`](#markup)
     - [`middleware`](#middleware)
+    - [`mutations`](#mutations)
+      - [`mutator`](#mutator)
+      - [`preserve`](#preserve)
+      - [`type`](#type)
     - [`props`](#props)
     - [`scope`](#scope)
     - [`src`](#src)
@@ -73,6 +77,7 @@ The options contains utilities that are used to create and manipulate a componen
   inlineStyles: Object,
   markup: string,
   middleware: Object,
+  mutations: Object,
   props: Object,
   scope: Element,
   src: string,
@@ -300,7 +305,31 @@ HTML Equivalent
 
 ### `middleware`
 
-middleware are used to manipulate [`markup`](#markup) and [`styles`](#styles), and add state to a component. Refer to [middleware](middleware.md).
+Used to provide utilities that are used to manipulate [`markup`](#markup) and [`styles`](#styles), and add state to a component. Refer to [middleware](middleware.md).
+
+### `mutations`
+
+Used to apply mutations to a component. It is an object that maps CSS selectors to options for mutating. Each property in the object is a CSS selector for elements you want to apply mutations to. The corresponding values are options for mutating the selected elements. The options object has the following structure:
+
+```js
+{
+  mutator: Function,
+  preserve: Object,
+  type: string
+}
+```
+
+#### `mutator`
+
+Used to apply mutations to elements. Refer to [`mutations`](../component/apply.md#mutations) for more details.
+
+#### `preserve`
+
+Indicates which parts of an element should be kept after cloning. Refer to [`mutations`](../component/apply.md#mutations) for more details.
+
+#### `type`
+
+Indicates the type of mutation you want to apply. Refer to [`mutations`](../component/apply.md#mutations) for more details.
 
 ### `props`
 

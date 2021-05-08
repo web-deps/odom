@@ -74,8 +74,8 @@ parseMarkup(options)
 
 - `options`
   - Type: `Object`
-  - Required: Yes
-  - Usage: contains markup and options for processing markup.
+  - Required: Yes.
+  - Usage: Contains markup and options for processing markup.
 
 `options`
 
@@ -92,10 +92,10 @@ _Structure_:
 
 _Properties_:
 
-- `markup`: the markup to be parsed
-- `mltype`: the markup type. Can be either `"html"` or `"xml"`. The default value is `"html"`.
-- `markupMiddleware`: utilities for processing markup. Refer to [`markup`](../create-component/middleware.md) for more information.
-- `convertMarkup`: indicates whether or not to convert the resulting `Element` (if not an HTMLElement) to an HTMLElement. The default value is true.
+- `markup`: The markup to be parsed
+- `mltype`: The markup type. Can be either `"html"` or `"xml"`. The default value is `"html"`.
+- `markupMiddleware`: Utilities for processing markup. Refer to [`markup`](../create-component/middleware.md) for more information.
+- `convertMarkup`: Indicates whether or not to convert the resulting `Element` (if not an HTMLElement) to an HTMLElement. The default value is true.
 
 #### Return Value
 
@@ -116,7 +116,7 @@ render(element)
 - `element`
   - Type: `string` | `Node`
   - Required: Yes
-  - Usage: if it is a node, it is replaced by [`scope`](#scope). If it is a CSS selector, it is used to select a node in the DOM to be replaced by `scope`.
+  - Usage: If it is a node, it is replaced by [`scope`](#scope). If it is a CSS selector, it is used to select a node in the DOM to be replaced by `scope`.
 
 #### Return Value
 
@@ -141,12 +141,12 @@ select(selector, selectAll)
 - `selector`:
   - Type: `string`
   - Required: Yes
-  - Usage: selecting an element specified
+  - Usage: Selecting an element specified
 
 - `selectAll`:
   - Type: `boolean`
   - Required: Yes
-  - Usage: determines whether all matching elements or only the first matching element must be returned from the function. The default value is `true`.
+  - Usage: Determines whether all matching elements or only the first matching element must be returned from the function. The default value is `true`.
 
 #### Return Value
 

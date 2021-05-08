@@ -39,7 +39,7 @@ createComponent(options);
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilities for manipulating a component
+  - Usage: Contains utilities for manipulating a component
   - Reference: [`options`](#options)
 
 > __Note:__ If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
@@ -154,8 +154,8 @@ The ID of the component. For HTML components, `id` is set via the meta tag. Set 
 
 The type of imported `options`. It have any of the following values:
 
-- `"module"`: a JavaScript (ESM) module
-- `"json"`: a JSON file or string. The JSON is fetched and the response is read to completion as JSON.
+- `"module"`: A JavaScript (ESM) module.
+- `"json"`: A JSON file or string. The JSON is fetched and the response is read to completion as JSON.
 
 The default value is `"module"`. If the imported module is a function, the function is invoked and the return value will be used as the imported `options`.
 

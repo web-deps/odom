@@ -43,14 +43,14 @@ A data selector is an attribute value (or part of an attribute value) that is us
 
 The structure has the following three parts:
 
-- `@`: necessary to indicate that the attribute value is a data selector.
-- `collection`: the data structure which can be any of these values;
+- `@`: Necessary to indicate that the attribute value is a data selector.
+- `collection`: The data structure which can be any of these values;
   - [`props`](#props) - props of a component.
   - [`data`](#data) - property of [`utils`](./api/create-component/utils.md).
   - [`methods`](#methods) - property of [`utils`](./api/create-component/utils.md)..
   - [`$App`](#app) - a property set on the `window` object.
   - `datum` - used in [Collections](collections.md).
-- `property`: a property of the data collection (you can use dot notation to select nested values).
+- `property`: A property of the data collection (you can use dot notation to select nested values).
 
 ### Data Binding
 

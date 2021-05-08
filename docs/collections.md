@@ -147,8 +147,8 @@ Used to specify the id of the cache. It must be unique globally (all components)
 
 Used to specify which storage facility will be used for the caching. It has the following values:
 
-* "app": means the cache is going to be stored in the global variable `$App`.
-* "session": means the cache will be stored in session storage.
+- `"app"`: Means the cache is going to be stored in the global variable `$App`.
+- `"session"`: Means the cache will be stored in session storage.
 
 #### `createNode`
 
@@ -163,9 +163,9 @@ createNode(datum)
 __Parameters__:
 
 - `datum`
-  - Type: any
-  - Required: Yes
-  - Usage: contains the information required to create a node. It is a member of the data array.
+  - Type: `any`
+  - Required: Yes.
+  - Usage: Contains the information required to create a node. It is a member of the data array.
 
 __Return Value__:
 
@@ -215,9 +215,9 @@ __Parameters__:
 
 - `options`
   - Type: `Object`
-  - Required: Yes
-  - Usage: contains the options for updating Map
-  - Reference: refer to the next section
+  - Required: Yes.
+  - Usage: Contains the options for updating Map.
+  - Reference: Refer to the next section.
 
 _updateMap Options_
 
@@ -236,12 +236,12 @@ Structure:
 
 Properties:
 
-- `append`: indicates that the new nodes should be appended to the existing nodes.
-- `extension`: specifies the number of nodes to add to existing nodes when appending or prepending.
-- `newData`: the data that should be used to create new nodes.
-- prepend: indicates that the new nodes should be prepended to the existing nodes.
-- range: the new range of nodes.
-- refresh: indicates that the new nodes should be created from the new data gotten from [`getData`](#getdata).
+- `append`: Indicates that the new nodes should be appended to the existing nodes.
+- `extension`: Specifies the number of nodes to add to existing nodes when appending or prepending.
+- `newData`: The data that should be used to create new nodes.
+- prepend: Indicates that the new nodes should be prepended to the existing nodes.
+- range: The new range of nodes.
+- refresh: Indicates that the new nodes should be created from the new data gotten from [`getData`](#getdata).
 
 __Return Value__:
 

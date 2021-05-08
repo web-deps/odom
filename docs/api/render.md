@@ -12,12 +12,12 @@ render([options]);
 
 ## Parameters
 
-###  `options`
+### `options`
 
-* Type: Object
-* Required: No
-* Usage: contains options for rendering assets
-* Reference: [`options`](#options)
+- Type: `Object`
+- Required: No.
+- Usage: contains options for rendering assets.
+- Reference: [`options`](#options)
 
 ## Return Value
 
@@ -44,19 +44,17 @@ A promise that resolves to `undefined`.
 
 The type of asset to be rendered. All assets that are not DOM nodes will be converted to DOM nodes before they are rendered. It can have any or the following values:
 
-* `"component"`: a [`Component`](../component/component.md)
-* `"node"`: a DOM `Node`
-* `"markup"`: HTML or XML markup
-* `"text"`: any text content
-
+- `"component"`: A [`Component`](../component/component.md).
+- `"node"`: A DOM `Node`.
+- `"markup"`: HTML or XML markup.
+- `"text"`: Any text content.
 
 ### `fileType`
 
 The type of file containing the asset. This property is considered only when [`asset`](#asset) is a URI. It can be set to any of the following values:
 
-* `"module"`: a JavaScript module (ESM)
-* `"text"`: HTML, XML or regular text file
-
+- `"module"`: a JavaScript module (ESM).
+- `"text"`: HTML, XML or regular text file.
 
 ### `target`
 
@@ -66,10 +64,10 @@ The `Node` that the asset is going to replace when rendered. A CSS selector can 
 
 The asset to be rendered. It can be any of the following:
 
-* Component: a [`Component`](../component/component.md) `Function` returns a promise that resolves to a [`Component`](../component/component.md). It is [`Component.scope`](../component/component.md#scope) that is rendered.
-* Node: a DOM `Node`
-* Markup: HTML or XML. Converted to `Element`
-* Text: regular text. Converted to `TextNode`.
+- Component: A [`Component`](../component/component.md) `Function` returns a promise that resolves to a [`Component`](../component/component.md). It is [`Component.scope`](../component/component.md#scope) that is rendered.
+- Node: A DOM `Node`.
+- Markup: HTML or XML. Converted to `Element`.
+- Text: Regular text. Converted to `TextNode`.
 
 ### `assets`
 

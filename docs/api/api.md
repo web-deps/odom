@@ -69,15 +69,14 @@ createComponent(options);
 
 ### Parameters
 
-* `options`
-  * Type: `Object`
-  * Required: Yes
-  * Usage: contains utilities for manipulating a component
-  * Reference: [`options`](./options.md)
+- `options`
+  - Type: `Object`
+  - Required: Yes.
+  - Usage: Contains utilities for manipulating a component
+  - Reference: [`options`](./options.md)
 
 
 > __Note:__ If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
-
 
 ### Return Value
 
@@ -113,10 +112,10 @@ render([options])
 
 ### Parameters
 
-* `options`
-  * Type: Object
-  * Required: No
-  * Usage: contains options for rendering assets
+- `options`
+  - Type: `Object`
+  - Required: No.
+  - Usage: Contains options for rendering assets
 
 ### Return Value
 
@@ -125,7 +124,6 @@ A promise that resolves to `undefined`.
 ### Reference
 
 [`render`](./render.md)
-
 
 ## `replaceNode`
 
@@ -141,21 +139,20 @@ replaceNode(target, node[, replacer])
 
 ### Parameters
 
-* `target`:
-  * Type: `Node`
-  * Required: Yes
-  * Usage: replaced by another node
+- `target`:
+  - Type: `Node`
+  - Required: Yes.
+  - Usage: Replaced by another node.
 
-* `node`:
-  * Type: `Node`
-  * Required: Yes
-  * Usage: replaces another node
+- `node`:
+  - Type: `Node`
+  - Required: Yes.
+  - Usage: Replaces another node.
 
-* `replacer`:
-  * Type: `Function`
-  * Required: No
-  * Usage: replaces `target` with `node`
-
+- `replacer`:
+  - Type: `Function`
+  - Required: No.
+  - Usage: Replaces `target` with `node`.
 
 ### Return Value
 
@@ -164,7 +161,6 @@ replaceNode(target, node[, replacer])
 ### Reference
 
 [`replaceNode`](#replace-node.md)
-
 
 ## `assetManager`
 
@@ -202,10 +198,10 @@ importComponent(src)
 
 ### Parameters
 
-* `src`
-  * Type: string
-  * Required: Yes
-  * Usage: uri pointing to the file location of component
+- `src`
+  - Type: `string`
+  - Required: Yes.
+  - Usage: URI pointing to the file location of component
 
 ### Return Value
 

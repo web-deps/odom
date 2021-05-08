@@ -74,7 +74,7 @@ parser(markup)
 - `markup`
   - Type: `string`
   - Required: Yes
-  - Usage: contains markup to be parsed
+  - Usage: Contains markup to be parsed
 
 #### Return Value
 
@@ -97,7 +97,7 @@ converter(element)
 - `element`
   - Type: `Element`
   - Required: Yes
-  - Usage: converted to `HTMLElement`
+  - Usage: Converted to `HTMLElement`
 
 #### Return Value
 
@@ -136,7 +136,7 @@ preprocessor(styles)
 - `styles`
   - Type: `string`
   - Required: Yes
-  - Usage: converted to CSS
+  - Usage: Converted to CSS
 
 #### Return Value
 
@@ -157,7 +157,7 @@ postprocessor(css)
 - `css`
   - Type: `String`
   - Required: Yes
-  - Usage: converted to post-precessed CSS
+  - Usage: Converted to post-precessed CSS
 
 #### Return Value
 

@@ -12,27 +12,25 @@ replaceNode(target, node[, replacer])
 
 ## Parameters
 
-* `target`:
-  * Type: `Node`
-  * Required: Yes
-  * Usage: replaced by another node
+- `target`:
+  - Type: `Node`
+  - Required: Yes.
+  - Usage: Replaced by another node.
 
-* `node`:
-  * Type: `Node`
-  * Required: Yes
-  * Usage: replaces another node
+- `node`:
+  - Type: `Node`
+  - Required: Yes.
+  - Usage: Replaces another node.
 
-* `replacer`:
-  * Type: `Function`
-  * Required: No
-  * Usage: replaces `target` with `node`
-  * Reference: [`replacer`](#replacer)
-
+- `replacer`:
+  - Type: `Function`
+  - Required: No.
+  - Usage: Replaces `target` with `node`.
+  - Reference: [`replacer`](#replacer).
 
 ## Return Value
 
 `undefined`
-
 
 ## replacer
 
@@ -48,14 +46,14 @@ replacer(target, node)
 
 ### Parameters
 
-* target
-    * Type: `Node`
-    * Required: Yes
-    * Usage: gets replaced by another node
-* node
-    * Type: `Node`
-    * Required: Yes
-    * Usage: replaces another node
+- `target`:
+  - Type: `Node`
+  - Required: Yes
+  - Usage: Gets replaced by another node
+- `node`:
+  - Type: `Node`
+  - Required: Yes
+  - Usage: Replaces another node
 
 ### Return Value
 

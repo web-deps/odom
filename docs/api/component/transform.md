@@ -112,7 +112,7 @@ insertComponents(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting components
+  - Usage: Contains utilites for inserting components
   - Reference: [`insertComponents Options`](#insertcomponents-options)
 
 #### insertComponent Options
@@ -131,9 +131,9 @@ __Structure__:
 __Properties__:
 
 - `components`: contains components with property names corresponding to values specified via "acom-src" attributes.
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
+- `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: The methods that can be accessed via data selectors
+- `props`: The props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -156,7 +156,7 @@ insertData(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: provides data utilities for inserting
+  - Usage: Provides data utilities for inserting
   - Reference: [`options`](#options)
 
 #### `options`
@@ -173,9 +173,9 @@ _Structure_
 
 _Properties_
 
-- `props`: the props of a component provided in [`options`](../create-component/create-component.md). For more information, Refer to [`props`](../create-component/create-component.md#props).
-- `data`: generic data in a component. Refer to [`data`](../create-component/create-component.md#data) for more details
-- `methods`: generic methods used in a component. Refer to [`methods`](../create-component/create-component.md#methods) for more details.
+- `props`: The props of a component provided in [`options`](../create-component/create-component.md). For more information, Refer to [`props`](../create-component/create-component.md#props).
+- `data`: Generic data in a component. Refer to [`data`](../create-component/create-component.md#data) for more details
+- `methods`: Generic methods used in a component. Refer to [`methods`](../create-component/create-component.md#methods) for more details.
 
 ### Return Value
 
@@ -198,7 +198,7 @@ insertMarkup(markups)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting markup
+  - Usage: Contains utilites for inserting markup
   - Reference: [`insertMarkup Options`](#insertmarkup-options)
 
 #### insertMarkup Options
@@ -216,10 +216,10 @@ __Structure__:
 
 __Properties__:
 
-- `markups`: contains markup with property names corresponding to values specified via "acom-markup" attributes.
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
+- `markups`: Contains markup with property names corresponding to values specified via "acom-markup" attributes.
+- `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: The methods that can be accessed via data selectors
+- `props`: The props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -242,7 +242,7 @@ insertNodes(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting elements
+  - Usage: Contains utilites for inserting elements
   - Reference: [`insertElements Options`](#insertnodes-options)
 
 #### insertNodes Options
@@ -260,10 +260,10 @@ __Structure__:
 
 __Properties__:
 
-- `nodes`: contains nodes with property names corresponding to values specified via "acom-node" attributes.
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
+- `nodes`: Contains nodes with property names corresponding to values specified via "acom-node" attributes.
+- `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: The methods that can be accessed via data selectors
+- `props`: The props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -286,7 +286,7 @@ insertSlots(slots)
 - `slots`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains slots passed in from parent component
+  - Usage: Contains slots passed in from parent component
 
 ### Return Value
 
@@ -309,7 +309,7 @@ insertText(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting text
+  - Usage: Contains utilites for inserting text
   - Reference: [`insertText Options`](#inserttext-options)
 
 #### insertText Options
@@ -327,10 +327,10 @@ __Structure__:
 
 __Properties__:
 
-- `texts`: contains text with property names corresponding to values specified via "acom-text" attributes.
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
+- `texts`: Contains text with property names corresponding to values specified via "acom-text" attributes.
+- `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: The methods that can be accessed via data selectors
+- `props`: The props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -359,7 +359,7 @@ map(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting a map element
+  - Usage: Contains utilites for inserting a map element
   - Reference: [`map Options`](#map-options)
 
 #### map Options
@@ -376,9 +376,9 @@ __Structure__:
 
 __Properties__:
 
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
+- `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: The methods that can be accessed via data selectors
+- `props`: The props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -401,7 +401,7 @@ multiple(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilites for inserting multiple elements
+  - Usage: Contains utilites for inserting multiple elements
   - Reference: [`multiple Options`](#multiple-options)
 
 #### multiple Options
@@ -418,9 +418,9 @@ __Structure__:
 
 __Properties__:
 
-- `data`: the data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
-- `methods`: the methods that can be accessed via data selectors
-- `props`: the props of the component that can be accessed via data selectors
+- `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
+- `methods`: The methods that can be accessed via data selectors
+- `props`: The props of the component that can be accessed via data selectors
 
 ### Return Value
 
@@ -449,7 +449,7 @@ run(options)
 - `options`
   - Type: `Object`
   - Required: Yes
-  - Usage: contains utilies for transforming a component
+  - Usage: Contains utilies for transforming a component
   - Reference: [`run Options`](#run-options)
 
 #### run Options
@@ -465,8 +465,8 @@ __Sturcture__:
 
 __Properties__:
 
-- `props`: the props of a component. For more information, Refer to [`props`](../../data.md#props).
-- `utils`: contains the utilities used to perform transformations. Refer to [`utils`](../create-component/utils.md) for more details.
+- `props`: The props of a component. For more information, Refer to [`props`](../../data.md#props).
+- `utils`: Contains the utilities used to perform transformations. Refer to [`utils`](../create-component/utils.md) for more details.
 
 ### Return Value
 

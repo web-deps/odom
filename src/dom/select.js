@@ -2,13 +2,15 @@ export const select = async (scope, selector, selectAll = true) => {
   selector = selector.trim();
 
   return (
-    selector === ":scope" ? scope
+    selector === ":scope" ? selectScope(scope, selectAll)
     : selector.startsWith(":scope.") ? scopeClass(scope, selector, selectAll)
     : selector.includes(",") ? list(scope, selector)
     : selectAll ? Array.from(scope.querySelectorAll(selector))
     : scope.querySelector(selector)
   );
 };
+
+const selectScope = (scope, selectAll) => selectAll ? [scope] : scope;
 
 const list = async (scope, selector) => {
   const selectors = selector.split(",");

@@ -19,6 +19,6 @@ const list = async (scope, selector) => {
 const scopeClass = (scope, selector, selectAll) => {
   const [match, classSelector] = selector.match(/^:scope(\.[-\w]+)/);
   const newSelector = selector.replace(match, ":scope");
-  if (!scope.matches(classSelector)) return null;
+  if (!scope.matches(classSelector)) return selectAll ? [] : null;
   return select(scope, newSelector, selectAll);
 };

@@ -44,7 +44,6 @@ const transform = async (
   $component, 
   {
     id,
-    url,
     props,
     markup,
     scope,
@@ -61,27 +60,22 @@ const transform = async (
   else $component.id = String(performance.now()).replace(".", "-");
 
   $component.selector = `[acom-scope="${$component.id}"]`;
-  $component.url = url;
+  await $component.setProps(props);
 
   if (scope) $component.scope = scope;
   else if (markup) await $component.parseMarkup(markup, middleware && middleware.markup);
 
   $component.scope.setAttribute("acom-scope", $component.id);
-  const apply = styles || inlineStyles || eventListeners || classes || attributes;
   const { data: { dynamic } = {} } = utils || { data: {} };
   if (dynamic) $component.dynamicData = createDynamicDataProxy(dynamic);
   // Delete dynamic from utils.data
 
-  apply && await $component.apply.run({
-    styles,
-    inlineStyles,
-    eventListeners,
-    classes,
-    attributes,
-    stylesMiddleware: middleware && middleware.styles,
-    dynamicData: $component.dynamicData
-  });
-
-  await $component.setProps(props);
+  attributes && await $component.apply.attributes(attributes);
+  classes && await $component.apply.classes(classes);
   await $component.transform.run({ props, utils });
+  const promises = [];
+  styles && promises.push($component.apply.styles(styles, middleware && middleware.styles));
+  inlineStyles && promises.push($component.apply.inlineStyles(inlineStyles));
+  eventListeners && promises.push($component.apply.eventListeners(eventListeners));
+  await Promise.all(promises);
 };

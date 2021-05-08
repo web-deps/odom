@@ -12,10 +12,17 @@ __Table of Contents__:
     - [Structure](#structure)
     - [`data`](#data)
     - [`eventListeners`](#eventlisteners)
+      - [Description](#description-1)
+      - [Structure](#structure-1)
+      - [Event Object Properties](#event-object-properties)
+      - [Example](#example)
     - [`extension`](#extension)
     - [`id`](#id)
     - [`importType`](#importtype)
     - [`inlineStyles`](#inlinestyles)
+      - [Description](#description-2)
+      - [Structure](#structure-2)
+      - [Example](#example-1)
     - [`markup`](#markup)
     - [`middleware`](#middleware)
     - [`props`](#props)
@@ -96,12 +103,18 @@ Used for HTML components and can also be user defined. This ends up being the `s
 
 ### `eventListeners`
 
-eventListeners can be attached to the DOM via `eventListeners`. This has the following structure:
+#### Description
+
+Used to specify event listeners you want to apply to a component. 
+
+#### Structure
+
+A map of CSS selectors and event types is used to specify the event listeners. Each property of the map is a CSS selector that is used to select elements in a component. Each value is an array of objects that are used to specify the type of event to listen to and other options. The objects have the following structure:
 
 ```js
 {
   type: String,
-  listerner: Function,
+  listener: Function,
   useCapture: Boolean,
   wantsUntrusted: Boolean,
   options: Object
@@ -110,20 +123,56 @@ eventListeners can be attached to the DOM via `eventListeners`. This has the fol
 
 The attributes of `eventListeners` are the [parameters](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#parameters) of [`addEventLister`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener). Let us look at what each one of the attributes mean.
 
+#### Event Object Properties
+
+Let us look at what each each one of the properties of the event objects.
+
 `type`
 
-This is the type of the event e.g `click`. This can be any valid JavaScript event type. In `addEventListener`, this is the first parameter.
+- Type: `string`
+- Required: Yes.
+- Usage: Indicates the type of the event e.g `click`. This can be any valid JavaScript event type.
 
 `listener`
 
-The event listener. It is a function that is called everytime an event to which it listens is fired. This is the second parameter of `addEventListener`.
+The event listener. It is a function that is called everytime an event to which it listens is fired.
+
+__Syntax__:
+
+```js
+listener(event, component)
+```
+
+__Parameters__:
+
+- `event`:
+  - Type: `Event`
+  - Required: Yes.
+  - Usage: The event object.
+- `component`:
+  - Type: `Object`
+  - Required: No.
+  - Usage: It is the component on which `eventListeners` are applied.
+
+__Return Value__:
+
+A promise that resolves to `undefined`.
 
 `useCaptrue`
 
+- Type: `Boolean`
+- Required: No.
+- Usage: Indicates whether the event will be dispatched to the registered `listener` before being dispatched to any `EventTarget` beneath it in the DOM tree.
+
 `wantsUntrusted`
 
+- Type: `Boolean`
+- Required: No.
+- Usage: It is a Firefox (Gecko)-specific parameter. If true, the `listener` receives synthetic events dispatched by web content (the default is false for browser chrome and true for regular web pages).
 
 `options`
+
+__Structure__:
 
 ```js
 {
@@ -134,13 +183,44 @@ The event listener. It is a function that is called everytime an event to which 
 }
 ```
 
-`capture`
+__Properties__:
 
-`once`
+- `capture`: 
+  - Type: `Boolean`
+  - Required: No.
+  - Usage: Indicates that events of this type will be dispatched to the registered listener before being dispatched to any `EventTarget` beneath it in the DOM tree.
+- `once`:
+  - TYpe: `Boolean`
+  - Required: No.
+  - Usage: Indicates that the listener should be invoked at most once after being added. If true, the listener would be automatically removed when invoked.
+- `passive`:
+  - Type: `Boolean`
+  - Required: No.
+  - Usage:  Indicates that the function specified by `listener` will never call `preventDefault()`. If a passive listener does call `preventDefault()`, the user agent will do nothing other than generate a console warning.
+- `mozSytemGroup`:
+  - Type: `Boolean`
+  - Required: No.
+  - Usage: Indicates whether the `listener` should be added to the system group. Available only in code running in XBL or in the chrome of the Firefox browser.
 
-`passive`
+#### Example
 
-`mozSytemGroup`
+Let us look at how we can apply event listeners to a component by applying a click event in a button element of a component.
+
+```js
+{
+  "button": [
+    {
+      type: "click",
+      listener: () => alert("Button clicked!")
+    }
+  ]
+}
+```
+
+The button element in the component will be selected and the `listener` will be applied for the `click` event. When you click the button, an alert will pop up with the message "Button clicked!".
+
+> __Note__: <br />
+> Acom uses event delegation to apply event listeners. All event listeners are attached to [`scope`](#scope). So, `event.currentTarget` always refers to `scope`.
 
 ### `extension`
 
@@ -161,7 +241,28 @@ The default value is `"module"`. If the imported module is a function, the funct
 
 ### `inlineStyles`
 
+#### Description
 
+The inline styles that you want to apply to a component.
+
+#### Structure
+
+You specify the inline styles using a map of CSS selectors and the styles you want to apply. The properties of the map are CSS selectors and each value is an object containing key value pairs of CSS properties and values.
+
+#### Example
+
+Let us look at an example on how we can apply inline styles to elements in a component. We will use a map with the following structure:
+
+```js
+{
+  ".main-content": {
+    "width": 50vw;
+    "min-height": 60vh;
+  }
+}
+```
+
+This will select the element with the class `main-content` and make its width half of the viewport width and its height 60% of the viewport height.
 
 ### `markup`
 

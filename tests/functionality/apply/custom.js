@@ -12,9 +12,11 @@ const custom = async () => {
     }
   };
 
-  const applyDataAttributes = (element, [name, value]) => element.dataset[name] = value;
+  const applyDataAttributes = (element, attributes) => {
+    for (const name in attributes) element.dataset[name] = attributes[name];
+  };
 
-  Custom.apply.custom(customMap, applyDataAttributes);
+  await Custom.apply.custom(customMap, applyDataAttributes);
   const scope = Custom.scope;
   let passed = scope.dataset.custom === "custom";
 

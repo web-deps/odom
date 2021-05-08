@@ -1,18 +1,24 @@
-export const eventListeners = async function (param) {
+export const eventListeners = async function (map) {
   const run = async () => {
-    await this.apply.custom(param, forEachElement);
+  	const selectors = Object.keys(map);
+    await Promise.all(selectors.map(selector => forEachSelector(selector)));
   };
 
-  const forEachElement = async (element, evs) => {
-    await Promise.all(evs.map(event => forEachEvent(element, event)));
+  const forEachSelector = async (selector) => {
+  	const events = map[selector];
+    await Promise.all(events.map(event => forEachEvent(event, selector)));
   };
 
-  const forEachEvent = async (element, event) => {
+  const forEachEvent = async (event, selector) => {
+  	const eventListener = async (event) => {
+  		if (!event.target.matches(selector)) return;
+  		await listener(event, this);
+  	};
+  	
     const { type, listener, useCapture, wantsUntrusted, options } = event;
-    const eventListener = e => listener(e, this);
 
-    if (useCapture === undefined) element.addEventListener(type, eventListener, options);
-    else element.addEventListener(type, eventListener, useCapture, wantsUntrusted);
+    if (useCapture === undefined) this.scope.addEventListener(type, eventListener, options);
+    else this.scope.addEventListener(type, eventListener, useCapture, wantsUntrusted);
   };
 
   await run();

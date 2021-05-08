@@ -6,7 +6,7 @@ import inlineStyles from "./inline-styles.js";
 import styles from "./styles.js";
 
 
-apply = {
+const apply = {
   attributes,
   classes,
   custom,

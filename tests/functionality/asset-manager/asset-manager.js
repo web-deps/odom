@@ -4,7 +4,7 @@ import limitAwait from "./limit-await.js";
 import prefetch from "./prefetch.js";
 
 
-assetManager = {
+const assetManager = {
   fetchAsset,
   importModule,
   limitAwait,

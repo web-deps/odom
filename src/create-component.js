@@ -1,5 +1,5 @@
 import { Component } from "./component.js";
-import { createDynamicDataProxy } from "./create-dynamic-data-proxy.js";
+import { createDynamicData } from "./create-dynamic-data.js";
 
 
 export const createComponent = async options => {
@@ -67,7 +67,7 @@ const transform = async (
 
   $component.scope.setAttribute("acom-scope", $component.id);
   const { data: { dynamic } = {} } = utils || { data: {} };
-  if (dynamic) $component.dynamicData = createDynamicDataProxy(dynamic);
+  if (dynamic) $component.dynamicData = createDynamicData(dynamic);
   // Delete dynamic from utils.data
 
   attributes && await $component.apply.attributes(attributes);

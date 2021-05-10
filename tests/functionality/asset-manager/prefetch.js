@@ -22,9 +22,9 @@ const prefetch = async () => {
   const assets = await _prefetch(assetOptions);
   let passed = true;
 
-  assets.forEach((asset, index) => {
+  assetOptions.forEach((option, index) => {
     if (!assets[index]) passed = false;
-    if (assets[index] !== window.$App.prefetchedAssets[asset.id]) passed = false;
+    if (assets[index] !== window.$app.prefetchedAssets[option.collection][option.id]) passed = false;
   });
   
   if (passed) console.info("Passed");

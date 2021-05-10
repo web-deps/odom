@@ -13,6 +13,7 @@
     import { $A, $create, assetManager, createComponent, Component, render, replaceNode } from "/src/main.js";
     import apply from "./apply/apply.js";
     import _assetManager from "./asset-manager/asset-manager.js";
+    import assets from "./assets/assets.js";
 
 
     // Tests for Component.apply
@@ -26,7 +27,17 @@
     // Tests for assetManager
     // _assetManager.fetchAsset();
     // _assetManager.importModule();
-    _assetManager.limitAwait();
+    // _assetManager.limitAwait();
+    // _assetManager.prefetch();
+
+    // Tests for assets
+    // assets.components.esm();
+    // assets.components.html();
+    // assets.markup();
+    // assets.node();
+    // assets.text();
+
+    
   </script>
 </body>
 </html>

@@ -12,15 +12,19 @@
   <script type="module">
     import { $A, $create, assetManager, createComponent, Component, render, replaceNode } from "/src/main.js";
     import apply from "./apply/apply.js";
-    import testAssetManager from "./asset-manager/asset-manager.js";
+    import _assetManager from "./asset-manager/asset-manager.js";
 
 
+    // Tests for Component.apply
     // apply.attributes();
     // apply.classes();
     // apply.custom();
     // apply.eventListeners();
     // apply.inlineStyles();
-    apply.styles();
+    // apply.styles();
+
+    // Tests for assetManager
+    _assetManager.fetchAsset();
   </script>
 </body>
 </html>

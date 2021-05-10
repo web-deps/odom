@@ -5,17 +5,17 @@ export const applyInlineStyles = async (element, styles) => {
 	setStyle = createStyleSetter(element);
 	valueSet = createValueSetChecker(element);
 	
-	for (const property in styles) {
+	for (const property of Object.keys(styles)) {
 		const [propertyPriority, value] = getPropertyPriority(styles[property]);
 		
 		if (property in element.style) {
 			setStyle(property, value, propertyPriority);
 			if (!valueSet(property)) setValueProfix({ element, property, value, propertyPriority });
-			return;
+			continue;
 		};
 		
 		const [prefixedProperty, prefix] = setPropertyPrefix({ element, property, value, propertyPrefix });
-		if (!prefix) return;
+		if (!prefix) continue;
 		if (!valueSet(prefixedProperty)) setValuePrefix({ element, property, vslue, propertyPriority, vendorPrefix });
 	};
 };
@@ -58,7 +58,7 @@ const setPropertyPrefix = ({ element, property, value, propertyPriority }) => {
 	return [prefixedProperty, vendorPrefix];
 };
 
-const setValuePrefix = ({ element, property, value, propertyPriority, vendorPrefix }) => {
+const setValuePrefix = ({ property, value, propertyPriority, vendorPrefix }) => {
 	if (vendorPrefix) {
 		setStyle(property, `${vendorPrefix}${value}`, propertyPriority);
 		return;

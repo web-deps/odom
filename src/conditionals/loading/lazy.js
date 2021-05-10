@@ -4,7 +4,7 @@ import { createPlaceholder } from "./create-placeholder.js";
 export const lazy = async function (
   element,
   value,
-  { transform, components, elements, markups, texts, props, data, methods }
+  { transform, ...transformOptions }
 ) {
   const options = {
     root: null,
@@ -15,7 +15,7 @@ export const lazy = async function (
   const render = async (entries, observer) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        element = await transform({ element, components, elements, markups, texts, props, data, methods });
+        element = await transform({ element, ...transformOptions });
         placeholder.replaceWith(element);
       };
     };

@@ -23,6 +23,6 @@ export const display = async (element, { value, conditions: { apply, media } = {
 
       if (negative) options.onNotMatched = onNotMatched;
       await setMediaQuery(options);
-    };
+    } else onMatched();
   } else negative && onNotMatched();
 };

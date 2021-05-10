@@ -4,7 +4,7 @@ import { assetManager } from "/src/main.js";
 const limitAwait = async () => {
   const { limitAwait: _limitAwait } = assetManager;
 
-  const asset = await _limitAwait({
+  let asset = await _limitAwait({
     placeholder: "Placeholder",
     promise: promise(),
     time: 1000,

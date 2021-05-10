@@ -77,5 +77,5 @@ const transform = async (
   styles && promises.push($component.apply.styles(styles, middleware && middleware.styles));
   inlineStyles && promises.push($component.apply.inlineStyles(inlineStyles));
   eventListeners && promises.push($component.apply.eventListeners(eventListeners));
-  await Promise.all(promises);
+  promises.length && await Promise.all(promises);
 };

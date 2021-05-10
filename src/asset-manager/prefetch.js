@@ -15,6 +15,7 @@ export const prefetch = async (assets) => {
 
 		if (!window.$app.prefetchedAssets[collection]) window.$app.prefetchedAssets[collection] = {};
 		window.$app.prefetchedAssets[collection][id] = asset;
+		return asset;
 	};
 	
 	return Promise.all(assets.map(asset => fetchOne(asset)));

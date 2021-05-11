@@ -3,25 +3,34 @@ export const createDynamicData = (data) => {
 	
 	for (const name in data) {
 		const value = data[name];
+		const includeUpdator = typeof value !== "object" || !("data" in value && "update" in value);
 		
-		if (typeof value === "string") {
+		if (includeUpdator) {
 			data[name] = {
 				data: value,
 				update
 			};
-		} else data[name] = value;
-	};
+		};
 
-  data.elements = {};
+		data[name].elements = [];
+	};
 	
 	return new Proxy(data, {
 		get(target, name) {
 			if (!Reflect.has(target, name)) {
-				console.error(`Could not find data with "${name}".`)
+				if (name === "addElement") {
+					const addElement = (dataName, elementData) => {
+						const datum = Reflect.get(target, dataName);
+						datum.elements.push(elementData);
+					};
+
+					return addElement;
+				};
+
+				console.error(`Could not find dynamic data with named "${name}".`)
 				return undefined;
 			};
 			
-      if (name === "elements") return target.elements;
 			return target[name].data;
 		},
 		set(target, name, value) {
@@ -31,9 +40,10 @@ export const createDynamicData = (data) => {
 
       if (target[name].data === value) return true;
 			target[name].data = target[name].update(value);
+			value = target[name].data;
 
-      if (`${name}` in data.elements) {
-        for (const { target, attributeName } of data.elements[name]) {
+      if (data[name].elements.length) {
+        for (const { target, attributeName } of data[name].elements) {
           if (target) target.setAttribute(attributeName, value);
         };
       };

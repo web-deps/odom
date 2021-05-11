@@ -7,10 +7,10 @@ import { collections } from "./collections/collections.js";
 import { render } from "../dom/render.js";
 
 
-export const run = async function ({ element, placeholder, props = {}, utils = {}, dynamicData }) {
+export const run = async function ({ element, placeholder, props = {}, utils = {} }) {
   const {
     components,
-    elements,
+    nodes,
     texts,
     markups,
     data,
@@ -42,7 +42,7 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
       type,
       options: attributes[attributeName],
       components,
-      elements,
+      nodes,
       markups,
       texts,
       props,
@@ -56,14 +56,14 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
 
   const assetTypeToAttributeMap = [
     ["component", "acom-src"],
-    ["element", "acom-node"],
+    ["node", "acom-node"],
     ["markup", "acom-markup"],
     ["text", "acom-text"]
   ];
 
   const assetTypeToAssetsMap = {
     "component": components,
-    "element": elements,
+    "node": nodes,
     "markup": markups,
     "text": texts
   };
@@ -98,14 +98,30 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
     ]
   };
 
-  await insertData({ element, attributes, props, data, methods, dynamicData, skip });
+  await insertData({
+    element,
+    attributes,
+    props,
+    data,
+    methods,
+    dynamicData: this.dynamicData,
+    skip
+  });
 
   if (!proceed) return;
   if (slots) return insertSlot(element, slots);
   return element;
 };
 
-const renderAsset = async ({ assetType, fileType, element, attribute, props, placeholder, assets }) => {
+const renderAsset = async ({
+  assetType,
+  fileType,
+  element,
+  attribute,
+  props,
+  placeholder,
+  assets
+}) => {
   let asset;
   const prefetchID = element.getAttribute("acom-prefetch");
 

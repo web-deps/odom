@@ -72,10 +72,10 @@ const transform = async (
 
   attributes && await $component.apply.attributes(attributes);
   classes && await $component.apply.classes(classes);
+  inlineStyles && await $component.apply.inlineStyles(inlineStyles);
+  await $component.transform.run({ props, utils });
   const promises = [];
   styles && promises.push($component.apply.styles(styles, middleware && middleware.styles));
-  inlineStyles && promises.push($component.apply.inlineStyles(inlineStyles));
   eventListeners && promises.push($component.apply.eventListeners(eventListeners));
   promises.length && await Promise.all(promises);
-  await $component.transform.run({ props, utils });
 };

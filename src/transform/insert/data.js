@@ -20,7 +20,7 @@ export const insertData = async ({ element, props, data, methods, dynamicData, s
 
   const insert = async ({ name, value }) => {
     if (attributes && attributes.indexOf(name) !== -1) return;
-    if (/^(:{1, 2}@data)/.test(value)) handleDynamicData({ element, attribute: [name, value], dynamicData });
+    if (/^(:{1,2}@data)/.test(value)) handleDynamicData({ element, attribute: [name, value], data: dynamicData });
     const datum = await getData({ selector: value, data, methods, props, dynamicData });
     if (datum !== value) element.setAttribute(name, datum);
   };
@@ -30,23 +30,46 @@ export const insertData = async ({ element, props, data, methods, dynamicData, s
 
 const handleDynamicData = ({ element, attribute: [name, value], data } ) => {
   const doubleBind = value.startsWith("::");
-  const selector = value.replace(/:{1,2}@data./, "");
+  const selector = value.replace(/:{1,2}@data\./, "");
   const datum = data[selector];
-  element.setAttribute(name, datum);
 
-  data.elements[selector] = {
+  const update = (newValue) => {
+    if (newValue === data[selector]) return;
+    data[selector] = newValue;
+  };
+
+  const elementData = {
     target: element,
     attributeName: name
   };
 
+  data.addElement(selector, elementData);
+  element.setAttribute(name, datum);
   if (!doubleBind) return;
 
   observeMutations(
     element,
     mutations => {
       const { target, attributeName } = mutations[0];
-      data[selector] = target.getAttribute(attributeName);
+      update(target.getAttribute(attributeName));
     },
     { attributes: true, attributeFilter: [name] }
   );
+
+  const INPUT_CONTROL_TAG_NAMES = ["INPUT", "SELECT", "TEXTAREA"];
+  let isInputControl = false;
+
+  for (const tagName of INPUT_CONTROL_TAG_NAMES) {
+    if (tagName === element.tagName) {
+      isInputControl = true;
+      break;
+    };
+  };
+
+  if (!isInputControl) return;
+  const EVENT_TYPES = ["input", "keyup", "change"];
+  
+  for (const eventType of EVENT_TYPES) {
+    element.addEventListener(eventType, (event) => update(event.target.value));
+  };
 };

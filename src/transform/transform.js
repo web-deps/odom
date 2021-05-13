@@ -11,7 +11,7 @@ import { render } from "../dom/render.js";
 export const transform = function () {
   return {
     insertData: async ({ props, data, methods }) => {
-      const skip = ["acom-markupltiple", "acom-map"];
+      const skip = ["acom-multiple", "acom-map"];
       await apply(this.scope, async element => {
         await insertData({ element, attributes, props, data, methods, skip });
       });

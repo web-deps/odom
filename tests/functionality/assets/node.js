@@ -10,7 +10,7 @@ const node = async () => {
 
   const options = { markup };
   const DemoComponent = await createComponent(options);
-  let passed = !!DemoComponent.select("#demo-node", false);
+  let passed = !!DemoComponent.select("#node", false);
 
   if (passed) console.info("Passed");
   else console.error("Failed");

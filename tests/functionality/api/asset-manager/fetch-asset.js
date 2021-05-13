@@ -3,7 +3,7 @@ import { assetManager } from "/src/main.js";
 
 const fetchAsset = async () => {
   const { fetchAsset: _fetchAsset } = assetManager;
-  const src = "/tests/functionality/asset-manager/assets/markup.html";
+  const src = "/tests/functionality/api/asset-manager/assets/markup.html";
   const markup = await _fetchAsset(src);
   let passed = markup.startsWith("<div");
   

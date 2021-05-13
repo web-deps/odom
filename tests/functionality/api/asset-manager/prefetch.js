@@ -8,13 +8,13 @@ const prefetch = async () => {
     {
       id: "markup",
       type: "text",
-      src: "/tests/functionality/asset-manager/assets/markup.html",
+      src: "/tests/functionality/api/asset-manager/assets/markup.html",
       collection: "markups"
     },
     {
       id: "module",
       type: "module",
-      src: "/tests/functionality/asset-manager/assets/module.js",
+      src: "/tests/functionality/api/asset-manager/assets/module.js",
       collection: "modules"
     }
   ];

@@ -24,7 +24,7 @@ const component = async () => {
     <p>Component</p>
   `;
 
-  const options = { markup };
+  const options = markup;
   return createComponent(options);
 };
 

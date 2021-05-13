@@ -16,7 +16,7 @@ export const transform = function () {
         await insertData({ element, attributes, props, data, methods, skip });
       });
     },
-    insertSlot: async slots => {
+    insertSlots: async slots => {
       await apply(this.scope, async element => {
         await insertSlot(element, slots);
       });

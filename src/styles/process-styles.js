@@ -16,7 +16,7 @@ export const processStyles = async ({
 		if (createElement) {
 			const styleElement = document.createElement("style");
 			styleElement.textContent = styles;
-      if (id) styleElement.classList.add(id);
+      if (id) styleElement.dataset.id = id;
 			styles = styleElement;
 		};
 			

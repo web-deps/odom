@@ -28,19 +28,18 @@ const cacheID = id => {
 };
 
 const observeScopeRemoval = (id, selector) => {
-  const removeStyles = () => {
-    if (styleElement) {
-      styleElement.remove();
-      window.$app.styles = window.$app.styles.filter(styleID => styleID !== id);
-    };
+  const removeStyles = (styleElement) => {
+    if (!styleElement) return;
+    styleElement.remove();
+    window.$app.styles.splice(window.$app.styles.indexOf(id), 1);
   };
 
 	const observer = observeMutations(
 		document.body,
 		mutations => {
 			if (document.body.querySelector(selector)) return;
-      const styleElement = document.head.querySelector(`.${id}`);
-      removeStyles();
+      const styleElement = document.head.querySelector(`[data-id="${id}"]`);
+      removeStyles(styleElement);
 			observer.disconnect();
 		},
 		{ childList: true, subtree: true }

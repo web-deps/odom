@@ -7,7 +7,7 @@ import { collections } from "./collections/collections.js";
 import { render } from "../dom/render.js";
 
 
-export const run = async function ({ element, placeholder, props = {}, utils = {} }) {
+export const run = async function ({ element, placeholder, props = {}, utils = {}, dynamicData }) {
   const {
     components,
     nodes,
@@ -104,7 +104,7 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
     props,
     data,
     methods,
-    dynamicData: this.dynamicData,
+    dynamicData,
     skip
   });
 

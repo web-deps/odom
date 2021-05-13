@@ -73,7 +73,7 @@ const transform = async (
   attributes && await $component.apply.attributes(attributes);
   classes && await $component.apply.classes(classes);
   inlineStyles && await $component.apply.inlineStyles(inlineStyles);
-  await $component.transform.run({ props, utils });
+  await $component.transform.run({ props, utils, dynamicData: $component.dynamicData });
   const promises = [];
   styles && promises.push($component.apply.styles(styles, middleware && middleware.styles));
   eventListeners && promises.push($component.apply.eventListeners(eventListeners));

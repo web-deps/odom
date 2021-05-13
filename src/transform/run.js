@@ -16,7 +16,6 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
     data,
     methods
   } = utils;
-
   let proceed = true;
   const slots = props.slots;
   const attributes = await getProps({ element, props, data, methods });
@@ -31,13 +30,13 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
 
   await Promise.all(multiplyTypes.map(type => multiplyElements(type)));
 
-  if (!proceed) return;
+  if (!proceed) return element;
 
   const conditionTypes = ["loading", "visibility", "display", "presence"];
 
   const setConditions = async type => {
     const attributeName = `acom-${type}`;
-    if (attributeName in attributes) await conditionals.call(this, {
+    if (attributeName in attributes) await conditionals({
       element,
       type,
       options: attributes[attributeName],
@@ -104,8 +103,8 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
     skip
   });
 
-  if (!proceed) return;
-  if (slots) return insertSlot(element, slots);
+  if (!proceed) return element;
+  if (element.hasAttribute("acom-slot") && slots) return insertSlot(element, slots[element.getAttribute("acom-slot")]);
   return element;
 };
 

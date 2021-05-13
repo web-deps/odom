@@ -166,9 +166,9 @@ export const transform = function () {
       );
     },
 
-    run: async ({ props, utils }) => {
+    run: async ({ props, utils, dynamicData }) => {
       await apply(this.scope, async element => {
-        this.scope = await run.call(this, {  element, props, utils });
+        this.scope = await run.call(this, {  element, props, utils, dynamicData });
       });
     }
   };

@@ -10,7 +10,7 @@ const text = async () => {
 
   const options = { markup };
   const DemoComponent = await createComponent(options);
-  let passed = DemoComponent.scope.textContent.includes("Demo Text");
+  let passed = DemoComponent.scope.textContent.includes("text");
 
   if (passed) console.info("Passed");
   else console.error("Failed");

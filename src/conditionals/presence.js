@@ -1,7 +1,7 @@
 export const presence = async (
   element,
   { action, conditions: { apply, media } },
-  { transform, ...transformOptions }
+  { transform, transformOptions }
 ) => {
   const remove = () => element.remove && element.remove();
   const add = async () => await transform({element, ...transformOptions});

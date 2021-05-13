@@ -5,7 +5,7 @@ import { createPlaceholder } from "./create-placeholder.js";
 export const defer = async (
   element,
   { time } = {},
-  { transform, ...transformOptions }
+  { transform, transformOptions }
 ) => {
   const placeholder = await createPlaceholder(element);
   const body = document.body;

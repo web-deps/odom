@@ -9,14 +9,8 @@ export const conditionals = async function ({
   element,
   type,
   options,
-  components,
-  elements,
-  markups,
-  texts,
-  props,
-  data,
-  methods,
-  transform
+  transform,
+  ...transformOptions
 }) {
   let value;
 
@@ -29,10 +23,10 @@ export const conditionals = async function ({
       this,
       element,
       value,
-      { transform, components, elements, markups, texts, props, data, methods }
+      { transform, transformOptions }
     );
   } else {
-    const interpretedConditions = await interpretConditions({ conditions: value.conditions, props, data, methods });
+    const interpretedConditions = await interpretConditions({ conditions: value.conditions, transformOptions });
     value.conditions = interpretedConditions;
     const conditions = ["visibility", "display", "presence"];
     const actions = { visibility, display, presence };
@@ -42,13 +36,13 @@ export const conditionals = async function ({
         element.removeAttribute(`acom-${condition}`);
 
         if (condition !== "presence") {
-          element = await transform({ element, components, elements, markups, texts, props, data, methods });
+          element = await transform({ element, transformOptions });
         };
 
         await actions[condition](
           element,
           value,
-          condition === "presence" && { transform, components, elements, markups, texts, props, data, methods }
+          condition === "presence" && { transform, transformOptions }
         );
       };
     };

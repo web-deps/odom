@@ -41,13 +41,9 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
       element,
       type,
       options: attributes[attributeName],
-      components,
-      nodes,
-      markups,
-      texts,
       props,
-      data,
-      methods,
+      utils,
+      dynamicData,
       transform: run
     });
   };

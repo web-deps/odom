@@ -1,11 +1,13 @@
 import { getNestedValue } from "../get-nested-value.js";
 
 
-export const interpretConditions = async ({ conditions, props, data, methods }) => {
+export const interpretConditions = async ({ conditions, transformOptions: { utils, dynamicData } }) => {
   const interpretedConditions = {
     apply: true,
     media: null
   };
+
+  const { props, data, methods } = utils;
 
   const getType = condition => {
     const types = ["props", "data", "methods", "$app"];

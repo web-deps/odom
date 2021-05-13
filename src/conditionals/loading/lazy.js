@@ -4,7 +4,7 @@ import { createPlaceholder } from "./create-placeholder.js";
 export const lazy = async function (
   element,
   value,
-  { transform, ...transformOptions }
+  { transform, transformOptions }
 ) {
   const options = {
     root: null,

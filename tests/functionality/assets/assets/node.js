@@ -1,6 +1,6 @@
 const DemoNode = async () => {
   const node = document.createElement("div");
-  node.setAttribute("id", "demo-node");
+  node.setAttribute("id", "node");
   return node;
 };
 

@@ -9,13 +9,13 @@ const node = async () => {
   `;
 
   const options = { markup };
-  const DemoComponent = await createComponent(options);
-  let passed = !!DemoComponent.select("#node", false);
+  const _Node = await createComponent(options);
+  let passed = !!_Node.select("#node", false);
 
   if (passed) console.info("Passed");
   else console.error("Failed");
 
-  return DemoComponent;
+  return _Node;
 };
 
 

@@ -3,7 +3,7 @@ import { createFragment } from "./create-fragment.js";
 
 
 export const multiple = async ({ element, props, data, methods }) => {
-  const options = element.getAttribute("acom-markupltiple");
+  const options = element.getAttribute("acom-multiple");
   let selector = "", limits;
 
   if (options.startsWith("@")) selector = options;

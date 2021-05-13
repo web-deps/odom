@@ -6,7 +6,6 @@ const html = async () => {
   const src = "/tests/functionality/assets/assets/html-component.html";
   const component = await importComponent(src);
   const DemoComponent = await component();
-  console.info(DemoComponent)
   let passed = !!DemoComponent.scope;
 
   if (passed) console.info("Passed");

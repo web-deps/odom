@@ -4,8 +4,8 @@ export const applyMutations = async (element, { type, mutator, preserve }) => {
 	else throw new Error(`Invalid mutation type "${type}"`);
 };
 
-const major = async (element, mutator, { subtree = true, observers = true }) => {
-	let subject = placeholder = null;
+const major = async (element, mutator, { subtree = true, observers = true } = {}) => {
+	let subject = null, placeholder = null;
 	
 	if (observers) {
 		const clone = element.cloneNode(true);

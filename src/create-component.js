@@ -52,14 +52,14 @@ const transform = async (
     classes,
     attributes,
     utils,
-    middleware
+    middleware = {}
   }
 ) => {
   $component.setID(id);
   await $component.setProps(props);
 
   if (scope) $component.scope = scope;
-  else if (markup) await $component.parseMarkup(markup, middleware && middleware.markup);
+  else if (markup) await $component.parseMarkup(markup, middleware.markup);
 
   $component.scope.setAttribute("acom-scope", $component.id);
   const { data: { dynamic } = {} } = utils || { data: {} };
@@ -71,7 +71,7 @@ const transform = async (
   inlineStyles && await $component.apply.inlineStyles(inlineStyles);
   await $component.transform.run({ props, utils, dynamicData: $component.dynamicData });
   const promises = [];
-  styles && promises.push($component.apply.styles(styles, middleware && middleware.styles));
+  styles && promises.push($component.apply.styles(styles, middleware.styles));
   eventListeners && promises.push($component.apply.eventListeners(eventListeners));
   promises.length && await Promise.all(promises);
 };

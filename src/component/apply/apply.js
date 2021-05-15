@@ -10,7 +10,7 @@ import { applyMutations } from "./mutations.js";
 
 export const apply = function () {
   return {
-    styles: async param => styles.call(this, param),
+    styles: async (_styles, middleware) => styles.call(this, _styles, middleware),
     inlineStyles: async (map) => this.apply.custom(map, applyInlineStyles),
     eventListeners: async param => eventListeners.call(this, param),
     run: async (param) => await run.call(this, param),

@@ -11,17 +11,21 @@ export const lazy = async function (
     rootMargin: "0px",
     threshold: 0
   };
+
   
   const render = async (entries, observer) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         element = await transform({ element, ...transformOptions });
+        if (!element) element = container.firstElementChild;
         placeholder.replaceWith(element);
       };
     };
   };
 
   const placeholder = await createPlaceholder(element);
+  const container = document.createElement("div");
+  container.appendChild(element);
 
   if (typeof value === "object") {
     const properties = ["root", "rootMargin", "threshold"];

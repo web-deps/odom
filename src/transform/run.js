@@ -79,6 +79,8 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
       break;
     };
   };
+
+  if (!proceed) return;
   
   const skip = {
     elements: [
@@ -103,7 +105,6 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
     skip
   });
 
-  if (!proceed) return element;
   if (element.hasAttribute("acom-slot") && slots) return insertSlot(element, slots[element.getAttribute("acom-slot")]);
   return element;
 };

@@ -8,11 +8,14 @@ export const defer = async (
   { transform, transformOptions }
 ) => {
   const placeholder = await createPlaceholder(element);
+  const container = document.createElement("div");
+  container.appendChild(element);
   const body = document.body;
 
   const onDOMLoaded = () => {
     const render = async () => {
       if (transform) element = await transform({ element, ...transformOptions });
+      if (!element) element = container.firstElementChild;
 
       if (time === undefined) placeholder.replaceWith(element);
       else setTimeout(() => placeholder.replaceWith(element), time);

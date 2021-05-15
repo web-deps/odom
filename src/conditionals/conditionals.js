@@ -19,6 +19,8 @@ export const conditionals = async function ({
   
 
   if (type === "loading") {
+    element.removeAttribute("acom-loading");
+    
     await loading.call(
       this,
       element,
@@ -34,9 +36,17 @@ export const conditionals = async function ({
     const action = async condition => {
       if (type === condition) {
         element.removeAttribute(`acom-${condition}`);
+        const placeholder = element;
+        const container = document.createElement("div");
+        container.appendChild(element);
 
         if (condition !== "presence") {
           element = await transform({ element, transformOptions });
+
+          if (!element) {
+            element = container.firstElementChild;
+            placeholder.replaceWith(element);
+          };
         };
 
         await actions[condition](

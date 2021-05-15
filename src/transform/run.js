@@ -30,7 +30,7 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
 
   await Promise.all(multiplyTypes.map(type => multiplyElements(type)));
 
-  if (!proceed) return element;
+  if (!proceed) return;
 
   const conditionTypes = ["loading", "visibility", "display", "presence"];
 

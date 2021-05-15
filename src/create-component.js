@@ -56,10 +56,7 @@ const transform = async (
     middleware
   }
 ) => {
-  if (id) $component.id = id;
-  else $component.id = String(performance.now()).replace(".", "-");
-
-  $component.selector = `[acom-scope="${$component.id}"]`;
+  $component.setID(id);
   await $component.setProps(props);
 
   if (scope) $component.scope = scope;

@@ -12,6 +12,11 @@ export class Component {
     this.apply = apply.call(this);
   };
 
+  setID = id => {
+    this.id = id || String(performance.now()).replace(".", "-");
+    this.selector = `[acom-scope="${this.id}"]`;
+  };
+
   setProps = props => Object.assign(this, props);
   select = (selector, selectAll) => select(this.scope, selector, selectAll);
   parseMarkup = async (markup, middleware) => parseMarkup.call(this, markup, middleware);

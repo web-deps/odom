@@ -23,8 +23,8 @@ const singleBind = async () => {
   const utils = { data };
   const options = { markup, utils };
   const SingleBind = await createComponent(options);
-  const h1 = await SingleBind.select("h1", false);
-  const input = await SingleBind.select("input", false);
+  const h1 = SingleBind.select("h1", false);
+  const input = SingleBind.select("input", false);
   let passed = input.value === "Default" && h1.textContent === "Default";
   SingleBind.dynamicData.text = "New";
   passed = input.value === "New" && h1.textContent === "New";

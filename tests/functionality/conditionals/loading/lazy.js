@@ -26,11 +26,11 @@ const lazy = async () => {
   const scope = Lazy.scope;
   const DIV = 4;
   document.body.appendChild(scope);
-  let div = await Lazy.select(`div:nth-of-type(${DIV})`, false);
+  let div = Lazy.select(`div:nth-of-type(${DIV})`, false);
   let passed = div.hasAttribute("acom-placeholder");
 
   const observer = new MutationObserver(async () => {
-    div = await Lazy.select(`#div-${DIV}`, false);
+    div = Lazy.select(`#div-${DIV}`, false);
     passed = passed && !!div;
 
     if (passed) console.info("Passed");

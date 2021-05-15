@@ -12,7 +12,7 @@ const loading = async () => {
   const Loading = new Component();
   await Loading.parseMarkup(markup);
   await Loading.transform.loading();
-  let passed = !(await Loading.select("#defer", false));
+  let passed = !Loading.select("#defer", false);
   document.body.appendChild(Loading.scope);
 
   setTimeout(async () => {

@@ -34,7 +34,7 @@ const display = async () => {
   const options = { markup, inlineStyles, utils };
   const Display = await createComponent(options);
   const DIV = 1;
-  const div = await Display.select(`div:nth-of-type(${DIV})`, false);
+  const div = Display.select(`div:nth-of-type(${DIV})`, false);
   let passed;
   
   if (data.hide === true) passed = div.style.getPropertyValue("display") === "none";

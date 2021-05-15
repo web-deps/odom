@@ -12,7 +12,7 @@ const insertComponents = async () => {
   const InsertComponents = new Component();
   await InsertComponents.parseMarkup(markup);
   await InsertComponents.transform.insertComponents();
-  const passed = !!(await InsertComponents.select("#esm-component", false));
+  const passed = !!InsertComponents.select("#esm-component", false);
   logResult(passed);
 
   return InsertComponents;

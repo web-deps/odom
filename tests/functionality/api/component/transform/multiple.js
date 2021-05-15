@@ -43,7 +43,7 @@ const multiple = async () => {
   const Multiple = new Component();
   await Multiple.parseMarkup(markup);
   await Multiple.transform.multiple({ data });
-  const passed = (await Multiple.select("tbody", false)).children.length === 3;
+  const passed = Multiple.select("tbody", false).children.length === 3;
   logResult(passed);
 
   return Multiple;

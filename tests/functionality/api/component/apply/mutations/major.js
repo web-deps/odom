@@ -25,7 +25,7 @@ const major = async () => {
   const options = { markup };
   const Major = await createComponent(options);
   await Major.apply.mutations(mutations);
-  let span = await Major.select("span", false);
+  let span = Major.select("span", false);
   let passed = span.textContent === "Mutant";
   logResult(passed);
   return Major;

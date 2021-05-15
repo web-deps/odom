@@ -36,7 +36,7 @@ const run = async () => {
   for (const asset of assets) assetsPassed = assetsPassed && !!asset;
   
   const conditionalsPassed = !(await Run.select("#conditionals", false));
-  const collectionsPassed = (await Run.select("#collections", false)).children.length === 3;
+  const collectionsPassed = Run.select("#collections", false).children.length === 3;
   const passed = assetsPassed && conditionalsPassed && collectionsPassed;
   logResult(passed);
 

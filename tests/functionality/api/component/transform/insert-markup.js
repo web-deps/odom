@@ -12,7 +12,7 @@ const insertMarkup = async () => {
   const InsertMarkup = new Component();
   await InsertMarkup.parseMarkup(markup);
   await InsertMarkup.transform.insertMarkup();
-  const passed = !!(await InsertMarkup.select("#markup", false));
+  const passed = !!InsertMarkup.select("#markup", false);
   logResult(passed);
 
   return InsertMarkup;

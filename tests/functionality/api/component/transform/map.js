@@ -43,7 +43,7 @@ const map = async () => {
   const _Map = new Component();
   await _Map.parseMarkup(markup);
   await _Map.transform.map({ data });
-  const passed = (await _Map.select("tbody", false)).children.length === 3;
+  const passed = _Map.select("tbody", false).children.length === 3;
   logResult(passed);
 
   return _Map;

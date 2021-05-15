@@ -11,7 +11,7 @@ const select = async () => {
 
   const options = { markup };
   const Select = await createComponent(options);
-  const passed = !!(await Select.select("div"));
+  const passed = !!Select.select("div");
   logResult(passed);
 
   return Select;

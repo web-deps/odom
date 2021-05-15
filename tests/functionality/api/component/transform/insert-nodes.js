@@ -12,7 +12,7 @@ const insertNodes = async () => {
   const InsertNodes = new Component();
   await InsertNodes.parseMarkup(markup);
   await InsertNodes.transform.insertNodes();
-  const passed = !!(await InsertNodes.select("#node", false));
+  const passed = !!InsertNodes.select("#node", false);
   logResult(passed);
 
   return InsertNodes;

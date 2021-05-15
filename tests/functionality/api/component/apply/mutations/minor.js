@@ -21,7 +21,7 @@ const minor = async () => {
   const options = { markup };
   const Minor = await createComponent(options);
   await Minor.apply.mutations(mutations);
-  const span = await Minor.select("span", false);
+  const span = Minor.select("span", false);
 
   setTimeout(() => {
     const passed = span.textContent === "Mutant";

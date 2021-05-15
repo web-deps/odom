@@ -43,7 +43,7 @@ const map = async () => {
   const utils = { data, methods };
   const options = { markup, utils };
   const MapComponent = await createComponent(options);
-  const firstUserTD = await MapComponent.select("tbody td", false);
+  const firstUserTD = MapComponent.select("tbody td", false);
   let passed = firstUserTD.textContent.includes("@");
 
   if (passed) console.info("Passed");

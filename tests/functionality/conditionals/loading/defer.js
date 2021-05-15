@@ -23,16 +23,16 @@ const defer = async () => {
   const scope = Defer.scope;
   const DIV = 2;
   document.body.appendChild(scope);
-  let div = await Defer.select(`div:nth-of-type(${DIV})`, false);
+  let div = Defer.select(`div:nth-of-type(${DIV})`, false);
   let passed = div.hasAttribute("acom-placeholder");
 
   setTimeout(async () => {
-    div = await Defer.select(`#div-${DIV}`, false);
+    div = Defer.select(`#div-${DIV}`, false);
     passed = passed && !div;
   }, 2000);
 
   setTimeout(async () => {
-    div = await Defer.select(`#div-${DIV}`, false);
+    div = Defer.select(`#div-${DIV}`, false);
     passed = passed && !!div;
 
     if (passed) console.info("Passed");

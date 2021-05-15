@@ -34,7 +34,7 @@ const visibility = async () => {
   const options = { markup, inlineStyles, utils };
   const Visibility = await createComponent(options);
   const DIV = 1;
-  const div = await Visibility.select(`div:nth-of-type(${DIV})`, false);
+  const div = Visibility.select(`div:nth-of-type(${DIV})`, false);
   let passed;
   
   if (data.hide === true) passed = div.style.getPropertyValue("visibility") === "hidden";

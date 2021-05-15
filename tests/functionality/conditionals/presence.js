@@ -34,7 +34,7 @@ const presence = async () => {
   const options = { markup, styles, utils };
   const Presence = await createComponent(options);
   const DIV = 1;
-  const div = await Presence.select(`div:nth-of-type(${DIV})`, false);
+  const div = Presence.select(`div:nth-of-type(${DIV})`, false);
   let passed;
   
   if (data.remove === true) passed = !div;

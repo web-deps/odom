@@ -42,8 +42,8 @@ const multiple = async () => {
   const utils = { data };
   const options = { markup, utils };
   const MultipleComponent = await createComponent(options);
-  const firstUserTR = await MultipleComponent.select("tbody tr", false)
-  const firstUserTD = await MultipleComponent.select("tbody td", false);
+  const firstUserTR = MultipleComponent.select("tbody tr", false)
+  const firstUserTD = MultipleComponent.select("tbody td", false);
   let passed = firstUserTR.getAttribute("title").includes("@") && firstUserTD.textContent.includes("@");
 
   if (passed) console.info("Passed");

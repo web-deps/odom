@@ -18,7 +18,7 @@ const insertSlots = async () => {
   const InsertSlots = new Component();
   await InsertSlots.parseMarkup(markup);
   await InsertSlots.transform.insertComponents({ components });
-  const slots = await InsertSlots.select("#slot-component .slot")
+  const slots = InsertSlots.select("#slot-component .slot")
   const passed = slots.length === 4;
   logResult(passed);
 

@@ -1,0 +1,1 @@
+export const getExtension = (uri) => uri.substring(uri.lastIndexOf(".") + 1).toLowerCase();

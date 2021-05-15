@@ -1,12 +1,13 @@
 import { getConstructor } from "./get-constructor.js";
+import { getExtension } from "../get-extension.js";
 
 
-export const importComponent = async src => {
+export const importComponent = async (src, type) => {
   if (window.$app && window.$app.srcMap && window.$app.srcMap.has(src)) {
     return window.$app.components.get(window.components.srcMap.get(src));
   };
 
-  const type = src.substring(src.lastIndexOf(".") + 1).toLowerCase();
+  if (!type) type = getExtension(src);
   return type === "js" ? importJSComponent(src) : importHTMLComponent(src);
 };
 

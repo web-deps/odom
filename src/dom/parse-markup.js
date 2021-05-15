@@ -1,8 +1,8 @@
 import { xml2html } from "./xml2html.js";
 
 
-export const parseMarkup = async ({ markup, markupMiddleware = {}, mltype, convertMarkup = true }) => {
-  const { parser, converter, custom } = markupMiddleware;
+export const parseMarkup = async ({ markup, middleware = {}, mltype, convertMarkup = true }) => {
+  const { parser, converter, custom } = middleware;
 
   if (!mltype) {
     const mlMatch = markup.match(/(?:acom-ml)=["']?((?:.(?!["'`]?\s+(?:\S+)=|\s*\/?[>"']))+.)["']?/);
@@ -13,15 +13,17 @@ export const parseMarkup = async ({ markup, markupMiddleware = {}, mltype, conve
   const tagName = markup.match(/<([A-Za-z0-9:_\-]+)/)[1];
   let dom;
 
-  if (custom) for (const middleware of custom) dom = await middleware(dom);
-  else {
+  if (custom) {
+    dom = markup;
+    for (const middleware of custom) dom = await middleware(dom);
+  } else {
     dom = await (
       parser ? parser(markup, mltype)
       : parse({ markup, type: mltype, root: tagName, convertMarkup })
     );
+
+    if (mltype !== "html" && convertMarkup) dom = converter ? converter(dom) : xml2html(dom);
   };
-  
-  if (mltype !== "html" && convertMarkup) dom = converter ? converter(dom) : xml2html(dom);
 
   return dom;
 };

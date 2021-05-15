@@ -1,8 +1,8 @@
 import { getRange } from "./get-range.js";
-import { apply } from "../../dom/apply.js";
-import { getNestedValue } from "../../get-nested-value.js";
-import { getProps } from "../../dom/get-props.js";
-import { render } from "../../dom/render.js";
+import { apply } from "../../../dom/apply.js";
+import { getNestedValue } from "../../../get-nested-value.js";
+import { getProps } from "../../../dom/get-props.js";
+import { render } from "../../../dom/render.js";
 
 
 export const createFragment = async ({ template, data, limits, createNode }) => {

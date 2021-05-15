@@ -1,4 +1,4 @@
-import { Component } from "./component.js";
+import { Component } from "./component/component.js";
 import { createComponent } from "./create-component.js";
 import { importComponent } from "./import-component.js";
 import { render } from "./dom/render.js";

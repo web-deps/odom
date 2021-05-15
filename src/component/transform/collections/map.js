@@ -1,6 +1,6 @@
-import { parseMarkup } from "../../dom/parse-markup.js";
-import { observeMutations } from "../../dom/observe-mutations.js";
-import { getData } from "../../get-data.js";
+import { parseMarkup } from "../../../dom/parse-markup.js";
+import { observeMutations } from "../../../dom/observe-mutations.js";
+import { getData } from "../../../get-data.js";
 import { createFragment } from "./create-fragment.js";
 
 

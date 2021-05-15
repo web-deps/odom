@@ -1,4 +1,4 @@
-import { getData } from "../../get-data.js";
+import { getData } from "../../../get-data.js";
 import { createFragment } from "./create-fragment.js";
 
 

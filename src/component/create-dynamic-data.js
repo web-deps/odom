@@ -1,4 +1,4 @@
-export const createDynamicData = (data) => {
+export const createDynamicData = async (data) => {
 	const update = value => value;
 	
 	for (const name in data) {

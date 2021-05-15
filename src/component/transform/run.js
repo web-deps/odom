@@ -1,10 +1,10 @@
 import { insertData } from "./insert/data.js";
 import { insertSlot } from "./insert/slot.js";
 import { getSlots } from "./get-slots.js";
-import { getProps } from "../dom/get-props.js";
-import { conditionals } from "../conditionals/conditionals.js";
+import { getProps } from "../../dom/get-props.js";
+import { conditionals } from "../../conditionals/conditionals.js";
 import { collections } from "./collections/collections.js";
-import { render } from "../dom/render.js";
+import { render } from "../../dom/render.js";
 
 
 export const run = async function ({ element, placeholder, props = {}, utils = {}, dynamicData }) {

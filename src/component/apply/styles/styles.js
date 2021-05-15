@@ -1,5 +1,5 @@
-import { processStyles } from "../styles/process-styles.js";
-import { observeMutations } from "../dom/observe-mutations.js";
+import { processStyles } from "./process-styles.js";
+import { observeMutations } from "../../../dom/observe-mutations.js";
 
 
 export const styles = async function (styles, middleware = {}) {

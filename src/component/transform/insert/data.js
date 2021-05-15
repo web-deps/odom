@@ -1,5 +1,5 @@
-import { observeMutations } from "../../dom/observe-mutations.js";
-import { getData } from "../../get-data.js";
+import { observeMutations } from "../../../dom/observe-mutations.js";
+import { getData } from "../../../get-data.js";
 
 
 export const insertData = async ({ element, props, data, methods, dynamicData, skip }) => {

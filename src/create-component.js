@@ -1,5 +1,4 @@
-import { Component } from "./component.js";
-import { createDynamicData } from "./create-dynamic-data.js";
+import { Component } from "./component/component.js";
 
 
 export const createComponent = async options => {
@@ -64,7 +63,7 @@ const transform = async (
 
   $component.scope.setAttribute("acom-scope", $component.id);
   const { data: { dynamic } = {} } = utils || { data: {} };
-  if (dynamic) $component.dynamicData = createDynamicData(dynamic);
+  if (dynamic) await $component.createDynamicData(dynamic);
   // Delete dynamic from utils.data
 
   attributes && await $component.apply.attributes(attributes);

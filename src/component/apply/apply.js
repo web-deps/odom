@@ -1,4 +1,4 @@
-import { styles } from "./styles.js";
+import { styles } from "./styles/styles.js";
 import { eventListeners } from "./event-listeners.js";
 import { run } from "./run.js";
 import { custom } from "./custom.js";

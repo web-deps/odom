@@ -5,7 +5,7 @@ export const custom = async function (map, action) {
   };
 
   const forEachEntry = async ([selector, data]) => {
-    const elements = await this.select(selector);
+    const elements = this.select(selector);
     await Promise.all(elements.map(element => forEachElement(element, data)));
   };
 

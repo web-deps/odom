@@ -18,7 +18,7 @@ export const render = async ({
   replacer = replace
 } = {}) => {
   if (!asset) return renderToDocument({});
-	if (typeof target === "string") target = await select(target, scope, false);
+	if (typeof target === "string") target = select(target, scope, false);
 	if (placeholder) target.replaceWith(placeholder);
 
   await insert({

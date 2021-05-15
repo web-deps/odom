@@ -29,7 +29,7 @@ export const lazy = async function (
 
     if (valueOptions) {
       for (const property of properties) if (property in valueOptions) options[property] = valueOptions[property];
-      if ("root" in valueOptions) options.root = await this.select(valueOptions.root, false);
+      if ("root" in valueOptions) options.root = this.select(valueOptions.root, false);
     };
   };
 

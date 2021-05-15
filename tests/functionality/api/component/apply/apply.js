@@ -4,6 +4,7 @@ import custom from "./custom.js";
 import eventListeners from "./event-listeners.js";
 import inlineStyles from "./inline-styles.js";
 import mutations from "./mutations/mutations.js";
+import run from "./run.js";
 import styles from "./styles.js";
 
 
@@ -14,6 +15,7 @@ const apply = {
   eventListeners,
   inlineStyles,
   mutations,
+  run,
   styles
 };
 

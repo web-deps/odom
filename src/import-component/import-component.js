@@ -26,7 +26,7 @@ const importHTMLComponent = async src => {
   };
 
   const regexes = {
-    id: /<meta\s*id=["']?([-\w]*)["']?\s*\/?>/,
+    id: /<meta\s*name=["']?(?:[-\w]*)["']?\s*content=["']?([-\w]*)["']?\s*\/?>/,
     markup: /<body(?:[^>"']|"[^"]*"|'[^']*')*>\s*(?:\s*([\w\W]*\s*))<\/body>/,
     styles: /<style(?:[^>"']|"[^"]*"|'[^']*')*>([\w\W]*)<\/style>/,
     script: /<script(?:[^>"']|"[^"]*"|'[^']*')*>[\w\W]*<\/script>/,

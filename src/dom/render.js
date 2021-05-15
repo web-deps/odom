@@ -1,6 +1,6 @@
 import { importModule } from "../asset-manager/import-module.js";
 import { select } from "./select.js";
-import { importComponent } from "../import-component.js";
+import { importComponent } from "../import-component/import-component.js";
 import { parseMarkup } from "./parse-markup.js";
 import { getProps } from "./get-props.js";
 import { fetchAsset } from "../asset-manager/fetch-asset.js";

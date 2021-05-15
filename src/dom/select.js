@@ -1,4 +1,4 @@
-export const select = async (scope, selector, selectAll = true) => {
+export const select = (scope, selector, selectAll = true) => {
   selector = selector.trim();
 
   return (
@@ -12,9 +12,9 @@ export const select = async (scope, selector, selectAll = true) => {
 
 const selectScope = (scope, selectAll) => selectAll ? [scope] : scope;
 
-const list = async (scope, selector) => {
+const list = (scope, selector) => {
   const selectors = selector.split(",");
-  const elements = await Promise.all(selectors.map(selector => select(scope, selector)));
+  const elements = selectors.map(selector => select(scope, selector));
   return elements.flat();
 };
 

@@ -2,45 +2,239 @@
 
 - [Apply](#apply)
   - [Structure](#structure)
-  - [`mutations`](#mutations)
-    - [Description](#description)
+  - [`custom`](#custom)
     - [Syntax](#syntax)
     - [Parameters](#parameters)
-      - [`map`](#map)
     - [Return Value](#return-value)
-    - [Return Value](#return-value-1)
-  - [`styles`](#styles)
-    - [Syntax](#syntax-1)
-    - [Parameters](#parameters-1)
-    - [Return Value](#return-value-2)
+    - [`action`](#action)
+      - [Syntax](#syntax-1)
+      - [Parameters](#parameters-1)
+      - [Return Value](#return-value-1)
+    - [Example](#example)
   - [`eventListeners`](#eventlisteners)
     - [Syntax](#syntax-2)
     - [Parameters](#parameters-2)
-    - [Return Value](#return-value-3)
-  - [`run`](#run)
+    - [Return Value](#return-value-2)
+    - [Example](#example-1)
+    - [Event Delegation](#event-delegation)
+  - [`inlineStyles`](#inlinestyles)
     - [Syntax](#syntax-3)
     - [Parameters](#parameters-3)
-      - [`param`](#param)
-    - [Return Value](#return-value-4)
-  - [`custom`](#custom)
+    - [Return Value](#return-value-3)
+    - [Example](#example-2)
+    - [Vendor Prefixes](#vendor-prefixes)
+  - [`mutations`](#mutations)
+    - [Description](#description)
     - [Syntax](#syntax-4)
     - [Parameters](#parameters-4)
-      - [`map`](#map-1)
-      - [`action`](#action)
+    - [Return Value](#return-value-4)
+    - [`map`](#map)
+      - [Structure](#structure-1)
+      - [Properties](#properties)
+  - [`run`](#run)
+    - [Syntax](#syntax-5)
+    - [Parameters](#parameters-5)
     - [Return Value](#return-value-5)
+    - [`options`](#options)
+      - [Structure](#structure-2)
+      - [Properties](#properties-1)
+  - [`styles`](#styles)
+    - [Syntax](#syntax-6)
+    - [Parameters](#parameters-6)
+    - [Return Value](#return-value-6)
 
-Styling and eventListeners are applied to a component vai `apply` a property of [`Component`](component.md). This is one of the functions performed by [`acom`](../exports.md#acom). Let us take a look at the structure and functionality of `apply`.
+Styles, event listeners and more are applied to a component via `apply` a property of [`Component`](component.md). This is one of the functions performed by [`acom`](../exports.md#acom). Let us take a look at the structure and functionality of `apply`.
 
 ## Structure
 
 ```js
 {
-  styles: Function,
+  custom: Function,
   eventListeners: Function,
+  inlineStyles: Function,
+  mutations: Function,
   run: Function,
-  custom: Function
+  styles: Function
 }
 ```
+
+## `custom`
+
+Used for selecting elements and performing actions on them. Through `custom`, you can map CSS selectors to data, then perform actions on each element matching the selector using the mapped data.
+
+### Syntax
+
+```js
+custom(map, action)
+```
+
+### Parameters
+
+- `map`:
+  - Type: `Object`
+  - Required: Yes
+  - Usage: Maps CSS selectors to data. All the properties are CSS selectors. Each value can be of any kind.
+- `action`:
+  - Type: `Function`
+  - Required: Yes
+  - Usage: Manipulates elements according to the mapped data.
+  - Reference: [`action`](#action)
+
+### Return Value
+
+A promise that resolves to `undefined`.
+
+### `action`
+
+A function that runs processes using selected elements and mapped data. It is called for each element selected.
+
+#### Syntax
+
+```js
+action(element, data)
+```
+
+#### Parameters
+
+- `element`:
+  - Type: `Element`
+  - Required: Yes.
+  - Usage: It is the element on which an action is applied.
+- `data`:
+  - Type: `any`
+  - Required: Yes
+  - Usage: The data that is specific to the element on which an action is applied.
+
+#### Return Value
+
+A promise that resolves to `undefined`.
+
+### Example
+
+Let us look at how we can use `custom` by applying data attributes to elements.
+
+```js
+// ...
+
+const Demo = await createComponent(options);
+
+const applyDataAttributes = async (element, attributes) => {
+  for (const name in attributes) element.dataset[name] = attributes[name];
+};
+
+const dataAttributes = {
+  ":scope": {
+    demo: "Demo attribute"
+  }
+};
+
+await Demo.apply.custom(dataAttributes, applyDataAttributes);
+
+// ...
+```
+
+We used a function `applyDataAttributes` that applies data attributes to elements. We mapped the selector `:scope` to an object containing a data attribute name and value. We used the map and the function set the data attribute `demo` to `Demo attribute` on the root element of the component.
+
+## `eventListeners`
+
+Used to attach event listeners to a component.
+
+### Syntax
+
+```js
+eventListeners(map)
+```
+
+### Parameters
+
+- `map`:
+  - Type: `Object`
+  - Required: Yes
+  - Usage: Maps CSS selectors to event options.
+
+### Return Value
+
+No return value.
+
+### Example
+
+In this example, we are going to apply a click event listener to the root element of a component.
+
+```js
+// ...
+
+const Demo = await createComponent(options);
+
+const eventListerners = {
+  ":scope": [
+    {
+      type: "click",
+      listener: (event, component) => {
+        alert("Clicked");
+      }
+    }
+  ]
+};
+
+await Demo.apply.eventListeners(eventListeners);
+
+// ..
+```
+
+In `eventListeners`, mapped the selector `:scope` to the event options. In the options, we specified the type of event as `click`. The listener was specified via `listener`. The listener took two paramers, `event` and `component`. The event object is referenced by `event` and component refers to `Demo`.
+
+### Event Delegation
+
+Acom uses event delegation. All listener are attached to [`Component.scope`](../component/component.md#scope). So, `Event.currentTarget` refers to `Component.scope`.
+
+## `inlineStyles`
+
+This is used to apply inline styles to a component.
+
+### Syntax
+
+```js
+inlineStyles(map)
+```
+
+### Parameters
+
+- `map`:
+  - Type: `Object`
+  - Required: Yes
+  - Usage: Contains the inline styles mapped to CSS selectors.
+
+### Return Value
+
+A promise that resolves to `undefined`.
+
+### Example
+
+Let look at how we can apply inline styles to a component.
+
+```js
+// ...
+
+const Demo = await createComponent(options);
+
+const inlineStyles = {
+  ":scope": {
+    "width": "100vw",
+    "height": "100vh",
+    "background-color": "green"
+  }
+};
+
+await Demo.apply.inlineStyles(inlineStyles);
+
+// ...
+```
+
+Each property of `inlineStyles` is a CSS selector for elements we want to apply styles to. Each value is an object that maps CSS properties to CSS values.
+
+### Vendor Prefixes
+
+All styles applied via [`inlineStyles`](#inlinestyles) are vender-prefixed. Both the properties and values are prefixed only when needed. The need for prefixing is detected at runtime. So, if no prefixing is needed, it is not applied.
 
 ## `mutations`
 
@@ -56,9 +250,23 @@ mutations(map)
 
 ### Parameters
 
-#### `map`
+- `map`:
+  - Type: `Object`
+  - Required: Yes
+  - Usage: Maps CSS selectors to options for mutating.
+  - Reference: [map](#map-1)
 
-An object that maps CSS selectors to options for mutating. Each property in `map` is a CSS selector for elements you want to apply mutations to. The corresponding values are options for mutating the selected elements. The options object has the following structure:
+### Return Value
+
+A promise that resolves to `undefined`.
+
+### `map`
+
+An object that maps CSS selectors to options for mutating. Each property in `map` is a CSS selector for elements you want to apply mutations to. The corresponding values are options for mutating the selected elements.
+
+#### Structure
+
+The options object has the following structure:
 
 ```js
 {
@@ -67,6 +275,8 @@ An object that maps CSS selectors to options for mutating. Each property in `map
   type: string
 }
 ```
+
+#### Properties
 
 `mutator`
 
@@ -113,17 +323,53 @@ A mutation operation that takes a short period of time (typically less than 16.6
 
 A mutation operation that takes long (typically takes more than 16.67ms) to be performed is considered to be a major mutation. Acom uses `requestAnimationFrame` (thus the 16.67ms) for minor mutions.
 
+## `run`
+
+Applies `attributes`, `classes`, `inlineStyles`, `styles`, `eventListeners` and `mutations` to `scope`.
+
+### Syntax
+
+```js
+run(options)
+```
+
+### Parameters
+
+- `param`:
+  - Type: `Object`
+  - Required: Yes.
+  - Usage: Contains all utilites that are applied to a component.
+  - Reference: [`options`](#options).
+
 ### Return Value
 
 A promise that resolves to `undefined`.
 
-`middleware`
+### `options`
 
-Functions used to transform [`styles`](../options.md#styles). Refer to [`styles`](../options.md#styles-1) for more information.
+#### Structure
 
-### Return Value
+```js
+{
+  styles: String,
+  eventListeners: Object,
+  stylesmiddleware: Object
+}
+```
 
-A promise that resolves to `undefined`.
+#### Properties
+
+`styles`
+
+A `String` that contains CSS or any language that can be converted to CSS via [`middleware`](../create-component/middleware.md#styles).
+
+`eventListeners`
+
+Event listeners for a component. Refer to [`eventListeners`](../create-component/create-component.md#eventListeners) for more information.
+
+`stylesMiddleware`
+
+Middleware used to process `styles`. Refer to [`styles`](../create-component/create-component.md#styles) for more information.
 
 ## `styles`
 
@@ -137,118 +383,15 @@ styles(styles [, middleware])
 
 ### Parameters
 
-`styles`
-
-A `String` or `HTMLStyleElement` containing the styles of `scope`.
-
-`middleware`
-
-Functions used to transform [`styles`](../options.md#styles). Refer to [`styles`](../options.md#styles-1) for more information.
-
-### Return Value
-
-A promise that resolves to `undefined`.
-
-## `eventListeners`
-
-Used to apply [`eventListeners`](../options.md#eventListeners) to a component.
-
-### Syntax
-
-```js
-eventListeners(param)
-```
-
-### Parameters
-
-`param`
-
-An object containing eventListeners. For more information Refer to [`eventListeners`](../options.md#eventListeners).
-
-### Return Value
-
-No return value.
-
-## `run`
-
-Applies `styles` and `eventListeners` to `scope`.
-
-### Syntax
-
-```js
-run(param)
-```
-
-### Parameters
-
-#### `param`
-
-__Structure__
-
-```js
-{
-  styles: String | HTMLStyleElement,
-  eventListeners: Object,
-  stylesmiddleware: Object
-}
-```
-
-`styles`
-
-CSS `String` or `HTMLStyleElement` that contains styles for a component.
-
-`eventListeners`
-
-eventListeners for a component. Refer to [`eventListeners`](../options.md#eventListeners) for more information.
-
-`stylesmiddleware`
-
-middleware used to transform [`styles`](../options.md#styles). Refer to [`styles`](../options.md#styles-1) for more information.
-
-### Return Value
-
-A promise that resolves to `undefined`.
-
-## `custom`
-
-Used for selecting elements and performing actions on them. Through `custom`, you can map CSS selectors to data, then perform actions on each element matching the selector using the mapped data.
-
-### Syntax
-
-```js
-custom(map, action)
-```
-
-### Parameters
-
-#### `map`
-
-An object for matching selectors to data. It has the following structure:
-
-#### `action`
-
-A function that runs processes using selected elements and matched data. It is called for each element selected.
-
-__Syntax__
-
-```js
-action(element, data)
-```
-
-__Parameters__:
-
-- `element`:
-  - Type: `Element`
-  - Required: Yes.
-  - Usage: It is the element on which an action is applied.
-- `data`:
-  - Type: `any`
+- `styles`:
+  - Type: `String`
   - Required: Yes
-  - Usage: The data that is specific to the element on which an action is applied.
+  - Usage: Contains styles to be applied on a component. It can CSS or any code that can be transformed to CSS via `middleware`.
 
-__Return Value__
-
-A promise that resolves to `undefined`.
+- `middleware`:
+  - Type: `Object`
+  - Required: No
+  - Usage: Contains functions used to transform `styles`. Refer to [`styles`](../create-component/middleware.md) for more information.
 
 ### Return Value
 

@@ -7,7 +7,7 @@ const custom = async () => {
 
   const styles = /* css */`
     :scope {
-      width: 100vw;
+      width: 500px;
     }
   `;
 
@@ -19,12 +19,10 @@ const custom = async () => {
   const options = { markup, styles, middleware };
   const Custom = await createComponent(options);
   document.body.appendChild(Custom.scope);
-  console.info(document.head.querySelector(`[data-id="${Custom.id}"]`));
-  console.info(Custom.scope.style.getPropertyValue("height"))
 
   const passed = (
-    Custom.scope.style.getPropertyValue("display") === "block"
-    && Custom.scope.style.getPropertyValue("height") === "100vw"
+    getComputedStyle(Custom.scope).getPropertyValue("display") === "block"
+    && getComputedStyle(Custom.scope).getPropertyValue("height") === "500px"
   );
 
   logResult(passed);

@@ -7,7 +7,7 @@ const postprocessor = async () => {
 
   const styles = /* css */`
     :scope {
-      width: 100vw;
+      width: 500px;
     }
   `;
 
@@ -17,8 +17,7 @@ const postprocessor = async () => {
   const options = { markup, styles, middleware };
   const Postprocessor = await createComponent(options);
   document.body.appendChild(Postprocessor.scope);
-  console.info(document.head.querySelector(`[data-id="${Postprocessor.id}"]`))
-  const passed = Postprocessor.scope.style.getPropertyValue("height") === "100vw";
+  const passed = getComputedStyle(Postprocessor.scope).getPropertyValue("height") === "500px";
   logResult(passed);
 
   return Postprocessor;

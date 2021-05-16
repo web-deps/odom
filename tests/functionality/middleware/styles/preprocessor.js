@@ -7,7 +7,7 @@ const preprocessor = async () => {
 
   const styles = /* css */`
     :scope {
-      width: 100vw;
+      width: 500px;
     }
   `;
 
@@ -17,8 +17,7 @@ const preprocessor = async () => {
   const options = { markup, styles, middleware };
   const Preprocessor = await createComponent(options);
   document.body.appendChild(Preprocessor.scope);
-  console.info(document.head.querySelector(`[data-id="${Preprocessor.id}"]`))
-  const passed = Preprocessor.scope.style.getPropertyValue("height") === "100vw";
+  const passed = getComputedStyle(Preprocessor.scope).getPropertyValue("height") === "500px";
   logResult(passed);
 
   return Preprocessor;

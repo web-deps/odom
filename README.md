@@ -18,24 +18,24 @@ Acom is a component-based framework. You get most of the functionality by using 
 Acom provides asset management capabilities to enable you to get assets, use them only when needed and reuse them. Ways of asset management in Acom include:
 
 1. __Importing__: Acom provides ways for you to import modules and other assets like markup and styles.
-2. __Prefetching__: You can prefetch assets like components, nodes, markup and more.
-3. __Conditional Loading__: You can defer the loading of DOM elements, lazily load elements and choose not to load some elements at all if the conditions you specify are met.
+2. __Prefetching__: You can prefetch assets like components, markup, styles and more.
+3. __Conditional Loading__: You can delay the loading of DOM elements, lazily load elements and choose not to load some elements at all if the conditions you specify are met.
 4. __Reusability__: You can reuse components, DOM nodes, markup, text and styles.
 
 ### Compatibility
 
-You can easily integrate Acom into existing projects. Acom also works well with other front-end frameworks and libraries in its category and related categories.
+You can easily integrate Acom into existing projects. Acom also works well with other front-end frameworks and libraries in its category and in related categories.
 
 ### Flexibility
 
 Acom offers a lot of flexibility including the following:
 
-1. __Markup__: You can use HTML, XML or any XML-compliant markup language. You are also provided with some flexibility on how the markup you write in non-HTML languages gets converted to HTML. This makes it easier for you to ship and reuse code from already existing code bases in native platforms and the like.
+1. __Markup__: You can use HTML, XML or any XML-compliant markup language. You are also provided with some flexibility on how the markup you write in non-HTML languages gets converted to HTML. This makes it easier for you to reuse code from already existing code bases in native platforms and the like.
 2. __Styles__: You can use inline, internal and external styles.
 3. __Components__: You can create components of the following types:
    1. Local Components: Local to a script or module.
    2. Single-file Components: Using ES modules or HTML files.
-   3. Multiple-file Components: Using seperate files for markup, styles and JavaScript code.
+   3. Multiple-file Components: Using seperate files for markup, styles and main JavaScript code.
 4. __Middleware__: Acom allows you to use middleware for processing markup and styles. These middleware can either supplement or override the default processes used by Acom. This offers you a lot of room for you to use user-defined or third-party utilities.
 
 ## Quick Start
@@ -56,6 +56,6 @@ You can contact us via email at <acom@gmail.com>.
 
 ## License
 
-This framework uses the [MIT license](https://github.com/acom-web/acom/blob/main/LICENSE.md).
+This framework under the [MIT license](https://github.com/acom-web/acom/blob/main/LICENSE.md).
 
 Copyright (c) 2021, __Mishieck Mwale__.

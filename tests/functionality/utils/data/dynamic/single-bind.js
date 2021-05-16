@@ -10,12 +10,14 @@ const singleBind = async () => {
     </div>
   `;
 
+  const update = (newData) => {
+    h1.textContent = newData;
+    return newData;
+  };
+
   const text = {
     data: "Default",
-    update: (newData) => {
-      h1.textContent = newData;
-      return newData;
-    }
+    updates: [update]
   };
 
   const dynamic = { text };

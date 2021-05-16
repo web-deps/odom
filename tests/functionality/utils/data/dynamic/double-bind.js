@@ -10,12 +10,14 @@ const doubleBind = async () => {
     </div>
   `;
 
+  const update = (newData) => {
+    h1.textContent = newData;
+    return newData;
+  };
+
   const text = {
     data: "Default",
-    update: (newData) => {
-      h1.textContent = newData;
-      return newData;
-    }
+    updates: [update]
   };
   
   const dynamic = { text };
@@ -31,13 +33,16 @@ const doubleBind = async () => {
   passed = input.value === "New" && h1.textContent === "New";
   input.setAttribute("value", "Newest");
 
-  passed = (
-    input.value === "Newest"
-    && h1.textContent === "Newest"
-    && DoubleBind.dynamicData.text === "Newest"
-  );
+  setTimeout(() => {
+    passed = (
+      input.value === "Newest"
+      && h1.textContent === "Newest"
+      && DoubleBind.dynamicData.text === "Newest"
+    );
+  
+    logResult(passed);
+  }, 0);
 
-  logResult(passed);
   document.body.appendChild(DoubleBind.scope);
 
   return DoubleBind;

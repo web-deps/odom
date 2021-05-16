@@ -3,12 +3,12 @@ export const createDynamicData = async (data) => {
 	
 	for (const name in data) {
 		const value = data[name];
-		const includeUpdator = typeof value !== "object" || !("data" in value && "update" in value);
+		const includeUpdator = typeof value !== "object" || !("data" in value && "updates" in value);
 		
 		if (includeUpdator) {
 			data[name] = {
 				data: value,
-				update
+				updates: [update]
 			};
 		};
 
@@ -27,7 +27,7 @@ export const createDynamicData = async (data) => {
 					return addElement;
 				};
 
-				console.error(`Could not find dynamic data with named "${name}".`)
+				// console.error(`Could not find dynamic data with named "${name}".`);
 				return undefined;
 			};
 			
@@ -35,15 +35,16 @@ export const createDynamicData = async (data) => {
 		},
 		set(target, name, value) {
 			if (!Reflect.has(target, name)) {
-				return console.error(`Could not find data with "${name}".`);
+				return console.error(`Could not find data named "${name}".`);
 			};
 
       if (target[name].data === value) return true;
-			target[name].data = target[name].update(value);
-			value = target[name].data;
+			for (const update of target[name].updates) value = update(value);
+			target[name].data = value;
 
       if (data[name].elements.length) {
         for (const { target, attributeName } of data[name].elements) {
+					if (target.getAttribute(attributeName) === value) continue;
           if (target) target.setAttribute(attributeName, value);
         };
       };

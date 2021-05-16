@@ -56,6 +56,8 @@ const handleDynamicData = ({ element, attribute: [name, value], data } ) => {
     { attributes: true, attributeFilter: [name] }
   );
 
+  if (name !== "value") return;
+
   const INPUT_CONTROL_TAG_NAMES = ["INPUT", "SELECT", "TEXTAREA"];
   let isInputControl = false;
 

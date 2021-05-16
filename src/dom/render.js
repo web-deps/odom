@@ -49,6 +49,7 @@ const insert = async ({
     replacer(target, asset);
   };
 
+  if (target && !fileType) fileType = target.getAttribute("acom-filetype");
   const getAssetParam = { asset, assets, props, assetType, fileType, createElement };
 
   if (wait) await insertAsset(await getAsset(getAssetParam));
@@ -124,7 +125,7 @@ const getAsset = async ({ asset, assets, props, assetType, fileType, createEleme
 
     asset = await (
       !asset.includes("/") ? assets[asset]
-      : assetType === "component" ? importComponent(asset)
+      : assetType === "component" ? importComponent(asset, fileType)
       : fileType === "module" ? importModule(asset, { construct: true, props })
       : fetchAsset(asset, "text")
     );

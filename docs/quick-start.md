@@ -35,13 +35,13 @@ __Table of Contents__
 ### CDN
 
 ```html
-<script src="https://unpkg.com/acom"></script>
+<script src="https://cdn.jsdelivr.net/npm/acom"></script>
 ```
 
 or
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/acom"></script>
+<script src="https://unpkg.com/acom"></script>
 ```
 
 ### NPM
@@ -52,7 +52,7 @@ or
 
 ### Introduction
 
-In this section, we will learn some basic concepts of Acom by creating a simple "Hello World" app. Our app is going to have a single button at the center of the page. When the user clicks the button, an alert with the greeting "Hello World!" is going to pop up. We are going to use a CDN for our app. We will create the app using a single HTML file. The HTML file will have the following general structure:
+In this section, we will learn some basic concepts of Acom by creating a simple "Hello World" app. Our app is going to have a single button at the center of the page. When the user clicks the button, an alert with the greeting "Hello World" pops up. We are going to use a [CDN](#cdn) for our app. We will create the app using a single HTML file. The HTML file will have the following general structure:
 
 ```html
 <!DOCTYPE html>
@@ -74,7 +74,7 @@ In this section, we will learn some basic concepts of Acom by creating a simple 
 <html>
 ```
 
-Create and HTML file and put the markup in the file. In this guide, we are going to focus on the contents of the `body` elements. The `body` contains a `main` element with the `id` attribute set to `hello-world`. We are going to replace `main` with a component we are going to create shortly. The `main` element is followed by a `script` element with the `src` attribute set to a CDN as described in [Installation](#installation). The last element is also a `script` element with nothing but a comment in it. In the following sections, we are going to modify only the contents of the this `script` element.
+Create an HTML file and put the markup in the file. In this guide, we are going to focus on the contents of the `body` element. The `body` contains a `main` element with the `id` attribute set to `hello-world`. We are going to replace `main` with a component we are going to create shortly. The `main` element is followed by a `script` element with the `src` attribute set to a CDN as described in [CDN](#cdn). The last element is also a `script` element with nothing but a comment in it. In the following sections, we are going to modify only the contents of the this `script` element.
 
 ### Creating a Component
 
@@ -96,10 +96,10 @@ Let us create a component and insert it into the DOM. Replace the comment in the
 
 Open the HTML file in the browser. You should be able to see a button with the text "Say Hello" on the page. Let us look at each step we took to make this happen:
 
-1. Create markup: First, we created HTML markup and put in the variable `markup`. For more details about using markup in Acom, refer to [`markup`](./api/create-component/utils.md#markup).
-2. Create options: The second thing we did was create an object and added our markup in it. We then put the object in the variable `options`. For more information about `options`, refer to [`options`](./api/create-component/create-component.md#options).
-3. Create component: We created a component (`HelloWorld`) using `Acom.createComponent`. The `options` object we created earlier was used as the only parameter to `Acom.createComponent`. `Acom.createComponent` is asynchronous. That is why we used the keyword `await` when calling it. Also notice that our entire code is wrapped in an asynchronous IIFE (indicated by the `async` keyword). This was done to enable us to use the `await` keyword in the code inside it.
-4. Render component: Finally, we rendered our component to the DOM by calling `HelloWorld.render`. The parameter to `HelloWorld.render` was a CSS selector corresponding to the element (`main#hello-world`) we wished to replace with our component.
+1. __Create Markup__: First, we created HTML markup and put in the variable `markup`.
+2. __Create Options__: The second thing we did was create an object and added our markup in it. We then put the object in the variable `options`.
+3. __Create Component__: We created a component (`HelloWorld`) using `Acom.createComponent`. The `options` object we created earlier was used as the only parameter to `Acom.createComponent`. `Acom.createComponent` is asynchronous. That is why we used the keyword `await` when calling it. Also notice that our entire code is wrapped in an asynchronous IIFE (indicated by the `async` keyword). This was done to enable us to use the `await` keyword in the code inside it.
+4. __Render Component__: Finally, we rendered our component to the DOM by calling `HelloWorld.render`. The parameter to `HelloWorld.render` was a CSS selector corresponding to the element (`main#hello-world`) we wished to replace with our component.
 
 ### Adding Styles
 
@@ -120,6 +120,7 @@ At this point, our app looks quite basic. Let us add some styling to make it loo
       padding: 0;
       display: grid;
       place-items: center;
+      width: 100vw;
       height: 100vh;
     }
 
@@ -140,7 +141,7 @@ At this point, our app looks quite basic. Let us add some styling to make it loo
 })();
 ```
 
-Refresh the page. You should see the CSS in `styles` has been applied to the element. Notice the use of the selector `:scope`. The selector is used to select the root element of our component, which in this case is `main`. All selectors in `styles` are scoped. This means that they apply to only elements in the component. So, event if there was another element in the `document` which matched the selector `button`, it could not have been selected. For more details about styles, refer to [`styles`](./api/create-component/utils.md#styles).
+Refresh the page. You see the component with the `styles` applied. Notice the use of the selector `:scope`. The selector is used to select the root element of our component, which in this case is `main`. All selectors in `styles` are scoped. This means that they apply to only elements in the component. So, event if there was another element in the `document` which matched the selector `button`, it could not have been selected. For more details about styles, refer to [`styles`](./api/create-component/utils.md#styles).
 
 ### Adding Event Listeners
 
@@ -179,7 +180,7 @@ We have created our component and added styles, but our app can not say "Hello W
       {
         type: "click",
         listener: function (event) {
-          alert("Hello World!");
+          alert("Hello World");
         }
       }
     ]
@@ -191,7 +192,7 @@ We have created our component and added styles, but our app can not say "Hello W
   HelloWorld.render("#hello-world");
 ```
 
-Refresh the page and click the button. Upon clicking the button, an alert must pop up with the message "Hellow World". The `eventListeners` object contains an array under the property `button`. The property `button` is a CSS selector for the element (`button`) we wanted to apply an event listener to. We can can put as many CSS selectors as we want in `eventListeners`. The array contains an object specifying the options for the event listener. The property `type` indicated what type of event we wished to listen to, which in our case was the click event. The property `listener` specified the listener we wanted to attach to the event. When the button was clicked, the listener show an alert message with the message "Hello World!". We can put as many event objects in the array for `button` as we wish to. For more information about events, refer to [`eventListeners`](./api/create-component/utils.md#eventlisteners).
+Refresh the page and click the button. Upon clicking the button, an alert must pop up with the message "Hellow World". The `eventListeners` object contained an array under the property `button`. The property `button` was a CSS selector for the element (`button`) we wanted to apply an event listener to. We can can put as many CSS selectors as we want in `eventListeners`. The array contained an object specifying the options for the event listener. The property `type` indicated what type of event we wished to listen to, which in our case was the click event. The property `listener` specified the listener we wanted to attach to the event. When the button was clicked, the listener show the alert. We can put as many event objects in the array for `button` as we wish to. For more information about event hadling, refer to [`eventListeners`](./api/create-component/utils.md#eventlisteners).
 
 ### Inserting Data
 
@@ -218,7 +219,7 @@ const options = { markup, styles, eventListeners, utils }; // Modified line
 // Code after
 ```
 
-Refresh the page and hover over the button. You will see the tooltip "Say Hello". In the `markup`, we set the title attribute of the `button` to `@data.title`. We created an object called `data` and put the title of the `button` in the property `title`. We then put `data` in `utils`. And finally, we put `utils` in `options`. The value `@data.title` for the `title` attribute of the `buttton` refers to `options.utils.data.title`. For more details about working with data in Acom, refer to [Data](./data.md).
+Refresh the page and hover over the button. You will see the tooltip "Say Hello". In the `markup`, we set the title attribute of the `button` to `@data.title`. We created an object called `data` and put the title of the `button` under the property `title`. We then put `data` in `utils`. And finally, we put `utils` in `options`. The value `@data.title` for the `title` attribute of the `buttton` refers to `options.utils.data.title`. For more details about working with data in Acom, refer to [Data](./data.md).
 
 ## Conditionals
 
@@ -239,7 +240,7 @@ We are going to use a single HTML file. THe file has the following general struc
 <body>
   <main id="conditionals"></main>
 
-  <script src="/path-to-acom"></script>
+  <script src="https://cdn.jsdelivr.net/npm/acom"></script>
 
   <script>
     (async () => {
@@ -265,11 +266,11 @@ Replace the comment in the value for `markup` with the following HTML code:
 
 ```html
 <ul>
-  <li acom-loading='{"type": "defer", "time": 3000}'>Loading - Defer (3s)</li>
-  <li acom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'>Visibility</li>
-  <li acom-display='{"value": ["none", "grid"], "conditions": ["@data.hide"]}'>Display</li>
-  <li acom-presence='{"action": "add", "conditions": ["@data.show", {"query": "(min-width: 800px)"}]}'>Presence</li>
-  <li acom-loading="lazy">Loading - Lazy</li>
+  <li acom-loading='{"type": "defer", "time": 3000}' class="conditional">Loading - Defer (3s)</li>
+  <li acom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'  class="conditional">Visibility</li>
+  <li acom-display='{"value": ["none", "grid"], "conditions": ["@data.hide"]}'  class="conditional">Display</li>
+  <li acom-presence='{"action": "add", "conditions": ["@data.show", {"query": "(min-width: 800px)"}]}'  class="conditional">Presence</li>
+  <li acom-loading="lazy"  class="conditional">Loading - Lazy</li>
 </ul>
 ```
 
@@ -287,11 +288,11 @@ Replace the comment in the value of `styles` with the following CSS code:
   gap: 1rem;
 }
 
-li {
+.conditional {
   display: grid;
   place-items: center;
-  width: 400px;
-  height: 400px;
+  width: 30vh;
+  height: 30vh;
   border: 1px solid black;
 }
 ```
@@ -300,15 +301,15 @@ We are going to use the CSS to style our content so that the effects of the cond
 
 ### Testing
 
-Open the HTML file in the browser and wait for about 3 seconds. After approximately 3 seconds, you should see another square being added to the page. While watching the scroll bar, scroll to the bottom of the page. Just before you reached the end of the page, you should have seen the scroll bar reduce in width a bit. This indicated that a new element was added to the page. If you have missed any of the steps, refresh the page and observe what happens. Let us look at each conditional we used in detail.
+Open the HTML file in the browser and wait for about 3 seconds. After approximately 3 seconds, you should see another square being added to the page. While watching the scroll bar, scroll to the bottom of the page. Just before you reached the end of the page, you should have seen the scroll bar reduce in width a bit. This indicated that a new element was added to the page. If you missed any of the steps, refresh the page and observe what happens. Let us look at each conditional we used in detail.
 
 #### Defer
 
-The conditional [Defer](./conditionals.md#defer) allows you to delay rendering of an element. The first element rendered approximately 3 seconds after the loading of the page. We made this happen via the attribute `acom-loading`. We used a JSON object to specify the options. The JSON object had a property `type` which was set to `defer`. This property enabled the delayed rendering of the element. The JSON object also had another property `time` which we set to `3000`. This property specified how much time (in miliseconds) should pass before the element is rendered.
+The conditional [Defer](./conditionals.md#defer) allows you to delay rendering of an element. The first element rendered approximately 3 seconds after the loading of the page. We made this happen via the attribute `acom-loading`. We used a JSON object to specify the options for the delay. The JSON object had a property `type` which was set to `defer`. This property indicated the type of loading we wanted. The JSON object also had another property `time` which we set to `3000`. This property specified how much time (in miliseconds) was supposed to pass before the element was rendered.
 
 #### Visibility
 
-The visibility of an element can be set or changed via the conditional [Visibility](./conditionals.md#visibility). The second element's visibility was set via the attribute `acom-visibilty`. We used a JSON object. The property `value` was set to an array containing two values of visibility. The visibility is set to the first value if the conditional is true, and to the second if the conditional is false. The conditions checked were specified in the property `conditions`. The `conditions` were specified in an array which contained only one value. The value was a string with a data selector `@data.hide` which referred to `options.utils.data.hide`. The value referred to was set to `false`, which means the conditional failed. This resulted into the visibility of the element being set to `visible`. That is why you were able to see the element on the page.
+The visibility of an element can be set or changed via the conditional [Visibility](./conditionals.md#visibility). The second element's visibility was set via the attribute `acom-visibilty`. We used a JSON object. The property `value` was set to an array containing two values of visibility. The visibility is set to the first value if the conditional is true, and to the second if the conditional is false. The conditions checked were specified in the property `conditions`. The `conditions` were specified in an array which contained only one value. The value was a string with a [data selector](./data.md#data-selectors) `@data.hide` which referred to `options.utils.data.hide`. The value referred to was set to `false`, which means the conditional failed. This resulted into the visibility of the element being set to `visible`. That is why you were able to see the element on the page.
 
 Let us see what happens if we change the result of the conditional. Set the value of `options.utils.data.hide` to `true` and refresh the page. After refreshing, you should not be able to see the element on the page. This is because the conditonal failed and thus the visibility of the element set to `hidden`. Fore more information about the Visibility conditional, refer to [Visibility](./conditionals.md#visibility).
 
@@ -320,9 +321,9 @@ Let us see what happens if we change the conditions. Set the value of `options.u
 
 #### Presence
 
-We can choose to add or remove and element from the DOM using the conditional [Presence](./conditionals.md#presence). The fourth element's presence in the DOM was set via the attribute `acom-presence`. The value for the attribute was a JSON object in which we specified the options for the conditional. The property `action` specified what was supposed to be done should the conditions be met, which in our case was to add the element to the DOM. The `conditions` were specified in an array with two values. The first value was a data selector of `options.utils.data.show`. The second value was a media query specifying the media conditions to be tested. All the values of the array must be true for the conditional to be successful. In our case, `options.utils.data.show` was set to `true`. The media query test depended on the width of the viewport. If your viewport width passed the test (was 800px or larger), you were able to see the element, and if not, you were not able to see it.
+We can choose to add or remove an element from the DOM using the conditional [Presence](./conditionals.md#presence). The fourth element's presence in the DOM was set via the attribute `acom-presence`. The value for the attribute was a JSON object in which we specified the options for the conditional. The property `action` specified what was supposed to be done should the conditions be met, which in our case was to add the element to the DOM. The `conditions` were specified in an array with two values. The first value was a data selector of `options.utils.data.show`. The second value was a media query specifying the media conditions to be tested. All the values of the array must be true for the conditional to be successful. In our case, `options.utils.data.show` was set to `true`. The media query test result depended on the width of the browser window. If your window width passed the test (was 800px or larger), you were able to see the element, and if not, you were not able to see it.
 
-Change the width of the viewport so that it results into the opposite effect. Refresh the page and observe what happens. Refer to [Presence conditional](./conditionals.md#presence) for more details.
+Change the width of the window so that it results into the opposite effect. Refresh the page and observe what happens. Refer to [Presence conditional](./conditionals.md#presence) for more details.
 
 #### Lazy
 
@@ -347,7 +348,7 @@ We are going to use a single HTML file which has the following general structure
 <body>
   <main id="collections"></main>
 
-  <script src="/path-to-acom"></script>
+  <script src="https://cdn.jsdelivr.net/npm/acom"></script>
 
   <script>
     (async () => {

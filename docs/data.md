@@ -11,6 +11,7 @@ __Table of Contents__
       - [Add Dynamic Data](#add-dynamic-data)
       - [Use Binding on Data Selectors](#use-binding-on-data-selectors)
       - [Updating Data](#updating-data)
+      - [Updator](#updator)
       - [Example](#example)
   - [Props](#props)
     - [Introduction](#introduction-2)
@@ -65,31 +66,14 @@ To [`options.utils.data`](./api/create-component/utils.md#generic-data), add the
 ```js
 {
   data: any,
-  update: Function
+  updates: Array
 }
 ```
 
 __Properties__:
 
 - `data`: Data of any type.
-- `update`: The function that updates the data.
- 
-The function has the follwing syntax:
-        
-```js
-update(newData)
-```
-
-_Parameters_:
-
-- newData
-  - Type: `any`.
-  - Required: Yes.
-  - Usage: Contains the update.
-
-_Return Value_:
-
-The update.
+- `updates`: The functions that update the data. All functions all called when an attempt to change the dynamic data is made. If multiple update functions have been provided, the output of one function is used as the input of the next. Refer to [`Updator`](#updator) for more details.
 
 #### Use Binding on Data Selectors
 
@@ -98,6 +82,27 @@ prefix the data selector with `:` for a single bind and `::` for a double bind. 
 #### Updating Data
 
 The dynamic data will be set as `Component.dynamicData`. You can get and set data using the properties specified in `options.utils.data.dynamic`.
+
+#### Updator
+
+An updator is a user defined function that is involked everytime you try to change dynamic data.
+
+__Syntax__:
+        
+```js
+update(newData)
+```
+
+__Parameters__:
+
+- newData
+  - Type: `any`.
+  - Required: Yes.
+  - Usage: Contains the update.
+
+__Return Value__:
+
+The updated value of any type. If double binding is used, the returned value is used to update the DOM.
 
 #### Example
 

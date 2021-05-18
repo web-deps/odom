@@ -22,8 +22,11 @@ __Table of Contents__
       - [Syntax](#syntax-2)
       - [Parameters](#parameters-2)
       - [Return Value](#return-value-2)
+    - [setID](#setid)
+      - [Syntax](#syntax-3)
+      - [Parameters](#parameters-3)
+      - [Return Value](#return-value-3)
     - [`transform`](#transform)
-
 
 ## Introduction
 
@@ -35,14 +38,15 @@ Acom uses components to build user interfaces. The components are instances of a
 
 ```js
 {
+  apply: Object,
   dynamicData: Object,
   id: string,
-  scope: Element | document,
-  apply: Object,
-  transform: Object,
-  select: Function,
+  insert: Function,
   parseMarkup: Function,
-  insert: Function
+  scope: Element,
+  select: Function,
+  setID: Function,
+  transform: Object
 }
 ```
 
@@ -151,6 +155,27 @@ select(selector, selectAll)
 #### Return Value
 
 A promise that resolves to an `Element` if `selectAll` is set to `false` and an array of elements if `selectAll` is set to `true`. This includes all descendants including those added by child components.
+
+### setID
+
+Used to set the ID of the component.
+
+#### Syntax
+
+```js
+setID(id)
+```
+
+#### Parameters
+
+- `id`:
+  - Type: `string`
+  - Required: No.
+  - Usage: The ID that will be set on a component. If not provided, an ID is randomly generated.
+
+#### Return Value
+
+`undefined`.
 
 ### `transform`
 

@@ -2,8 +2,11 @@ import { processStyles } from "./process-styles.js";
 import { observeMutations } from "../../../dom/observe-mutations.js";
 
 
+let styleRemoverAdded = false;
+
 export const styles = async function (styles, middleware = {}) {
-  if (!styles || cacheID(this.id) || this.scope === document) return;
+  if (typeof styles !== `string`) throw new Error(`Styles must be of type string and not ${typeof styles}.`);
+  if (cacheID(this.id)) return;
 
   const styleElement = await processStyles({
     id: this.id,
@@ -16,7 +19,7 @@ export const styles = async function (styles, middleware = {}) {
 
   const head = document.querySelector("head");
   head.appendChild(styleElement);
-  observeScopeRemoval(this.id, this.selector);
+  styleRemoverAdded || addStyleRemover(this.id);
 };
 
 const cacheID = id => {
@@ -27,21 +30,23 @@ const cacheID = id => {
   return false;
 };
 
-const observeScopeRemoval = (id, selector) => {
-  const removeStyles = (styleElement) => {
-    if (!styleElement) return;
-    styleElement.remove();
-    window.$app.styles.splice(window.$app.styles.indexOf(id), 1);
-  };
-
-	const observer = observeMutations(
+const addStyleRemover = () => {
+	observeMutations(
 		document.body,
 		mutations => {
-			if (document.body.querySelector(selector)) return;
-      const styleElement = document.head.querySelector(`[data-id="${id}"]`);
-      removeStyles(styleElement);
-			observer.disconnect();
+      const promises = window.$app.styles.map((id, index) => removeStyles(id, index));
+      Promise.all(promises);
 		},
 		{ childList: true, subtree: true }
 	);
+
+  styleRemoverAdded = true;
+};
+
+const removeStyles = async (id, index) => {
+  if (document.body.querySelector(`[acom-scope="${id}"]`)) return;
+  const styleElement = document.head.querySelector(`[data-id="${id}"]`);
+  if (!styleElement) return;
+  styleElement.remove();
+  window.$app.styles.splice(index, 1);
 };

@@ -347,12 +347,12 @@ You can import options via this property. You provide a URI of either an ES modu
 
 The styling for the content is specified via `styles`. This can be a `string` containing CSS or any code that can be converted to CSS. Note the following things about styles:
 
-- All styles are scoped including animations.
+- All styles are scoped including animations. When using the short-hand property for animations (i.e. `animation`), always start with the animation name.
 - The selector `:scope` is used to select the root element of the component.
-- Only absolute URLs are guaranteed to work in import `@` rules.
+- Only absolute URLs and root relative URLs (URLs that start with `/`) are guaranteed to work in `@import` rules.
 - Imported styles are not scoped.
 - If you have explicitly set an ID on a component, the following will happen:
-  - The `styles` will be reused everytime the component is created.
+  - The `styles` will be reused everytime a new component is created.
   - The styles will be discarded if all the components that use them are removed from the DOM.
 
 ### `utils`

@@ -537,17 +537,13 @@ We are going to use our HTML component in `index.html`. The file contents are ve
 
 #### HTML Component Constructor URIs
 
-In the constructor of HTML components, not all relative URIs work. The module is considered to be from a different origin because of the method Acom uses to import the modules. Therefore, using relative URLs works for the following cases:
+In the constructor of HTML components, not all relative URLs work. The module is considered to be from a different origin because of the method Acom uses to import the modules. Therefore, using relative URLs works for the following cases:
 
-- Statice imports: all relative URIs in ES static imports work.
-- Dynamic imports: all relative URIs us as the parameter to the ES dynamic import method `import` work. However, calculated URIs do not work.
-- [importComponent](exports.md#importcomponent): relative URIs used in the method `importComponent` (one of the named exports of Acom) work.
-- fetch API: relative URIs used in the window method `fetch` work.
-
-To use relative URLs other than in the aforementioned cases, the URLs must start with the following charactors:
-
-- `/`
-- `www.`
+- Root relative URLs: All root relative URLs (i.e. URLs that start with `/`) work.
+- Statice imports: all relative URLs in ES static imports work.
+- Dynamic imports: all relative URLs us as the parameter to the ES dynamic import method `import` work. However, calculated URLs do not work.
+- [importComponent](exports.md#importcomponent): relative URLs used in the method `importComponent` (one of the named exports of Acom) work.
+- fetch API: relative URLs used in the window method `fetch` work.
 
 ## Multiple File Components
 

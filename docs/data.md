@@ -85,7 +85,7 @@ The dynamic data will be set as `Component.dynamicData`. You can get and set dat
 
 #### Updator
 
-An updator is a user defined function that is involked everytime you try to change dynamic data.
+An updator is a user defined function that is invoked everytime you try to change dynamic data.
 
 __Syntax__:
         

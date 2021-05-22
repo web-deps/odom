@@ -105,7 +105,7 @@ A promise that resolves to an `HTMLElement`.
 
 ### `custom`
 
-Array of functions used to process [`markup`](./create-component.md#markup). The functions are involked in the order they are in the array. The result of one function is passed to the next function. After processing, the end result is assigned to [`Component.scope`](../component/compnent.md#scope). This overrides all the component utilities used to process markup.
+Array of functions used to process [`markup`](./create-component.md#markup). The functions are invoked in the order they are in the array. The result of one function is passed to the next function. After processing, the end result is assigned to [`Component.scope`](../component/compnent.md#scope). This overrides all the component utilities used to process markup.
 
 ## `styles`
 
@@ -165,4 +165,4 @@ A promise that resolves to a `string` containing post-processed CSS.
 
 ### `custom`
 
-Array of functions used to process [`styles`](./create-component.md#styles). The functions are involked in the order they are put in the array. The result of one function is passed to the next function. The end result is used to style the component. These utilities override all the default styling utilities of a component.
+Array of functions used to process [`styles`](./create-component.md#styles). The functions are invoked in the order they are put in the array. The result of one function is passed to the next function. The end result is used to style the component. These utilities override all the default styling utilities of a component.

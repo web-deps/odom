@@ -47,7 +47,7 @@ __Table of Contents__
 
 ## Introduction
 
-Acom is a component based framework. Components put content, presentation and behavour in the same place. In Acom, omponents are created using [`createComponent`](api/create-component/create-component.md), one of the named exports. The method has an alias `$create`. You can build a component at once using `createComponent`, or you can only create an instance of [`Component`](api/component/component.md) first then transform the component bit by bit using the [API](api/component/component.md#api).
+Acom is a component based framework. Components put content, presentation and behavior in the same place. In Acom, components are created using [`createComponent`](api/create-component/create-component.md), one of the named exports. The method has an alias `$create`. You can build a component at once using `createComponent`, or you can only create an instance of [`Component`](api/component/component.md) first then transform the component bit by bit using the [API](api/component/component.md#api).
 
 ## Local Components
 
@@ -57,7 +57,7 @@ Local components are created and used in the same file. This file can be a scrip
 
 #### Introduction
 
-Let us create a "Hello World" app using a local component. The app has a heading which initially reads "Hello World". It also has a text input field into which the user can put their name. It also has a button which the user can click after puting their name in the input field. Upon clicking the button, the heading will be update to "Hello [name of user]", where [name of user] is the name of the user put into the input field.
+Let us create a "Hello World" app using a local component. The app has a heading which initially reads "Hello World". It also has a text input field into which the user can put their name. It also has a button which the user can click after putting their name in the input field. Upon clicking the button, the heading will be update to "Hello [name of user]", where [name of user] is the name of the user put into the input field.
 
 #### File Structure
 
@@ -92,7 +92,7 @@ The index.html file has the following general structure:
 <html>
 ```
 
-The `body` of the html document has a `main` element with the ID `hello-world`. This is the element that is going to be replaced by our component. The following element is a `script` element having its `src` attribute set to the CDN for Acom. The last element of the `body` is a `script` element from which we are going to create the component and insert it into the DOM. So, in the following sections, we are goint to focus on the contents of this element.
+The `body` of the html document has a `main` element with the ID `hello-world`. This is the element that is going to be replaced by our component. The following element is a `script` element having its `src` attribute set to the CDN for Acom. The last element of the `body` is a `script` element from which we are going to create the component and insert it into the DOM. So, in the following sections, we are going to focus on the contents of this element.
 
 #### Creating the Component
 
@@ -180,7 +180,7 @@ Refresh the page. You should be able to see the content updated with the styles.
 
 #### Adding Event Listeners
 
-At this point, our component does not have the desired behaviour. Let us add behaviour to it using an event listener. We are going to add a `click` event listener on the `button` so that we can be able to update our page when the use clicks it. Add the following code to the `script`:
+At this point, our component does not have the desired behavior. Let us add behavior to it using an event listener. We are going to add a `click` event listener on the `button` so that we can be able to update our page when the use clicks it. Add the following code to the `script`:
 
 ```js
 // ...
@@ -235,7 +235,7 @@ __File Structure__
 Create the following file structure:
 
 ```txt
-|-- hellow-world-js-component
+|-- hello-world-js-component
     |-- hello-world.js
     |-- index.html
 ```
@@ -342,7 +342,7 @@ const eventListeners = {
 
 #### ID
 
-The varible `id` indicates the ID of the component. The ID is not required, but it is used for caching. If not set, the ID is automatically generated.
+The variable `id` indicates the ID of the component. The ID is not required, but it is used for caching. If not set, the ID is automatically generated.
 
 #### Component Constructor
 
@@ -354,7 +354,7 @@ The file `index.html` has the following contents:
 
 #### HTML
 
-The first element of the `body` is `main` which has an attribute `acom-src`. The attribute indicates that the element is to be replaced by a component. The value of the attribute is the URI of the component (`"./hello-world.js"`). The following element is a `script` element that refers to an Acom CDN. The last element is also a `script` element with code that inserts our component into the DOM. The script involkes the method `Acom.render` without any parameters. The method `Acom.render` will go through the DOM looking for [target elements](assets#target-elements). When it finds `main`, it will look for the component specified via the attribute `acom-src`. When it finds the component, it then replaces `main` with the component. If you open the HTML file in the browser, you will see the component on the page.
+The first element of the `body` is `main` which has an attribute `acom-src`. The attribute indicates that the element is to be replaced by a component. The value of the attribute is the URI of the component (`"./hello-world.js"`). The following element is a `script` element that refers to an Acom CDN. The last element is also a `script` element with code that inserts our component into the DOM. The script invokes the method `Acom.render` without any parameters. The method `Acom.render` will go through the DOM looking for [target elements](assets#target-elements). When it finds `main`, it will look for the component specified via the attribute `acom-src`. When it finds the component, it then replaces `main` with the component. If you open the HTML file in the browser, you will see the component on the page.
 
 ```html
 <!DOCTYPE html>
@@ -385,7 +385,7 @@ Let us rewrite the [Hello World](#js-components) app we created earlier (using a
 The app has the following file system:
 
 ```txt
-|-- hellow-world-html-component
+|-- hello-world-html-component
     |-- hello-world.html
     |-- index.html
 ```
@@ -513,7 +513,7 @@ The `script` tag contains a module that exports the [Constructor](#constructor).
 
 #### Main HTML File
 
-We are going to use our HTML component in `index.html`. The file contents are very similar to those of the file we used in the JS component. The only difference is the extension used for the URI of the component file specified in the attribute `acom-src` on the `main` element. Openning the file in the browser, you will see the component displayed on the page.
+We are going to use our HTML component in `index.html`. The file contents are very similar to those of the file we used in the JS component. The only difference is the extension used for the URI of the component file specified in the attribute `acom-src` on the `main` element. Opening the file in the browser, you will see the component displayed on the page.
 
 ```html
 <!DOCTYPE html>
@@ -547,7 +547,7 @@ In the constructor of HTML components, not all relative URLs work. The module is
 
 ## Multiple File Components
 
-A component that has its markup and/or styles (e.g CSS) in a seperate file (or files) is called a multiple file component. The assets (markup and styles) are imported in the file containing the [Constructor](#constructor). They are then used to build a component.
+A component that has its markup and/or styles (e.g CSS) in a separate file (or files) is called a multiple file component. The assets (markup and styles) are imported in the file containing the [Constructor](#constructor). They are then used to build a component.
 
 Acom provides a way to dynamically import these assets via [`assetManager`](api/asset-manager.md). In this section we are going to rewrite the app we wrote using a [JS single file component](#js-components) and an [HTML single file component](#html-components).
 
@@ -556,7 +556,7 @@ Acom provides a way to dynamically import these assets via [`assetManager`](api/
 All the files for the component are put in a single folder `component`.
 
 ```txt
-|-- hellow-world-multiple-file-component
+|-- hello-world-multiple-file-component
     |-- component
         |-- styles.css
         |-- markup.html
@@ -623,7 +623,7 @@ button {
 
 ### Constructor
 
-The [Constructor](#constructor) of the component contaned in `main.js`. The file is a module that exports the constructor. In the constructor, we import the assets using [`assetManager.fetchAsset`](api/asset-manager.md#fetchasset). The method `fetchAsset` of `assetManager` returns a promise that resolves to a string containing the contents of the file specified in the URI passed in as the parameter. The module has the following contents:
+The [Constructor](#constructor) of the component contained in `main.js`. The file is a module that exports the constructor. In the constructor, we import the assets using [`assetManager.fetchAsset`](api/asset-manager.md#fetchasset). The method `fetchAsset` of `assetManager` returns a promise that resolves to a string containing the contents of the file specified in the URI passed in as the parameter. The module has the following contents:
 
 ```js
 export const HelloWorld = async (props) => {

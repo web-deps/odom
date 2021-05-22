@@ -5,7 +5,7 @@ const sourceMap = mode === "development" ? "eval-source-map" : "source-map";
 
 module.exports = {
   mode,
-  entry: path.resolve(__dirname, './src/index.js'),
+  entry: path.resolve(__dirname, './src/main.js'),
   module: {
     rules: [
       {
@@ -19,14 +19,14 @@ module.exports = {
     extensions: ['*', '.js']
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
     library: 'acom',
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
   devServer: {
-    contentBase: path.join(__dirname, 'src'),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
   },

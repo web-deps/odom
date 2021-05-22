@@ -14,10 +14,10 @@ __Table of Contents__
       - [Adding Event Listeners](#adding-event-listeners)
   - [Global Components](#global-components)
   - [Constructor](#constructor)
-  - [Single File Components](#single-file-components)
+  - [Single-file Components](#single-file-components)
     - [Description](#description)
     - [JS Components](#js-components)
-      - [Creating an App using a JS Single File Component](#creating-an-app-using-a-js-single-file-component)
+      - [Creating an App using a JS Single-file Component](#creating-an-app-using-a-js-single-file-component)
       - [JS Component File Contents](#js-component-file-contents)
       - [Markup](#markup)
       - [Styles](#styles)
@@ -33,8 +33,9 @@ __Table of Contents__
       - [Styles](#styles-1)
       - [module](#module)
       - [Main HTML File](#main-html-file)
-      - [HTML Component Constructor URIs](#html-component-constructor-uris)
-  - [Multiple File Components](#multiple-file-components)
+      - [HTML Component Constructor URLs](#html-component-constructor-urls)
+      - [Installation Support](#installation-support)
+  - [Multiple-file Components](#multiple-file-components)
     - [File Structure](#file-structure-1)
     - [Markup](#markup-2)
     - [Styles](#styles-2)
@@ -414,7 +415,7 @@ The HTML component file (`hello-world.html`) has the following HTML structure:
 </html>
 ```
 
-In the following sections we will look at the contents of each one of the main elements of the HTML.
+In the following sections, we will look at the contents of each one of the main elements of the HTML.
 
 #### Head
 
@@ -422,7 +423,7 @@ The first element we will look at is the `meta` element in the `head` element. T
 
 ```html
 <head>
-  <meta id="hello-world">
+  <meta name="id" content="hello-world">
 </head>
 ```
 
@@ -487,11 +488,11 @@ The CSS used to style our component is put inside the `style` element. The selec
 
 #### module
 
-The `script` tag contains a module that exports the [Constructor](#constructor). The constructor is what is used to create the component. The constructor takes one parameter `data`. The parameter is required as it contains the markup, styles and the ID. We are using `createComponent` to create our component, so, we have to pass the parameter `data` into `options`. You do not have to include the attribute `type` on the script element.
+The `script` tag contains a module that exports the [Constructor](#constructor). The constructor is what is used to create the component. The constructor takes one parameter `props`. The parameter is required as it contains the markup, styles and the ID (under the property `componentAssets`). We are using `createComponent` to create our component, so, we have to pass the parameter `props` into `options`. You do not have to include the attribute `type` on the script element.
 
 ```html
 <script type="module">
-  export const HelloWorld = async data => {
+  export const HelloWorld = async props => {
     const eventListeners = {
       "button": [
         {
@@ -506,7 +507,7 @@ The `script` tag contains a module that exports the [Constructor](#constructor).
       ]
     };
     
-    return Acom.createComponent({ data, eventListeners });
+    return Acom.createComponent({ props, eventListeners });
   };
 </script>
 ```
@@ -535,15 +536,26 @@ We are going to use our HTML component in `index.html`. The file contents are ve
 <html>
 ```
 
-#### HTML Component Constructor URIs
+#### HTML Component Constructor URLs
 
-In the constructor of HTML components, not all relative URLs work. The module is considered to be from a different origin because of the method Acom uses to import the modules. Therefore, using relative URLs works for the following cases:
+In the constructor of HTML components, not all relative URLs work. Relative URLs are guaranteed to work in the following cases:
 
 - Root relative URLs: All root relative URLs (i.e. URLs that start with `/`) work.
-- Statice imports: all relative URLs in ES static imports work.
-- Dynamic imports: all relative URLs us as the parameter to the ES dynamic import method `import` work. However, calculated URLs do not work.
-- [importComponent](exports.md#importcomponent): relative URLs used in the method `importComponent` (one of the named exports of Acom) work.
-- fetch API: relative URLs used in the window method `fetch` work.
+- Statice imports: All relative URLs in ES static imports work.
+- Dynamic imports: All relative URLs us as the parameter to the ES dynamic import method `import` work. However, calculated URLs do not work.
+- [importComponent](exports.md#importcomponent): Relative URLs used in the method `importComponent` (one of the named exports of Acom) work.
+- [fetchAsset](./api/asset-manager.md#fetchasset): Relative URLs used in `fetchAsset` work.
+- [prefetch](./api/asset-manager.md#prefetch): Relative URLs used in `prefetch` work.
+- fetch API: Relative URLs used in the window method `fetch` work.
+
+#### Installation Support
+
+Importing Acom in HTML single-file components is supported only in some types of installation. You can access Acom in the following cases:
+
+- CDN: Using a CDN, you can access Acom the same way you would in any module or script.
+- NPM: The only way you can access Acom using NPM is by directly importing from the node modules folder. This way, you will be importing the source files and not the bundle. In the `node_modules` folder, the main source file for Acom is located at `node_modules/acom/src/main.js`.
+
+> NOTE: This might change in the future. Build tools for Acom might be implemented in the future to address this.
 
 ## Multiple-file Components
 

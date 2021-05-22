@@ -11,8 +11,10 @@ const correctURIs = async (text, uri) => {
   const regexes = [
     /import\s+?(?:(?:(?:[\$\w*\s{},]*)\s+from\s+?)|)(?:(?:["'`](.*?)["'`])|(?:["'`](.*?)["'`]))[\s]*?(?:;|$|)/g,
     /import\(\s*["'`](.*?)["'`]\s*\)/g,
-    /importComponent\(\s*["'`](.*?)["'`]\s*\)/g,
-    /fetch\(\s*["'`](.*?)["'`]/g
+    /importComponent\(\s*["'`](.*?)["'`]\s*\)/g,,
+    /fetch\(\s*["'`](.*?)["'`]/g,
+    /fetchAsset\(\s*["'`](.*?)["'`]/g,
+    /prefetch\(\s*["'`](.*?)["'`]/g
   ];
 
   const applyRegex = regex => text.replace(regex, (match, g1) => match.replace(g1, (match) => createURL(match)));

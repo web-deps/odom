@@ -56,7 +56,8 @@ const importHTMLComponent = async src => {
   const module = await getText(regexes.module);
   
   const constructor = await getConstructor(module, src);
-  const component = async props => constructor({ id, src, markup, styles, props });
+  const componentAssets = { id, markup, styles };
+  const component = async props => constructor({ ...props, componentAssets });
   cache(src, component, id);
 
   return component;

@@ -67,7 +67,7 @@ import middleware from "./middleware/middleware.js";
 
 // Tests for assets
 // assets.components.esm();
-// assets.components.html();
+assets.components.html();
 // assets.markup();
 // assets.node();
 // assets.text();

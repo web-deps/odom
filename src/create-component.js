@@ -14,9 +14,9 @@ export const createComponent = async options => {
     };
   };
 
-  if ("htmlData" in options) {
-    options = { ...options, ...options.htmlData };
-    delete options.htmlData;
+  if ("props" in options && "componentAssets" in options.props) {
+    options = { ...options, ...options.props.componentAssets };
+    delete options.props.componentAssets;
   };
   
   if (options.props && "id" in options.props) delete options.props.id;

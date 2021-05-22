@@ -9,7 +9,7 @@ const html = async () => {
   let passed = !!DemoComponent.scope;
 
   if (passed) console.info("Passed");
-  else console.error("Faild");
+  else console.error("Failed");
 
   return DemoComponent;
 };

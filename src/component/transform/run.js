@@ -7,7 +7,15 @@ import { collections } from "./collections/collections.js";
 import { render } from "../../dom/render.js";
 
 
-export const run = async function ({ element, placeholder, props = {}, utils = {}, dynamicData }) {
+export const run = async function (options) {
+  let {
+    element,
+    placeholder,
+    props = {},
+    utils = {},
+    dynamicData
+  } = options;
+
   const {
     components,
     nodes,
@@ -90,7 +98,7 @@ export const run = async function ({ element, placeholder, props = {}, utils = {
       "acom-text"
     ],
     attributes: [
-      "acom-markupltiple",
+      "acom-multiple",
       "acom-map"
     ]
   };

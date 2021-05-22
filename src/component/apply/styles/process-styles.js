@@ -1,14 +1,16 @@
 import { scopeCSS } from "./scope-css.js";
 
 
-export const processStyles = async ({
-  id,
-	selector,
-  styles,
-  scopeStyles,
-  middleware: { preprocessor, postprocessor, custom },
-  createElement
-}) => {
+export const processStyles = async (options) => {
+  let {
+    id,
+    selector,
+    styles,
+    scopeStyles,
+    middleware: { preprocessor, postprocessor, custom },
+    createElement
+  } = options;
+  
 	const processCSS = async () => {
 		if (postprocessor) styles = await postprocessor(styles);
 		if (scopeStyles) styles = await scopeCSS(styles, selector);

@@ -1,7 +1,9 @@
 import { getNestedValue } from "../get-nested-value.js";
 
 
-export const interpretConditions = async ({ conditions, transformOptions: { utils, dynamicData } }) => {
+export const interpretConditions = async (options) => {
+  const { conditions, transformOptions: { utils, dynamicData } } = options;
+  
   const interpretedConditions = {
     apply: true,
     media: null

@@ -6,7 +6,7 @@ import { render } from "../../../dom/render.js";
 
 
 export const createFragment = async ({ template, data, limits, createNode }) => {
-  if (template) template.removeAttribute("acom-markupltiple");
+  if (template) template.removeAttribute("acom-multiple");
   const fragment = document.createDocumentFragment();
   const elements = [];
   const range = await getRange(data.length, limits);

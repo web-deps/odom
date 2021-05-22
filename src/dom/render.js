@@ -6,17 +6,19 @@ import { getProps } from "./get-props.js";
 import { fetchAsset } from "../asset-manager/fetch-asset.js";
 
 
-export const render = async ({
-  assetType,
-  fileType,
-  target,
-  asset,
-  assets,
-  placeholder,
-  scope,
-  props,
-  replacer = replace
-} = {}) => {
+export const render = async (options = {}) => {
+  let {
+    assetType,
+    fileType,
+    target,
+    asset,
+    assets,
+    placeholder,
+    scope,
+    props,
+    replacer = replace
+  } = options;
+  
   if (!asset) return renderToDocument({});
 	if (typeof target === "string") target = select(target, scope, false);
 	if (placeholder) target.replaceWith(placeholder);

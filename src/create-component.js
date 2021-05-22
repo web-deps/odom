@@ -39,9 +39,8 @@ const importOptions = async ({ src, importType = "module", extension }) => {
   return extension ? { ...imported, ...extension } : json;
 };
 
-const transform = async (
-  $component, 
-  {
+const transform = async ($component, options) => {
+  const {
     id,
     props,
     markup,
@@ -53,8 +52,8 @@ const transform = async (
     attributes,
     utils,
     middleware = {}
-  }
-) => {
+  } = options;
+
   $component.setID(id);
   await $component.setProps(props);
 

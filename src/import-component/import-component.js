@@ -69,9 +69,9 @@ const importJSComponent = async src => {
 };
 
 const cache = (src, component, id) => {
-  const savesrc = /^\/|^http[s]?|^www./.test(src);
+  const saveSrc = /^\/|^http[s]?|^www./.test(src);
 
-  if (savesrc) {
+  if (saveSrc) {
     if (!window.$app) window.$app = {};
     if (!window.$app.components) window.$app.components = new Map();
     if (!window.$app.srcMap) window.$app.srcMap = new Map();

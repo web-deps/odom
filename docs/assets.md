@@ -76,7 +76,7 @@ Assets can be imported statically or dynamically. Static imports are done via th
 
 #### Static Imports
 
-Static imports work for all kinds of assets execpt HTML single file components. Only assets in modules can be imported this way.
+Static imports work for all kinds of assets execpt HTML single-file components. Only assets in modules can be imported this way.
 
 __Example__
 
@@ -88,7 +88,7 @@ import { home } from "/src/components/pages/home.js";
 
 __Description__
 
-ES6 dynamic imports work for all kinds of assets except HTML single file components. Single file components, whether HTML or JS, can be imported with `importComponent`. It is used the same way ES6 dynamic imports are used.
+ES6 dynamic imports work for all kinds of assets except HTML single-file components. Single-file components, whether HTML or JS, can be imported with `importComponent`. It is used the same way ES6 dynamic imports are used.
 
 __Example__
 

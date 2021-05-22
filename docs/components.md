@@ -214,17 +214,17 @@ Global components are created in one file and used in another file. A module may
 
 A constructor is any function that returns a promise that resolves to a [`Component`](api/component/component.md). Constructors can be used in all of the kinds components.
 
-## Single File Components
+## Single-file Components
 
 ### Description
 
-Single file components are created using one file, which can be either an HTML file or an ES6 module. If created in an ES6 module, the module has only one export - the component. The [`constructor`](#constructor) of an HTML single file component always exports the component as the only export.
+Single-file components are created using one file, which can be either an HTML file or an ES6 module. If created in an ES6 module, the module has only one export - the component. The [`constructor`](#constructor) of an HTML single-file component always exports the component as the only export.
 
 ### JS Components
 
-JavaScript single file components are ES6 modules that have a [`constructor`](#constructor) as the only export.
+JavaScript single-file components are ES6 modules that have a [`constructor`](#constructor) as the only export.
 
-#### Creating an App using a JS Single File Component
+#### Creating an App using a JS Single-file Component
 
 __Introduction__
 
@@ -378,9 +378,9 @@ The first element of the `body` is `main` which has an attribute `acom-src`. The
 
 ### HTML Components
 
-HTML single file components are created using standard HTML files. Each file contains markup used just as it would be used for a single page. In other words, each HTML component is also a page on its own. One strict rule is that the `style` element should be placed inside the `body` element.
+HTML single-file components are created using standard HTML files. Each file contains markup used just as it would be used for a single page. In other words, each HTML component is also a page on its own. One strict rule is that the `style` element should be placed inside the `body` element.
 
-Let us rewrite the [Hello World](#js-components) app we created earlier (using a JS component) using an HTML single file component.
+Let us rewrite the [Hello World](#js-components) app we created earlier (using a JS component) using an HTML single-file component.
 
 The app has the following file system:
 
@@ -545,11 +545,11 @@ In the constructor of HTML components, not all relative URLs work. The module is
 - [importComponent](exports.md#importcomponent): relative URLs used in the method `importComponent` (one of the named exports of Acom) work.
 - fetch API: relative URLs used in the window method `fetch` work.
 
-## Multiple File Components
+## Multiple-file Components
 
-A component that has its markup and/or styles (e.g CSS) in a separate file (or files) is called a multiple file component. The assets (markup and styles) are imported in the file containing the [Constructor](#constructor). They are then used to build a component.
+A component that has its markup and/or styles (e.g CSS) in a separate file (or files) is called a multiple-file component. The assets (markup and styles) are imported in the file containing the [Constructor](#constructor). They are then used to build a component.
 
-Acom provides a way to dynamically import these assets via [`assetManager`](api/asset-manager.md). In this section we are going to rewrite the app we wrote using a [JS single file component](#js-components) and an [HTML single file component](#html-components).
+Acom provides a way to dynamically import these assets via [`assetManager`](api/asset-manager.md). In this section we are going to rewrite the app we wrote using a [JS single-file component](#js-components) and an [HTML single-file component](#html-components).
 
 ### File Structure
 
@@ -652,7 +652,7 @@ export const HelloWorld = async (props) => {
 
 ### Main HTML File
 
-The main HTML file `index.html` contains content so similar to that used for single file components. The only difference is the URI for the main file (`main.js`) for the component. The HTML file has the following contents:
+The main HTML file `index.html` contains content so similar to that used for single-file components. The only difference is the URI for the main file (`main.js`) for the component. The HTML file has the following contents:
 
 ```html
 <!DOCTYPE html>

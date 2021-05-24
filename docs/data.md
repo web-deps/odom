@@ -1,6 +1,6 @@
 # Data
 
-__Table of Contents__
+**Table of Contents**
 
 - [Data](#data)
   - [Introduction](#introduction)
@@ -17,7 +17,7 @@ __Table of Contents__
     - [Introduction](#introduction-2)
     - [Attributes](#attributes)
       - [Description](#description)
-      - [__Example__](#example-1)
+      - [**Example**](#example-1)
     - [Slots](#slots)
       - [Description](#description-1)
       - [Example](#example-2)
@@ -62,7 +62,7 @@ You can bind data to the DOM using dynamic data. When the data changes, the DOM 
 #### Add Dynamic Data
 
 To [`options.utils.data`](./api/create-component/utils.md#generic-data), add the property `dynamic`. Inside `dynamic`, you can either add values directly, or specify options that include a way of updating the data. The options have the following structure:
-   
+
 ```js
 {
   data: any,
@@ -70,7 +70,7 @@ To [`options.utils.data`](./api/create-component/utils.md#generic-data), add the
 }
 ```
 
-__Properties__:
+**Properties**:
 
 - `data`: Data of any type.
 - `updates`: The functions that update the data. All functions all called when an attempt to change the dynamic data is made. If multiple update functions have been provided, the output of one function is used as the input of the next. Refer to [`Updator`](#updator) for more details.
@@ -87,20 +87,20 @@ The dynamic data will be set as `Component.dynamicData`. You can get and set dat
 
 An updator is a user defined function that is invoked everytime you try to change dynamic data.
 
-__Syntax__:
-        
+**Syntax**:
+
 ```js
-update(newData)
+update(newData);
 ```
 
-__Parameters__:
+**Parameters**:
 
 - newData
   - Type: `any`.
   - Required: Yes.
   - Usage: Contains the update.
 
-__Return Value__:
+**Return Value**:
 
 The updated value of any type. If double binding is used, the returned value is used to update the DOM.
 
@@ -108,7 +108,7 @@ The updated value of any type. If double binding is used, the returned value is 
 
 Let us use data binding on an input field. First we are going to use a single bind to update the value of the input field. Then well update the data and display it when the user enters some data in the input field.
 
-__Markup__:
+**Markup**:
 
 ```html
 <div>
@@ -117,7 +117,7 @@ __Markup__:
 </div>
 ```
 
-__JavaScript__:
+**JavaScript**:
 
 ```js
 // ...
@@ -173,7 +173,7 @@ Data can be passed from a component to an asset (component or not) using `props`
 
 One way of using props is by using attributes on target elements. All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `acom-`) are considered as props. Props are used to instantiate assets.
 
-#### __Example__
+#### **Example**
 
 In this example we will import a component and instantiate it using props.
 
@@ -185,7 +185,7 @@ In this example, `page` will be considered as a prop of the component at `/src/c
 
 ```js
 {
-  page: "home"
+  page: "home";
 }
 ```
 
@@ -200,13 +200,13 @@ Any child of the target element is considered to be a slot. All slots are added 
 - All elements with unique values for the `name` attribute are put in `props` under property names corresponding to the value of their `name` attributes.
 - All elements with the same value for `name` attribute collected into an array and put in `props` under the same property (equal to the value of the `name` attribute).
 
- Slots are used only with components.
+Slots are used only with components.
 
 #### Example
 
-Let us import a component and pass a slot into it throug props.
+Let us import a component and pass a slot into it through props.
 
-__Parent Component__
+**Parent Component**
 
 ```html
 <div acom-src="/src/components/button.htm">
@@ -214,9 +214,9 @@ __Parent Component__
 </div>
 ```
 
-__Child Component__
+**Child Component**
 
-Acom inserts slots on all nodes in the component that have the same value for the attribute `acom-slot` as the name of the attribute `name` on a slot from the parent component. If the value of the slot in `props` is an array, the slot placeholder is replaced with all the elements in the array.
+Acom inserts slots on all descendant elements in the component that have the same value for the attribute `acom-slot` as the value of the attribute `name` on a slot from the parent component. If the value of the slot in `props` is an array, the slot placeholder is replaced with all the elements in the array.
 
 ```html
 <div>

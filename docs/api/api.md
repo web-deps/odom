@@ -1,6 +1,6 @@
 # API
 
-__Table of Contents__
+**Table of Contents**
 
 - [API](#api)
   - [Introduction](#introduction)
@@ -35,7 +35,6 @@ __Table of Contents__
     - [Syntax](#syntax-3)
     - [Parameters](#parameters-3)
     - [Return Value](#return-value-3)
-
 
 ## Introduction
 
@@ -75,8 +74,7 @@ createComponent(options);
   - Usage: Contains utilities for manipulating a component
   - Reference: [`options`](./options.md)
 
-
-> __Note:__ If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
+> **Note:** If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
 
 ### Return Value
 
@@ -107,7 +105,7 @@ Used for inserting components into the DOM or component.
 ### Syntax
 
 ```js
-render([options])
+render([options]);
 ```
 
 ### Parameters
@@ -140,11 +138,13 @@ replaceNode(target, node[, replacer])
 ### Parameters
 
 - `target`:
+
   - Type: `Node`
   - Required: Yes.
   - Usage: Replaced by another node.
 
 - `node`:
+
   - Type: `Node`
   - Required: Yes.
   - Usage: Replaces another node.
@@ -183,7 +183,6 @@ Contains utilities used to manage assets. It handles importation, fetching and p
 
 [assetManager](./asset-manager.md);
 
-
 ## `importComponent`
 
 ### Description
@@ -193,7 +192,7 @@ Used to import components. It can be used to import either HTML or JS components
 ### Syntax
 
 ```js
-importComponent(src)
+importComponent(src);
 ```
 
 ### Parameters
@@ -201,7 +200,7 @@ importComponent(src)
 - `src`
   - Type: `string`
   - Required: Yes.
-  - Usage: URI pointing to the file location of component
+  - Usage: Contains HTML string (for HTML single-file components) or URL pointing to the file location of component (for both HTML and JS single-file components).
 
 ### Return Value
 

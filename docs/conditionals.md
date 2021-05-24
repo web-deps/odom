@@ -1,6 +1,6 @@
 # Conditionals
 
-__Table of Contents__
+**Table of Contents**
 
 - [Conditionals](#conditionals)
   - [Conditions](#conditions)
@@ -76,7 +76,7 @@ The attribute `acom-loading` takes either a string that specifies a type of load
 
 ### Placeholders
 
-Conditional loading uses placeholders for certain conditionals. [Loading](#loading) uses placeholders to conditionally load elements. Placeholders are used to replace elements elements upon which conditions are declared so that the elements are added to the DOM only if the conditions are met. A placeholder is a `<div>` element. The div has the attribute `acom-placeholder` which is set to the value of the attribute `name` of the element (if present) or `""`. When conditions for loading an element are met, the placeholder is replaced with the element.
+[Loading](#loading) uses placeholders to conditionally load elements. Placeholders are used to replace elements elements upon which conditions are declared so that the elements are added to the DOM only if the conditions are met. Placeholders have the same tag name as the original elements. The placeholder contains only one attribute, `acom-placeholder`, which is set to the value of the attribute `name` of the element (if present) or `""`. When conditions for loading an element are met, the placeholder is replaced with the element.
 
 ### Defer
 
@@ -91,7 +91,7 @@ You use `defer` to load content after a component has been added to the DOM. Use
 }
 ```
 
-__Attributes__:
+**Attributes**:
 
 - `type`: Set to `"defer"`.
 - `time`: The time that must pass before the element can be loaded after a component has been added to the DOM. Measured in seconds. The default value is `0`.
@@ -109,20 +109,23 @@ This is used to lazy load an element. It uses the [`IntersectionObserver`](https
 }
 ```
 
-__Attributes__:
+**Attributes**:
 
 - `type`: set to `"lazy"`.
-- `options`: 
-  - Structure;
-      ```json
-      {
-        "root": string,
-        "threshold": string,
-        "rootMargin": number | array<number>
-      }
-      ```
+- `options`:
 
-      Refer to [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) for a detailed explaination of how these values work.
+  - Structure;
+
+    ```json
+    {
+      "root": string,
+      "threshold": string,
+      "rootMargin": number | array<number>
+    }
+    ```
+
+    Refer to [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) for a detailed explaination of how these values work.
+
   - Attributes;
     - `root`: A CSS selector for the element used to check the intersection. The selector is used the same way it is used in `select`. If not set, the root is considered to be the viewport.
     - `rootMargin`: A string indicating the margin around the `root`. It takes values valid for [CSS margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin).
@@ -218,4 +221,4 @@ In this example, the element will be removed from the DOM if the width of the br
 <div acom-presence='{"action": "remove", "conditions": [{ "query": "(min-width: 992px)" }]}'></div>
 ```
 
-> __Note:__ The value `"watch"` of the media query has no effect as the action is performed only once for [Presence](#presence).
+> **Note:** The value `"watch"` of the media query has no effect as the action is performed only once for [Presence](#presence).

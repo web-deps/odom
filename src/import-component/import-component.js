@@ -1,18 +1,21 @@
-import { getConstructor } from "./get-constructor.js";
-import { getExtension } from "../get-extension.js";
-
+import {getConstructor} from "./get-constructor.js";
+import {getExtension} from "../get-extension.js";
 
 export const importComponent = async (src, type) => {
+  if (/^\s*</.test(src)) return importHTMLComponent(src, true);
   if (window.$app && window.$app.srcMap && window.$app.srcMap.has(src)) {
     return window.$app.components.get(window.components.srcMap.get(src));
-  };
+  }
 
   if (!type) type = getExtension(src);
   return type === "js" ? importJSComponent(src) : importHTMLComponent(src);
 };
 
-const importHTMLComponent = async src => {
-  const getText = async regex => {
+const importHTMLComponent = async (src, isFile = false) => {
+  let text;
+  if (isFile) text = src;
+
+  const getText = async (regex) => {
     let txt;
 
     text = text.replace(regex, (match, group) => {
@@ -34,36 +37,36 @@ const importHTMLComponent = async src => {
     comments: /\<\!\-\-(?:.|\n|\r)*?-->/g
   };
 
-  const res = await fetch(src);
-  let text = await res.text();
+  if (!text) {
+    const res = await fetch(src);
+    text = await res.text();
+  }
+
   let id = await getText(regexes.id);
 
   if (id) {
     if (window.$app && window.$app.components && window.$app.components.has(id)) {
       return window.$app.components.get(id);
-    };
+    }
   } else id = String(performance.now()).replace(".", "-");
 
   await getText(regexes.comments);
 
-  let [styles, script] = await Promise.all([
-    regexes.styles,
-    regexes.script
-  ].map(regex => getText(regex)));
+  let [styles, script] = await Promise.all([regexes.styles, regexes.script].map((regex) => getText(regex)));
 
   const markup = await getText(regexes.markup);
   text = script;
   const module = await getText(regexes.module);
-  
+
   const constructor = await getConstructor(module, src);
-  const componentAssets = { id, markup, styles };
-  const component = async props => constructor({ ...props, componentAssets });
+  const componentAssets = {id, markup, styles};
+  const component = async (props) => constructor({...props, componentAssets});
   cache(src, component, id);
 
   return component;
 };
 
-const importJSComponent = async src => {
+const importJSComponent = async (src) => {
   const component = Object.values(await import(src))[0];
   return component;
 };

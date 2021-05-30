@@ -1,6 +1,6 @@
 # Middleware
 
-__Table of Contents__
+**Table of Contents**
 
 - [Middleware](#middleware)
   - [Introduction](#introduction)
@@ -117,7 +117,9 @@ Used to manipulate [`styles`](#styles).
 {
   preprocessor: Function,
   postprocessor: Function,
-  custom: Array
+  custom: Array,
+  process: Boolean,
+  scope: Boolean
 }
 ```
 
@@ -166,3 +168,11 @@ A promise that resolves to a `string` containing post-processed CSS.
 ### `custom`
 
 Array of functions used to process [`styles`](./create-component.md#styles). The functions are invoked in the order they are put in the array. The result of one function is passed to the next function. The end result is used to style the component. These utilities override all the default styling utilities of a component.
+
+### `process`
+
+Specifies whether the styles should be processed or not. You can set this to `false` if the styles are already processed. The default value is `true`.
+
+### `scope`
+
+Specifies whether or not the styles should be scoped. The default value is `true`.

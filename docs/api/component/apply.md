@@ -282,20 +282,20 @@ The options object has the following structure:
 
 A function that applies mutations to elements in a component.
 
-__Syntax__:
+**Syntax**:
 
 ```js
 mutator(subject)
 ```
 
-__Parameters__:
+**Parameters**:
 
 - `subject`:
   - Type: `HTMLElement`
   - Required: Yes.
   - Usage: It is the element to which mutations are applied.
 
-__Return Value__:
+**Return Value**:
 
 A promise that resolves to an `HTMLElement`. The element is the mutated version of `subject`. This is the value that ends up in the DOM.
 
@@ -306,14 +306,16 @@ An object used to specify how the element to be mutated should be removed from t
 ```js
 {
   observers: Boolean,
-  subtree: Boolean
+  subtree: Boolean,
+  documentSubtree: Boolean
 }
 ```
 
-__Properties__:
+**Properties**:
 
 - `observers`: Specifies whether or not observers like event listeners should be kept.
-- `subtree`: Specifies whether the subtree of the element should be kept.
+- `subtree`: Specifies whether the subtree of the element upon which the mutation is applied should be kept.
+- `documentSubtree`: Specifies whether or not the subtree in the DOM should be preserved. When set to false, the user can not see the subtree while the mutation is taking place. The default value is `true`.
 
 `type`
 
@@ -384,6 +386,7 @@ styles(styles [, middleware])
 ### Parameters
 
 - `styles`:
+
   - Type: `String`
   - Required: Yes
   - Usage: Contains styles to be applied on a component. It can CSS or any code that can be transformed to CSS via `middleware`.

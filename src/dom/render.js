@@ -4,24 +4,14 @@ import { importComponent } from "../import-component/import-component.js";
 import { parseMarkup } from "./parse-markup.js";
 import { getProps } from "./get-props.js";
 import { fetchAsset } from "../asset-manager/fetch-asset.js";
-
+import { getExtension } from "../get-extension.js";
 
 export const render = async (options = {}) => {
-  let {
-    assetType,
-    fileType,
-    target,
-    asset,
-    assets,
-    placeholder,
-    scope,
-    props,
-    replacer = replace
-  } = options;
-  
+  let { assetType, fileType, target, asset, assets, placeholder, scope, props, replacer = replace } = options;
+
   if (!asset) return renderToDocument({});
-	if (typeof target === "string") target = select(target, scope, false);
-	if (placeholder) target.replaceWith(placeholder);
+  if (typeof target === "string") target = select(target, scope, false);
+  if (placeholder) target.replaceWith(placeholder);
 
   await insert({
     assetType,
@@ -36,18 +26,8 @@ export const render = async (options = {}) => {
   });
 };
 
-const insert = async ({
-  target,
-  asset,
-  assets,
-  props,
-  createElement,
-  wait,
-  assetType,
-  fileType,
-  replacer
-}) => {
-  const insertAsset = async asset => {
+const insert = async ({ target, asset, assets, props, createElement, wait, assetType, fileType, replacer }) => {
+  const insertAsset = async (asset) => {
     replacer(target, asset);
   };
 
@@ -55,7 +35,7 @@ const insert = async ({
   const getAssetParam = { asset, assets, props, assetType, fileType, createElement };
 
   if (wait) await insertAsset(await getAsset(getAssetParam));
-  else getAsset(getAssetParam).then(asset => insertAsset(asset));
+  else getAsset(getAssetParam).then((asset) => insertAsset(asset));
 };
 
 const getTargets = () => {
@@ -70,9 +50,9 @@ const getTargets = () => {
       for (const element of elements) {
         const attributeValue = element.getAttribute(attributeName);
         targets.push([assetType, element, attributeValue]);
-      };
-    };
-  };
+      }
+    }
+  }
 
   return targets;
 };
@@ -85,10 +65,10 @@ const assetTypeToAttributeMap = {
 };
 
 const assetTypeToCreateElementMap = {
-  component: async $component => $component.scope,
-  node: node => node,
-  markup: async markup => parseMarkup({ markup }),
-  text: text => document.createTextNode(text)
+  component: async ($component) => $component.scope,
+  node: (node) => node,
+  markup: async (markup) => parseMarkup({ markup }),
+  text: (text) => document.createTextNode(text)
 };
 
 const renderToDocument = async ({ replacer = replace }) => {
@@ -100,7 +80,7 @@ const renderToDocument = async ({ replacer = replace }) => {
       fileType: target.getAttribute("acom-filetype"),
       target,
       asset,
-      props: await getProps({ element: target, skip: [assetTypeToAttributeMap[assetType]]}),
+      props: await getProps({ element: target, skip: [assetTypeToAttributeMap[assetType]] }),
       createElement: assetTypeToCreateElementMap[assetType],
       wait: true,
       replacer
@@ -117,21 +97,22 @@ const getAsset = async ({ asset, assets, props, assetType, fileType, createEleme
     if (fileType && !/module|text/.test(fileType)) throw new Error(`Wrong filetype ${fileType}.`);
 
     if (!fileType) {
-      let extension = asset.substring(asset.lastIndexOf(".") + 1);
+      let extension = getExtension(asset);
 
       if (extension) {
         if (extension && extension !== "js") fileType = "text";
         else fileType = "module";
-      };
-    };
+      }
+    }
 
-    asset = await (
-      !asset.includes("/") ? assets[asset]
-      : assetType === "component" ? importComponent(asset, fileType)
-      : fileType === "module" ? importModule(asset, { construct: true, props })
-      : fetchAsset(asset, "text")
-    );
-  };
+    asset = await (!asset.includes("/")
+      ? assets[asset]
+      : assetType === "component"
+      ? importComponent(asset, fileType === "module" ? "js" : "html")
+      : fileType === "module"
+      ? importModule(asset, { construct: true, props })
+      : fetchAsset(asset, "text"));
+  }
 
   if (typeof asset === "function") asset = await asset(props);
   return createElement ? createElement(asset) : asset;

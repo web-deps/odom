@@ -1,5 +1,5 @@
-import {getConstructor} from "./get-constructor.js";
-import {getExtension} from "../get-extension.js";
+import { getConstructor } from "./get-constructor.js";
+import { getExtension } from "../get-extension.js";
 
 export const importComponent = async (src, type) => {
   if (/^\s*</.test(src)) return importHTMLComponent(src, true);
@@ -59,8 +59,8 @@ const importHTMLComponent = async (src, isFile = false) => {
   const module = await getText(regexes.module);
 
   const constructor = await getConstructor(module, src);
-  const componentAssets = {id, markup, styles};
-  const component = async (props) => constructor({...props, componentAssets});
+  const componentAssets = { id, markup, styles };
+  const component = async (props) => constructor({ ...props, componentAssets });
   cache(src, component, id);
 
   return component;

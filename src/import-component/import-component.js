@@ -1,68 +1,36 @@
-import { getConstructor } from "./get-constructor.js";
 import { getExtension } from "../get-extension.js";
+import { createModule } from "./create-module.js";
+import { getText } from "./get-text.js";
+import { transpile } from "./transpile.js";
 
-export const importComponent = async (src, type) => {
-  if (/^\s*</.test(src)) return importHTMLComponent(src, true);
-  if (window.$app && window.$app.srcMap && window.$app.srcMap.has(src)) {
-    return window.$app.components.get(window.components.srcMap.get(src));
-  }
+const ID_REGEX = /<meta\s*name=["']?(?:[-\w]*)["']?\s*content=["']?([-\w]*)["']?\s*\/?>/;
 
+(function createCache() {
+  if (!window.$app) window.$app = {};
+  if (!window.$app.components) window.$app.components = new Map();
+  if (!window.$app.srcMap) window.$app.srcMap = new Map();
+})();
+
+export const importComponent = async ({ src = "/", type = "html", file, id }) => {
+  const component = getCachedComponent({ src, id });
+  if (component) return component;
   if (!type) type = getExtension(src);
-  return type === "js" ? importJSComponent(src) : importHTMLComponent(src);
+  return /html?/.test(type) || file ? importHTMLComponent({ src, file, id }) : importJSComponent(src);
 };
 
-const importHTMLComponent = async (src, isFile = false) => {
-  let text;
-  if (isFile) text = src;
+const importHTMLComponent = async ({ src, file, id }) => {
+  let text = "";
 
-  const getText = async (regex) => {
-    let txt;
-
-    text = text.replace(regex, (match, group) => {
-      if (typeof group === "string") txt = group;
-      else txt = match;
-
-      return "";
-    });
-
-    return txt;
-  };
-
-  const regexes = {
-    id: /<meta\s*name=["']?(?:[-\w]*)["']?\s*content=["']?([-\w]*)["']?\s*\/?>/,
-    markup: /<body(?:[^>"']|"[^"]*"|'[^']*')*>\s*(?:\s*([\w\W]*\s*))<\/body>/,
-    styles: /<style(?:[^>"']|"[^"]*"|'[^']*')*>([\w\W]*)<\/style>/,
-    script: /<script(?:[^>"']|"[^"]*"|'[^']*')*>[\w\W]*<\/script>/,
-    module: /<script(?:[^>"']|"[^"]*"|'[^']*')*>([\w\W]*?)<\/script>/,
-    comments: /\<\!\-\-(?:.|\n|\r)*?-->/g
-  };
-
-  if (!text) {
+  if (file) text = file;
+  else if (src) {
     const res = await fetch(src);
     text = await res.text();
   }
 
-  let id = await getText(regexes.id);
-
-  if (id) {
-    if (window.$app && window.$app.components && window.$app.components.has(id)) {
-      return window.$app.components.get(id);
-    }
-  } else id = String(performance.now()).replace(".", "-");
-
-  await getText(regexes.comments);
-
-  let [styles, script] = await Promise.all([regexes.styles, regexes.script].map((regex) => getText(regex)));
-
-  const markup = await getText(regexes.markup);
-  text = script;
-  const module = await getText(regexes.module);
-
-  const constructor = await getConstructor(module, src);
-  const componentAssets = { id, markup, styles };
-  const component = async (props) => constructor({ ...props, componentAssets });
+  if (!id) id = await getText({ value: text }, ID_REGEX);
+  const moduleText = await transpile(text, src);
+  const component = await Object.values(await createModule(moduleText))[0];
   cache(src, component, id);
-
   return component;
 };
 
@@ -72,14 +40,17 @@ const importJSComponent = async (src) => {
 };
 
 const cache = (src, component, id) => {
+  if (src === "/") return;
   const saveSrc = /^\/|^http[s]?|^www./.test(src);
 
   if (saveSrc) {
-    if (!window.$app) window.$app = {};
-    if (!window.$app.components) window.$app.components = new Map();
-    if (!window.$app.srcMap) window.$app.srcMap = new Map();
     if (!id) id = String(performance.now);
     window.$app.srcMap.set(src, id);
     window.$app.components.set(id, component);
   } else if (id) window.$app.components.set(id, component);
+};
+
+const getCachedComponent = ({ id, src }) => {
+  if (src && window.$app.srcMap.has(src)) id = window.components.srcMap.get(src);
+  if (id && window.$app.components.has(id)) return window.$app.components.get(id);
 };

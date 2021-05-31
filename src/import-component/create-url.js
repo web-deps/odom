@@ -6,9 +6,5 @@ export const createURL = (uri, root) => {
   if (root && root.startsWith("/")) root = `${origin}${root}`;
   else root = origin;
 
-  return (
-    uri.startsWith("/") ? origin + uri
-    : uri.startsWith(".") ? root + "/" + uri
-    : uri
-  );
+  return uri.startsWith("/") ? origin + uri : uri.startsWith(".") ? root + "/" + uri : uri;
 };

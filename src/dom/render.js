@@ -108,7 +108,7 @@ const getAsset = async ({ asset, assets, props, assetType, fileType, createEleme
     asset = await (!asset.includes("/")
       ? assets[asset]
       : assetType === "component"
-      ? importComponent(asset, fileType === "module" ? "js" : "html")
+      ? importComponent({ src: asset, type: fileType === "module" ? "js" : "html" })
       : fileType === "module"
       ? importModule(asset, { construct: true, props })
       : fetchAsset(asset, "text"));

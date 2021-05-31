@@ -1,6 +1,6 @@
 # Components
 
-__Table of Contents__
+**Table of Contents**
 
 - [Components](#components)
   - [Introduction](#introduction)
@@ -126,10 +126,10 @@ Put the following code into the `script` element:
 
 Open the HTML file in the browser. You should be able to see the heading reading "Hello World", an input field with the label "To:" and a button with the text "Say Hello". Let us look at each step we have taken to make this happen.
 
-1. __Create Markup__: First, we put the markup for our component in the variable `markup`. This is the markup used to build the element that replaces `main#hello-world`.
-2. __Create `options`__: Next, we created an `options` object and put our markup in it.
-3. __Create Component__: Next, we created our component using `Acom.createComponent`. We passed the object `options` as the only parameter of the method `createComponent`. The method is asynchronous, thus we had to use the `await` keyword when calling it. Also note that we wrapped our code in an asynchronous IIFE. The IIFE is asynchronous (indicated by the `async` keyword), this enabled us to use the keyword `await` in the code inside it.
-4. __Render the Component__: Finally, we rendered the component to the DOM using the our component's method `render`. In this case, we used a CSS selector as the only parameter of the method. The method looked for the element (`main`) that matched the selector in the DOM and replaced it with the component element.
+1. **Create Markup**: First, we put the markup for our component in the variable `markup`. This is the markup used to build the element that replaces `main#hello-world`.
+2. **Create `options`**: Next, we created an `options` object and put our markup in it.
+3. **Create Component**: Next, we created our component using `Acom.createComponent`. We passed the object `options` as the only parameter of the method `createComponent`. The method is asynchronous, thus we had to use the `await` keyword when calling it. Also note that we wrapped our code in an asynchronous IIFE. The IIFE is asynchronous (indicated by the `async` keyword), this enabled us to use the keyword `await` in the code inside it.
+4. **Render the Component**: Finally, we rendered the component to the DOM using the our component's method `render`. In this case, we used a CSS selector as the only parameter of the method. The method looked for the element (`main`) that matched the selector in the DOM and replaced it with the component element.
 
 #### Adding Styles
 
@@ -227,11 +227,11 @@ JavaScript single-file components are ES6 modules that have a [`constructor`](#c
 
 #### Creating an App using a JS Single-file Component
 
-__Introduction__
+**Introduction**
 
 Let us rewrite the component we created in [Creating an App using a Local Component](#creating-an-app-using-a-local-component) section.
 
-__File Structure__
+**File Structure**
 
 Create the following file structure:
 
@@ -246,9 +246,10 @@ Create the following file structure:
 The module, `hello-world.js` has the following general structure:
 
 ```js
+const markup = // ...
+const styles = // ...
+
 export const HelloWorld = async (props) => {
-  const markup = // ...
-  const styles = // ...
   const eventListeners = // ...
   const id = "hello-world";
   const options = { id, markup, styles, events };
@@ -488,11 +489,14 @@ The CSS used to style our component is put inside the `style` element. The selec
 
 #### module
 
-The `script` tag contains a module that exports the [Constructor](#constructor). The constructor is what is used to create the component. The constructor takes one parameter `props`. The parameter is required as it contains the markup, styles and the ID (under the property `componentAssets`). We are using `createComponent` to create our component, so, we have to pass the parameter `props` into `options`. You do not have to include the attribute `type` on the script element.
+The `script` tag contains a module that exports the [Constructor](#constructor). The constructor is what is used to create the component. A special syntax is used to include the markup and styles in the module. Interpolation is used to replace a special combination of characters with the corresponding asset. The characters must always be wrapped in back ticks. For markup, `<scope />` is used. For styles, `@import "styles";` is used.
 
 ```html
-<script type="module">
-  export const HelloWorld = async props => {
+<script>
+  const markup = `<scope />`;
+  const styles = `@import "scope";`;
+
+  export const HelloWorld = async () => {
     const eventListeners = {
       "button": [
         {
@@ -506,8 +510,10 @@ The `script` tag contains a module that exports the [Constructor](#constructor).
         }
       ]
     };
-    
-    return Acom.createComponent({ props, eventListeners });
+
+    const options = { markup, styles,
+    . eventListeners };
+    return Acom.createComponent(options);
   };
 </script>
 ```

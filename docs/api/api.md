@@ -35,6 +35,9 @@
     - [Syntax](#syntax-3)
     - [Parameters](#parameters-3)
     - [Return Value](#return-value-3)
+    - [importComponent Options](#importcomponent-options)
+      - [Structure](#structure-2)
+      - [Properties](#properties)
 
 ## Introduction
 
@@ -192,16 +195,44 @@ Used to import components. It can be used to import either HTML or JS components
 ### Syntax
 
 ```js
-importComponent(src);
+importComponent(options);
 ```
 
 ### Parameters
 
-- `src`
-  - Type: `string`
+- `options`
+  - Type: `Object`
   - Required: Yes.
-  - Usage: Contains HTML string (for HTML single-file components) or URL pointing to the file location of component (for both HTML and JS single-file components).
+  - Usage: Contains options for importing a component.
+  - Reference: [importComponentOptions](#importcomponent-options).
 
 ### Return Value
 
 A promise that resolves to a function.
+
+### importComponent Options
+
+#### Structure
+
+```js
+{
+  file: string,
+  id: string,
+  src: string
+}
+```
+
+#### Properties
+
+- `file`:
+  - Type: `string`
+  - Required: No.
+  - Usage: Contains text for an HTML file that contains an HTML component.
+- `id`:
+  - Type: `string`,
+  - Required: No.
+  - Usage: Contains the ID of the component. This is used for caching and retrieving the component. If not provided, the ID is gotten from one the `meta` element (if provided) of the [`head`](../components.md#head) of the HTML file.
+  - `src`:
+    - Type: `string`
+    - Required: No.
+    - Usage: Specifies the location of the component to be imported. It is also used for caching and resolving relative URLs in HTML file components. It must either an absolute URL or root-relative URL (i.e. starts with `/`).

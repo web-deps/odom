@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick Tests</title>
+  </head>
+  <body>
+    <!-- <script src="/src/import-component/transpile.js"></script> -->
+
+    <script type="module">
+      import { transpile } from "/src/import-component/transpile.js";
+      import * as Acom from "/src/main.js";
+
+      const src = "/tests/functionality/assets/assets/html-component.html";
+      const html = await (await fetch(src)).text();
+
+      (async () => {
+        // const jsModule = await transpile(html);
+        // console.info(jsModule);
+        window.Acom = Acom;
+        const component = await Acom.importComponent({src});
+        console.info(component);
+        const Component = await component();
+        document.body.append(Component.scope);
+      })();
+    </script>
+  </body>
+</html>

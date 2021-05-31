@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="id" content="html-component">
-  <title>HTML Component</title>
-</head>
-<body>
-  <div id="html-component"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="id" content="html-component" />
+    <title>HTML Component</title>
+  </head>
+  <body>
+    <div id="html-component"></div>
 
-  <style>
-    :scope {
-      width: 100vw;
-      height: 100%vh;
-      color: green;
-    }
-  </style>
+    <style>
+      :scope {
+        width: 100vw;
+        height: 100vh;
+        background-color: green;
+      }
+    </style>
 
-  <script>
-    export const HTMLComponent = async (props) => {
-      const options = { props };
-      return Acom.createComponent(options);
-    };
-  </script>
-</body>
+    <script>
+      const markup = `<scope />`;
+      const styles = `@import "scope";`;
+
+      export const HTMLComponent = async (props) => {
+        const options = { props, markup, styles };
+        return Acom.createComponent(options);
+      };
+    </script>
+  </body>
 </html>

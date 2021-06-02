@@ -59,7 +59,7 @@ const transform = async ($component, options) => {
   inlineStyles && (await $component.apply.inlineStyles(inlineStyles));
   const { data: { dynamic } = {} } = utils || { data: {} };
   if (dynamic) await $component.createDynamicData(dynamic);
-  data.dynamic = undefined;
+  if (dynamic) utils.data.dynamic = undefined;
   await $component.transform.run({ props, utils, dynamicData: $component.dynamicData });
   const promises = [];
   styles && promises.push($component.apply.styles(styles, middleware.styles));

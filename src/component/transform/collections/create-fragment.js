@@ -4,7 +4,6 @@ import { getNestedValue } from "../../../get-nested-value.js";
 import { getProps } from "../../../dom/get-props.js";
 import { render } from "../../../dom/render.js";
 
-
 export const createFragment = async ({ template, data, limits, createNode }) => {
   if (template) template.removeAttribute("acom-multiple");
   const fragment = document.createDocumentFragment();
@@ -12,17 +11,26 @@ export const createFragment = async ({ template, data, limits, createNode }) => 
   const range = await getRange(data.length, limits);
   const lowerLimit = range[0];
 
-  const addElement = async i => {
-    elements[i - lowerLimit] = await apply(template.cloneNode(true), async el => insertData(el, data[i]));
+  const addElement = async (i) => {
+    elements[i - lowerLimit] = await apply(template.cloneNode(true), async (el) => insertData(el, data[i]));
   };
 
-  const addMapperElement = async i => {
+  const addMapperElement = async (i) => {
     elements[i - lowerLimit] = await createNode(data[i]);
   };
 
-  if (template) await Promise.all(range.map(i => addElement(i)));
-  else await Promise.all(range.map(i => addMapperElement(i)));
+  const setPromises = (fun) => {
+    for (let index = range[0]; index <= range[1]; index++) {
+      promises.push(fun(index));
+    }
+  };
 
+  const promises = [];
+
+  if (template) setPromises(addElement);
+  else setPromises(addMapperElement);
+
+  await Promise.all(promises);
   for (const el of elements) fragment.appendChild(el);
   return fragment;
 };
@@ -34,7 +42,7 @@ const insertData = async (element, datum) => {
     if (value.startsWith("@datum")) {
       value = value.includes(".") ? await getNestedValue(datum, value.replace("@datum.", "")) : datum;
       element.setAttribute(name, value);
-    };
+    }
   };
 
   if (element.hasAttribute("acom-text")) {
@@ -54,7 +62,7 @@ const insertData = async (element, datum) => {
       assets: texts,
       props
     });
-  } else await Promise.all(attributes.map(attribute => setAttribute(attribute)));
+  } else await Promise.all(attributes.map((attribute) => setAttribute(attribute)));
 
   return element;
 };

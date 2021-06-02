@@ -1,6 +1,6 @@
 # `createComponent`
 
-__Table of Contents__:
+**Table of Contents**:
 
 - [`createComponent`](#createcomponent)
   - [Introduction](#introduction)
@@ -53,7 +53,7 @@ createComponent(options);
   - Usage: Contains utilities for manipulating a component
   - Reference: [`options`](#options)
 
-> __Note:__ If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
+> **Note:** If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
 
 ## Return Value
 
@@ -110,7 +110,7 @@ Used for HTML components and can also be user defined. This ends up being the `s
 
 #### Description
 
-Used to specify event listeners you want to apply to a component. 
+Used to specify event listeners you want to apply to a component.
 
 #### Structure
 
@@ -142,13 +142,13 @@ Let us look at what each each one of the properties of the event objects.
 
 The event listener. It is a function that is called everytime an event to which it listens is fired.
 
-__Syntax__:
+**Syntax**:
 
 ```js
 listener(event, component)
 ```
 
-__Parameters__:
+**Parameters**:
 
 - `event`:
   - Type: `Event`
@@ -159,7 +159,7 @@ __Parameters__:
   - Required: No.
   - Usage: It is the component on which `eventListeners` are applied.
 
-__Return Value__:
+**Return Value**:
 
 A promise that resolves to `undefined`.
 
@@ -177,7 +177,7 @@ A promise that resolves to `undefined`.
 
 `options`
 
-__Structure__:
+**Structure**:
 
 ```js
 {
@@ -188,9 +188,9 @@ __Structure__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
-- `capture`: 
+- `capture`:
   - Type: `Boolean`
   - Required: No.
   - Usage: Indicates that events of this type will be dispatched to the registered listener before being dispatched to any `EventTarget` beneath it in the DOM tree.
@@ -201,7 +201,7 @@ __Properties__:
 - `passive`:
   - Type: `Boolean`
   - Required: No.
-  - Usage:  Indicates that the function specified by `listener` will never call `preventDefault()`. If a passive listener does call `preventDefault()`, the user agent will do nothing other than generate a console warning.
+  - Usage: Indicates that the function specified by `listener` will never call `preventDefault()`. If a passive listener does call `preventDefault()`, the user agent will do nothing other than generate a console warning.
 - `mozSytemGroup`:
   - Type: `Boolean`
   - Required: No.
@@ -224,7 +224,7 @@ Let us look at how we can apply event listeners to a component by applying a cli
 
 The button element in the component will be selected and the `listener` will be applied for the `click` event. When you click the button, an alert will pop up with the message "Button clicked!".
 
-> __Note__: <br />
+> **Note**: <br />
 > Acom uses event delegation to apply event listeners. All event listeners are attached to [`scope`](#scope). So, `event.currentTarget` always refers to `scope`.
 
 ### `extension`
@@ -248,7 +248,7 @@ The default value is `"module"`. If the imported module is a function, the funct
 
 #### Description
 
-The inline styles that you want to apply to a component.
+The inline styles that you want to apply to a component. Unlike [`styles`](#styles), inline styles do not affect descendant components.
 
 #### Structure
 
@@ -275,7 +275,7 @@ The markup used to construct the DOM of a component. The markup can be HTML, XML
 
 For all non-HTML markup, all elements are converted to the `div` element of HTML by default. To specify which HTML element should be used in place of an element, you set the attribute `html` to the HTML element tag name. All other attributes on the element will be preserved. An attribute `xml` is set to the XML tag name during conversion from XML to HTML.
 
-__Example__:
+**Example**:
 
 The following markup flavours will result in the same DOM elements, except for extra attribute "xml" on the XML based one.
 
@@ -348,6 +348,7 @@ You can import options via this property. You provide a URI of either an ES modu
 The styling for the content is specified via `styles`. This can be a `string` containing CSS or any code that can be converted to CSS. Note the following things about styles:
 
 - All styles are scoped including animations. When using the short-hand property for animations (i.e. `animation`), always start with the animation name.
+- Styles can leak into descendant components.
 - The selector `:scope` is used to select the root element of the component.
 - Only absolute URLs and root relative URLs (URLs that start with `/`) are guaranteed to work in `@import` rules.
 - Imported styles are not scoped.

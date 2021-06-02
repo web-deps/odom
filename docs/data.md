@@ -195,7 +195,7 @@ Inside the component being imported, the props can be accessed from the markup u
 
 #### Description
 
-Any child of the target element is considered to be a slot. All slots are added to props. If there is more than one child, one of the following things will happen
+All descendants of the target element that have a name attribute are considered to be slots. All slots are added to props. If there is more than one child, one of the following things will happen
 
 - All elements with unique values for the `name` attribute are put in `props` under property names corresponding to the value of their `name` attributes.
 - All elements with the same value for `name` attribute collected into an array and put in `props` under the same property (equal to the value of the `name` attribute).

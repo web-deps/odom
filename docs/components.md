@@ -380,7 +380,7 @@ The first element of the `body` is `main` which has an attribute `acom-src`. The
 
 ### HTML Components
 
-HTML single-file components are created using standard HTML files. Each file contains markup used just as it would be used for a single page. In other words, each HTML component is also a page on its own. One strict rule is that the `style` element should be placed inside the `body` element.
+HTML single-file components are created using standard HTML files. Each file contains markup used just as it would be used for a single page. In other words, each HTML component is also a page on its own.
 
 Let us rewrite the [Hello World](#js-components) app we created earlier (using a JS component) using an HTML single-file component.
 
@@ -449,7 +449,7 @@ The markup of a component can be wrapped in any HTML element that can be display
 
 #### Styles
 
-The CSS used to style our component is put inside the `style` element. The selector `:scope` is used to select the root element, which in this case is the root element of the markup (`main`).
+The CSS used to style our component is put inside the `style` element. The selector `:scope` is used to select the root element, which in this case is the root element of the markup (`main`). The `style` element can placed in the `body` or the `head`.
 
 ```html
 <style>

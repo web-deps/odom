@@ -1,6 +1,6 @@
 # Component
 
-__Table of Contents__
+**Table of Contents**
 
 - [Component](#component)
   - [Introduction](#introduction)
@@ -27,6 +27,7 @@ __Table of Contents__
       - [Parameters](#parameters-3)
       - [Return Value](#return-value-3)
     - [`transform`](#transform)
+  - [Order of Execution](#order-of-execution)
 
 ## Introduction
 
@@ -62,7 +63,7 @@ The data that is linked to the DOM. This is the data specified in [`options.util
 
 The ID of the component. In HTML components, it is set via the `id` attribute of a `<meta>` tag. In JS components, it is set on `options`. If you have not set this property, it is automatically generated. The ID is used for uniquely identifying `scope` of a component for styling and eventListeners purposes. It is also used for caching a component and `styles`.
 
-> __Note__: If you have not set the `id` explicitly, it will not be used for caching purposes. Therefore, settiing `id` on a component guarantees caching.
+> **Note**: If you have not set the `id` explicitly, it will not be used for caching purposes. Therefore, settiing `id` on a component guarantees caching.
 
 ### `parseMarkup`
 
@@ -143,6 +144,7 @@ select(selector, selectAll)
 #### Parameters
 
 - `selector`:
+
   - Type: `string`
   - Required: Yes
   - Usage: Selecting an element specified
@@ -180,3 +182,17 @@ setID(id)
 ### `transform`
 
 Transformations like inserting components into `scope` are done via `transform`. Refer to [Transform](transform.md) for more details.
+
+## Order of Execution
+
+When using the `Component` directly, the order in which you use the API methods may matter. The following is the recommended order of execution:
+
+1. Set ID: The ID is used for many purposes. As such, setting the ID should be the first thing to do. The ID is used for identifying the component element in the DOM, scoping and removing styles and more. The ID can be set directly or via [`setID`](#setid).
+2. Set Props: The functions used with [`apply`](#apply) may depend on the props of the component. So, setting props has to done before such methods. Props are set using [`setProps`](#setprops).
+3. set Scope: Properties [`apply`](#apply) and [`transform`](#transform) depend on [`scope`](#scope). So, the scope of the element has to set before the aforementioned properties are used. You can set the scope either by directly setting the property or via [`parseMarkup`](#parsemarkup).
+4. Set Scope Attribute: If you have not used [`parseMarkup`](#parsemarkup) to set the scope of the component, you need to explicitly set the attribute `acom-scope` of [`scope`](#scope) to the ID of the component.
+5. Set Attributes: A lot of the methods of the API interact with [`scope`](#scope). These methods may depend on the values of the attributes of `scope`. So, you need to set the attributes before invoking these methods. You set attributes via [`attributes`](./apply.md#attributes)
+6. Set Classes: Methods of the API may have to use the classes of the elements of `scope`. So, you might have to set the classes of the elements before using these methods. Setting classes after attributes avoids overwriting of class values. You set classes via [`classes`](./apply.md#classes).
+7. Set Inline Styles: Set inline styles be [`transformations`](#transform) to avoid colliding values with those used in [`conditionals`](../../conditionals.md).
+8. Create Dynamic Data: The dynamic data of the element is used in [`transform`](#transform). So, if you used dynamic data, you must set the data before transformations.
+9. Set Styles and Add Event Listeners: You can perform these tasks one after another or at once. None of the previous steps depend on these two steps. So, it is okay to perform them last.

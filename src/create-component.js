@@ -49,19 +49,17 @@ const transform = async ($component, options) => {
   } = options;
 
   $component.setID(id);
-  await $component.setProps(props);
+  $component.setProps(props);
 
   if (scope) $component.scope = scope;
   else if (markup) await $component.parseMarkup(markup, middleware.markup);
 
-  $component.scope.setAttribute("acom-scope", $component.id);
-  const { data: { dynamic } = {} } = utils || { data: {} };
-  if (dynamic) await $component.createDynamicData(dynamic);
-  // Delete dynamic from utils.data
-
   attributes && (await $component.apply.attributes(attributes));
   classes && (await $component.apply.classes(classes));
   inlineStyles && (await $component.apply.inlineStyles(inlineStyles));
+  const { data: { dynamic } = {} } = utils || { data: {} };
+  if (dynamic) await $component.createDynamicData(dynamic);
+  data.dynamic = undefined;
   await $component.transform.run({ props, utils, dynamicData: $component.dynamicData });
   const promises = [];
   styles && promises.push($component.apply.styles(styles, middleware.styles));

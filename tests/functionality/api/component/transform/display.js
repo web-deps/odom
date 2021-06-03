@@ -1,11 +1,10 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const display = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-display='{"value": ["none", "block"], "conditions": ["@data.hide"]}'></div>
+      <div odom-display='{"value": ["none", "block"], "conditions": ["@data.hide"]}'></div>
     </div>
   `;
 
@@ -18,6 +17,5 @@ const display = async () => {
 
   return Display;
 };
-
 
 export default display;

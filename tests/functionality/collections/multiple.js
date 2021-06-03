@@ -1,8 +1,7 @@
 import { createComponent } from "/src/main.js";
 
-
 const multiple = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <table>
       <thead>
           <tr>
@@ -10,13 +9,13 @@ const multiple = async () => {
             <td>Name</td>
           </tr>
       </thead>
-      <tbody acom-map="@data.users">
+      <tbody odom-map="@data.users">
         <tr title="@datum.username">
           <td>
-            <span acom-text="@datum.username"></span>
+            <span odom-text="@datum.username"></span>
           </td>
           <td>
-            <span acom-text="@datum.name"></span>
+            <span odom-text="@datum.name"></span>
           </td>
         </tr>
       </tbody>
@@ -42,7 +41,7 @@ const multiple = async () => {
   const utils = { data };
   const options = { markup, utils };
   const MultipleComponent = await createComponent(options);
-  const firstUserTR = MultipleComponent.select("tbody tr", false)
+  const firstUserTR = MultipleComponent.select("tbody tr", false);
   const firstUserTD = MultipleComponent.select("tbody td", false);
   let passed = firstUserTR.getAttribute("title").includes("@") && firstUserTD.textContent.includes("@");
 
@@ -51,6 +50,5 @@ const multiple = async () => {
 
   return MultipleComponent;
 };
-
 
 export default multiple;

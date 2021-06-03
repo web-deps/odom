@@ -1,11 +1,10 @@
 import { createComponent } from "/src/main.js";
 import logResult from "../log-result.js";
 
-
 const components = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-src="component"></div>
+      <div odom-src="component"></div>
     </div>
   `;
 
@@ -20,13 +19,12 @@ const components = async () => {
 };
 
 const component = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <p>Component</p>
   `;
 
   const options = markup;
   return createComponent(options);
 };
-
 
 export default components;

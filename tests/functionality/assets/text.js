@@ -1,10 +1,9 @@
 import { createComponent } from "/src/main.js";
 
-
 const text = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <span acom-text="/tests/functionality/assets/assets/text.txt"></span>
+      <span odom-text="/tests/functionality/assets/assets/text.txt"></span>
     </div>
   `;
 
@@ -17,6 +16,5 @@ const text = async () => {
 
   return DemoComponent;
 };
-
 
 export default text;

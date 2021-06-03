@@ -1,11 +1,10 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const visibility = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'></div>
+      <div odom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'></div>
     </div>
   `;
 
@@ -18,6 +17,5 @@ const visibility = async () => {
 
   return Visibility;
 };
-
 
 export default visibility;

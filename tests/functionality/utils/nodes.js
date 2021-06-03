@@ -1,11 +1,10 @@
 import { createComponent } from "/src/main.js";
 import logResult from "../log-result.js";
 
-
 const nodes = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-node="node"></div>
+      <div odom-node="node"></div>
     </div>
   `;
 
@@ -24,6 +23,5 @@ const node = async () => {
   _node.textContent = "Component";
   return _node;
 };
-
 
 export default nodes;

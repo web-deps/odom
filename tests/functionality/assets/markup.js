@@ -1,10 +1,9 @@
 import { createComponent } from "/src/main.js";
 
-
 const markup = async () => {
-  const _markup = /* html */`
+  const _markup = /* html */ `
     <div>
-      <div acom-markup="/tests/functionality/assets/assets/markup.html"></div>
+      <div odom-markup="/tests/functionality/assets/assets/markup.html"></div>
     </div>
   `;
 
@@ -17,6 +16,5 @@ const markup = async () => {
 
   return DemoComponent;
 };
-
 
 export default markup;

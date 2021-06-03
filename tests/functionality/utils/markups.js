@@ -1,11 +1,10 @@
 import { createComponent } from "/src/main.js";
 import logResult from "../log-result.js";
 
-
 const markups = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-markup="_markup"></div>
+      <div odom-markup="_markup"></div>
     </div>
   `;
 
@@ -20,10 +19,9 @@ const markups = async () => {
 };
 
 const _markup = async () => {
-  return /* html */`
+  return /* html */ `
     <p>Component</p>
   `;
 };
-
 
 export default markups;

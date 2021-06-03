@@ -1,11 +1,10 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const loading = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-loading='{"type": "defer", "time": 1000}' id="defer"></div>
+      <div odom-loading='{"type": "defer", "time": 1000}' id="defer"></div>
     </div>
   `;
 
@@ -22,6 +21,5 @@ const loading = async () => {
 
   return Loading;
 };
-
 
 export default loading;

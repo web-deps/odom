@@ -1,9 +1,8 @@
 import { createComponent } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const custom = async () => {
-  const markup = /* xml */`<sec acom-ml="xml"></sec>`;
+  const markup = /* xml */ `<sec odom-ml="xml"></sec>`;
 
   const converter = async (xml) => {
     const html = document.createElement("main");
@@ -25,6 +24,5 @@ const custom = async () => {
 
   return Custom;
 };
-
 
 export default custom;

@@ -1,11 +1,10 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const insertMarkup = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-markup="/tests/functionality/assets/assets/markup.html"></div>
+      <div odom-markup="/tests/functionality/assets/assets/markup.html"></div>
     </div>
   `;
 
@@ -17,6 +16,5 @@ const insertMarkup = async () => {
 
   return InsertMarkup;
 };
-
 
 export default insertMarkup;

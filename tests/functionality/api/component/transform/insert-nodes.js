@@ -1,11 +1,10 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const insertNodes = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-node="/tests/functionality/assets/assets/node.js"></div>
+      <div odom-node="/tests/functionality/assets/assets/node.js"></div>
     </div>
   `;
 
@@ -17,6 +16,5 @@ const insertNodes = async () => {
 
   return InsertNodes;
 };
-
 
 export default insertNodes;

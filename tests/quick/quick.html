@@ -11,7 +11,7 @@
 
     <script type="module">
       import { transpile } from "/src/import-component/transpile.js";
-      import * as Acom from "/src/main.js";
+      import * as Odom from "/src/main.js";
 
       const src = "/tests/functionality/assets/assets/html-component.html";
       const html = await (await fetch(src)).text();
@@ -19,8 +19,8 @@
       (async () => {
         // const jsModule = await transpile(html);
         // console.info(jsModule);
-        window.Acom = Acom;
-        const component = await Acom.importComponent({src});
+        window.Odom = Odom;
+        const component = await Odom.importComponent({src});
         console.info(component);
         const Component = await component();
         document.body.append(Component.scope);

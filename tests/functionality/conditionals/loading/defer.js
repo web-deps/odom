@@ -1,15 +1,14 @@
 import { createComponent } from "/src/main.js";
 
-
 const defer = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div id="div-1" acom-loading="defer"></div>
-      <div id="div-2" acom-loading='{"type": "defer", "time": 3000}'></div>
+      <div id="div-1" odom-loading="defer"></div>
+      <div id="div-2" odom-loading='{"type": "defer", "time": 3000}'></div>
     </div>
   `;
 
-  const styles = /* css */`
+  const styles = /* css */ `
     :scope > div {
       margin: 1rem auto;
       width: 40vh;
@@ -17,14 +16,14 @@ const defer = async () => {
       background-color: green;
     }
   `;
-  
+
   const options = { markup, styles };
   const Defer = await createComponent(options);
   const scope = Defer.scope;
   const DIV = 2;
   document.body.appendChild(scope);
   let div = Defer.select(`div:nth-of-type(${DIV})`, false);
-  let passed = div.hasAttribute("acom-placeholder");
+  let passed = div.hasAttribute("odom-placeholder");
 
   setTimeout(async () => {
     div = Defer.select(`#div-${DIV}`, false);
@@ -41,6 +40,5 @@ const defer = async () => {
 
   return Defer;
 };
-
 
 export default defer;

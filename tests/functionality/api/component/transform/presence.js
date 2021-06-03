@@ -1,11 +1,10 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const presence = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-presence='{"action": "remove", "conditions": ["@data.remove"]}'></div>
+      <div odom-presence='{"action": "remove", "conditions": ["@data.remove"]}'></div>
     </div>
   `;
 
@@ -18,6 +17,5 @@ const presence = async () => {
 
   return Presence;
 };
-
 
 export default presence;

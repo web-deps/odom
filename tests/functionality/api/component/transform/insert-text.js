@@ -1,11 +1,10 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const insertText = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-text="/tests/functionality/assets/assets/text.txt"></div>
+      <div odom-text="/tests/functionality/assets/assets/text.txt"></div>
     </div>
   `;
 
@@ -17,6 +16,5 @@ const insertText = async () => {
 
   return InsertText;
 };
-
 
 export default insertText;

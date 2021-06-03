@@ -1,9 +1,8 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const map = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <table>
       <thead>
           <tr>
@@ -11,13 +10,13 @@ const map = async () => {
             <td>Name</td>
           </tr>
       </thead>
-      <tbody acom-map="@data.users">
+      <tbody odom-map="@data.users">
         <tr title="@datum.username">
           <td>
-            <span acom-text="@datum.username"></span>
+            <span odom-text="@datum.username"></span>
           </td>
           <td>
-            <span acom-text="@datum.name"></span>
+            <span odom-text="@datum.name"></span>
           </td>
         </tr>
       </tbody>
@@ -48,6 +47,5 @@ const map = async () => {
 
   return _Map;
 };
-
 
 export default map;

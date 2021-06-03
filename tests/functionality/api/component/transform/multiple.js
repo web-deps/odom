@@ -1,9 +1,8 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const multiple = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <table>
       <thead>
           <tr>
@@ -12,12 +11,12 @@ const multiple = async () => {
           </tr>
       </thead>
       <tbody>
-        <tr acom-multiple="@data.users">
+        <tr odom-multiple="@data.users">
           <td>
-            <span acom-text="@datum.username"></span>
+            <span odom-text="@datum.username"></span>
           </td>
           <td>
-            <span acom-text="@datum.name"></span>
+            <span odom-text="@datum.name"></span>
           </td>
         </tr>
       </tbody>
@@ -48,6 +47,5 @@ const multiple = async () => {
 
   return Multiple;
 };
-
 
 export default multiple;

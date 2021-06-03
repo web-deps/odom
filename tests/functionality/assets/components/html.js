@@ -1,7 +1,7 @@
 import { createComponent, importComponent } from "/src/main.js";
 
 const html = async () => {
-  window.Acom = { createComponent }; // Simulate CDN
+  window.Odom = { createComponent }; // Simulate CDN
   const src = "/tests/functionality/assets/assets/html-component.html";
   const component = await importComponent({ src });
   const DemoComponent = await component();

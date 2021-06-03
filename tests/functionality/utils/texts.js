@@ -1,11 +1,10 @@
 import { createComponent } from "/src/main.js";
 import logResult from "../log-result.js";
 
-
 const texts = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-text="text"></div>
+      <div odom-text="text"></div>
     </div>
   `;
 
@@ -20,6 +19,5 @@ const texts = async () => {
 };
 
 const text = async () => "Component";
-
 
 export default texts;

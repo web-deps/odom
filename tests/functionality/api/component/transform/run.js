@@ -1,20 +1,19 @@
 import { Component } from "/src/main.js";
 import logResult from "/tests/functionality/log-result.js";
 
-
 const run = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-src="/tests/functionality/assets/assets/esm-component.js"></div>
-      <div acom-markup="/tests/functionality/assets/assets/markup.html"></div>
-      <div acom-node="/tests/functionality/assets/assets/node.js"></div>
+      <div odom-src="/tests/functionality/assets/assets/esm-component.js"></div>
+      <div odom-markup="/tests/functionality/assets/assets/markup.html"></div>
+      <div odom-node="/tests/functionality/assets/assets/node.js"></div>
       <div id="text">
-        <div acom-text="/tests/functionality/assets/assets/text.txt"></div>
+        <div odom-text="/tests/functionality/assets/assets/text.txt"></div>
       </div>
-      <div acom-presence='{"action": "remove", "conditions": ["@data.remove"]}' id="conditional"></div>
+      <div odom-presence='{"action": "remove", "conditions": ["@data.remove"]}' id="conditional"></div>
       <ul id="collections">
-        <li acom-multiple="@data.items">
-          <span acom-text="@datum"></span>
+        <li odom-multiple="@data.items">
+          <span odom-text="@datum"></span>
         </li>
       </ul>
     </div>
@@ -34,7 +33,7 @@ const run = async () => {
   assets.push(assets[3].textContent.trim());
   let assetsPassed = true;
   for (const asset of assets) assetsPassed = assetsPassed && !!asset;
-  
+
   const conditionalsPassed = !(await Run.select("#conditionals", false));
   const collectionsPassed = Run.select("#collections", false).children.length === 3;
   const passed = assetsPassed && conditionalsPassed && collectionsPassed;
@@ -42,6 +41,5 @@ const run = async () => {
 
   return Run;
 };
-
 
 export default run;

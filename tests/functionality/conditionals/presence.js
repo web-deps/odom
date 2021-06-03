@@ -1,18 +1,17 @@
 import { createComponent } from "/src/main.js";
 
-
 const presence = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div id="div-1" acom-presence='{"action": "remove", "conditions": ["@data.remove"]}'></div>
-      <div id="div-2" acom-presence='{"action": "remove", "conditions": [{"query": "(min-width: 800px)"}]}'></div>
+      <div id="div-1" odom-presence='{"action": "remove", "conditions": ["@data.remove"]}'></div>
+      <div id="div-2" odom-presence='{"action": "remove", "conditions": [{"query": "(min-width: 800px)"}]}'></div>
       <div
         id="div-3"
-        acom-presence='{"action": "remove", "conditions": ["@data.remove", {"query": "(min-width: 800px)"}]}'
+        odom-presence='{"action": "remove", "conditions": ["@data.remove", {"query": "(min-width: 800px)"}]}'
       ></div>
       <div
         id="div-4"
-        acom-presence='{
+        odom-presence='{
           "action": "remove",
           "conditions": ["@data.remove", {"query": "(min-width: 800px)", "watch": true}]
         }'
@@ -20,7 +19,7 @@ const presence = async () => {
     </div>
   `;
 
-  const styles = /* css */`
+  const styles = /* css */ `
     :scope > div {
       margin: 1rem auto;
       width: 40vh;
@@ -36,7 +35,7 @@ const presence = async () => {
   const DIV = 1;
   const div = Presence.select(`div:nth-of-type(${DIV})`, false);
   let passed;
-  
+
   if (data.remove === true) passed = !div;
   else if (data.remove === false) passed = !!div;
 
@@ -45,6 +44,5 @@ const presence = async () => {
 
   return Presence;
 };
-
 
 export default presence;

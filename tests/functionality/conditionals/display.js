@@ -1,17 +1,16 @@
 import { createComponent } from "/src/main.js";
 
-
 const display = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-display='{"value": "none", "conditions": ["@data.hide"]}'></div>
-      <div acom-display='{"value": ["none", "block"], "conditions": ["@data.hide"]}'></div>
-      <div acom-display='{"value": ["none", "block"], "conditions": [{"query": "(min-width: 800px)"}]}'></div>
+      <div odom-display='{"value": "none", "conditions": ["@data.hide"]}'></div>
+      <div odom-display='{"value": ["none", "block"], "conditions": ["@data.hide"]}'></div>
+      <div odom-display='{"value": ["none", "block"], "conditions": [{"query": "(min-width: 800px)"}]}'></div>
       <div
-        acom-display='{"value": ["none", "block"], "conditions": ["@data.hide", {"query": "(min-width: 800px)"}]}'
+        odom-display='{"value": ["none", "block"], "conditions": ["@data.hide", {"query": "(min-width: 800px)"}]}'
       ></div>
       <div
-        acom-display='{
+        odom-display='{
           "value": ["none", "block"],
           "conditions": ["@data.hide", {"query": "(min-width: 800px)", "watch": true}]
         }'
@@ -21,11 +20,11 @@ const display = async () => {
 
   const inlineStyles = {
     ":scope > div": {
-      "margin": "1rem auto",
-      "width": "40vh",
-      "height": "40vh",
+      margin: "1rem auto",
+      width: "40vh",
+      height: "40vh",
       "background-color": "green",
-      "display": "block"
+      display: "block"
     }
   };
 
@@ -36,7 +35,7 @@ const display = async () => {
   const DIV = 1;
   const div = Display.select(`div:nth-of-type(${DIV})`, false);
   let passed;
-  
+
   if (data.hide === true) passed = div.style.getPropertyValue("display") === "none";
   else if (data.hide === false) passed = div.style.getPropertyValue("display") === "block";
 
@@ -45,6 +44,5 @@ const display = async () => {
 
   return Display;
 };
-
 
 export default display;

@@ -1,10 +1,9 @@
 import { createComponent } from "/src/main.js";
 
-
 const node = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-node="/tests/functionality/assets/assets/node.js"></div>
+      <div odom-node="/tests/functionality/assets/assets/node.js"></div>
     </div>
   `;
 
@@ -17,6 +16,5 @@ const node = async () => {
 
   return _Node;
 };
-
 
 export default node;

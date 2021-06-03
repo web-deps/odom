@@ -1,8 +1,7 @@
 import { createComponent } from "/src/main.js";
 
-
 const map = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <table>
       <thead>
           <tr>
@@ -10,7 +9,7 @@ const map = async () => {
             <td>Name</td>
           </tr>
       </thead>
-      <tbody acom-map='{"data": "@data.users", "createNode": "@methods.createNode"}'></tbody>
+      <tbody odom-map='{"data": "@data.users", "createNode": "@methods.createNode"}'></tbody>
     </table>
   `;
 
@@ -29,7 +28,7 @@ const map = async () => {
     }
   ];
 
-  const createNode = user => {
+  const createNode = (user) => {
     return `
       <tr>
         <td>${user.username}</td>
@@ -51,6 +50,5 @@ const map = async () => {
 
   return MapComponent;
 };
-
 
 export default map;

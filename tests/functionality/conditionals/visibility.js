@@ -1,17 +1,16 @@
 import { createComponent } from "/src/main.js";
 
-
 const visibility = async () => {
-  const markup = /* html */`
+  const markup = /* html */ `
     <div>
-      <div acom-visibility='{"value": "hidden", "conditions": ["@data.hide"]}'></div>
-      <div acom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'></div>
-      <div acom-visibility='{"value": ["hidden", "visible"], "conditions": [{"query": "(min-width: 800px)"}]}'></div>
+      <div odom-visibility='{"value": "hidden", "conditions": ["@data.hide"]}'></div>
+      <div odom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'></div>
+      <div odom-visibility='{"value": ["hidden", "visible"], "conditions": [{"query": "(min-width: 800px)"}]}'></div>
       <div
-        acom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide", {"query": "(min-width: 800px)"}]}'
+        odom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide", {"query": "(min-width: 800px)"}]}'
       ></div>
       <div
-        acom-visibility='{
+        odom-visibility='{
           "value": ["hidden", "visible"],
           "conditions": ["@data.hide", {"query": "(min-width: 800px)", "watch": true}]
         }'
@@ -21,11 +20,11 @@ const visibility = async () => {
 
   const inlineStyles = {
     ":scope > div": {
-      "margin": "1rem auto",
-      "width": "40vh",
-      "height": "40vh",
+      margin: "1rem auto",
+      width: "40vh",
+      height: "40vh",
       "background-color": "green",
-      "visibility": "visible"
+      visibility: "visible"
     }
   };
 
@@ -36,7 +35,7 @@ const visibility = async () => {
   const DIV = 1;
   const div = Visibility.select(`div:nth-of-type(${DIV})`, false);
   let passed;
-  
+
   if (data.hide === true) passed = div.style.getPropertyValue("visibility") === "hidden";
   else if (data.hide === false) passed = div.style.getPropertyValue("visibility") === "visible";
 
@@ -45,6 +44,5 @@ const visibility = async () => {
 
   return Visibility;
 };
-
 
 export default visibility;

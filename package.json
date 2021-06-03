@@ -1,7 +1,7 @@
 {
-  "name": "acom",
+  "name": "odom",
   "version": "1.0.0",
-  "description": "<P align=\"center\">   <img src=\"https://user-images.githubusercontent.com/57598264/105575616-978ba400-5d75-11eb-81d0-6b6da44b8b2f.png\" />   <h1 align=\"center\" style=\"font-weight:bold;\">Acom</h1> </p>",
+  "description": "A JavaScript framework for building user interfaces.",
   "main": "dist/main.js",
   "files": [
     "dist",
@@ -28,13 +28,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riu-web/acom.git"
+    "url": "git+https://github.com/riu-web/odom.git"
   },
-  "keywords": [],
+  "keywords": [
+    "javascript",
+    "framework",
+    "component",
+    "ui"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/riu-web/acom/issues"
+    "url": "https://github.com/riu-web/odom/issues"
   },
-  "homepage": "https://github.com/riu-web/acom#readme"
+  "homepage": "https://github.com/riu-web/odom#readme"
 }

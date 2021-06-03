@@ -48,7 +48,7 @@
 
 ## Introduction
 
-Acom is a component based framework. Components put content, presentation and behavior in the same place. In Acom, components are created using [`createComponent`](api/create-component/create-component.md), one of the named exports. The method has an alias `$create`. You can build a component at once using `createComponent`, or you can only create an instance of [`Component`](api/component/component.md) first then transform the component bit by bit using the [API](api/component/component.md#api).
+Odom is a component based framework. Components put content, presentation and behavior in the same place. In Odom, components are created using [`createComponent`](api/create-component/create-component.md), one of the named exports. The method has an alias `$create`. You can build a component at once using `createComponent`, or you can only create an instance of [`Component`](api/component/component.md) first then transform the component bit by bit using the [API](api/component/component.md#api).
 
 ## Local Components
 
@@ -84,7 +84,7 @@ The index.html file has the following general structure:
   <body>
     <main id="hello-world"></main>
 
-    <script src="/path-to-acom"></script>
+    <script src="/path-to-odom"></script>
 
     <script>
       // ...
@@ -93,18 +93,18 @@ The index.html file has the following general structure:
 <html>
 ```
 
-The `body` of the html document has a `main` element with the ID `hello-world`. This is the element that is going to be replaced by our component. The following element is a `script` element having its `src` attribute set to the CDN for Acom. The last element of the `body` is a `script` element from which we are going to create the component and insert it into the DOM. So, in the following sections, we are going to focus on the contents of this element.
+The `body` of the html document has a `main` element with the ID `hello-world`. This is the element that is going to be replaced by our component. The following element is a `script` element having its `src` attribute set to the CDN for Odom. The last element of the `body` is a `script` element from which we are going to create the component and insert it into the DOM. So, in the following sections, we are going to focus on the contents of this element.
 
 #### Creating the Component
 
-First we are going to create our component using `Acom.createComponent`. We are only going to build our component with markup we put into the argument of `createComponent`.
+First we are going to create our component using `Odom.createComponent`. We are only going to build our component with markup we put into the argument of `createComponent`.
 
 Put the following code into the `script` element:
 
 ```js
 (async () => {
   const markup = `
-    <main acom-ml="html">
+    <main odom-ml="html">
       <h1>
         Hello <span>World</span>
       </h1>
@@ -119,7 +119,7 @@ Put the following code into the `script` element:
   `;
 
   const options = { markup };
-  const HelloWorld = await Acom.createComponent(options);
+  const HelloWorld = await Odom.createComponent(options);
   HelloWorld.render("#hello-world");
 })();
 ```
@@ -128,7 +128,7 @@ Open the HTML file in the browser. You should be able to see the heading reading
 
 1. **Create Markup**: First, we put the markup for our component in the variable `markup`. This is the markup used to build the element that replaces `main#hello-world`.
 2. **Create `options`**: Next, we created an `options` object and put our markup in it.
-3. **Create Component**: Next, we created our component using `Acom.createComponent`. We passed the object `options` as the only parameter of the method `createComponent`. The method is asynchronous, thus we had to use the `await` keyword when calling it. Also note that we wrapped our code in an asynchronous IIFE. The IIFE is asynchronous (indicated by the `async` keyword), this enabled us to use the keyword `await` in the code inside it.
+3. **Create Component**: Next, we created our component using `Odom.createComponent`. We passed the object `options` as the only parameter of the method `createComponent`. The method is asynchronous, thus we had to use the `await` keyword when calling it. Also note that we wrapped our code in an asynchronous IIFE. The IIFE is asynchronous (indicated by the `async` keyword), this enabled us to use the keyword `await` in the code inside it.
 4. **Render the Component**: Finally, we rendered the component to the DOM using the our component's method `render`. In this case, we used a CSS selector as the only parameter of the method. The method looked for the element (`main`) that matched the selector in the DOM and replaced it with the component element.
 
 #### Adding Styles
@@ -253,7 +253,7 @@ export const HelloWorld = async (props) => {
   const eventListeners = // ...
   const id = "hello-world";
   const options = { id, markup, styles, events };
-  return Acom.createComponent(options);
+  return Odom.createComponent(options);
 };
 ```
 
@@ -261,11 +261,11 @@ Let us look at each one of the variables in detail in the following sections.
 
 #### Markup
 
-The markup for the component is put in the variable `markup`. The markup is required to have only one root element, which in our case is an `HTMLMainElement`. The attribute `acom-ml` is used to indicate the type of markup used. We are using HTML for the markup, thus, the value was set to "html". The default value for the attribute is "html". Therefore, we are not required to include the attribute in this case.
+The markup for the component is put in the variable `markup`. The markup is required to have only one root element, which in our case is an `HTMLMainElement`. The attribute `odom-ml` is used to indicate the type of markup used. We are using HTML for the markup, thus, the value was set to "html". The default value for the attribute is "html". Therefore, we are not required to include the attribute in this case.
 
 ```js
 const markup = /* html */`
-  <main acom-ml="html">
+  <main odom-ml="html">
     <h1>
       Hello <span>World</span>
     </h1>
@@ -348,7 +348,7 @@ The variable `id` indicates the ID of the component. The ID is not required, but
 
 #### Component Constructor
 
-The [Constructor](#constructor) is the single named export of the module `HelloWorld`. The constructor is used to create the component. The component is created using `createComponent`, one of the named exports of Acom. The constructor then returns the component instance, which is what the promise returned by `createComponent` resolves to.
+The [Constructor](#constructor) is the single named export of the module `HelloWorld`. The constructor is used to create the component. The component is created using `createComponent`, one of the named exports of Odom. The constructor then returns the component instance, which is what the promise returned by `createComponent` resolves to.
 
 #### Using the component
 
@@ -356,7 +356,7 @@ The file `index.html` has the following contents:
 
 #### HTML
 
-The first element of the `body` is `main` which has an attribute `acom-src`. The attribute indicates that the element is to be replaced by a component. The value of the attribute is the URI of the component (`"./hello-world.js"`). The following element is a `script` element that refers to an Acom CDN. The last element is also a `script` element with code that inserts our component into the DOM. The script invokes the method `Acom.render` without any parameters. The method `Acom.render` will go through the DOM looking for [target elements](assets#target-elements). When it finds `main`, it will look for the component specified via the attribute `acom-src`. When it finds the component, it then replaces `main` with the component. If you open the HTML file in the browser, you will see the component on the page.
+The first element of the `body` is `main` which has an attribute `odom-src`. The attribute indicates that the element is to be replaced by a component. The value of the attribute is the URI of the component (`"./hello-world.js"`). The following element is a `script` element that refers to an Odom CDN. The last element is also a `script` element with code that inserts our component into the DOM. The script invokes the method `Odom.render` without any parameters. The method `Odom.render` will go through the DOM looking for [target elements](assets#target-elements). When it finds `main`, it will look for the component specified via the attribute `odom-src`. When it finds the component, it then replaces `main` with the component. If you open the HTML file in the browser, you will see the component on the page.
 
 ```html
 <!DOCTYPE html>
@@ -367,12 +367,12 @@ The first element of the `body` is `main` which has an attribute `acom-src`. The
     <title>Hello World</title>
   </head>
   <body>
-    <main acom-src="./hello-world.js"></main>
+    <main odom-src="./hello-world.js"></main>
 
-    <script src="/path-to-acom"></script>
+    <script src="/path-to-odom"></script>
 
     <script>
-      Acom.render();
+      Odom.render();
     </script>
   </body>
 <html>
@@ -430,10 +430,10 @@ The first element we will look at is the `meta` element in the `head` element. T
 
 #### Markup
 
-The markup of a component can be wrapped in any HTML element that can be displayed. The markup has to have only one root element. In our case, the element is an `HTMLMainElement`. The attribute "acom-ml" is used to indicate what type of markup is used. The attribute has been set to "html" because we are using HTML. The default value for the attribute is "html", so, it is okay to leave it out in this case.
+The markup of a component can be wrapped in any HTML element that can be displayed. The markup has to have only one root element. In our case, the element is an `HTMLMainElement`. The attribute "odom-ml" is used to indicate what type of markup is used. The attribute has been set to "html" because we are using HTML. The default value for the attribute is "html", so, it is okay to leave it out in this case.
 
 ```html
-<main acom-ml="html">
+<main odom-ml="html">
   <h1>
     Hello <span>World</span>
   </h1>
@@ -513,14 +513,14 @@ The `script` tag contains a module that exports the [Constructor](#constructor).
 
     const options = { markup, styles,
     . eventListeners };
-    return Acom.createComponent(options);
+    return Odom.createComponent(options);
   };
 </script>
 ```
 
 #### Main HTML File
 
-We are going to use our HTML component in `index.html`. The file contents are very similar to those of the file we used in the JS component. The only difference is the extension used for the URI of the component file specified in the attribute `acom-src` on the `main` element. Opening the file in the browser, you will see the component displayed on the page.
+We are going to use our HTML component in `index.html`. The file contents are very similar to those of the file we used in the JS component. The only difference is the extension used for the URI of the component file specified in the attribute `odom-src` on the `main` element. Opening the file in the browser, you will see the component displayed on the page.
 
 ```html
 <!DOCTYPE html>
@@ -531,12 +531,12 @@ We are going to use our HTML component in `index.html`. The file contents are ve
     <title>Hello World</title>
   </head>
   <body>
-    <main acom-src="./hello-world.html"></main>
+    <main odom-src="./hello-world.html"></main>
 
-    <script src="/path-to-acom"></script>
+    <script src="/path-to-odom"></script>
 
     <script>
-      Acom.render();
+      Odom.render();
     </script>
   </body>
 <html>
@@ -549,25 +549,25 @@ In the constructor of HTML components, not all relative URLs work. Relative URLs
 - Root relative URLs: All root relative URLs (i.e. URLs that start with `/`) work.
 - Statice imports: All relative URLs in ES static imports work.
 - Dynamic imports: All relative URLs us as the parameter to the ES dynamic import method `import` work. However, calculated URLs do not work.
-- [importComponent](exports.md#importcomponent): Relative URLs used in the method `importComponent` (one of the named exports of Acom) work.
+- [importComponent](exports.md#importcomponent): Relative URLs used in the method `importComponent` (one of the named exports of Odom) work.
 - [fetchAsset](./api/asset-manager.md#fetchasset): Relative URLs used in `fetchAsset` work.
 - [prefetch](./api/asset-manager.md#prefetch): Relative URLs used in `prefetch` work.
 - fetch API: Relative URLs used in the window method `fetch` work.
 
 #### Installation Support
 
-Importing Acom in HTML single-file components is supported only in some types of installation. You can access Acom in the following cases:
+Importing Odom in HTML single-file components is supported only in some types of installation. You can access Odom in the following cases:
 
-- CDN: Using a CDN, you can access Acom the same way you would in any module or script.
-- NPM: The only way you can access Acom using NPM is by directly importing from the node modules folder. This way, you will be importing the source files and not the bundle. In the `node_modules` folder, the main source file for Acom is located at `node_modules/acom/src/main.js`.
+- CDN: Using a CDN, you can access Odom the same way you would in any module or script.
+- NPM: The only way you can access Odom using NPM is by directly importing from the node modules folder. This way, you will be importing the source files and not the bundle. In the `node_modules` folder, the main source file for Odom is located at `node_modules/odom/src/main.js`.
 
-> NOTE: This might change in the future. Build tools for Acom might be implemented in the future to address this.
+> NOTE: This might change in the future. Build tools for Odom might be implemented in the future to address this.
 
 ## Multiple-file Components
 
 A component that has its markup and/or styles (e.g CSS) in a separate file (or files) is called a multiple-file component. The assets (markup and styles) are imported in the file containing the [Constructor](#constructor). They are then used to build a component.
 
-Acom provides a way to dynamically import these assets via [`assetManager`](api/asset-manager.md). In this section we are going to rewrite the app we wrote using a [JS single-file component](#js-components) and an [HTML single-file component](#html-components).
+Odom provides a way to dynamically import these assets via [`assetManager`](api/asset-manager.md). In this section we are going to rewrite the app we wrote using a [JS single-file component](#js-components) and an [HTML single-file component](#html-components).
 
 ### File Structure
 
@@ -587,7 +587,7 @@ All the files for the component are put in a single folder `component`.
 The markup for the component is put in the file `markup.html`. The file has the following contents:
 
 ```html
-<main acom-ml="html">
+<main odom-ml="html">
   <h1>
     Hello <span>World</span>
   </h1>
@@ -645,8 +645,8 @@ The [Constructor](#constructor) of the component contained in `main.js`. The fil
 
 ```js
 export const HelloWorld = async (props) => {
-  const markup = await Acom.assetManager.fetchAsset("./markup.html");
-  const styles = await Acom.assetManager.fetchAsset("./styles.css");
+  const markup = await Odom.assetManager.fetchAsset("./markup.html");
+  const styles = await Odom.assetManager.fetchAsset("./styles.css");
 
   const eventListeners = {
     "button": [
@@ -664,7 +664,7 @@ export const HelloWorld = async (props) => {
 
   const id = "hello-world";
   const options = { id, markup, styles, events };
-  return Acom.createComponent(options);
+  return Odom.createComponent(options);
 };
 ```
 
@@ -681,12 +681,12 @@ The main HTML file `index.html` contains content so similar to that used for sin
     <title>Hello World</title>
   </head>
   <body>
-    <main acom-src="./component/main.js"></main>
+    <main odom-src="./component/main.js"></main>
 
-    <script src="/path-to-acom"></script>
+    <script src="/path-to-odom"></script>
 
     <script>
-      Acom.render();
+      Odom.render();
     </script>
   </body>
 <html>

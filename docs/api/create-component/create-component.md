@@ -225,7 +225,7 @@ Let us look at how we can apply event listeners to a component by applying a cli
 The button element in the component will be selected and the `listener` will be applied for the `click` event. When you click the button, an alert will pop up with the message "Button clicked!".
 
 > **Note**: <br />
-> Acom uses event delegation to apply event listeners. All event listeners are attached to [`scope`](#scope). So, `event.currentTarget` always refers to `scope`.
+> Odom uses event delegation to apply event listeners. All event listeners are attached to [`scope`](#scope). So, `event.currentTarget` always refers to `scope`.
 
 ### `extension`
 
@@ -271,7 +271,7 @@ This will select the element with the class `main-content` and make its width ha
 
 ### `markup`
 
-The markup used to construct the DOM of a component. The markup can be HTML, XML or any XML-compliant markup. For types of markup other than HTML, the root element of the markup must have the attribute `acom-ml="xml"`. The attribute is not required for HTML, but it is permitted, in which case you set it to `html`.
+The markup used to construct the DOM of a component. The markup can be HTML, XML or any XML-compliant markup. For types of markup other than HTML, the root element of the markup must have the attribute `odom-ml="xml"`. The attribute is not required for HTML, but it is permitted, in which case you set it to `html`.
 
 For all non-HTML markup, all elements are converted to the `div` element of HTML by default. To specify which HTML element should be used in place of an element, you set the attribute `html` to the HTML element tag name. All other attributes on the element will be preserved. An attribute `xml` is set to the XML tag name during conversion from XML to HTML.
 
@@ -282,7 +282,7 @@ The following markup flavours will result in the same DOM elements, except for e
 HTML
 
 ```html
-<main acom-ml="html">
+<main odom-ml="html">
   <a href="/example">visit</a>
 </main>
 ```
@@ -290,7 +290,7 @@ HTML
 XML
 
 ```xml
-<container acom-ml="xml" html="main">
+<container odom-ml="xml" html="main">
   <link html="a" href="/example">Visit</link>
 </container>
 ```
@@ -298,7 +298,7 @@ XML
 HTML Equivalent
 
 ```html
-<main acom-ml="xml" xml="container">
+<main odom-ml="xml" xml="container">
   <a href="/example" xml="link">Visit</button>
 </main>
 ```

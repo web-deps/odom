@@ -70,17 +70,17 @@ When set to true, the media changes are watched and if the media matches, the sp
 
 ### Introduction
 
-The loading conditional is used to load an element if a particular condition has been met. To use this conditional, add the attribute `acom-loading` to an element and specify conditions that if met, the element will be loaded. The conditions are specified in the value of this attribute.
+The loading conditional is used to load an element if a particular condition has been met. To use this conditional, add the attribute `odom-loading` to an element and specify conditions that if met, the element will be loaded. The conditions are specified in the value of this attribute.
 
-The attribute `acom-loading` takes either a string that specifies a type of loading, or a JSON string that specifies the type of loading and other options. The type can have the values `"defer"` or `"lazy"`. The JSON string has a different structure depending on the type of loading.
+The attribute `odom-loading` takes either a string that specifies a type of loading, or a JSON string that specifies the type of loading and other options. The type can have the values `"defer"` or `"lazy"`. The JSON string has a different structure depending on the type of loading.
 
 ### Placeholders
 
-[Loading](#loading) uses placeholders to conditionally load elements. Placeholders are used to replace elements elements upon which conditions are declared so that the elements are added to the DOM only if the conditions are met. Placeholders have the same tag name as the original elements. The placeholder contains only one attribute, `acom-placeholder`, which is set to the value of the attribute `name` of the element (if present) or `""`. When conditions for loading an element are met, the placeholder is replaced with the element.
+[Loading](#loading) uses placeholders to conditionally load elements. Placeholders are used to replace elements elements upon which conditions are declared so that the elements are added to the DOM only if the conditions are met. Placeholders have the same tag name as the original elements. The placeholder contains only one attribute, `odom-placeholder`, which is set to the value of the attribute `name` of the element (if present) or `""`. When conditions for loading an element are met, the placeholder is replaced with the element.
 
 ### Defer
 
-You use `defer` to load content after a component has been added to the DOM. Use the value `defer` for the value of `acom-loading` or use a JSON string.
+You use `defer` to load content after a component has been added to the DOM. Use the value `defer` for the value of `odom-loading` or use a JSON string.
 
 #### JSON Structure
 
@@ -135,9 +135,9 @@ This is used to lazy load an element. It uses the [`IntersectionObserver`](https
 
 ```html
 <div>
-  <div acom-loading="defer" class="div-1"></div>
-  <div acom-loading='{"type": "defer", "time": 3000}' class="div-2"></div>
-  <div acom-loading='{"type": "lazy"}' class="div-3"></div>
+  <div odom-loading="defer" class="div-1"></div>
+  <div odom-loading='{"type": "defer", "time": 3000}' class="div-2"></div>
+  <div odom-loading='{"type": "lazy"}' class="div-3"></div>
 </div>
 ```
 
@@ -145,7 +145,7 @@ The first div (`div.div-1`) will load immediately the component has been added t
 
 ## Visibility
 
-This is used to make an element visible if certain conditions are met. It uses the attribute `acom-visibility`.
+This is used to make an element visible if certain conditions are met. It uses the attribute `odom-visibility`.
 
 ### JSON Structure
 
@@ -166,12 +166,12 @@ This is used to make an element visible if certain conditions are met. It uses t
 In this example, the element will have its visibility set to `"visible"` if `options.utils.data.makeVisible` is true.
 
 ```html
-<div acom-visibility='{"value": "visible", "conditions": ["@data.makeVisible"]}'></div>
+<div odom-visibility='{"value": "visible", "conditions": ["@data.makeVisible"]}'></div>
 ```
 
 ## Display
 
-This is used to display an element if certain conditions are met. It uses the attribute `acom-display`.
+This is used to display an element if certain conditions are met. It uses the attribute `odom-display`.
 
 ### JSON Structure
 
@@ -192,12 +192,12 @@ This is used to display an element if certain conditions are met. It uses the at
 In this example, the element will have its display set to `"none"` if `options.utils.data.hide` is true.
 
 ```html
-<div acom-display='{"value": "none", "conditions": ["@data.hide"]}'></div>
+<div odom-display='{"value": "none", "conditions": ["@data.hide"]}'></div>
 ```
 
 ## Presence
 
-This is used to add an element to the DOM if certain conditions are met. It uses the attribute `acom-presence`.
+This is used to add an element to the DOM if certain conditions are met. It uses the attribute `odom-presence`.
 
 ### JSON Structure
 
@@ -218,7 +218,7 @@ This is used to add an element to the DOM if certain conditions are met. It uses
 In this example, the element will be removed from the DOM if the width of the browser window is at least `"992px"`.
 
 ```html
-<div acom-presence='{"action": "remove", "conditions": [{ "query": "(min-width: 992px)" }]}'></div>
+<div odom-presence='{"action": "remove", "conditions": [{ "query": "(min-width: 992px)" }]}'></div>
 ```
 
 > **Note:** The value `"watch"` of the media query has no effect as the action is performed only once for [Presence](#presence).

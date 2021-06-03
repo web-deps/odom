@@ -26,7 +26,7 @@
 
 ## Introduction
 
-Acom provides a number of ways in which data can be shared within a component, across components and within an applications as a whole. Data can be shared using the following methods:
+Odom provides a number of ways in which data can be shared within a component, across components and within an applications as a whole. Data can be shared using the following methods:
 
 - `props`: Data transfered from one component to another.
 - `utils`: An attribute of [`options`](./api/create-component/create-component.md#options).
@@ -126,7 +126,7 @@ const dynamic = { username: "" };
 const data = { dynamic };
 const utils = { data }
 const options = { utils };
-const ExampleComponent = await Acom.createComponent(options);
+const ExampleComponent = await Odom.createComponent(options);
 const ExampleComponent.render("#example-component");
 
 setTimeout(() => {
@@ -171,14 +171,14 @@ Data can be passed from a component to an asset (component or not) using `props`
 
 #### Description
 
-One way of using props is by using attributes on target elements. All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `acom-`) are considered as props. Props are used to instantiate assets.
+One way of using props is by using attributes on target elements. All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `odom-`) are considered as props. Props are used to instantiate assets.
 
 #### **Example**
 
 In this example we will import a component and instantiate it using props.
 
 ```html
-<div acom-src="/src/components/header.html" page="home"></div>
+<div odom-src="/src/components/header.html" page="home"></div>
 ```
 
 In this example, `page` will be considered as a prop of the component at `/src/components/header.html`. The component will be imported and instantiated with an object (`props`) containing `page` as a prop. The object will have the following structure:
@@ -209,25 +209,25 @@ Let us import a component and pass a slot into it through props.
 **Parent Component**
 
 ```html
-<div acom-src="/src/components/button.htm">
+<div odom-src="/src/components/button.htm">
   <div name="text"></div>
 </div>
 ```
 
 **Child Component**
 
-Acom inserts slots on all descendant elements in the component that have the same value for the attribute `acom-slot` as the value of the attribute `name` on a slot from the parent component. If the value of the slot in `props` is an array, the slot placeholder is replaced with all the elements in the array.
+Odom inserts slots on all descendant elements in the component that have the same value for the attribute `odom-slot` as the value of the attribute `name` on a slot from the parent component. If the value of the slot in `props` is an array, the slot placeholder is replaced with all the elements in the array.
 
 ```html
 <div>
-  <div acom-slot="text"></slot>
+  <div odom-slot="text"></slot>
 </div>
 ```
 
-The `div` with the attribute `acom-slot` will be replaced with `props.slots.text`.
+The `div` with the attribute `odom-slot` will be replaced with `props.slots.text`.
 
 ## $App
 
 ### Description
 
-To share data within a web app as a whole, Acom uses the global object `$App`. You can explicitly add this object to the window object. If you have not added it, Acom will add it automatically when needed. Through `$App`, Acom caches and shares a lot of data between components.
+To share data within a web app as a whole, Odom uses the global object `$App`. You can explicitly add this object to the window object. If you have not added it, Odom will add it automatically when needed. Through `$App`, Odom caches and shares a lot of data between components.

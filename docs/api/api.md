@@ -41,7 +41,7 @@
 
 ## Introduction
 
-Acom provides a number of utilities for creating and manipulating components. We are going to look at how each one of these utilities works.
+Odom provides a number of utilities for creating and manipulating components. We are going to look at how each one of these utilities works.
 
 ## Structure
 

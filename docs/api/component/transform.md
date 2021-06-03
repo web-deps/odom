@@ -117,7 +117,7 @@ insertComponents(options)
 
 #### insertComponent Options
 
-__Structure__:
+**Structure**:
 
 ```js
 {
@@ -128,9 +128,9 @@ __Structure__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
-- `components`: contains components with property names corresponding to values specified via "acom-src" attributes.
+- `components`: contains components with property names corresponding to values specified via "odom-src" attributes.
 - `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
 - `methods`: The methods that can be accessed via data selectors
 - `props`: The props of the component that can be accessed via data selectors
@@ -203,7 +203,7 @@ insertMarkup(markups)
 
 #### insertMarkup Options
 
-__Structure__:
+**Structure**:
 
 ```js
 {
@@ -214,9 +214,9 @@ __Structure__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
-- `markups`: Contains markup with property names corresponding to values specified via "acom-markup" attributes.
+- `markups`: Contains markup with property names corresponding to values specified via "odom-markup" attributes.
 - `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
 - `methods`: The methods that can be accessed via data selectors
 - `props`: The props of the component that can be accessed via data selectors
@@ -247,7 +247,7 @@ insertNodes(options)
 
 #### insertNodes Options
 
-__Structure__:
+**Structure**:
 
 ```js
 {
@@ -258,9 +258,9 @@ __Structure__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
-- `nodes`: Contains nodes with property names corresponding to values specified via "acom-node" attributes.
+- `nodes`: Contains nodes with property names corresponding to values specified via "odom-node" attributes.
 - `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
 - `methods`: The methods that can be accessed via data selectors
 - `props`: The props of the component that can be accessed via data selectors
@@ -314,7 +314,7 @@ insertText(options)
 
 #### insertText Options
 
-__Structure__:
+**Structure**:
 
 ```js
 {
@@ -325,9 +325,9 @@ __Structure__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
-- `texts`: Contains text with property names corresponding to values specified via "acom-text" attributes.
+- `texts`: Contains text with property names corresponding to values specified via "odom-text" attributes.
 - `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
 - `methods`: The methods that can be accessed via data selectors
 - `props`: The props of the component that can be accessed via data selectors
@@ -364,7 +364,7 @@ map(options)
 
 #### map Options
 
-__Structure__:
+**Structure**:
 
 ```js
 {
@@ -374,7 +374,7 @@ __Structure__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
 - `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
 - `methods`: The methods that can be accessed via data selectors
@@ -406,7 +406,7 @@ multiple(options)
 
 #### multiple Options
 
-__Structure__:
+**Structure**:
 
 ```js
 {
@@ -416,7 +416,7 @@ __Structure__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
 - `data`: The data that can be accessed via [data selectors](../create-component/utils.md#data-selectors)
 - `methods`: The methods that can be accessed via data selectors
@@ -454,7 +454,7 @@ run(options)
 
 #### run Options
 
-__Sturcture__:
+**Sturcture**:
 
 ```js
 {
@@ -463,7 +463,7 @@ __Sturcture__:
 }
 ```
 
-__Properties__:
+**Properties**:
 
 - `props`: The props of a component. For more information, Refer to [`props`](../../data.md#props).
 - `utils`: Contains the utilities used to perform transformations. Refer to [`utils`](../create-component/utils.md) for more details.

@@ -1,6 +1,6 @@
 # Quick Start
 
-__Table of Contents__
+**Table of Contents**
 
 - [Quick Start](#quick-start)
   - [Installation](#installation)
@@ -35,24 +35,24 @@ __Table of Contents__
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/acom"></script>
+<script src="https://cdn.jsdelivr.net/npm/odom"></script>
 ```
 
 or
 
 ```html
-<script src="https://unpkg.com/acom"></script>
+<script src="https://unpkg.com/odom"></script>
 ```
 
 ### NPM
 
-`$ npm i --save acom`
+`$ npm i --save odom`
 
 ## Creating a Simple App
 
 ### Introduction
 
-In this section, we will learn some basic concepts of Acom by creating a simple "Hello World" app. Our app is going to have a single button at the center of the page. When the user clicks the button, an alert with the greeting "Hello World" pops up. We are going to use a [CDN](#cdn) for our app. We will create the app using a single HTML file. The HTML file will have the following general structure:
+In this section, we will learn some basic concepts of Odom by creating a simple "Hello World" app. Our app is going to have a single button at the center of the page. When the user clicks the button, an alert with the greeting "Hello World" pops up. We are going to use a [CDN](#cdn) for our app. We will create the app using a single HTML file. The HTML file will have the following general structure:
 
 ```html
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ In this section, we will learn some basic concepts of Acom by creating a simple 
   <body>
     <main id="hello-world"></main>
 
-    <script src="https://cdn.jsdelivr.net/npm/acom"></script>
+    <script src="https://cdn.jsdelivr.net/npm/odom"></script>
 
     <script>
       // ...
@@ -89,17 +89,17 @@ Let us create a component and insert it into the DOM. Replace the comment in the
   `;
 
   const options = { markup };
-  const HelloWorld = await Acom.createComponent(options);
+  const HelloWorld = await Odom.createComponent(options);
   HelloWorld.render("#hello-world");
 })();
 ```
 
 Open the HTML file in the browser. You should be able to see a button with the text "Say Hello" on the page. Let us look at each step we took to make this happen:
 
-1. __Create Markup__: First, we created HTML markup and put in the variable `markup`.
-2. __Create Options__: The second thing we did was create an object and added our markup in it. We then put the object in the variable `options`.
-3. __Create Component__: We created a component (`HelloWorld`) using `Acom.createComponent`. The `options` object we created earlier was used as the only parameter to `Acom.createComponent`. `Acom.createComponent` is asynchronous. That is why we used the keyword `await` when calling it. Also notice that our entire code is wrapped in an asynchronous IIFE (indicated by the `async` keyword). This was done to enable us to use the `await` keyword in the code inside it.
-4. __Render Component__: Finally, we rendered our component to the DOM by calling `HelloWorld.render`. The parameter to `HelloWorld.render` was a CSS selector corresponding to the element (`main#hello-world`) we wished to replace with our component.
+1. **Create Markup**: First, we created HTML markup and put in the variable `markup`.
+2. **Create Options**: The second thing we did was create an object and added our markup in it. We then put the object in the variable `options`.
+3. **Create Component**: We created a component (`HelloWorld`) using `Odom.createComponent`. The `options` object we created earlier was used as the only parameter to `Odom.createComponent`. `Odom.createComponent` is asynchronous. That is why we used the keyword `await` when calling it. Also notice that our entire code is wrapped in an asynchronous IIFE (indicated by the `async` keyword). This was done to enable us to use the `await` keyword in the code inside it.
+4. **Render Component**: Finally, we rendered our component to the DOM by calling `HelloWorld.render`. The parameter to `HelloWorld.render` was a CSS selector corresponding to the element (`main#hello-world`) we wished to replace with our component.
 
 ### Adding Styles
 
@@ -136,7 +136,7 @@ At this point, our app looks quite basic. Let us add some styling to make it loo
   // End of added code
 
   const options = { markup, styles }; // Modified line
-  const HelloWorld = await Acom.createComponent(options);
+  const HelloWorld = await Odom.createComponent(options);
   HelloWorld.render("#hello-world");
 })();
 ```
@@ -188,7 +188,7 @@ We have created our component and added styles, but our app can not say "Hello W
   // End of added code
 
   const options = { markup, styles, eventListeners }; // Modified line
-  const HelloWorld = await Acom.createComponent(options);
+  const HelloWorld = await Odom.createComponent(options);
   HelloWorld.render("#hello-world");
 ```
 
@@ -196,7 +196,7 @@ Refresh the page and click the button. Upon clicking the button, an alert must p
 
 ### Inserting Data
 
-Let us add a title attribute to our button and set its value using Acom. Modify the code as follows:
+Let us add a title attribute to our button and set its value using Odom. Modify the code as follows:
 
 ```js
 // Code before
@@ -219,11 +219,11 @@ const options = { markup, styles, eventListeners, utils }; // Modified line
 // Code after
 ```
 
-Refresh the page and hover over the button. You will see the tooltip "Say Hello". In the `markup`, we set the title attribute of the `button` to `@data.title`. We created an object called `data` and put the title of the `button` under the property `title`. We then put `data` in `utils`. And finally, we put `utils` in `options`. The value `@data.title` for the `title` attribute of the `buttton` refers to `options.utils.data.title`. For more details about working with data in Acom, refer to [Data](./data.md).
+Refresh the page and hover over the button. You will see the tooltip "Say Hello". In the `markup`, we set the title attribute of the `button` to `@data.title`. We created an object called `data` and put the title of the `button` under the property `title`. We then put `data` in `utils`. And finally, we put `utils` in `options`. The value `@data.title` for the `title` attribute of the `buttton` refers to `options.utils.data.title`. For more details about working with data in Odom, refer to [Data](./data.md).
 
 ## Conditionals
 
-Using Acom, you can add or remove elements to/from the DOM or change the visual status such as display and visibility of elements according to conditions you specify. Let us look at the different kinds of [conditionals](./conditionals.md) you can apply to DOM elements.
+Using Odom, you can add or remove elements to/from the DOM or change the visual status such as display and visibility of elements according to conditions you specify. Let us look at the different kinds of [conditionals](./conditionals.md) you can apply to DOM elements.
 
 ### HTML File Contents
 
@@ -240,7 +240,7 @@ We are going to use a single HTML file. THe file has the following general struc
 <body>
   <main id="conditionals"></main>
 
-  <script src="https://cdn.jsdelivr.net/npm/acom"></script>
+  <script src="https://cdn.jsdelivr.net/npm/odom"></script>
 
   <script>
     (async () => {
@@ -250,7 +250,7 @@ We are going to use a single HTML file. THe file has the following general struc
       const data = { show: true, hide: false };
       const utils = { data };
       const options = { markup, styles, utils };
-      const Conditionals = await Acom.createComponent(options);
+      const Conditionals = await Odom.createComponent(options);
       Conditionals.render("#conditionals");
     })();
   </script>
@@ -266,11 +266,11 @@ Replace the comment in the value for `markup` with the following HTML code:
 
 ```html
 <ul>
-  <li acom-loading='{"type": "defer", "time": 3000}' class="conditional">Loading - Defer (3s)</li>
-  <li acom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'  class="conditional">Visibility</li>
-  <li acom-display='{"value": ["none", "grid"], "conditions": ["@data.hide"]}'  class="conditional">Display</li>
-  <li acom-presence='{"action": "add", "conditions": ["@data.show", {"query": "(min-width: 800px)"}]}'  class="conditional">Presence</li>
-  <li acom-loading="lazy"  class="conditional">Loading - Lazy</li>
+  <li odom-loading='{"type": "defer", "time": 3000}' class="conditional">Loading - Defer (3s)</li>
+  <li odom-visibility='{"value": ["hidden", "visible"], "conditions": ["@data.hide"]}'  class="conditional">Visibility</li>
+  <li odom-display='{"value": ["none", "grid"], "conditions": ["@data.hide"]}'  class="conditional">Display</li>
+  <li odom-presence='{"action": "add", "conditions": ["@data.show", {"query": "(min-width: 800px)"}]}'  class="conditional">Presence</li>
+  <li odom-loading="lazy"  class="conditional">Loading - Lazy</li>
 </ul>
 ```
 
@@ -305,33 +305,33 @@ Open the HTML file in the browser and wait for about 3 seconds. After approximat
 
 #### Defer
 
-The conditional [Defer](./conditionals.md#defer) allows you to delay rendering of an element. The first element rendered approximately 3 seconds after the loading of the page. We made this happen via the attribute `acom-loading`. We used a JSON object to specify the options for the delay. The JSON object had a property `type` which was set to `defer`. This property indicated the type of loading we wanted. The JSON object also had another property `time` which we set to `3000`. This property specified how much time (in miliseconds) was supposed to pass before the element was rendered.
+The conditional [Defer](./conditionals.md#defer) allows you to delay rendering of an element. The first element rendered approximately 3 seconds after the loading of the page. We made this happen via the attribute `odom-loading`. We used a JSON object to specify the options for the delay. The JSON object had a property `type` which was set to `defer`. This property indicated the type of loading we wanted. The JSON object also had another property `time` which we set to `3000`. This property specified how much time (in miliseconds) was supposed to pass before the element was rendered.
 
 #### Visibility
 
-The visibility of an element can be set or changed via the conditional [Visibility](./conditionals.md#visibility). The second element's visibility was set via the attribute `acom-visibilty`. We used a JSON object. The property `value` was set to an array containing two values of visibility. The visibility is set to the first value if the conditional is true, and to the second if the conditional is false. The conditions checked were specified in the property `conditions`. The `conditions` were specified in an array which contained only one value. The value was a string with a [data selector](./data.md#data-selectors) `@data.hide` which referred to `options.utils.data.hide`. The value referred to was set to `false`, which means the conditional failed. This resulted into the visibility of the element being set to `visible`. That is why you were able to see the element on the page.
+The visibility of an element can be set or changed via the conditional [Visibility](./conditionals.md#visibility). The second element's visibility was set via the attribute `odom-visibilty`. We used a JSON object. The property `value` was set to an array containing two values of visibility. The visibility is set to the first value if the conditional is true, and to the second if the conditional is false. The conditions checked were specified in the property `conditions`. The `conditions` were specified in an array which contained only one value. The value was a string with a [data selector](./data.md#data-selectors) `@data.hide` which referred to `options.utils.data.hide`. The value referred to was set to `false`, which means the conditional failed. This resulted into the visibility of the element being set to `visible`. That is why you were able to see the element on the page.
 
 Let us see what happens if we change the result of the conditional. Set the value of `options.utils.data.hide` to `true` and refresh the page. After refreshing, you should not be able to see the element on the page. This is because the conditonal failed and thus the visibility of the element set to `hidden`. Fore more information about the Visibility conditional, refer to [Visibility](./conditionals.md#visibility).
 
 #### Display
 
-We set the display value of the third element using the conditional [Display](./conditionals.md#display). In the value for the attribute `acom-display` we set the desired options via a JSON object. The property `value` specified the desired display values for the success and failure of the conditional using the first and second values of the array respectively. The property `conditions` was used to specify the conditions to be checked. The array contained only a data selector for the value `options.utils.data.hide`. Since the value was set to `false` the conditional failed and thus the value of the display was set to `grid`.
+We set the display value of the third element using the conditional [Display](./conditionals.md#display). In the value for the attribute `odom-display` we set the desired options via a JSON object. The property `value` specified the desired display values for the success and failure of the conditional using the first and second values of the array respectively. The property `conditions` was used to specify the conditions to be checked. The array contained only a data selector for the value `options.utils.data.hide`. Since the value was set to `false` the conditional failed and thus the value of the display was set to `grid`.
 
 Let us see what happens if we change the conditions. Set the value of `options.utils.data.hide` (if you have not changed it already) to `true` and refresh the page. You should no longer see the element on the page. For more information about Display refer to [Display](./conditionals.md#display).
 
 #### Presence
 
-We can choose to add or remove an element from the DOM using the conditional [Presence](./conditionals.md#presence). The fourth element's presence in the DOM was set via the attribute `acom-presence`. The value for the attribute was a JSON object in which we specified the options for the conditional. The property `action` specified what was supposed to be done should the conditions be met, which in our case was to add the element to the DOM. The `conditions` were specified in an array with two values. The first value was a data selector of `options.utils.data.show`. The second value was a media query specifying the media conditions to be tested. All the values of the array must be true for the conditional to be successful. In our case, `options.utils.data.show` was set to `true`. The media query test result depended on the width of the browser window. If your window width passed the test (was 800px or larger), you were able to see the element, and if not, you were not able to see it.
+We can choose to add or remove an element from the DOM using the conditional [Presence](./conditionals.md#presence). The fourth element's presence in the DOM was set via the attribute `odom-presence`. The value for the attribute was a JSON object in which we specified the options for the conditional. The property `action` specified what was supposed to be done should the conditions be met, which in our case was to add the element to the DOM. The `conditions` were specified in an array with two values. The first value was a data selector of `options.utils.data.show`. The second value was a media query specifying the media conditions to be tested. All the values of the array must be true for the conditional to be successful. In our case, `options.utils.data.show` was set to `true`. The media query test result depended on the width of the browser window. If your window width passed the test (was 800px or larger), you were able to see the element, and if not, you were not able to see it.
 
 Change the width of the window so that it results into the opposite effect. Refresh the page and observe what happens. Refer to [Presence conditional](./conditionals.md#presence) for more details.
 
 #### Lazy
 
-We can apply lazy loading to any element in the DOM via the [Lazy loading conditional](./conditionals.md#lazy). The last element was lazily loaded as you observed in [Testing](#testing). In the attribute `acom-loading`, we specified the type of loading as `lazy`. This enabled the element to be lazily loaded. For more information about lazy loading refer to [Lazy](./conditionals.md#lazy).
+We can apply lazy loading to any element in the DOM via the [Lazy loading conditional](./conditionals.md#lazy). The last element was lazily loaded as you observed in [Testing](#testing). In the attribute `odom-loading`, we specified the type of loading as `lazy`. This enabled the element to be lazily loaded. For more information about lazy loading refer to [Lazy](./conditionals.md#lazy).
 
 ## Collections
 
-Using Acom, you can create collections of elements from collections of data. You can use these elements in lists, tables and the like.
+Using Odom, you can create collections of elements from collections of data. You can use these elements in lists, tables and the like.
 
 ### File Content Structure
 
@@ -348,7 +348,7 @@ We are going to use a single HTML file which has the following general structure
 <body>
   <main id="collections"></main>
 
-  <script src="https://cdn.jsdelivr.net/npm/acom"></script>
+  <script src="https://cdn.jsdelivr.net/npm/odom"></script>
 
   <script>
     (async () => {
@@ -359,7 +359,7 @@ We are going to use a single HTML file which has the following general structure
       const data = { users };
       const utils = { data };
       const options = { markup, styles, utils };
-      const Collections = await Acom.createComponent(options);
+      const Collections = await Odom.createComponent(options);
       Collections.render("#collections");
     })();
   </script>
@@ -374,13 +374,13 @@ We are going to modify the contents of the `script` element.
 Replace the comment in `markup` with the following HTML code:
 
 ```html
-<ul acom-multiple="@data.users">
+<ul odom-multiple="@data.users">
   <li title="@datum.username">
     <span>
-      <span acom-text="@datum.id"></span>
+      <span odom-text="@datum.id"></span>
     </span>
     <span>
-      <span acom-text="@datum.username"></span>
+      <span odom-text="@datum.username"></span>
     </span>
   </li>
 </ul>
@@ -422,11 +422,11 @@ We are going to use an array of users as our collection. Set the value of `users
 
 Save the file and open it in the browser. You should be able to see a list displaying three items. Each item has a number and followed by some text prefixed with `@`.
 
-Let us look at how we made this possible. We put the attribute `acom-multiple` on the `li` element in our `markup`. This indicated that the element was a collection of type `multiple`. The value of the attribute was a data selector for the collection `options.utils.data.users`.
+Let us look at how we made this possible. We put the attribute `odom-multiple` on the `li` element in our `markup`. This indicated that the element was a collection of type `multiple`. The value of the attribute was a data selector for the collection `options.utils.data.users`.
 
 The `ul` element contained only one `li` element. This is the template which was used to generate the list items you saw on the page. The `li` element had an attribute `title` which was set to `@datum.id`. Every item of the collection was referenced by `@datum`. The properties of the each item was accessed using the dot notation. So, `@datum.id` referred to the `id` of each user.
 
-The first element of the `li` element was a `span` element which contained another `span` element inside it. The inner `span` had an attribute `acom-text` which was set to `@datum.id`. The attribute `acom-text` indicated that the element was supposed to be used to insert a text asset. So, the `span` was replaced by the `id`. For more information about how to insert text into the DOM, refer to [texts](./api/create-component/utils.md#texts).
+The first element of the `li` element was a `span` element which contained another `span` element inside it. The inner `span` had an attribute `odom-text` which was set to `@datum.id`. The attribute `odom-text` indicated that the element was supposed to be used to insert a text asset. So, the `span` was replaced by the `id`. For more information about how to insert text into the DOM, refer to [texts](./api/create-component/utils.md#texts).
 
 The second child of `li` followed the same pattern. The inner `span` was used to insert the `username` of the user.
 

@@ -1,6 +1,6 @@
 # Collections
 
-__Table of Contents__
+**Table of Contents**
 
 - [Collections](#collections)
   - [Introduction](#introduction)
@@ -31,13 +31,13 @@ __Table of Contents__
 
 ## Introduction
 
-Acom provides a way for you to create collections of DOM nodes based of collections of data. You can populate tables or lists using these collections. There are two types of collections in Acom, multiple and map. The following sections dive deep into the nature of these collectins.
+Odom provides a way for you to create collections of DOM nodes based of collections of data. You can populate tables or lists using these collections. There are two types of collections in Odom, multiple and map. The following sections dive deep into the nature of these collectins.
 
 ## Multiple
 
 ### Introduction
 
-Multiple is a collection of elements which are variants of one element. The original element acts as a template for all its variants. The original element references an array, and specifies how each item of the array will be used on each one of its variants. The original element uses the attribute `"acom-multiple"`. Each variant accesses the matching item of the array using a data selector prefixed with `@datum` in its attribute values. If the item is an object its values can be accessed using the dot notation.
+Multiple is a collection of elements which are variants of one element. The original element acts as a template for all its variants. The original element references an array, and specifies how each item of the array will be used on each one of its variants. The original element uses the attribute `"odom-multiple"`. Each variant accesses the matching item of the array using a data selector prefixed with `@datum` in its attribute values. If the item is an object its values can be accessed using the dot notation.
 
 ### Attribute Value
 
@@ -66,10 +66,10 @@ An array of numbers that indicates the range of the array over which the variant
 
 ```html
 <ul>
-  <li acom-multiple="@data.users" title="@datum.username">
+  <li odom-multiple="@data.users" title="@datum.username">
     <img src="@datum.avator" class="avator" />
     <span class="username">
-      <span acom-text="@datum.username"></span>
+      <span odom-text="@datum.username"></span>
     </span>
   </li>
 </ul>
@@ -111,11 +111,11 @@ const List = await createComponent(options);
 
 ### Introduction
 
-Map is an element whose children are variants of a template element or nodes created by a function based on a collection of data. Map uses the attribute `"acom-map"`. Map can use a template just like [Multiple](#multiple). The template must be the child element of the element.
+Map is an element whose children are variants of a template element or nodes created by a function based on a collection of data. Map uses the attribute `"odom-map"`. Map can use a template just like [Multiple](#multiple). The template must be the child element of the element.
 
 ### Attribute Value
 
-Just like [Multiple](#multiple), the value of `acom-map` can either be a data selector or a JSON string. A data selector is used when a template is used. The JSON string has the following structure:
+Just like [Multiple](#multiple), the value of `odom-map` can either be a data selector or a JSON string. A data selector is used when a template is used. The JSON string has the following structure:
 
 ```json
 {
@@ -130,7 +130,7 @@ Just like [Multiple](#multiple), the value of `acom-map` can either be a data se
 
 #### `cache`
 
-An object used to specify the options for caching. This is used for [Reactivity](#reactivity). The data is cached, and used everytime the [`range`](#range) is changed via the element's attribute (`acom-map`) or when an update is done via [`updateMap`](#updatemap).
+An object used to specify the options for caching. This is used for [Reactivity](#reactivity). The data is cached, and used everytime the [`range`](#range) is changed via the element's attribute (`odom-map`) or when an update is done via [`updateMap`](#updatemap).
 
 Structure
 
@@ -154,20 +154,20 @@ Used to specify which storage facility will be used for the caching. It has the 
 
 A data selector used to select a user defined function that creates a node based on an item in the data array. Let us look at the signature of this function.
 
-__Syntax__:
+**Syntax**:
 
 ```js
 createNode(datum)
 ```
 
-__Parameters__:
+**Parameters**:
 
 - `datum`
   - Type: `any`
   - Required: Yes.
   - Usage: Contains the information required to create a node. It is a member of the data array.
 
-__Return Value__:
+**Return Value**:
 
 A promise that resolves to a `Node` or markup. If the promise resolves to markup, the markup will be converted to an `Element`.
 
@@ -179,17 +179,17 @@ A data selector for an array containing data that will be used to create nodes o
 
 A data selector for a function that returns an array of data to be used to create nodes for Map nodes. Let us look at the signature of this function.
 
-__Syntax__:
+**Syntax**:
 
 ```js
 getData()
 ```
 
-__Parameters__: 
+**Parameters**:
 
 None.
 
-__Return Value__:
+**Return Value**:
 
 A promise that resolves to an array.
 
@@ -199,19 +199,19 @@ An array used to specify the range of the data over which variants must be gener
 
 ### Reactivity
 
-Map is can be reactive. Every time the range is changed via the attribute `acom-map`, the nodes generated are updated according to the range. To change the range, update the range in the JSON object in the `acom-map` attribute. You can also use [`updateMap`](#updatemap) to update the nodes in Map.
+Map is can be reactive. Every time the range is changed via the attribute `odom-map`, the nodes generated are updated according to the range. To change the range, update the range in the JSON object in the `odom-map` attribute. You can also use [`updateMap`](#updatemap) to update the nodes in Map.
 
 #### `updateMap`
 
-A function used to update the nodes for [Map](#map). It is accessed via the Map element (element with the attribute `acom-map`) as `element.acom.updateMap`.
+A function used to update the nodes for [Map](#map). It is accessed via the Map element (element with the attribute `odom-map`) as `element.odom.updateMap`.
 
-__Syntax__:
+**Syntax**:
 
 ```js
 updateMap(options)
 ```
 
-__Parameters__:
+**Parameters**:
 
 - `options`
   - Type: `Object`
@@ -243,7 +243,7 @@ Properties:
 - range: The new range of nodes.
 - refresh: Indicates that the new nodes should be created from the new data gotten from [`getData`](#getdata).
 
-__Return Value__:
+**Return Value**:
 
 A promise that resolves to `undefined`
 
@@ -259,13 +259,13 @@ A promise that resolves to `undefined`
       <th></th>
     </tr>
   </thead>
-  <tbody acom-map="@data.users">
+  <tbody odom-map="@data.users">
     <tr>
       <td>
         <img src="@datum.avator" />
       </td>
       <td>
-        <span acom-text="@datum.username"></span>
+        <span odom-text="@datum.username"></span>
       </td>
     </tr>
   </tbody>
@@ -315,7 +315,7 @@ const Table = await createComponent(options);
       <th></th>
     </tr>
   </thead>
-  <tbody acom-map='{"data": "@data.users", "createNode": "@methods.createNode"}'></tbody>
+  <tbody odom-map='{"data": "@data.users", "createNode": "@methods.createNode"}'></tbody>
 ```
 
 #### JS

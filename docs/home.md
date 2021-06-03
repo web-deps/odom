@@ -1,6 +1,6 @@
 # Documentaion
 
-__Table of Contents__
+**Table of Contents**
 
 - [Documentaion](#documentaion)
   - [Introduction](#introduction)
@@ -10,7 +10,7 @@ __Table of Contents__
 
 ## Introduction
 
-A component-based JavaScript framework for building user interfaces. It is highly flexible and compatible with other frameworks and libraries. You can easily integrate it in existing projects or use it to create a web app from scratch. The framework provides a number of ways to manage resources in terms of reusability, loading and more. It provides built in support for middleware, allowing you to extend its functionality easily. Acom provides both declarative and procedural ways of building user interfaces.
+A component-based JavaScript framework for building user interfaces. It is highly flexible and compatible with other frameworks and libraries. You can easily integrate it in existing projects or use it to create a web app from scratch. The framework provides a number of ways to manage resources in terms of reusability, loading and more. It provides built in support for middleware, allowing you to extend its functionality easily. Odom provides both declarative and procedural ways of building user interfaces.
 
 ## Assumptions
 

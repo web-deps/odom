@@ -1,6 +1,6 @@
 # Utils
 
-__Table of Contents__
+**Table of Contents**
 
 - [Utils](#utils)
   - [Introduction](#introduction)
@@ -83,28 +83,27 @@ Specific utilities are used for inserting content into the DOM. The items in thi
 
 _Attribute Names_
 
-Specific utilities are used with specific attributes. All attribute names are prefixed with `acom-`. The table below shows specific utilities and corresponding attribute names.
+Specific utilities are used with specific attributes. All attribute names are prefixed with `odom-`. The table below shows specific utilities and corresponding attribute names.
 
-
-Utility       | Attribute Name 
---------------|----------------
-`components`  | `acom-src`     
-`nodes`    | `acom-node`  
-`markups`     | `acom-markup`  
-`texts`       | `acom-text`   
+| Utility      | Attribute Name |
+| ------------ | -------------- |
+| `components` | `odom-src`     |
+| `nodes`      | `odom-node`    |
+| `markups`    | `odom-markup`  |
+| `texts`      | `odom-text`    |
 
 _Attribute Values_
 
-Attribute values are simple, just set the attribute value to the name of the item as it is in the collection. Acom will look up the item in the utility collection corresponding to the attribute value.
+Attribute values are simple, just set the attribute value to the name of the item as it is in the collection. Odom will look up the item in the utility collection corresponding to the attribute value.
 
 ### Example
 
-Let us insert a component `footer` into the markup. For this, we are going to use the attribute `acom-src`. The value will be the name of our component.
+Let us insert a component `footer` into the markup. For this, we are going to use the attribute `odom-src`. The value will be the name of our component.
 
 HTML:
 
 ```html
-<div acom-src="footer">
+<div odom-src="footer">
 ```
 
 JS:

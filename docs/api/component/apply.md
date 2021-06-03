@@ -43,7 +43,7 @@
     - [Parameters](#parameters-6)
     - [Return Value](#return-value-6)
 
-Styles, event listeners and more are applied to a component via `apply` a property of [`Component`](component.md). This is one of the functions performed by [`acom`](../exports.md#acom). Let us take a look at the structure and functionality of `apply`.
+Styles, event listeners and more are applied to a component via `apply` a property of [`Component`](component.md). This is one of the functions performed by [`odom`](../exports.md#odom). Let us take a look at the structure and functionality of `apply`.
 
 ## Structure
 
@@ -185,7 +185,7 @@ In `eventListeners`, mapped the selector `:scope` to the event options. In the o
 
 ### Event Delegation
 
-Acom uses event delegation. All listener are attached to [`Component.scope`](../component/component.md#scope). So, `Event.currentTarget` refers to `Component.scope`.
+Odom uses event delegation. All listener are attached to [`Component.scope`](../component/component.md#scope). So, `Event.currentTarget` refers to `Component.scope`.
 
 ## `inlineStyles`
 
@@ -240,7 +240,7 @@ All styles applied via [`inlineStyles`](#inlinestyles) are vender-prefixed. Both
 
 ### Description
 
-Applying multiple changes to the DOM is usually costly. Acom provides performant ways to apply mutations to components. The method `mutations` is used to apply mutations to components.
+Applying multiple changes to the DOM is usually costly. Odom provides performant ways to apply mutations to components. The method `mutations` is used to apply mutations to components.
 
 ### Syntax
 
@@ -321,9 +321,9 @@ An object used to specify how the element to be mutated should be removed from t
 
 Indicates the type of mutation that is to be carried out. It can be set to either `"major"` or `"minor"`. Whether a mutation is major or minor is determined by the time complexity of the mutation operations, excluding the rendering process.
 
-A mutation operation that takes a short period of time (typically less than 16.67ms) to be performed is considered to be a minor mutation. Acom uses element cloning for major mutations
+A mutation operation that takes a short period of time (typically less than 16.67ms) to be performed is considered to be a minor mutation. Odom uses element cloning for major mutations
 
-A mutation operation that takes long (typically takes more than 16.67ms) to be performed is considered to be a major mutation. Acom uses `requestAnimationFrame` (thus the 16.67ms) for minor mutions.
+A mutation operation that takes long (typically takes more than 16.67ms) to be performed is considered to be a major mutation. Odom uses `requestAnimationFrame` (thus the 16.67ms) for minor mutions.
 
 ## `run`
 

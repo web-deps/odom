@@ -7,7 +7,8 @@
   - [API](#api)
     - [Structure](#structure)
     - [`apply`](#apply)
-    - [dynamicData](#dynamicdata)
+    - [`dynamicData`](#dynamicdata)
+      - [`addUpdater`](#addupdater)
     - [`id`](#id)
     - [`parseMarkup`](#parsemarkup)
       - [Syntax](#syntax)
@@ -55,9 +56,30 @@ Acom uses components to build user interfaces. The components are instances of a
 
 Select nodes in the component and apply actions like styling, adding event listeners and the like. Refer to [`apply](./apply.md) for more information.
 
-### dynamicData
+### `dynamicData`
 
-The data that is linked to the DOM. This is the data specified in [`options.utils.data.dynamic`](../create-component/utils.md#dynamic-data). Changing the contents updates the data in the DOM.
+Data that may change during the execution of the program. Usually, the data is linked to the DOM. This is the data specified in [`options.utils.data.dynamic`](../create-component/utils.md#dynamic-data). Changing the data triggers updates especially in the DOM.
+
+#### `addUpdater`
+
+A method of [dynamicData](#dynamicdata). Used to add a data updater.
+
+**Syntax**:
+
+```js
+addUpdater(dataName, updater)
+```
+
+**Parameters**:
+
+- `dataName`:
+  - Type: `string`
+  - Required: Yes.
+  - Usage: The name of the data you want to add an updater to.
+- `updater`:
+  - Type: `Function`
+  - Required: Yes.
+  - Usage: Runs an update when the data is changed.
 
 ### `id`
 

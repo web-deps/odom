@@ -11,7 +11,7 @@
       - [Add Dynamic Data](#add-dynamic-data)
       - [Use Binding on Data Selectors](#use-binding-on-data-selectors)
       - [Updating Data](#updating-data)
-      - [Updator](#updator)
+      - [Updater](#updater)
       - [Example](#example)
   - [Props](#props)
     - [Introduction](#introduction-2)
@@ -66,14 +66,14 @@ To [`options.utils.data`](./api/create-component/utils.md#generic-data), add the
 ```js
 {
   data: any,
-  updates: Array
+  updaters: Array
 }
 ```
 
 **Properties**:
 
 - `data`: Data of any type.
-- `updates`: The functions that update the data. All functions all called when an attempt to change the dynamic data is made. If multiple update functions have been provided, the output of one function is used as the input of the next. Refer to [`Updator`](#updator) for more details.
+- `updaters`: The functions that update the data. All functions all called when an attempt to change the dynamic data is made. If multiple update functions have been provided, the output of one function is used as the input of the next. Refer to [`Updater`](#updater) for more details.
 
 #### Use Binding on Data Selectors
 
@@ -83,14 +83,14 @@ prefix the data selector with `:` for a single bind and `::` for a double bind. 
 
 The dynamic data will be set as `Component.dynamicData`. You can get and set data using the properties specified in `options.utils.data.dynamic`.
 
-#### Updator
+#### Updater
 
-An updator is a user defined function that is invoked everytime you try to change dynamic data.
+An updater is a user defined function that is invoked every time you try to change dynamic data.
 
 **Syntax**:
 
 ```js
-update(newData);
+updater(newData);
 ```
 
 **Parameters**:

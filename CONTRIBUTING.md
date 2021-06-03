@@ -1,8 +1,8 @@
-# Contributing to Acom
+# Contributing to Odom
 
 ## Table of Contents
 
-- [Contributing to Acom](#contributing-to-acom)
+- [Contributing to Odom](#contributing-to-odom)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Code of Conduct](#code-of-conduct)
@@ -14,17 +14,17 @@
 
 ## Introduction
 
-A big welcome and thank you for considering contributing to Acom open source project! It's people like you that make it a reality for users in our community.
+A big welcome and thank you for considering contributing to Odom open source project! It's people like you that make it a reality for users in our community.
 
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change. 
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-Reading and following these guidelines will help us make the contribution process easy and effective for everyone involved. It also communicates that you agree to respect the time of the developers managing and developing these open source projects. In return, we will reciprocate that  espect by addressing your issue, assessing changes, and helping you finalize your pull requests.
+Reading and following these guidelines will help us make the contribution process easy and effective for everyone involved. It also communicates that you agree to respect the time of the developers managing and developing these open source projects. In return, we will reciprocate that espect by addressing your issue, assessing changes, and helping you finalize your pull requests.
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Code of Conduct
 
-We take our open source community seriously and hold ourselves and other contributors to high standards of communication. By participating and contributing to this project, you agree to uphold our [Code of Conduct](https://github.com/acom-web/acom/blob/main/CODE-OF-CONDUCT.md).
+We take our open source community seriously and hold ourselves and other contributors to high standards of communication. By participating and contributing to this project, you agree to uphold our [Code of Conduct](https://github.com/odom-web/odom/blob/main/CODE-OF-CONDUCT.md).
 
 ## Issues
 
@@ -36,10 +36,10 @@ If you find an Issue that addresses the problem you're having, please add your o
 
 Pull requests to our libraries are always welcome and can be a quick way to get your fix or improvement slated for the next release. In general, pull requests should:
 
-- Only fix/add the functionality in question __OR__ address wide-spread whitespace/style issues, not both.
+- Only fix/add the functionality in question **OR** address wide-spread whitespace/style issues, not both.
 - Add unit or integration tests for fixed or changed functionality (if a test suite already exists).
 - Address a single concern in the least number of changed lines as possible.
-- Include documentation in the repo [here](https://github.com/acom-web/acom#readme).
+- Include documentation in the repo [here](https://github.com/odom-web/odom#readme).
 - Be accompanied by a complete pull request template (loaded automatically when a pull request is created).
 
 For changes that address core functionality or would require breaking changes (e.g. a major release), it's best to open an Issue to discuss your proposal first. This is not required but can save time creating and reviewing changes.
@@ -58,9 +58,9 @@ In general, we follow the ["fork-and-pull" Git workflow](https://github.com/susa
 
 Use a consistent coding style. The following are the style convensions to be followed:
 
-* 2 spaces for indentation rather than tabs
-* Use a maximum of 120 characters per line
-* You can try running `npm run lint` for style unification
+- 2 spaces for indentation rather than tabs
+- Use a maximum of 120 characters per line
+- You can try running `npm run lint` for style unification
 
 ## License
 
@@ -70,6 +70,6 @@ By contributing, you agree that your contributions will be licensed under the [M
 
 This document was adapted from:
 
-* [Good Contributing Template](https://gist.github.com/PurpleBooth/b24679402957c63ec426) by [PurpleBooth](https://gist.github.com/PurpleBooth/)
-* [Contributing to Transcriptase](https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62) by [briandk](https://gist.github.com/briandk/)
-* [Contributing to Auth0 projects](https://github.com/auth0/open-source-template/blob/master/GENERAL-CONTRIBUTING.md) by [auth0](https://github.com/auth0/)
+- [Good Contributing Template](https://gist.github.com/PurpleBooth/b24679402957c63ec426) by [PurpleBooth](https://gist.github.com/PurpleBooth/)
+- [Contributing to Transcriptase](https://gist.github.com/briandk/3d2e8b3ec8daf5a27a62) by [briandk](https://gist.github.com/briandk/)
+- [Contributing to Auth0 projects](https://github.com/auth0/open-source-template/blob/master/GENERAL-CONTRIBUTING.md) by [auth0](https://github.com/auth0/)

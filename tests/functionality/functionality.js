@@ -85,7 +85,7 @@ import middleware from "./middleware/middleware.js";
 // Tests for Utils
 // utils.components();
 // utils.data.dynamic.doubleBind();
-// utils.data.dynamic.singleBind();
+utils.data.dynamic.singleBind();
 // utils.data.static();
 // utils.markups();
 // utils.nodes();

@@ -1,5 +1,5 @@
 export const scopeCSS = async (css, attributeSelector) => {
-  if (!attributeSelector) attributeSelector = `[acom-scope="${id}"]`;
+  if (!attributeSelector) attributeSelector = `[odom-scope="${id}"]`;
   let scopedSelector = attributeSelector;
 
   const regexes = {
@@ -15,7 +15,9 @@ export const scopeCSS = async (css, attributeSelector) => {
     });
   };
 
-  const removeComments = () => { css = css.replace(regexes.comments, ""); };
+  const removeComments = () => {
+    css = css.replace(regexes.comments, "");
+  };
 
   const scopeSelectors = () => {
     css = css.replace(regexes.selector, (match, selector) => {
@@ -27,24 +29,27 @@ export const scopeCSS = async (css, attributeSelector) => {
     const scopeAtRule = () => {
       const scopeKeyframesName = (match, keyframesName) => ` ${keyframesName}-${id.replace(".", "-")}`;
 
-      return (
-        selector.startsWith("@keyframes")
-        ? selector.replace(regexes.keyframesName, scopeKeyframesName)
-        : selector
-      );
+      return selector.startsWith("@keyframes") ? selector.replace(regexes.keyframesName, scopeKeyframesName) : selector;
     };
 
     selector = selector.trim();
 
-    return (
-      !selector ? ""
-      : selector.includes(",") ? selector.split(",").map(sel => scopeSelector(sel)).join(",")
-      : selector.startsWith("@") ? scopeAtRule()
-      : selector === ":scope" ? scopedSelector
-      : selector.startsWith(":scope") ? selector.replace(":scope", attributeSelector)
-      : /:root|from|to/.test(selector) ? selector
-      : `${attributeSelector} ${selector}`
-    );
+    return !selector
+      ? ""
+      : selector.includes(",")
+      ? selector
+          .split(",")
+          .map((sel) => scopeSelector(sel))
+          .join(",")
+      : selector.startsWith("@")
+      ? scopeAtRule()
+      : selector === ":scope"
+      ? scopedSelector
+      : selector.startsWith(":scope")
+      ? selector.replace(":scope", attributeSelector)
+      : /:root|from|to/.test(selector)
+      ? selector
+      : `${attributeSelector} ${selector}`;
   };
 
   removeComments();

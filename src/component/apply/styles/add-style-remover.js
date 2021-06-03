@@ -12,7 +12,7 @@ export const addStyleRemover = () => {
 };
 
 const removeStyles = async (id, index) => {
-  if (document.body.querySelector(`[acom-scope="${id}"]`)) return;
+  if (document.body.querySelector(`[odom-scope="${id}"]`)) return;
   const styleElement = document.head.querySelector(`[data-id="${id}"]`);
   if (!styleElement) return;
   styleElement.remove();

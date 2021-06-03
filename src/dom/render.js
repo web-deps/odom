@@ -31,7 +31,7 @@ const insert = async ({ target, asset, assets, props, createElement, wait, asset
     replacer(target, asset);
   };
 
-  if (target && !fileType) fileType = target.getAttribute("acom-filetype");
+  if (target && !fileType) fileType = target.getAttribute("odom-filetype");
   const getAssetParam = { asset, assets, props, assetType, fileType, createElement };
 
   if (wait) await insertAsset(await getAsset(getAssetParam));
@@ -58,10 +58,10 @@ const getTargets = () => {
 };
 
 const assetTypeToAttributeMap = {
-  component: "acom-src",
-  node: "acom-node",
-  markup: "acom-markup",
-  text: "acom-text"
+  component: "odom-src",
+  node: "odom-node",
+  markup: "odom-markup",
+  text: "odom-text"
 };
 
 const assetTypeToCreateElementMap = {
@@ -77,7 +77,7 @@ const renderToDocument = async ({ replacer = replace }) => {
   for (const [assetType, target, asset] of targets) {
     await insert({
       assetType,
-      fileType: target.getAttribute("acom-filetype"),
+      fileType: target.getAttribute("odom-filetype"),
       target,
       asset,
       props: await getProps({ element: target, skip: [assetTypeToAttributeMap[assetType]] }),

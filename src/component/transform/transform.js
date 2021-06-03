@@ -8,59 +8,58 @@ import { collections } from "./collections/collections.js";
 import { getProps } from "../../dom/get-props.js";
 import { render } from "../../dom/render.js";
 
-
 export const transform = function () {
   return {
     insertData: async ({ props, data, methods } = {}) => {
-      const skip = ["acom-multiple", "acom-map"];
-      await apply(this.scope, async element => {
+      const skip = ["odom-multiple", "odom-map"];
+      await apply(this.scope, async (element) => {
         await insertData({ element, props, data, methods, skip });
       });
     },
-    insertSlots: async slots => {
+    insertSlots: async (slots) => {
       if (!slots) return;
 
-      await apply(this.scope, async element => {
-        if (!element.hasAttribute("acom-slot")) return;
-        await insertSlot(element, slots[element.getAttribute("acom-slot")]);
+      await apply(this.scope, async (element) => {
+        if (!element.hasAttribute("odom-slot")) return;
+        await insertSlot(element, slots[element.getAttribute("odom-slot")]);
       });
     },
 
     insertComponents: async ({ components, data, methods, props } = {}) => {
       await apply(
         this.scope,
-        async element => {
+        async (element) => {
           const children = element.children;
-          const _props = await getProps({ element, skip: ["acom-src"], data, methods, props });;
+          const _props = await getProps({ element, skip: ["odom-src"], data, methods, props });
           if (children[0]) _props.slots = await getSlots(children);
-          
+
           await render({
             assetType: "component",
             fileType: "module",
             target: element,
-            asset: element.getAttribute("acom-src"),
+            asset: element.getAttribute("odom-src"),
             assets: components,
             props: _props
           });
         },
-        "acom-src"
+        "odom-src"
       );
     },
 
     insertNodes: async ({ nodes, data, methods, props } = {}) => {
       await apply(
         this.scope,
-        async element => {
+        async (element) => {
           await render({
             assetType: "element",
             fileType: "module",
             target: element,
-            asset: element.getAttribute("acom-node"),
+            asset: element.getAttribute("odom-node"),
             assets: nodes,
-            props: await getProps({ element, skip: ["acom-node"], data, methods, props})
+            props: await getProps({ element, skip: ["odom-node"], data, methods, props })
           });
         },
-        "acom-node"
+        "odom-node"
       );
     },
 
@@ -70,14 +69,14 @@ export const transform = function () {
         async (element) => {
           await render({
             assetType: "markup",
-            fileType: element.getAttribute("acom-filetype"),
+            fileType: element.getAttribute("odom-filetype"),
             target: element,
-            asset: element.getAttribute("acom-markup"),
+            asset: element.getAttribute("odom-markup"),
             assets: markups,
-            props: await getProps({ element, skip: ["acom-node"], data, methods, props})
+            props: await getProps({ element, skip: ["odom-node"], data, methods, props })
           });
         },
-        "acom-markup"
+        "odom-markup"
       );
     },
 
@@ -87,100 +86,104 @@ export const transform = function () {
         async (element) => {
           await render({
             assetType: "text",
-            fileType: element.getAttribute("acom-filetype"),
+            fileType: element.getAttribute("odom-filetype"),
             target: element,
-            asset: element.getAttribute("acom-text"),
+            asset: element.getAttribute("odom-text"),
             assets: texts,
-            props: await getProps({ element, skip: ["acom-node"], data, methods, props})
+            props: await getProps({ element, skip: ["odom-node"], data, methods, props })
           });
         },
-        "acom-text"
+        "odom-text"
       );
     },
 
     multiple: async ({ data, methods, props }) => {
       await apply(
         this.scope,
-        async element => collections({ element, type: "multiple", props, data, methods }),
-        "acom-multiple"
+        async (element) => collections({ element, type: "multiple", props, data, methods }),
+        "odom-multiple"
       );
     },
 
     map: async ({ data, methods, props }) => {
       await apply(
         this.scope,
-        async element => collections({ element, type: "map", props, data, methods }),
-        "acom-map"
+        async (element) => collections({ element, type: "map", props, data, methods }),
+        "odom-map"
       );
     },
 
     loading: async ({ props, data, methods } = {}) => {
       await apply(
         this.scope,
-        async element => conditionals.call(this, {
-          element,
-          type: "loading",
-          options: element.getAttribute("acom-loading"),
-          props,
-          utils: { data, methods },
-          dynamicData: this.dynamicData,
-          transform: run
-        }),
-        "acom-loading"
+        async (element) =>
+          conditionals.call(this, {
+            element,
+            type: "loading",
+            options: element.getAttribute("odom-loading"),
+            props,
+            utils: { data, methods },
+            dynamicData: this.dynamicData,
+            transform: run
+          }),
+        "odom-loading"
       );
     },
 
     visibility: async ({ props, data, methods } = {}) => {
       await apply(
         this.scope,
-        async element => conditionals({
-          element,
-          type: "visibility",
-          options: element.getAttribute("acom-visibility"),
-          props,
-          utils: { data, methods },
-          dynamicData: this.dynamicData,
-          transform: run
-        }),
-        "acom-visibility"
+        async (element) =>
+          conditionals({
+            element,
+            type: "visibility",
+            options: element.getAttribute("odom-visibility"),
+            props,
+            utils: { data, methods },
+            dynamicData: this.dynamicData,
+            transform: run
+          }),
+        "odom-visibility"
       );
     },
-    
+
     display: async ({ props, data, methods } = {}) => {
       await apply(
         this.scope,
-        async element => conditionals({
-          element,
-          type: "display",
-          options: element.getAttribute("acom-display"),
-          props,
-          utils: { data, methods },
-          dynamicData: this.dynamicData,
-          transform: run
-        }),
-        "acom-display"
+        async (element) =>
+          conditionals({
+            element,
+            type: "display",
+            options: element.getAttribute("odom-display"),
+            props,
+            utils: { data, methods },
+            dynamicData: this.dynamicData,
+            transform: run
+          }),
+        "odom-display"
       );
     },
-    
+
     presence: async ({ props, data, methods } = {}) => {
       await apply(
         this.scope,
-        async element => conditionals({
-          element,
-          type: "presence",
-          options: element.getAttribute("acom-presence"),
-          props,
-          utils: { data, methods },
-          dynamicData: this.dynamicData,
-          transform: run
-        }),
-        "acom-presence"
+        async (element) =>
+          conditionals({
+            element,
+            type: "presence",
+            options: element.getAttribute("odom-presence"),
+            props,
+            utils: { data, methods },
+            dynamicData: this.dynamicData,
+            transform: run
+          }),
+        "odom-presence"
       );
     },
 
     run: async ({ props, utils, dynamicData } = {}) => {
-      await apply(this.scope, async element => {
-        this.scope = await run.call(this, {  element, props, utils, dynamicData });
+      await apply(this.scope, async (element) => {
+        this.scope = await run.call(this, { element, props, utils, dynamicData });
       });
     }
   };

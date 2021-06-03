@@ -5,7 +5,7 @@ import { getProps } from "../../../dom/get-props.js";
 import { render } from "../../../dom/render.js";
 
 export const createFragment = async ({ template, data, limits, createNode }) => {
-  if (template) template.removeAttribute("acom-multiple");
+  if (template) template.removeAttribute("odom-multiple");
   const fragment = document.createDocumentFragment();
   const elements = [];
   const range = await getRange(data.length, limits);
@@ -45,10 +45,10 @@ const insertData = async (element, datum) => {
     }
   };
 
-  if (element.hasAttribute("acom-text")) {
+  if (element.hasAttribute("odom-text")) {
     let props;
     if (attributes.length > 1) props = await getProps({ element });
-    const selector = element.getAttribute("acom-text");
+    const selector = element.getAttribute("odom-text");
     let texts = {};
     const asset = selector.includes(".") ? selector.substring(selector.lastIndexOf(".") + 1) : "datum";
     const text = await getNestedValue(datum, selector.replace(/@datum[.]?/, ""));

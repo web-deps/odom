@@ -1,15 +1,15 @@
 export const createDynamicData = async (data) => {
-  const update = (value) => value;
+  const updater = (value) => value;
   const setValue = createValueSetter(data);
 
   for (const name in data) {
     const value = data[name];
-    const includeUpdator = typeof value !== "object" || !("data" in value && "updates" in value);
+    const includeUpdater = typeof value !== "object" || !("data" in value && "updaters" in value);
 
-    if (includeUpdator) {
+    if (includeUpdater) {
       data[name] = {
         data: value,
-        updates: [update]
+        updaters: [updater]
       };
     }
 
@@ -26,6 +26,10 @@ export const createDynamicData = async (data) => {
           };
 
           return addElement;
+        } else if (name === "addUpdater") {
+          return (dataName, updater) => {
+            target[dataName].updaters.push(updater);
+          };
         } else if (name === "setValueFromAttribute") {
           return setValue;
         }
@@ -44,7 +48,7 @@ export const createDynamicData = async (data) => {
       if (!setValue(name, value)) return true;
 
       if (data[name].elements.length) {
-        for (const {target, attributeName} of data[name].elements) {
+        for (const { target, attributeName } of data[name].elements) {
           if (target.getAttribute(attributeName) === value) continue;
           if (target) target.setAttribute(attributeName, value);
         }
@@ -58,7 +62,7 @@ export const createDynamicData = async (data) => {
 const createValueSetter = (target) => {
   return (name, value) => {
     if (target[name].data === value) return false;
-    for (const update of target[name].updates) value = update(value);
+    for (const update of target[name].updaters) value = update(value);
     target[name].data = value;
     return true;
   };

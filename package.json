@@ -8,12 +8,12 @@
     "src"
   ],
   "directories": {
-    "example": "examples",
-    "test": "tests"
+    "src": "src"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.14.4",
     "babel-loader": "^8.2.2",
     "eslint": "^7.27.0",
     "prettier": "^2.3.0",
@@ -23,7 +23,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "dev": "NODE_ENV=development webpack",
+    "dev": "NODE_ENV=development webpack serve",
     "build": "NODE_ENV=production webpack"
   },
   "repository": {

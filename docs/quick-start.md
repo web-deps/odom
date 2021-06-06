@@ -353,7 +353,7 @@ We are going to use a single HTML file which has the following general structure
       const markup = `<!-- markup -->`;
       const styles = `/* styles */`;
 
-      const users = /* users */;
+      const users = []; // Users
       const data = { users };
       const utils = { data };
       const options = { markup, styles, utils };
@@ -400,7 +400,7 @@ span + span {
 
 ### Users
 
-We are going to use an array of users as our collection. Set the value of `users` to the following array (replace comment):
+We are going to use an array of users as our collection. Set the value of `users` to the following array (replace empty array):
 
 ```js
 [

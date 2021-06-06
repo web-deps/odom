@@ -16,7 +16,7 @@ render([options]);
 
 - Type: `Object`
 - Required: No.
-- Usage: contains options for rendering assets.
+- Usage: Contains options for rendering assets.
 - Reference: [`options`](#options)
 
 ## Return Value
@@ -25,7 +25,8 @@ A promise that resolves to `undefined`.
 
 ## `options`
 
-## Structure:
+## Structure
+
 ```js
 {
   assetType: string,
@@ -42,7 +43,7 @@ A promise that resolves to `undefined`.
 
 ### `assetType`
 
-The type of asset to be rendered. All assets that are not DOM nodes will be converted to DOM nodes before they are rendered. It can have any or the following values:
+The type of asset to be rendered. All assets that are not DOM nodes will be converted to DOM nodes before they are rendered. It can have any of the following values:
 
 - `"component"`: A [`Component`](../component/component.md).
 - `"node"`: A DOM `Node`.
@@ -51,7 +52,7 @@ The type of asset to be rendered. All assets that are not DOM nodes will be conv
 
 ### `fileType`
 
-The type of file containing the asset. This property is considered only when [`asset`](#asset) is a URI. It can be set to any of the following values:
+The type of file containing the asset. This property is considered only when [`asset`](#asset) is a URL. It can be set to any of the following values:
 
 - `"module"`: a JavaScript module (ESM).
 - `"text"`: HTML, XML or regular text file.
@@ -64,18 +65,18 @@ The `Node` that the asset is going to replace when rendered. A CSS selector can 
 
 The asset to be rendered. It can be any of the following:
 
-- Component: A [`Component`](../component/component.md) `Function` returns a promise that resolves to a [`Component`](../component/component.md). It is [`Component.scope`](../component/component.md#scope) that is rendered.
+- Component: A [`Component`](../component/component.md) or a `Function` that returns a promise that resolves to a [`Component`](../component/component.md).
 - Node: A DOM `Node`.
-- Markup: HTML or XML. Converted to `Element`.
-- Text: Regular text. Converted to `TextNode`.
+- Markup: HTML or XML.
+- Text: Regular text.
 
 ### `assets`
 
-Contains assets which can be refered to by property name using [`asset`](#asset).
+Contains assets which can be referred to by property name using [`asset`](#asset).
 
 ### `placeholder`
 
-Used as a placeholder for the `Node` (asset) that is supposed to be rendered. This can be used to show a temporary UI component like a loader before the `Node` is rendered. The placeholder gets rendered immediatly and when the asset gets fetched and/or gets constructed, the asset is rendered.
+Used as a placeholder for the `Node` (asset) that is supposed to be rendered. This can be used to show a temporary UI component like a loader before the `Node` is rendered. The placeholder gets rendered immediately. When the asset gets fetched and/or gets constructed, the asset is rendered.
 
 ### `scope`
 

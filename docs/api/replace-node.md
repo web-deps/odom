@@ -13,11 +13,13 @@ replaceNode(target, node[, replacer])
 ## Parameters
 
 - `target`:
+
   - Type: `Node`
   - Required: Yes.
   - Usage: Replaced by another node.
 
 - `node`:
+
   - Type: `Node`
   - Required: Yes.
   - Usage: Replaces another node.

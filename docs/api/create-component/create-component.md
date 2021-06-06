@@ -10,7 +10,6 @@
   - [`options`](#options)
     - [Description](#description)
     - [Structure](#structure)
-    - [`data`](#data)
     - [`eventListeners`](#eventlisteners)
       - [Description](#description-1)
       - [Structure](#structure-1)
@@ -37,7 +36,9 @@
 
 ## Introduction
 
-Components can be created using `createComponent`, a method of the [API](../api.md). The method creates and transforms a component using [`options`](#options). The method has an alias `$create` which available in the API.
+Components can be created using `createComponent`, a method of the [API](../api.md). The method creates and manipulates a component using [`options`](#options). The method has an alias `$create`, which is available on the API.
+
+> **Note:** If you create a component directly using [`Component`](../component/component.md), you have to manipulate the component on your own using the [`API`](../component/component.md#api) of the component.
 
 ## Syntax
 
@@ -53,8 +54,6 @@ createComponent(options);
   - Usage: Contains utilities for manipulating a component
   - Reference: [`options`](#options)
 
-> **Note:** If you create a component directly using [`Component`](./component/component.md), you have to manipulate the component on your own using the [`API`](./component/component.md#api).
-
 ## Return Value
 
 A promise that resolves to an instance of [`Component`](#component).
@@ -63,13 +62,12 @@ A promise that resolves to an instance of [`Component`](#component).
 
 ### Description
 
-The options contains utilities that are used to create and manipulate a component.
+The options are utilities that are used to create and manipulate a component.
 
 ### Structure
 
 ```js
 {
-  data: Object,
   eventListeners: Array<Object>,
   extension: Object,
   id: string,
@@ -81,30 +79,14 @@ The options contains utilities that are used to create and manipulate a componen
   props: Object,
   scope: Element,
   src: string,
-  styles: string | HTMLStyleElement,
+  styles: string,
   utils: Object
 }
 ```
 
-### `data`
-
-Used for HTML components. The creator gets `data` as a parameter and put it in the options. This can also be user defined, used to assign custom element and props to a component.
-
-```js
-{
-  id: String,
-  uri: String,
-  props: Object,
-  scope: Element | document,
-  styles: String | HTMLStyleElement
-}
-```
-
-The attributes `id`, `uri`, `props`, `styles` work the same way as the attributes of the `options`.
-
 `scope`
 
-Used for HTML components and can also be user defined. This ends up being the `scope` of a component accessed via `Component.scope`.
+An `Element` used to set the [`scope`](../component/component.md#scope) of a component.
 
 ### `eventListeners`
 
@@ -126,7 +108,7 @@ A map of CSS selectors and event types is used to specify the event listeners. E
 }
 ```
 
-The attributes of `eventListeners` are the [parameters](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#parameters) of [`addEventLister`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener). Let us look at what each one of the attributes mean.
+The properties of the even objects are the [parameters](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#parameters) of [`addEventLister`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener). Let us look at what each one of the properties means.
 
 #### Event Object Properties
 
@@ -140,7 +122,7 @@ Let us look at what each each one of the properties of the event objects.
 
 `listener`
 
-The event listener. It is a function that is called everytime an event to which it listens is fired.
+The event listener. It is a function that is called every time an event to which it listens is fired.
 
 **Syntax**:
 
@@ -163,7 +145,7 @@ listener(event, component)
 
 A promise that resolves to `undefined`.
 
-`useCaptrue`
+`useCapture`
 
 - Type: `Boolean`
 - Required: No.
@@ -184,7 +166,7 @@ A promise that resolves to `undefined`.
   capture: Boolean,
   once: Boolean,
   passive: Boolean,
-  mozSytemGroup: Boolean
+  mozSystemGroup: Boolean
 }
 ```
 
@@ -202,7 +184,7 @@ A promise that resolves to `undefined`.
   - Type: `Boolean`
   - Required: No.
   - Usage: Indicates that the function specified by `listener` will never call `preventDefault()`. If a passive listener does call `preventDefault()`, the user agent will do nothing other than generate a console warning.
-- `mozSytemGroup`:
+- `mozSystemGroup`:
   - Type: `Boolean`
   - Required: No.
   - Usage: Indicates whether the `listener` should be added to the system group. Available only in code running in XBL or in the chrome of the Firefox browser.
@@ -233,7 +215,7 @@ This is used when the `options` are being imported. It is an extension of the im
 
 ### `id`
 
-The ID of the component. For HTML components, `id` is set via the meta tag. Set the id property of a meta tag to the ID of the component. For JS components, the id is set via `options`. If not provided, it is generated. The `id` is used to provide a unique class for style elements of components and for caching. The id must be unique.
+The ID of the component. For HTML components, `id` is set via the meta tag or [`options`](#options). For JS components, the id is set via `options`. If not provided, it is generated. The id must be unique in whole app.
 
 ### `importType`
 
@@ -267,25 +249,17 @@ Let us look at an example on how we can apply inline styles to elements in a com
 }
 ```
 
-This will select the element with the class `main-content` and make its width half of the viewport width and its height 60% of the viewport height.
+This will select the element with the class `main-content` and make its width half of the window width and its height 60% of the viewport height.
 
 ### `markup`
 
-The markup used to construct the DOM of a component. The markup can be HTML, XML or any XML-compliant markup. For types of markup other than HTML, the root element of the markup must have the attribute `odom-ml="xml"`. The attribute is not required for HTML, but it is permitted, in which case you set it to `html`.
+The markup used to construct the DOM of a component. The markup can be HTML, XML or any XML-compliant markup. For types of markup other than HTML, the root element of the markup must have the attribute `odom-ml` set to `xml`. The attribute is not required for HTML, but it is permitted, in which case you set it to `html`.
 
 For all non-HTML markup, all elements are converted to the `div` element of HTML by default. To specify which HTML element should be used in place of an element, you set the attribute `html` to the HTML element tag name. All other attributes on the element will be preserved. An attribute `xml` is set to the XML tag name during conversion from XML to HTML.
 
 **Example**:
 
-The following markup flavours will result in the same DOM elements, except for extra attribute "xml" on the XML based one.
-
-HTML
-
-```html
-<main odom-ml="html">
-  <a href="/example">visit</a>
-</main>
-```
+The following code snippets illustrate how to convert XML to HTML.
 
 XML
 
@@ -305,7 +279,7 @@ HTML Equivalent
 
 ### `middleware`
 
-Used to provide utilities that are used to manipulate [`markup`](#markup) and [`styles`](#styles), and add state to a component. Refer to [middleware](middleware.md).
+Used to provide utilities that are used to manipulate [`markup`](#markup) and [`styles`](#styles). Refer to [middleware](./middleware.md) for more details.
 
 ### `mutations`
 
@@ -333,7 +307,7 @@ Indicates the type of mutation you want to apply. Refer to [`mutations`](../comp
 
 ### `props`
 
-Contains data that define a component. The data can be inserted into the DOM via the data selector `@props`. All data (except any value with the property named 'id') is going to be added to the properties of [`Component`](../../component/component.md).
+Contains data that define a component. The data can be inserted into the DOM via the data selector `@props`. All data (except any value with the property named 'id') is going to be added to the properties of [`Component`](../component/component.md).
 
 ### `scope`
 
@@ -341,11 +315,11 @@ An `Element` used for the DOM of the component. It is required if `markup` is no
 
 ### `src`
 
-You can import options via this property. You provide a URI of either an ES module or JSON file.
+You can import options via this property. You provide a URL of either an ES module or JSON file.
 
 ### `styles`
 
-The styling for the content is specified via `styles`. This can be a `string` containing CSS or any code that can be converted to CSS. Note the following things about styles:
+The styling for the component is specified via `styles`. This is `string` containing CSS or any code that can be converted to CSS. Note the following things about styles:
 
 - All styles are scoped including animations. When using the short-hand property for animations (i.e. `animation`), always start with the animation name.
 - Styles can leak into descendant components.
@@ -353,7 +327,7 @@ The styling for the content is specified via `styles`. This can be a `string` co
 - Only absolute URLs and root relative URLs (URLs that start with `/`) are guaranteed to work in `@import` rules.
 - Imported styles are not scoped.
 - If you have explicitly set an ID on a component, the following will happen:
-  - The `styles` will be reused everytime a new component is created.
+  - The `styles` will be reused every time a new component is created.
   - The styles will be discarded if all the components that use them are removed from the DOM.
 
 ### `utils`

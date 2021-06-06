@@ -2,46 +2,54 @@
 
 - [Apply](#apply)
   - [Structure](#structure)
-  - [`custom`](#custom)
+  - [`attributes`](#attributes)
     - [Syntax](#syntax)
     - [Parameters](#parameters)
     - [Return Value](#return-value)
-    - [`action`](#action)
-      - [Syntax](#syntax-1)
-      - [Parameters](#parameters-1)
-      - [Return Value](#return-value-1)
-    - [Example](#example)
-  - [`eventListeners`](#eventlisteners)
+  - [`classes`](#classes)
+    - [Syntax](#syntax-1)
+    - [Parameters](#parameters-1)
+    - [Return Value](#return-value-1)
+  - [`custom`](#custom)
     - [Syntax](#syntax-2)
     - [Parameters](#parameters-2)
     - [Return Value](#return-value-2)
+    - [`action`](#action)
+      - [Syntax](#syntax-3)
+      - [Parameters](#parameters-3)
+      - [Return Value](#return-value-3)
+    - [Example](#example)
+  - [`eventListeners`](#eventlisteners)
+    - [Syntax](#syntax-4)
+    - [Parameters](#parameters-4)
+    - [Return Value](#return-value-4)
     - [Example](#example-1)
     - [Event Delegation](#event-delegation)
   - [`inlineStyles`](#inlinestyles)
-    - [Syntax](#syntax-3)
-    - [Parameters](#parameters-3)
-    - [Return Value](#return-value-3)
+    - [Syntax](#syntax-5)
+    - [Parameters](#parameters-5)
+    - [Return Value](#return-value-5)
     - [Example](#example-2)
     - [Vendor Prefixes](#vendor-prefixes)
   - [`mutations`](#mutations)
     - [Description](#description)
-    - [Syntax](#syntax-4)
-    - [Parameters](#parameters-4)
-    - [Return Value](#return-value-4)
+    - [Syntax](#syntax-6)
+    - [Parameters](#parameters-6)
+    - [Return Value](#return-value-6)
     - [`map`](#map)
       - [Structure](#structure-1)
       - [Properties](#properties)
   - [`run`](#run)
-    - [Syntax](#syntax-5)
-    - [Parameters](#parameters-5)
-    - [Return Value](#return-value-5)
+    - [Syntax](#syntax-7)
+    - [Parameters](#parameters-7)
+    - [Return Value](#return-value-7)
     - [`options`](#options)
       - [Structure](#structure-2)
       - [Properties](#properties-1)
   - [`styles`](#styles)
-    - [Syntax](#syntax-6)
-    - [Parameters](#parameters-6)
-    - [Return Value](#return-value-6)
+    - [Syntax](#syntax-8)
+    - [Parameters](#parameters-8)
+    - [Return Value](#return-value-8)
 
 Styles, event listeners and more are applied to a component via `apply` a property of [`Component`](component.md). This is one of the functions performed by [`odom`](../exports.md#odom). Let us take a look at the structure and functionality of `apply`.
 
@@ -49,6 +57,8 @@ Styles, event listeners and more are applied to a component via `apply` a proper
 
 ```js
 {
+  attributes: Function,
+  classes: Function,
   custom: Function,
   eventListeners: Function,
   inlineStyles: Function,
@@ -57,6 +67,48 @@ Styles, event listeners and more are applied to a component via `apply` a proper
   styles: Function
 }
 ```
+
+## `attributes`
+
+Used to set the attributes of the component element.
+
+### Syntax
+
+```js
+attributes(map)
+```
+
+### Parameters
+
+- `map`:
+  - Type: `Object`
+  - Required: Yes.
+  - Usage: Maps CSS selectors to objects containing Key value pairs of attributes.
+
+### Return Value
+
+`undefined`
+
+## `classes`
+
+Used to set the classes of the component element.
+
+### Syntax
+
+```js
+classes(map)
+```
+
+### Parameters
+
+- `map`:
+  - Type: `Object`
+  - Required: Yes.
+  - Usage: Maps CSS selectors to arrays containing values of class names.
+
+### Return Value
+
+`undefined`
 
 ## `custom`
 

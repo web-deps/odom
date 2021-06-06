@@ -41,7 +41,7 @@ Generic utilities are used for general purposes. The following are the items in 
 
 ### Data Selectors
 
-Generic utilities are accessed using any markup attribute via data selectors. Data selectors are a way of accessing generic utilities using a special syntax in attribute values. To access `data` or `methods` use the name of the utility and profix it with the symbol `@`. Then you use the dot notation to access nested properties.
+Generic utilities are accessed using any markup attribute via data selectors. Data selectors are a way of accessing generic utilities using a special syntax in attribute values. To access `data` or `methods` use the name of the utility and prefix it with the symbol `@`. Then you use the dot notation to access nested properties.
 
 #### Example
 

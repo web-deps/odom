@@ -31,24 +31,24 @@
 
 ## Introduction
 
-Odom provides a way for you to create collections of DOM nodes based of collections of data. You can populate tables or lists using these collections. There are two types of collections in Odom, multiple and map. The following sections dive deep into the nature of these collectins.
+Odom provides a way for you to create collections of DOM nodes based on collections of data. You can populate tables or lists using these collections. There are two types of collections in Odom, multiple and map. The following sections dive deep into the nature of these collections.
 
 ## Multiple
 
 ### Introduction
 
-Multiple is a collection of elements which are variants of one element. The original element acts as a template for all its variants. The original element references an array, and specifies how each item of the array will be used on each one of its variants. The original element uses the attribute `"odom-multiple"`. Each variant accesses the matching item of the array using a data selector prefixed with `@datum` in its attribute values. If the item is an object its values can be accessed using the dot notation.
+Multiple is a collection of elements which are variants of one element. The original element acts as a template for all its variants. The original element references an array, and specifies how each item of the array will be used on each one of its variants. The original element uses the attribute `"odom-multiple"`. Each variant accesses the matching item of the array using a [data selector](./data.md#data-selectors) prefixed with `@datum` in its attribute values. If the item is an object its values can be accessed using the dot notation.
 
 ### Attribute Value
 
-The attribute value can either be a data selector or a JSON string. A data selector references an array in any of the properties of [`utils`](api/create-component/utils.md#generic-utilities).
+The attribute value can either be a data selector or a JSON string. A data selector references an array in any of the properties of [`generic utilities`](api/create-component/utils.md#generic-utilities).
 
 The JSON string has the following structure:
 
 ```json
 {
   "data": string,
-  "range": array<number>
+  "range": array
 }
 ```
 
@@ -67,7 +67,7 @@ An array of numbers that indicates the range of the array over which the variant
 ```html
 <ul>
   <li odom-multiple="@data.users" title="@datum.username">
-    <img src="@datum.avator" class="avator" />
+    <img src="@datum.avatar" class="avatar" />
     <span class="username">
       <span odom-text="@datum.username"></span>
     </span>
@@ -83,15 +83,15 @@ An array of numbers that indicates the range of the array over which the variant
 const data = {
   users: [
     {
-      avator: "/users/avator-1.png",
+      avatar: "/users/avatar-1.png",
       username: "user-1"
     },
     {
-      avator: "/users/avator-2.png",
+      avatar: "/users/avatar-2.png",
       username: "user-2"
     },
     {
-      avator: "/users/avator-3.png",
+      avatar: "/users/avatar-3.png",
       username: "user-3"
     }
   ]
@@ -111,11 +111,11 @@ const List = await createComponent(options);
 
 ### Introduction
 
-Map is an element whose children are variants of a template element or nodes created by a function based on a collection of data. Map uses the attribute `"odom-map"`. Map can use a template just like [Multiple](#multiple). The template must be the child element of the element.
+Map is an element whose children are variants of a template element or nodes created by a function based on a collection of data. Map uses the attribute `"odom-map"`. Map can use a template just like [Multiple](#multiple), with the exception that the attribute `odom-map` is set on the parent of the template.
 
 ### Attribute Value
 
-Just like [Multiple](#multiple), the value of `odom-map` can either be a data selector or a JSON string. A data selector is used when a template is used. The JSON string has the following structure:
+Just like [Multiple](#multiple), the value of `odom-map` can either be a data selector or a JSON string. A data selector is used only when a template is used. The JSON string has the following structure:
 
 ```json
 {
@@ -130,7 +130,7 @@ Just like [Multiple](#multiple), the value of `odom-map` can either be a data se
 
 #### `cache`
 
-An object used to specify the options for caching. This is used for [Reactivity](#reactivity). The data is cached, and used everytime the [`range`](#range) is changed via the element's attribute (`odom-map`) or when an update is done via [`updateMap`](#updatemap).
+An object used to specify the options for caching. This is used for [Reactivity](#reactivity). The data is cached, and used every time the [`range`](#range) is changed via the element's attribute (`odom-map`) or when an update is done via [`updateMap`](#updatemap).
 
 Structure
 
@@ -147,7 +147,7 @@ Used to specify the id of the cache. It must be unique globally (all components)
 
 Used to specify which storage facility will be used for the caching. It has the following values:
 
-- `"app"`: Means the cache is going to be stored in the global variable `$App`.
+- `"app"`: Means the cache is going to be stored in the global variable `$app`.
 - `"session"`: Means the cache will be stored in session storage.
 
 #### `createNode`
@@ -165,7 +165,7 @@ createNode(datum)
 - `datum`
   - Type: `any`
   - Required: Yes.
-  - Usage: Contains the information required to create a node. It is a member of the data array.
+  - Usage: Contains the information required to create a node. It is a member of the collection array.
 
 **Return Value**:
 
@@ -177,7 +177,7 @@ A data selector for an array containing data that will be used to create nodes o
 
 #### `getData`
 
-A data selector for a function that returns an array of data to be used to create nodes for Map nodes. Let us look at the signature of this function.
+A data selector for a function that returns an array or a promise that resolves to an array of data that is used to create nodes. Let us look at the signature of this function.
 
 **Syntax**:
 
@@ -191,15 +191,15 @@ None.
 
 **Return Value**:
 
-A promise that resolves to an array.
+A an array or a promise that resolves to an array.
 
 #### `range`
 
-An array used to specify the range of the data over which variants must be generated. It has two values. The first value specifies the begenning of the range, and the second one specifies the end of the range. You specify the range using one-based indexing (i.e. [1, 5] means from first item to the fifth item).
+An array used to specify the range of the data over which nodes must be created. It has two values. The first value specifies the beginning of the range, and the second one specifies the end of the range. You specify the range using one-based indexing (i.e. [1, 5] means from first item to the fifth item).
 
 ### Reactivity
 
-Map is can be reactive. Every time the range is changed via the attribute `odom-map`, the nodes generated are updated according to the range. To change the range, update the range in the JSON object in the `odom-map` attribute. You can also use [`updateMap`](#updatemap) to update the nodes in Map.
+Map is can be reactive. Every time the range is changed via the attribute `odom-map`, the nodes generated are updated according to the range. To change the range, update the range in the JSON object in the `odom-map` attribute or use [`updateMap`](#updatemap).
 
 #### `updateMap`
 
@@ -237,11 +237,11 @@ Structure:
 Properties:
 
 - `append`: Indicates that the new nodes should be appended to the existing nodes.
-- `extension`: Specifies the number of nodes to add to existing nodes when appending or prepending.
+- `extension`: Specifies the number of nodes to add to existing nodes when appending or pre-pending.
 - `newData`: The data that should be used to create new nodes.
-- prepend: Indicates that the new nodes should be prepended to the existing nodes.
-- range: The new range of nodes.
-- refresh: Indicates that the new nodes should be created from the new data gotten from [`getData`](#getdata).
+- `prepend`: Indicates that the new nodes should be pre-pended to the existing nodes.
+- `range`: The new range of nodes.
+- `refresh`: Indicates that the new nodes should be created from the new data gotten from [`getData`](#getdata).
 
 **Return Value**:
 
@@ -262,7 +262,7 @@ A promise that resolves to `undefined`
   <tbody odom-map="@data.users">
     <tr>
       <td>
-        <img src="@datum.avator" />
+        <img src="@datum.avatar" />
       </td>
       <td>
         <span odom-text="@datum.username"></span>
@@ -279,15 +279,15 @@ A promise that resolves to `undefined`
 const data = {
   users: [
     {
-      avator: "/users/avator-1.png",
+      avatar: "/users/avatar-1.png",
       username: "user-1"
     },
     {
-      avator: "/users/avator-2.png",
+      avatar: "/users/avatar-2.png",
       username: "user-2"
     },
     {
-      avator: "/users/avator-3.png",
+      avatar: "/users/avatar-3.png",
       username: "user-3"
     }
   ]
@@ -326,15 +326,15 @@ const Table = await createComponent(options);
 const data = {
   users: [
     {
-      avator: "/users/avator-1.png",
+      avatar: "/users/avatar-1.png",
       username: "user-1"
     },
     {
-      avator: "/users/avator-2.png",
+      avatar: "/users/avatar-2.png",
       username: "user-2"
     },
     {
-      avator: "/users/avator-3.png",
+      avatar: "/users/avatar-3.png",
       username: "user-3"
     }
   ]
@@ -344,14 +344,14 @@ const createNode = user => {
   return `
     <tr>
       <td>
-        <img src="${user.avator}" />
+        <img src="${user.avatar}" />
       </td>
       <td>${user.username}</td>
     </tr>
   `;
 };
 
-const methods = { userMapper };
+const methods = { createNode };
 const utils = { data, methods };
 
 // ...

@@ -21,20 +21,20 @@
     - [Slots](#slots)
       - [Description](#description-1)
       - [Example](#example-2)
-  - [$App](#app)
+  - [$app](#app)
     - [Description](#description-2)
 
 ## Introduction
 
 Odom provides a number of ways in which data can be shared within a component, across components and within an applications as a whole. Data can be shared using the following methods:
 
-- `props`: Data transfered from one component to another.
+- `props`: Data transferred from one component to another.
 - `utils`: An attribute of [`options`](./api/create-component/create-component.md#options).
-- `$App`: An object set on the `window` object.
+- `$app`: An object set on the `window` object.
 
 ## Data Access
 
-In components, data can be accessed via attributes in markup. For some special attributes, data can be accessed by simply providing the property name of the data provided that the data is stored in the appropriate collection in [utils](./api/create-component/utils.md). User defined attributes and some special attributes can access data via [data selectors](#data-selectors).
+In components, data can be accessed via attributes in markup. For some special attributes, data can be accessed by simply providing the property name of the data provided that the data is stored in the appropriate collection in [generic utilities](./api/create-component/utils.md#generic-utilities). User defined attributes and some special attributes can access data via [data selectors](#data-selectors).
 
 ### Data Selectors
 
@@ -49,7 +49,7 @@ The structure has the following three parts:
   - [`props`](#props) - props of a component.
   - [`data`](#data) - property of [`utils`](./api/create-component/utils.md).
   - [`methods`](#methods) - property of [`utils`](./api/create-component/utils.md)..
-  - [`$App`](#app) - a property set on the `window` object.
+  - [`$app`](#app) - a property set on the `window` object.
   - `datum` - used in [Collections](collections.md).
 - `property`: A property of the data collection (you can use dot notation to select nested values).
 
@@ -57,7 +57,7 @@ The structure has the following three parts:
 
 #### Introduction
 
-You can bind data to the DOM using dynamic data. When the data changes, the DOM is updated. You can also make the data be updated if the DOM changes. To be able to use data binding, you need to a two things - add dynamic data and add data binding syntax to data selectors. Let us look at how we can achive this.
+You can bind data to the DOM using dynamic data. When the data changes, the DOM is updated. You can also make the data be updated if the DOM changes. To be able to use data binding, you need to a two things - add dynamic data and add data binding syntax to data selectors. Let us look at how we can achieve this.
 
 #### Add Dynamic Data
 
@@ -73,19 +73,19 @@ To [`options.utils.data`](./api/create-component/utils.md#generic-data), add the
 **Properties**:
 
 - `data`: Data of any type.
-- `updaters`: The functions that update the data. All functions all called when an attempt to change the dynamic data is made. If multiple update functions have been provided, the output of one function is used as the input of the next. Refer to [`Updater`](#updater) for more details.
+- `updaters`: The functions that update the data. All functions are called when an attempt to change the dynamic data is made. If multiple update functions have been provided, the output of one function is used as the input of the next. Refer to [`Updater`](#updater) for more details.
 
 #### Use Binding on Data Selectors
 
-prefix the data selector with `:` for a single bind and `::` for a double bind. A single bind will updates the DOM every time the data is changed. A double bind does what a single bind does, but also updates the data if the DOM updates.
+prefix the data selector with `:` for a single bind and `::` for a double bind. A single bind will update the DOM every time the data is changed. A double bind does what a single bind does, but also updates the data if the DOM updates.
 
 #### Updating Data
 
-The dynamic data will be set as `Component.dynamicData`. You can get and set data using the properties specified in `options.utils.data.dynamic`.
+The dynamic data will be set as [`Component.dynamicData`](./api/component/component.md#dynamicdata). You can get and set data using the properties specified in `options.utils.data.dynamic`.
 
 #### Updater
 
-An updater is a user defined function that is invoked every time you try to change dynamic data.
+An updater is a function that is invoked every time you try to change dynamic data.
 
 **Syntax**:
 
@@ -98,7 +98,7 @@ updater(newData);
 - newData
   - Type: `any`.
   - Required: Yes.
-  - Usage: Contains the update.
+  - Usage: Contains the new value.
 
 **Return Value**:
 
@@ -126,15 +126,15 @@ const dynamic = { username: "" };
 const data = { dynamic };
 const utils = { data }
 const options = { utils };
-const ExampleComponent = await Odom.createComponent(options);
-const ExampleComponent.render("#example-component");
+const ExampleComponent = await odom.createComponent(options);
+await ExampleComponent.render("#example-component");
 
 setTimeout(() => {
   ExampleComponent.dynamicData.username = "@username";
 }, 3000);
 ```
 
-If you open the HTML file in the browser, you should see no text in the text field initailly. After about 3 seconds, you should see the text "@username" in the text field.
+If you open the HTML file in the browser, you should see no text in the text field initially. After about 3 seconds, you should see the text "@username" in the text field.
 
 Let us use double binding and an update function. Change the data selector on `input` to `::@data.username`
 
@@ -171,17 +171,17 @@ Data can be passed from a component to an asset (component or not) using `props`
 
 #### Description
 
-One way of using props is by using attributes on target elements. All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `odom-`) are considered as props. Props are used to instantiate assets.
+One way of using props is by using attributes on target elements. All attributes that are not special (i.e. not used for special purposes, e.g. attributes prefixed with `odom-`) are considered as props. Props are used to construct assets.
 
 #### **Example**
 
-In this example we will import a component and instantiate it using props.
+In this example we will import a component and construct it using props.
 
 ```html
 <div odom-src="/src/components/header.html" page="home"></div>
 ```
 
-In this example, `page` will be considered as a prop of the component at `/src/components/header.html`. The component will be imported and instantiated with an object (`props`) containing `page` as a prop. The object will have the following structure:
+In this example, `page` will be considered as a prop of the component at `/src/components/header.html`. The component will be imported and constructed with an object (`props`) containing `page` as a prop. The object will have the following structure:
 
 ```js
 {
@@ -189,7 +189,7 @@ In this example, `page` will be considered as a prop of the component at `/src/c
 }
 ```
 
-Inside the component being imported, the props can be accessed from the markup using data selectors. For example, the prop `page` can be accessed using `@props.page` in any of the attributes. For this to work, the props must be included in the [`options`](./api/create-component/create-component.md#options) of the component (`home`).
+Inside the component being imported, the props can be accessed from the markup using data selectors. For example, the prop `page` can be accessed using `@props.page` in any of the attributes. For this to work, the props must be included in the [`options`](./api/create-component/create-component.md#options) of the component.
 
 ### Slots
 
@@ -209,8 +209,10 @@ Let us import a component and pass a slot into it through props.
 **Parent Component**
 
 ```html
-<div odom-src="/src/components/button.htm">
-  <div name="text"></div>
+<div odom-src="/src/components/container.js">
+  <div name="content">
+    <span>Content</span>
+  </div>
 </div>
 ```
 
@@ -220,14 +222,14 @@ Odom inserts slots on all descendant elements in the component that have the sam
 
 ```html
 <div>
-  <div odom-slot="text"></slot>
+  <div odom-slot="content"></slot>
 </div>
 ```
 
-The `div` with the attribute `odom-slot` will be replaced with `props.slots.text`.
+The `div` with the attribute `odom-slot` will be replaced with `props.slots.content`.
 
-## $App
+## $app
 
 ### Description
 
-To share data within a web app as a whole, Odom uses the global object `$App`. You can explicitly add this object to the window object. If you have not added it, Odom will add it automatically when needed. Through `$App`, Odom caches and shares a lot of data between components.
+To share data within a web app as a whole, Odom uses the global object `$app`. You can explicitly add this object to the window object. If you have not added it, Odom will add it automatically when needed. Through `$app`, Odom caches and shares a lot of data between components.

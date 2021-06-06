@@ -13,7 +13,7 @@
     - [Reference](#reference)
   - [`$create`](#create)
   - [`Component`](#component)
-  - [`$A`](#a)
+  - [`$C`](#c)
   - [`render`](#render)
     - [Description](#description-1)
     - [Syntax](#syntax-1)
@@ -50,7 +50,7 @@ Odom provides a number of utilities for creating and manipulating components. We
   createComponent: Function,
   $create: Function,
   Component: Object,
-  $A: class,
+  $C: class,
   render: Function,
   replaceNode: Function,
   assetManager: Object
@@ -93,9 +93,9 @@ An alias for [`crateComponent`](#createcomponent).
 
 ## `Component`
 
-The component class. Refer to [Component](./component/component.md) for more.
+The component class. Refer to [Component](./component/component.md) for more information.
 
-## `$A`
+## `$C`
 
 An alias for [Component](#component);
 
@@ -169,7 +169,7 @@ replaceNode(target, node[, replacer])
 
 ### Description
 
-Contains utilities used to manage assets. It handles importation, fetching and prefetching of assets.
+Contains utilities used to manage assets. It handles importing, fetching and prefetching of assets.
 
 ### Structure
 

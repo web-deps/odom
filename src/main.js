@@ -5,16 +5,7 @@ import { render } from "./dom/render.js";
 import { assetManager } from "./asset-manager/asset-manager.js";
 import { replaceNode } from "./dom/replace-node.js";
 
+const $create = createComponent,
+  $C = Component;
 
-const $create = createComponent, $A = Component;
-
-export {
-  createComponent,
-  $create,
-  Component,
-  $A,
-  importComponent,
-  render,
-  replaceNode,
-  assetManager
-};
+export { createComponent, $create, Component, $C, importComponent, render, replaceNode, assetManager };

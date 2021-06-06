@@ -1,13 +1,8 @@
 import { observeMutations } from "../../dom/observe-mutations.js";
-import { createPlaceholder } from "./create-placeholder.js";
+import { createPlaceholder } from "../create-placeholder.js";
 
-
-export const defer = async (
-  element,
-  { time } = {},
-  { transform, transformOptions }
-) => {
-  const placeholder = await createPlaceholder(element);
+export const defer = async (element, { time } = {}, { transform, transformOptions }) => {
+  const placeholder = createPlaceholder(element);
   const container = document.createElement("div");
   container.appendChild(element);
   const body = document.body;
@@ -25,17 +20,17 @@ export const defer = async (
     else {
       const observer = observeMutations(
         body,
-        mutations => {
+        (mutations) => {
           if (body.contains(placeholder)) {
             render();
             observer.disconnect();
-          };
+          }
         },
         { childList: true, subtree: true }
       );
-    };
+    }
   };
-  
+
   if (document.readyState === "complete") onDOMLoaded();
   else window.addEventListener("DOMContentLoaded", onDOMLoaded);
 };

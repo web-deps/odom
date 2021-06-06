@@ -1,5 +1,4 @@
-import {media as setMediaQuery} from "./media.js";
-
+import { media as setMediaQuery } from "./media.js";
 
 export const visibility = async (element, { value, conditions: { apply, media } = {} }) => {
   let positive, negative;
@@ -8,8 +7,8 @@ export const visibility = async (element, { value, conditions: { apply, media } 
   else {
     positive = value[0];
     negative = value[1];
-  };
-  
+  }
+
   const onMatched = () => element.style.setProperty("visibility", positive);
   const onNotMatched = () => element.style.setProperty("visibility", negative);
 

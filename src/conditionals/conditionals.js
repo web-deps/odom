@@ -3,6 +3,7 @@ import { interpretConditions } from "./interpret-conditions.js";
 import { visibility } from "./visibility.js";
 import { display } from "./display.js";
 import { presence } from "./presence.js";
+import { createPlaceholder } from "./create-placeholder.js";
 
 export const conditionals = async function ({ element, type, options, transform, ...transformOptions }) {
   let value;
@@ -23,19 +24,16 @@ export const conditionals = async function ({ element, type, options, transform,
     const action = async (condition) => {
       if (type === condition) {
         element.removeAttribute(`odom-${condition}`);
-        const placeholder = element;
+        const placeholder = createPlaceholder(element);
         const container = document.createElement("div");
         container.appendChild(element);
 
         if (condition !== "presence") {
           element = await transform({ element, transformOptions });
-
-          if (!element) {
-            element = container.firstElementChild;
-            placeholder.replaceWith(element);
-          }
+          if (!element) element = container.firstElementChild;
         }
 
+        placeholder.replaceWith(element);
         await actions[condition](element, value, condition === "presence" && { transform, transformOptions });
       }
     };

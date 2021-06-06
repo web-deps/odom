@@ -15,7 +15,7 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.14.4",
     "babel-loader": "^8.2.2",
-    "eslint": "^7.27.0",
+    "eslint": "^7.28.0",
     "prettier": "^2.3.0",
     "shx": "^0.3.3",
     "webpack": "^5.35.0",
@@ -33,6 +33,7 @@
   "keywords": [
     "javascript",
     "framework",
+    "library",
     "component",
     "ui"
   ],

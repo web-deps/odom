@@ -1,0 +1,38 @@
+:scope {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #cccccc;
+}
+
+h1,
+label {
+  color: #444444;
+}
+
+h1 {
+  text-align: center;
+}
+
+h1 span {
+  color: #222222;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #cccccc;
+  background-color: #444444;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}

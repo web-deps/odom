@@ -7,17 +7,12 @@
     <title>Quick Tests</title>
   </head>
   <body>
-    <main odom-src="/tests/quick/component/main.js"></main>
+    <main odom-src="/tests/quick/hello-world.js"></main>
 
     <script src="/dist/main.js"></script>
-    <!-- <script src="/src/import-component/transpile.js"></script> -->
 
     <script type="module">
-      import { transpile } from "/src/import-component/transpile.js";
-      import * as odom from "/src/main.js";
-
-      const src = "/tests/functionality/assets/assets/html-component.html";
-      const html = await (await fetch(src)).text();
+      import { createComponent } from "/src/main.js";
 
       (async () => {
         odom.render();

@@ -20,6 +20,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
+    publicPath: path.join(__dirname, "dist"),
     filename: "main.js",
     library: "odom",
     libraryTarget: "umd",

@@ -7,7 +7,7 @@
     <title>Quick Tests</title>
   </head>
   <body>
-    <main odom-src="/tests/quick/component/main.js"></main>
+    <div id="collections"></div>
 
     <script src="/dist/main.js"></script>
     <!-- <script src="/src/import-component/transpile.js"></script> -->
@@ -20,7 +20,7 @@
       const html = await (await fetch(src)).text();
 
       (async () => {
-        odom.render();
+
       })();
     </script>
   </body>

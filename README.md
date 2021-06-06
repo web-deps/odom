@@ -1,17 +1,17 @@
 <P align="center">
-  <img src="https://user-images.githubusercontent.com/57598264/105575616-978ba400-5d75-11eb-81d0-6b6da44b8b2f.png" />
+  <img src="https://user-images.githubusercontent.com/57598264/120887480-6fe5fb80-c5f3-11eb-9587-9d3bf10b87e2.png" width="128" height="128" />
   <h1 align="center" style="font-weight:bold;">Odom</h1>
 </p>
 
 ## Introduction
 
-A component-based JavaScript framework for building user interfaces. It is highly flexible and compatible with other frameworks and libraries. Odom provides both declarative and procedural ways of building user interfaces.
+A JavaScript framework for building user interfaces. It is highly flexible and compatible with other frameworks and libraries. Odom provides both declarative and procedural ways of building user interfaces.
 
 ## Features
 
 ### Components
 
-Odom is a component-based framework. You get most of the functionality by using components. However, it is possible to work with Odom without using component.
+Odom uses components to build user interfaces. It provides its own component class. However, any component that can expose a DOM node can be used.
 
 ### Asset Management
 
@@ -35,7 +35,7 @@ Odom offers a lot of flexibility including the following:
 3. **Components**: You can create components of the following types:
    1. Local Components: Local to a script or module.
    2. Single-file Components: Using ES modules or HTML files.
-   3. Multiple-file Components: Using seperate files for markup, styles and main JavaScript code.
+   3. Multiple-file Components: Using separate files for markup, styles and main JavaScript code.
 4. **Middleware**: Odom allows you to use middleware for processing markup and styles. These middleware can either supplement or override the default processes used by Odom. This offers you a lot of room for you to use user-defined or third-party utilities.
 
 ## Quick Start
@@ -44,7 +44,7 @@ Checkout the [Quick Start Guide](./docs/quick-start.md) for an introductory guid
 
 ## Documentation
 
-[Documentation](./documentation/home.md).
+Refer to our [Documentation](./documentation/home.md) for a detailed guide to Odom.
 
 ## Development Tools
 
@@ -54,12 +54,8 @@ Refer to [Development Tools](./docs/dev-tools.md) for a list of recommended deve
 
 Refer to our [Contributing to Odom](https://github.com/odom-web/odom/blob/main/CONTRIBUTING.md) guide for information concerning contributing.
 
-## Contact Us
-
-You can contact us via email at <odom@gmail.com>.
-
 ## License
 
-This framework under the [MIT license](https://github.com/odom-web/odom/blob/main/LICENSE.md).
+This framework under the [MIT license](https://choosealicense.com/licenses/mit/).
 
 Copyright (c) 2021, **Mishieck Mwale**.

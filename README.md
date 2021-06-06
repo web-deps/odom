@@ -5,13 +5,9 @@
 
 ## Introduction
 
-A JavaScript framework for building user interfaces. It is highly flexible and compatible with other frameworks and libraries. Odom provides both declarative and procedural ways of building user interfaces.
+A JavaScript framework for building user interfaces. It is highly flexible and compatible with other frameworks and libraries.
 
 ## Features
-
-### Components
-
-Odom uses components to build user interfaces. It provides its own component class. However, any component that can expose a DOM node can be used.
 
 ### Asset Management
 
@@ -49,10 +45,6 @@ Refer to our [Documentation](./documentation/home.md) for a detailed guide to Od
 ## Development Tools
 
 Refer to [Development Tools](./docs/dev-tools.md) for a list of recommended development tools.
-
-## Contributing
-
-Refer to our [Contributing to Odom](https://github.com/odom-web/odom/blob/main/CONTRIBUTING.md) guide for information concerning contributing.
 
 ## License
 

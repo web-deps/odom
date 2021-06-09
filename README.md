@@ -27,7 +27,7 @@ Checkout the [Quick Start Guide](./docs/quick-start.md) for an introductory guid
 
 ## Documentation
 
-Refer to our [Documentation](./documentation/home.md) for a detailed guide to Odom.
+Refer to our [Documentation](./docs/home.md) for a detailed guide to Odom.
 
 ## Development Tools
 

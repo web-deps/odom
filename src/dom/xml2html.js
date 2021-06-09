@@ -16,7 +16,6 @@ export const xml2html = async xml => {
     for (const { name, value } of attributes) html.setAttribute(name, value);
     html.hasAttribute("html") && html.removeAttribute("html");
     html.setAttribute("xml", tagName);
-    html.hasAttribute("name") || html.setAttribute("name", tagName);
     xml.replaceWith(html);
     return html;
   };

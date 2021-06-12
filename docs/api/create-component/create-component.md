@@ -10,18 +10,24 @@
   - [`options`](#options)
     - [Description](#description)
     - [Structure](#structure)
-    - [`eventListeners`](#eventlisteners)
+    - [`attributes`](#attributes)
       - [Description](#description-1)
+      - [Example](#example)
+    - [`classes`](#classes)
+      - [Description](#description-2)
+      - [Example](#example-1)
+    - [`eventListeners`](#eventlisteners)
+      - [Description](#description-3)
       - [Structure](#structure-1)
       - [Event Object Properties](#event-object-properties)
-      - [Example](#example)
+      - [Example](#example-2)
     - [`extension`](#extension)
     - [`id`](#id)
     - [`importType`](#importtype)
     - [`inlineStyles`](#inlinestyles)
-      - [Description](#description-2)
+      - [Description](#description-4)
       - [Structure](#structure-2)
-      - [Example](#example-1)
+      - [Example](#example-3)
     - [`markup`](#markup)
     - [`middleware`](#middleware)
     - [`mutations`](#mutations)
@@ -68,7 +74,9 @@ The options are utilities that are used to create and manipulate a component.
 
 ```js
 {
-  eventListeners: Array<Object>,
+  attributes: Object,
+  classes: Object,
+  eventListeners: Object,
   extension: Object,
   id: string,
   importType: string,
@@ -87,6 +95,50 @@ The options are utilities that are used to create and manipulate a component.
 `scope`
 
 An `Element` used to set the [`scope`](../component/component.md#scope) of a component.
+
+### `attributes`
+
+#### Description
+
+Used to set attributes for the elements of a component. It maps CSS selectors to key-value pairs of attributes. When using frameworks like Bootstrap, you end up with long class names and/or a lot of attributes. This can be used to make the markup more readable by reducing the amount of attributes set in markup.
+
+#### Example
+
+```js
+{
+  "#username": {
+    name: "username",
+    type: "text",
+    class: "form-control"
+  }
+}
+```
+
+The property of the object `.username` selects an `input` element. The values for the property will be applied as attributes on the element. Assuming there are no other attributes on the element apart from the `id`, it will end with the following structure:
+
+```html
+<input type="text" id="username" name="username" class="form-control"/>
+```
+
+### `classes`
+
+#### Description
+
+Used to set classes on the elements of a component. It maps CSS selectors to arrays of classes. When using frameworks like Tailwind, you end with class names that are long. This can be used to reduce the value of the class attribute set in markup.
+
+#### Example
+
+```js
+{
+  "button": ["btn", "btn-secondary", "text-light"]
+}
+```
+
+The object contains a CSS selector `button`. The selector selects a `button` element. The values in the array are added to the class name of the button. Assuming there are no other attributes on the element, it will end up with the following structure:
+
+```html
+<button class="btn btn-secondary text-light"></button>
+```
 
 ### `eventListeners`
 

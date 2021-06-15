@@ -33,6 +33,14 @@ Refer to our [Documentation](./docs/home.md) for a detailed guide to Odom.
 
 Refer to [Development Tools](./docs/dev-tools.md) for a list of recommended development tools.
 
+## Contributing
+
+The full contribution guide is still being worked on. For now, you can follow the following guidelines:
+
+- **Styling**: Refer to the prettier config file.
+- **Linting**: Refer to the eslint config file.
+- **Pull Requests**: Use the branch `dev` as the base for pull requests.
+
 ## License
 
 This framework under the [MIT license](https://choosealicense.com/licenses/mit/).

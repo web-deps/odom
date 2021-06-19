@@ -4,7 +4,7 @@
 
 This is a documentation of upcoming releases. Only minor and major releases are included. Date and time are given in [GMT](https://greenwichmeantime.com/).
 
-## Version 1.2.0
+## Version 1.1.0
 
 ### Features
 

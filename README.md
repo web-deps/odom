@@ -41,6 +41,10 @@ The full contribution guide is still being worked on. For now, you can follow th
 - **Linting**: Refer to the eslint config file.
 - **Pull Requests**: Use the branch `dev` as the base for pull requests.
 
+## Releases
+
+Refer to [Releases](./docs/releases.md) for information about future releases and features.
+
 ## License
 
 This framework under the [MIT license](https://choosealicense.com/licenses/mit/).

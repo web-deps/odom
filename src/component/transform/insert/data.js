@@ -20,7 +20,7 @@ export const insertData = async ({ element, props, data, methods, dynamicData, s
   const insert = async ({ name, value }) => {
     if (attributes && attributes.indexOf(name) !== -1) return;
     if (/^(:{1,2}@data)/.test(value)) handleDynamicData({ element, attribute: [name, value], data: dynamicData });
-    const datum = await getData({ selector: value, data, methods, props, dynamicData });
+    let datum = await getData({ selector: value, data, methods, props, dynamicData });
     if (typeof datum === "function") datum = await datum();
     if (typeof datum === "object" && datum !== null) datum = JSON.stringify(datum);
     if (datum !== value) element.setAttribute(name, datum);

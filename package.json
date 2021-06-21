@@ -1,6 +1,6 @@
 {
   "name": "odom",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A JavaScript framework for building user interfaces.",
   "main": "dist/main.js",
   "files": [

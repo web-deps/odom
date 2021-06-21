@@ -13,7 +13,7 @@ This is a documentation of upcoming releases. Only minor and major releases are 
 
 ### Progress
 
-- [ ] Add lifecycle hooks.
+- [x] Add lifecycle hooks.
 - [ ] Add customized component as a parameter to [`createComponent`](api/create-component/create-component.md).
 
 ### Release Date

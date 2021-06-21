@@ -20,41 +20,28 @@
       const html = await (await fetch(src)).text();
 
       (async () => {
-        const First = async () => {
-          const markup = `<div></div>`;
+        const data = { title: "hello", description: "world"}
 
-          const styles = `
-            :scope {
-              width: 500px;
-              height: 500px;
-              background-color: green;
-            }
-          `;
+        const component = await odom.createComponent({
+          markup: `
+          <div>
+            <div odom-multiple="@data.posts">
+              <h1><span odom-text="@datum.title"></span></h1>
+              <p><span odom-text="@datum.description"></span></p>
+              <div>
+                <span odom-text="text"></span>
+              </div>
+            </div>
+          </div>`,
+          utils: {
+            data: {
+              posts: [{title: "hello", description: ""}]
+            },
+            texts: { text: ""}
+          }
+        })
 
-          return odom.createComponent({ markup, styles });
-        };
-
-        const Second = async () => {
-          const markup = `<div></div>`;
-
-          const styles = `
-            :scope {
-              width: 500px;
-              height: 500px;
-              background-color: red;
-            }
-          `;
-
-          return odom.createComponent({ markup, styles });
-        };
-
-        const first = await First();
-        const second = await Second();
-        first.render("#root");
-
-        setTimeout(() => {
-          second.render(document.body.firstElementChild);
-        }, 3000);
+        component.render("#root");
       })();
     </script>
   </body>

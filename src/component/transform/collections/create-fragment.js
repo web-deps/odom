@@ -52,7 +52,7 @@ const insertData = async (element, datum) => {
     let texts = {};
     const asset = selector.includes(".") ? selector.substring(selector.lastIndexOf(".") + 1) : "datum";
     const text = await getNestedValue(datum, selector.replace(/@datum[.]?/, ""));
-    if (text) texts = { [asset]: text };
+    if (text !== undefined) texts = { [asset]: text };
 
     await render({
       assetType: "text",

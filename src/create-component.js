@@ -6,7 +6,7 @@ export const createComponent = async (options, CustomComponent) => {
 
   if ("src" in options) {
     try {
-      options = importOptions(options);
+      options = await importOptions(options);
     } catch (error) {
       console.error(`Failed to get options at ${src}.`);
       return;
@@ -24,10 +24,10 @@ const importOptions = async ({ src, importType = "module", extension }) => {
 
   if (importType === "module") {
     imported = Object.values(await import(src))[0];
-    if (typeof imported === "function") imported = imported();
+    if (typeof imported === "function") imported = await imported();
   } else {
     const res = await fetch(src);
-    imported = res.json();
+    imported = await res.json();
   }
 
   return extension ? { ...imported, ...extension } : json;

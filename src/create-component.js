@@ -1,8 +1,8 @@
 import { Component } from "./component/component.js";
 
-export const createComponent = async (options) => {
+export const createComponent = async (options, CustomComponent) => {
   if (!options) throw new Error("Missing parameter 'options'.");
-  const $component = new Component();
+  const $component = CustomComponent ? new CustomComponent() : new Component();
 
   if ("src" in options) {
     try {

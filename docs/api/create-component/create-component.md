@@ -55,7 +55,7 @@ Components can be created using `createComponent`, a method of the [API](../api.
 ## Syntax
 
 ```js
-createComponent(options);
+createComponent(options, CustomComponent);
 ```
 
 ## Parameters
@@ -65,6 +65,10 @@ createComponent(options);
   - Required: Yes
   - Usage: Contains utilities for manipulating a component
   - Reference: [`options`](#options)
+- `CustomComponent`:
+  - Type: `Function`
+  - Required: No.
+  - Usage: A class that extends [`Component`](../component/component.md). It is used to customize `Component`. When provided, `createComponent`uses it to create a component instance (as opposed to using `Component`).
 
 ## Return Value
 

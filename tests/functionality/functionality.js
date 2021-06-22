@@ -5,6 +5,7 @@ import conditionals from "./conditionals/conditionals.js";
 import utils from "./utils/utils.js";
 import attributes from "./attributes/attributes.js";
 import middleware from "./middleware/middleware.js";
+import CustomComponent from "./custom-component.js";
 
 // Tests for the API
 // createComponent
@@ -104,3 +105,6 @@ import middleware from "./middleware/middleware.js";
 // middleware.styles.custom();
 // middleware.styles.postprocessor();
 // middleware.styles.preprocessor();
+
+// Test for Custom Component
+CustomComponent();

@@ -34,6 +34,12 @@
       - [`mutator`](#mutator)
       - [`preserve`](#preserve)
       - [`type`](#type)
+    - [`onIDSet`](#onidset)
+    - [`onScopeCreated`](#onscopecreated)
+    - [`onAttributesSet`](#onattributesset)
+    - [`onDynamicDataCreated`](#ondynamicdatacreated)
+    - [`onTransformationCompleted`](#ontransformationcompleted)
+    - [`onStylesAndEventsApplied`](#onstylesandeventsapplied)
     - [`props`](#props)
     - [`scope`](#scope)
     - [`src`](#src)
@@ -49,7 +55,7 @@ Components can be created using `createComponent`, a method of the [API](../api.
 ## Syntax
 
 ```js
-createComponent(options);
+createComponent(options, CustomComponent);
 ```
 
 ## Parameters
@@ -59,6 +65,10 @@ createComponent(options);
   - Required: Yes
   - Usage: Contains utilities for manipulating a component
   - Reference: [`options`](#options)
+- `CustomComponent`:
+  - Type: `Function`
+  - Required: No.
+  - Usage: A class that extends [`Component`](../component/component.md). It is used to customize `Component`. When provided, `createComponent`uses it to create a component instance (as opposed to using `Component`).
 
 ## Return Value
 
@@ -84,6 +94,12 @@ The options are utilities that are used to create and manipulate a component.
   markup: string,
   middleware: Object,
   mutations: Object,
+  onIDSet: Function,
+  onScopeCreated: Function,
+  onAttributesSet: Function,
+  onDynamicDataCreated: Function,
+  onTransformationCompleted: Function,
+  onStylesAndEventsApplied: Function,
   props: Object,
   scope: Element,
   src: string,
@@ -356,6 +372,30 @@ Indicates which parts of an element should be kept after cloning. Refer to [`mut
 #### `type`
 
 Indicates the type of mutation you want to apply. Refer to [`mutations`](../component/apply.md#mutations) for more details.
+
+### `onIDSet`
+
+A lifecycle hook called after the ID of the component has been set. Refer to [Lifecycle hooks](./lifecycle-hooks.md) for more information.
+
+### `onScopeCreated`
+
+A lifecycle hook called after the element of the component has been created. Refer to [Lifecycle hooks](./lifecycle-hooks.md) for more information.
+
+### `onAttributesSet`
+
+A lifecycle hook called after the attributes of the component have been set. Refer to [Lifecycle hooks](./lifecycle-hooks.md) for more information.
+
+### `onDynamicDataCreated`
+
+A lifecycle hook called after the [dynamic data](../component/component.md#dynamicData) of the component have been created. Refer to [Lifecycle hooks](./lifecycle-hooks.md) for more information.
+
+### `onTransformationCompleted`
+
+A lifecycle hook called after [transformations](../component/transform.md) of the component have been completed. Refer to [Lifecycle hooks](./lifecycle-hooks.md) for more information.
+
+### `onStylesAndEventsApplied`
+
+A lifecycle hook called after the [styles](#styles) and [event listeners](#eventlisteners) of the component have been applied. Refer to [Lifecycle hooks](./lifecycle-hooks.md) for more information.
 
 ### `props`
 

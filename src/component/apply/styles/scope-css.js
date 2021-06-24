@@ -1,5 +1,5 @@
-export const scopeCSS = async (css, attributeSelector) => {
-  if (!attributeSelector) attributeSelector = `[odom-scope="${id}"]`;
+export const scopeCSS = async (css, id) => {
+  const attributeSelector = `[odom-scope="${id}"]`;
   let scopedSelector = attributeSelector;
 
   const regexes = {
@@ -27,7 +27,7 @@ export const scopeCSS = async (css, attributeSelector) => {
 
   const scopeSelector = (selector) => {
     const scopeAtRule = () => {
-      const scopeKeyframesName = (match, keyframesName) => ` ${keyframesName}-${id.replace(".", "-")}`;
+      const scopeKeyframesName = (match, keyframesName) => ` ${keyframesName}-${id}`;
 
       return selector.startsWith("@keyframes") ? selector.replace(regexes.keyframesName, scopeKeyframesName) : selector;
     };

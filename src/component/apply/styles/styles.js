@@ -20,7 +20,7 @@ export const styles = async function (styles, middleware = {}) {
     });
   }
 
-  if (scope) styles = await scopeCSS(styles, this.selector);
+  if (scope) styles = await scopeCSS(styles, this.id);
   const styleElement = createStyleElement(styles, this.id);
   const head = document.querySelector("head");
   head.appendChild(styleElement);

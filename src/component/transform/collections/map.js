@@ -8,7 +8,7 @@ export const map = async ({ element, props, data, methods }) => {
   let limits, cache, getMapData, createNode, mapDataSelector, mapData, reactive;
 
   if (value.startsWith("@")) mapDataSelector = value;
-  else if (value.startsWith("{")) {
+  else if (/^\s*\{/.test(value)) {
     const options = JSON.parse(value);
     mapDataSelector = options.data;
     limits = options.range;

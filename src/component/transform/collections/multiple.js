@@ -7,7 +7,7 @@ export const multiple = async ({ element, props, data, methods }) => {
     limits;
 
   if (options.startsWith("@")) selector = options;
-  else if (options.startsWith("{")) {
+  else if (/^\s*\{/.test(options)) {
     const value = JSON.parse(options);
     selector = value.data;
     limits = value.range;
